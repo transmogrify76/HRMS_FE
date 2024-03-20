@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="card">
+      <h5 class="card-header">Mark - Out</h5>
+      <div class="card-body">
+        <form>
+          <div class="mb-3">
+            <label for="date" class="form-label">Date</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="date" [(ngModel)]="attendanceDate" bsDatepicker #datePicker="bsDatepicker" placeholder="Choose Date">
+              <!-- <span class="input-group-text" (click)="datePicker.show()"><i class="bi bi-calendar"></i></span> -->
+            </div>
+          </div>
+          <div class="mb-3">
+            <button type="button" class="btn btn-primary" (click)="setCurrentDate()">Set Current Date </button>
+          </div>
+  
+          <div class="mb-3">
+            <label for="time" class="form-label">Time</label>
+            <div class="input-group">
+              <input type="time" class="form-control" id="time" [(ngModel)]="attendanceDate" placeholder="Choose Time">
+            </div>
+          </div>
+          <div class="mb-3">
+            <button type="button" class="btn btn-primary" (click)="setCurrentTime()">Set Current time </button>
+          </div>
+          <div class="mb-3">
+            <bs-timepicker [(ngModel)]="attendanceDate"></bs-timepicker>
+          </div>
+          <div class="mb-3">
+            <button type="button" class="btn btn-success" (click)="submitAttendance()">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
