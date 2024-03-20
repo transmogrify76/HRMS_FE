@@ -1,0 +1,33 @@
+.card {
+    margin-top: 50px; /* Add some top margin */
+    border-radius: 10px; /* Add border radius */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add box shadow */
+    // width:max-content;
+  }
+  
+  .card-header {
+    text-align: center; /* Center the card title */
+  }
+  
+  .form-group {
+    margin-bottom: 20px; /* Add some bottom margin to form groups */
+  }
+  
+  .btn-primary {
+    width: 100%; /* Make the button full width */
+  }
+  .login-card { /* Adjust padding */
+    margin-top: 30%; /* Adjust margin top */
+    width:60%;
+  }
+  .container1 {
+    position:absolute; 
+    justify-content: center;
+    align-items: center;
+    height: 94.1%;
+    width: 200vh;
+    background-image: url('../../../../assets/futuristic-business-scene-with-ultra-modern-ambiance.jpg');
+    background-size: cover;
+
+  }
+  
