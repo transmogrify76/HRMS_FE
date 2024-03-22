@@ -2,11 +2,15 @@
     margin-top: 50px; /* Add some top margin */
     border-radius: 10px; /* Add border radius */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add box shadow */
-    // width:max-content;
+
   }
   
   .card-header {
-    text-align: center; /* Center the card title */
+    text-align: center; 
+    background-color:rgb(161, 209, 221);
+  }
+  h5 {
+    color: rgb(5, 49, 54);
   }
   
   .form-group {
@@ -18,16 +22,26 @@
   }
   .login-card { /* Adjust padding */
     margin-top: 30%; /* Adjust margin top */
-    width:60%;
+    width:45%;
+    
   }
   .container1 {
     position:absolute; 
     justify-content: center;
     align-items: center;
-    height: 94.1%;
-    width: 200vh;
-    background-image: url('../../../../assets/futuristic-business-scene-with-ultra-modern-ambiance.jpg');
+    height: 93.9%;
+    width: 99.3%;
+    background-image: url('../../../../assets/display.jpg');
     background-size: cover;
 
   }
-  
+  .offset-md-3 {
+    margin-left: 10%;
+}
+.custom-button {
+  background-color: rgb(5, 50, 92) ; 
+  width:100%;/* Replace 'your-color' with the desired color value */
+}
+label{
+  font-weight: bold;
+}

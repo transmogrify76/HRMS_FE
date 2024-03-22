@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { BsDatepickerDirective, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerComponent, TimepickerModule } from 'ngx-bootstrap/timepicker';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-mark-out',
@@ -14,7 +15,7 @@ export class MarkOutComponent {
   attendanceDate!: Date;
 
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   setCurrentDate() {
     this.attendanceDate = new Date();
@@ -33,7 +34,10 @@ export class MarkOutComponent {
   submitAttendance() {
     // Handle form submission here
     console.log('Attendance Date & Time:', this.attendanceDate);
-    // You can send this data to your backend or perform any other actions
+    this.router.navigateByUrl('/home');
+  }
+  skip(){
+    this.router.navigateByUrl('/home');
   }
 }
 

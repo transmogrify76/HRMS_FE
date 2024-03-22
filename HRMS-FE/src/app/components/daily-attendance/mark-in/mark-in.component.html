@@ -1,3 +1,4 @@
+<body>
 <div class="container">
     <div class="card">
       <h5 class="card-header">Mark -In</h5>
@@ -11,8 +12,8 @@
             </div>
           </div>
           <div class="mb-3">
-            <button type="button" class="btn btn-primary" (click)="setCurrentDate()">Set Current Date </button>
-          </div>
+            <button type="button" class="btn btn-dark custom-button" (click)="setCurrentTime()">Set Current date</button>
+          </div> 
   
           <div class="mb-3">
             <label for="time" class="form-label">Time</label>
@@ -21,16 +22,18 @@
             </div>
           </div>
           <div class="mb-3">
-            <button type="button" class="btn btn-primary" (click)="setCurrentTime()">Set Current time </button>
-          </div>
+            <button type="button" class="btn btn-dark custom-button" (click)="setCurrentTime()">Set Current time</button>
+          </div>          
           <div class="mb-3">
             <bs-timepicker [(ngModel)]="attendanceDate"></bs-timepicker>
           </div>
-          <div class="mb-3">
-            <button type="button" class="btn btn-success" (click)="submitAttendance()">Submit Attendance</button>
-          </div>
+            <div class="mb-3 custom-flex-container">
+              <button type="button" class="btn btn-success" (click)="submitAttendance()">Submit Attendance</button>
+              <button type="button" class="btn btn-danger" (click)="skip()">Skip</button>
+            </div>
         </form>
       </div>
     </div>
   </div>
+  </body>
   

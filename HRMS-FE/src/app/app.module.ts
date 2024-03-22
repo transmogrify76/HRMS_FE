@@ -12,6 +12,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { MarkInComponent } from './components/daily-attendance/mark-in/mark-in.component';
 import { MarkOutComponent } from './components/daily-attendance/mark-out/mark-out.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { MarkOutComponent } from './components/daily-attendance/mark-out/mark-ou
     NavbarComponent,
     MarkInComponent,
     MarkOutComponent,
+    HomeComponent,
 
   ],
   imports: [

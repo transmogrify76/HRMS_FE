@@ -1,17 +1,52 @@
+.navbar {
+  z-index: 10; /* Ensure the navbar is above the background and the card */
+}
+
 .card {
-    margin-top: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width:50%;
-  }
+  margin-top: 10px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
+  z-index: 2; /* Ensure the card is above the background */
+}
   
-  .card-header {
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #ccc;
-  }
-  
-  .card-body {
-    padding: 20px;
-  }
-  
+.card-header {
+  text-align: center; 
+  background-color:rgb(123, 210, 216);
+}
+h5{
+  color:rgb(11, 12, 12);
+}
+label{
+  font-weight: bold;
+}
+.card-body {
+  padding: 20px;
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  top: 10;
+  left: 0;
+  width: 100%;
+  height: 93.6%;
+  background-image: url('../../../../assets/display.jpg'); /* Replace 'your-background-image.jpg' with your background image URL */
+  background-size: cover;
+  background-position: center;
+  filter: blur(5px); /* Adjust the blur intensity as needed */
+  z-index: 1; /* Ensure the background is behind the card */
+}
+.custom-flex-container {
+  display: flex;
+  justify-content: space-between;
+}
+.custom-button {
+  background-color: rgb(5, 50, 92) ;/* Replace 'your-color' with the desired color value */
+}
+
