@@ -34,3 +34,8 @@
 .dropdown-menu li:hover {
     background-color: #f1f1f1;
 }
+.navbar {
+    z-index: 3; /* Ensure the navbar is above the background and the card */
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Add a subtle border */
+  }

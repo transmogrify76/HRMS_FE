@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { MarkInComponent } from './components/daily-attendance/mark-in/mark-in.component';
 import { MarkOutComponent } from './components/daily-attendance/mark-out/mark-out.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 
@@ -25,6 +26,10 @@ const routes: Routes = [
   {
     path: 'mark-out',
     component: MarkOutComponent,
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
   }
 ];
 

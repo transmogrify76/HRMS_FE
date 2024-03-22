@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { BsDatepickerDirective, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { TimepickerComponent, TimepickerModule } from 'ngx-bootstrap/timepicker';
-
+import { BsDatepickerDirective  } from 'ngx-bootstrap/datepicker';
+import { TimepickerComponent } from 'ngx-bootstrap/timepicker';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-mark-in',
@@ -15,7 +15,7 @@ export class MarkInComponent {
   attendanceDate!: Date;
 
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   setCurrentDate() {
     this.attendanceDate = new Date();
@@ -32,9 +32,12 @@ export class MarkInComponent {
   }
 
   submitAttendance() {
-    // Handle form submission here
+   
     console.log('Attendance Date & Time:', this.attendanceDate);
-    // You can send this data to your backend or perform any other actions
+    this.router.navigateByUrl('/home');
+  }
+  skip(){
+    this.router.navigateByUrl('/home');
   }
 }
 
