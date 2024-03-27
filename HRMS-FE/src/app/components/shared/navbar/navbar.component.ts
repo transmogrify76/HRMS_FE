@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,6 +8,7 @@ import { HostListener } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
+  constructor( private router: Router) { }
   isDropdownOpen = false;
   submitted = false;
   toggleDropdown() {
@@ -48,6 +50,9 @@ export class NavbarComponent {
     if (!(event.target as HTMLElement).closest('.profile-dropdown')) {
       this.closeDropdown();
     }
+  }
+  myprofile(){
+    this.router.navigate(['/my-profile']);
   }
 
 }

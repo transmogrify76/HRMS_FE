@@ -29,7 +29,7 @@
       <div class="profile-dropdown ms-auto">
         <img src="https://cdn-icons-png.flaticon.com/128/236/236831.png" alt="Profile" class="profile-icon" (click)="toggleDropdown()">
         <ul class="dropdown-menu" [class.show]="isDropdownOpen" (clickOutside)="closeDropdown()">
-            <li>My Profile</li>
+            <li (click)="myprofile()">My Profile</li>
             <li (click)="logout()">Logout</li>
             <div *ngIf="submitted" class="spinner-overlay">
                 <div class="spinner"></div>
