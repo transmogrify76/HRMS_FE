@@ -23,16 +23,16 @@ export class MarkOutComponent {
     this.timepicker.writeValue(this.attendanceDate);
   }
   setCurrentTime() {
-    // Set current time
-    this.attendanceDate = new Date();
+    // Get current time
+    let currentTime = new Date();
+    
     // Update timepicker value
-    if (this.attendanceDate) {
-      this.timepicker.writeValue(this.attendanceDate);
-    }
+    this.timepicker.writeValue(currentTime);
   }
+  
 
   submitAttendance() {
-    // Handle form submission here
+   
     console.log('Attendance Date & Time:', this.attendanceDate);
     this.router.navigateByUrl('/home');
   }
@@ -40,5 +40,4 @@ export class MarkOutComponent {
     this.router.navigateByUrl('/home');
   }
 }
-
 

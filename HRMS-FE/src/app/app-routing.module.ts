@@ -7,6 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MarkInComponent } from './components/daily-attendance/mark-in/mark-in.component';
 import { MarkOutComponent } from './components/daily-attendance/mark-out/mark-out.component';
 import { HomeComponent } from './components/home/home.component';
+import { LeaveComponent } from './leave/leave.component';
 
 
 
@@ -34,6 +35,10 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+  },
+  {
+    path: 'leave',
+    component: LeaveComponent,
   }
 ];
 
