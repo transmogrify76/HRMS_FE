@@ -42,6 +42,7 @@ const routes: Routes = [
     path: 'leave',
     component: LeaveComponent,
   },
+  {
     path: 'my-profile',
     component: MyProfileComponent,
   }
