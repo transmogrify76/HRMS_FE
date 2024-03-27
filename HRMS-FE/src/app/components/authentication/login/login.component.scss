@@ -8,6 +8,7 @@
   .card-header {
     text-align: center; 
     background-color:rgb(161, 209, 221);
+    height: 45px;
   }
   h5 {
     color: rgb(5, 49, 54);
@@ -29,8 +30,8 @@
     position:absolute; 
     justify-content: center;
     align-items: center;
-    height: 93.9%;
-    width: 99.3%;
+    height: 100%;
+    width: 100%;
     background-image: url('../../../../assets/display.jpg');
     background-size: cover;
 
