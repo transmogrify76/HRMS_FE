@@ -14,6 +14,8 @@ import { MarkInComponent } from './components/daily-attendance/mark-in/mark-in.c
 import { MarkOutComponent } from './components/daily-attendance/mark-out/mark-out.component';
 import { HomeComponent } from './components/home/home.component';
 import { LeaveComponent } from './leave/leave.component';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
+
 
 
 @NgModule({
@@ -26,6 +28,7 @@ import { LeaveComponent } from './leave/leave.component';
     MarkOutComponent,
     HomeComponent,
     LeaveComponent,
+    MyProfileComponent,
 
   ],
   imports: [

@@ -1,17 +1,16 @@
-import { Component, OnInit,HostListener  } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
 
+import { Component } from '@angular/core';
+import { HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
-  constructor(private router: Router) { }
 
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+export class NavbarComponent {
+  constructor( private router: Router) { }
+
   isDropdownOpen = false;
   submitted = false;
   toggleDropdown() {
@@ -53,5 +52,8 @@ export class NavbarComponent implements OnInit {
     if (!(event.target as HTMLElement).closest('.profile-dropdown')) {
       this.closeDropdown();
     }
+  }
+  myprofile(){
+    this.router.navigate(['/my-profile']);
   }
 }
