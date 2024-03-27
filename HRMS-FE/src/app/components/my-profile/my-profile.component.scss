@@ -1,0 +1,47 @@
+.card {
+    margin-top: 60px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    background-color: rgba(255, 255, 255, 0.8); 
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    z-index: 10; 
+  }
+    
+  .card-header {
+    text-align: center; 
+    background-color:rgb(123, 210, 216);
+  }
+  h5{
+    color:rgb(11, 12, 12);
+  }
+  label{
+    font-weight: bold;
+  }
+  .card-body {
+    padding: 10px;
+  }
+  
+  .container::before {
+    content: "";
+    position: absolute;
+    top: 10;
+    left: 0;
+    width: 100%;
+    height: 93.6%;
+    background-image: url('../../../assets/display.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(5px); 
+    z-index: 0; 
+  }
+  .custom-flex-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  .custom-button {
+    background-color: rgb(5, 50, 92) ;/* Replace 'your-color' with the desired color value */
+  }
