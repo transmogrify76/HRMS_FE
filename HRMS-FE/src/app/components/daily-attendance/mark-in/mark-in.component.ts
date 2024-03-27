@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { BsDatepickerDirective  } from 'ngx-bootstrap/datepicker';
 import { TimepickerComponent } from 'ngx-bootstrap/timepicker';
 import {Router} from '@angular/router'
+import { Time } from '@angular/common';
 
 @Component({
   selector: 'app-mark-in',
@@ -23,13 +24,13 @@ export class MarkInComponent {
     this.timepicker.writeValue(this.attendanceDate);
   }
   setCurrentTime() {
-    // Set current time
-    this.attendanceDate = new Date();
+    // Get current time
+    let currentTime = new Date();
+    
     // Update timepicker value
-    if (this.attendanceDate) {
-      this.timepicker.writeValue(this.attendanceDate);
-    }
+    this.timepicker.writeValue(currentTime);
   }
+  
 
   submitAttendance() {
    
