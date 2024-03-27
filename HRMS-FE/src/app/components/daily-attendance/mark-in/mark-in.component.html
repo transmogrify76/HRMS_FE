@@ -12,8 +12,8 @@
             </div>
           </div>
           <div class="mb-3">
-            <button type="button" class="btn btn-dark custom-button" (click)="setCurrentTime()">Set Current date</button>
-          </div> 
+            <button type="button" class="btn btn-alert custom-button" (click)="setCurrentDate()">Set Current Date </button>
+          </div>
   
           <div class="mb-3">
             <label for="time" class="form-label">Time</label>
@@ -22,15 +22,12 @@
             </div>
           </div>
           <div class="mb-3">
-            <button type="button" class="btn btn-dark custom-button" (click)="setCurrentTime()">Set Current time</button>
-          </div>          
-          <div class="mb-3">
             <bs-timepicker [(ngModel)]="attendanceDate"></bs-timepicker>
           </div>
-            <div class="mb-3 custom-flex-container">
-              <button type="button" class="btn btn-success" (click)="submitAttendance()">Submit Attendance</button>
-              <button type="button" class="btn btn-danger" (click)="skip()">Skip</button>
-            </div>
+          <div class="mb-3 custom-flex-container">
+            <button type="button" class="btn btn-success" (click)="submitAttendance()">Submit</button>
+            <button type="button" class="btn btn-danger" (click)="skip()">Skip</button>
+          </div>
         </form>
       </div>
     </div>
