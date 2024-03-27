@@ -13,7 +13,9 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { MarkInComponent } from './components/daily-attendance/mark-in/mark-in.component';
 import { MarkOutComponent } from './components/daily-attendance/mark-out/mark-out.component';
 import { HomeComponent } from './components/home/home.component';
+import { LeaveComponent } from './leave/leave.component';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
+
 
 
 @NgModule({
@@ -25,6 +27,7 @@ import { MyProfileComponent } from './components/my-profile/my-profile.component
     MarkInComponent,
     MarkOutComponent,
     HomeComponent,
+    LeaveComponent,
     MyProfileComponent,
 
   ],

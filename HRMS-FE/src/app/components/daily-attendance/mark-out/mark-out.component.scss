@@ -12,7 +12,7 @@
   background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
-  z-index: 2; /* Ensure the card is above the background */
+  z-index: 10; /* Ensure the card is above the background */
 }
   
 .card-header {
@@ -40,7 +40,7 @@ label{
   background-size: cover;
   background-position: center;
   filter: blur(5px); /* Adjust the blur intensity as needed */
-  z-index: 1; /* Ensure the background is behind the card */
+  z-index: 0; /* Ensure the background is behind the card */
 }
 .custom-flex-container {
   display: flex;
@@ -48,5 +48,6 @@ label{
 }
 .custom-button {
   background-color: rgb(5, 50, 92) ;/* Replace 'your-color' with the desired color value */
+  color: antiquewhite;
 }
 
