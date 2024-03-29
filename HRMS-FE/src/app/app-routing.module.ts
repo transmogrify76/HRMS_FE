@@ -9,6 +9,7 @@ import { MarkOutComponent } from './components/daily-attendance/mark-out/mark-ou
 import { HomeComponent } from './components/home/home.component';
 import { LeaveComponent } from './leave/leave.component';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import { AttendanceComponent } from './components/attendance/attendance.component';
 
 
 
@@ -42,6 +43,12 @@ const routes: Routes = [
     path: 'leave',
     component: LeaveComponent,
   },
+  {
+
+    path: 'attendance',
+    component: AttendanceComponent,
+  },
+
   {
     path: 'my-profile',
     component: MyProfileComponent,
