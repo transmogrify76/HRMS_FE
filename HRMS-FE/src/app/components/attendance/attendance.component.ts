@@ -49,9 +49,15 @@ export class AttendanceComponent implements OnInit {
   }
 
   nextMonth(): void {
-    this.currentDate.setMonth(this.currentDate.getMonth() + 1);
+    const nextMonthDate = new Date(this.currentDate);
+    nextMonthDate.setMonth(nextMonthDate.getMonth() + 1);
+    if (nextMonthDate.getMonth() === 0) {
+      nextMonthDate.setFullYear(nextMonthDate.getFullYear() + 1);
+    }
+    this.currentDate = nextMonthDate;
     this.generateCalendar();
   }
+  
 
   isAbsent(day: Date): boolean {
     // Logic to determine if the day is marked as absent

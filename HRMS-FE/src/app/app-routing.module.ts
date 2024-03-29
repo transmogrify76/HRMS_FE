@@ -51,6 +51,11 @@ const routes: Routes = [
     component: LeaveComponent,
   },
   {
+
+    path: 'payslip',
+    component: PayslipComponent,
+  },
+  {
     path: 'my-profile',
     component: MyProfileComponent,
   }
