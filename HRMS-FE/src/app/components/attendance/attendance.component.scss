@@ -4,16 +4,16 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    margin-top: 2.2rem;
-    max-height: 100vh;
+
   }
   
   .calendar {
-    width: 400px;
+    width: 700px;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    margin-top: 5%;
   }
   
   .legend {
@@ -35,7 +35,7 @@
   }
   
   .absent-color {
-    background-color: #ff8a80; /* Adjust color as needed */
+    background-color: #e95f53; /* Adjust color as needed */
   }
   
   .leave-color {
@@ -48,7 +48,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #3f51b5;
+    background-color: rgb(25, 59, 75);
     color: #fff;
     font-size: 18px;
   }
@@ -104,5 +104,16 @@
   .leave {
     background-color: #ffffcc;
   }
-
+  .container1::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 93.6%;
+    background-image: url('../../../assets/display.jpg'); /* Replace 'your-background-image.jpg' with your background image URL */
+    background-size: cover;
+    background-position: center;
+    filter: blur(5px); /* Adjust the blur intensity as needed */
+    z-index: 0; /* Ensure the background is behind the card */
+  }
   

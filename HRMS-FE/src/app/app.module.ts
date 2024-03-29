@@ -13,8 +13,9 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { MarkInComponent } from './components/daily-attendance/mark-in/mark-in.component';
 import { MarkOutComponent } from './components/daily-attendance/mark-out/mark-out.component';
 import { HomeComponent } from './components/home/home.component';
-import { LeaveComponent } from './leave/leave.component';
+import { LeaveComponent } from './components/leave/leave.component';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import { PayslipComponent } from './components/payslip/payslip.component';
 import { AttendanceComponent } from './components/attendance/attendance.component';
 
 
@@ -32,6 +33,7 @@ import { AttendanceComponent } from './components/attendance/attendance.componen
     HomeComponent,
     LeaveComponent,
     MyProfileComponent,
+    PayslipComponent,
     AttendanceComponent,
 
 
