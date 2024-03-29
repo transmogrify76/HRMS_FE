@@ -1,36 +1,60 @@
 <div class="container">
+    <!-- Notifications Card -->
     <div class="card notifications-card">
         <div class="card-header">
             Notifications
         </div>
         <div class="card-body">
-            <!-- Insert notification content here -->
-            You have <span class="badge">3</span> new notifications.
+            <!-- Notification content will be dynamically populated -->
+            You have <span class="badge">{{ notificationCount }}</span> new notifications.
         </div>
     </div>
+
+    <!-- Box with links -->
     <div class="box">
         <a routerLink="/mark-in" routerLinkActive="active">Mark in</a>
         <span class="space"></span>
         <a routerLink="/mark-out" routerLinkActive="active">Mark out</a>
     </div>
-    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Holidays</button>
 
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasRightLabel">List of holidays</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    ...
-  </div>
-</div>
+    <!-- Button to toggle offcanvas -->
+    <button class="btn btn-primary" type="button" (click)="toggleOffcanvas()">Holidays</button>
+
+    <!-- Offcanvas sidebar -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" [ngClass]="{'show': showOffcanvas}">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasRightLabel">List of holidays</h5>
+            <button type="button" class="btn-close" (click)="toggleOffcanvas()" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <!-- Holiday table -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Occasion</th>
+                        <th>Date</th>
+                        <th>Day</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let holiday of holidays">
+                        <td>{{ holiday.occasion }}</td>
+                        <td>{{ holiday.date }}</td>
+                        <td>{{ holiday.day }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- HR Policies Card -->
     <div class="hr-policies-box">
         <div class="card">
             <div class="card-header">
                 HR Policies
             </div>
             <div class="card-body">
-                <!-- Insert HR policies here -->
+                <!-- HR policies content will be dynamically populated -->
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget felis eget augue ultricies gravida.</p>
                 <p>Integer volutpat ligula id velit scelerisque, sit amet volutpat leo vehicula.</p>
                 <!-- Add more policies as needed -->
