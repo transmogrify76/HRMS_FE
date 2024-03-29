@@ -1,48 +1,65 @@
-.card {
-    margin-top: 50px; /* Add some top margin */
-    border-radius: 10px; /* Add border radius */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add box shadow */
-
-  }
-  
-  .card-header {
-    text-align: center; 
-    background-color:rgb(161, 209, 221);
-    height: 45px;
-  }
-  h5 {
-    color: rgb(5, 49, 54);
-  }
-  
-  .form-group {
-    margin-bottom: 20px; /* Add some bottom margin to form groups */
-  }
-  
-  .btn-primary {
-    width: 100%; /* Make the button full width */
-  }
-  .login-card { /* Adjust padding */
-    margin-top: 30%; /* Adjust margin top */
-    width:45%;
-    
-  }
-  .container1 {
-    position:absolute; 
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    background-image: url('../../../../assets/display.jpg');
-    background-size: cover;
-
-  }
-  .offset-md-3 {
-    margin-left: 10%;
+/* Overall card styling */
+.forgot-password-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.custom-button {
-  background-color: rgb(5, 50, 92) ; 
-  width:100%;/* Replace 'your-color' with the desired color value */
-}
-label{
+
+/* Header styling */
+.card-header {
+  display: flex;
+  align-items: center;
+  padding: 20px 15px; /* Adjust padding as needed */
+  background-color: #f8f9fa;
+  border-radius: 5px 5px 0 0;
+  color: #333; /* Dark text for contrast */
   font-weight: bold;
+}
+
+.card-header i {
+  margin-right: 10px; /* Spacing between icon and text */
+  color: #1e5b85; /* Blue icon color */
+}
+
+/* Body styling */
+.card-body {
+  padding: 25px; /* Adjust padding as needed */
+}
+
+/* Form styling */
+.form-group {
+  margin-bottom: 20px; /* Consistent spacing between fields */
+}
+
+/* Label styling */
+.form-label {
+  color: #777; /* Light gray for labels */
+  font-weight: bold;
+}
+
+/* Input styling */
+/* Gradient for card header */
+.bg-gradient-primary {
+  background: linear-gradient(to right, #15395f, #38879b);
+}
+
+/* Customize input placeholder color */
+.form-control::placeholder {
+  color: #a5a5a5;
+}
+
+/* Style the custom button */
+.btn-primary {
+  color: #fff;
+  border-color: #1d5eb4;
+  background-color: #1e5a7e;
+}
+.row{
+  width:60%;
+  margin-top: 15%;
+  margin-left: 2%;
+}
+.extraordinary-link{
+  color:#1e5a7e
 }
