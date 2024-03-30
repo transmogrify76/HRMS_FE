@@ -15,12 +15,12 @@
   z-index: 10; /* Ensure the card is above the background */
 }
   
-.card-header {
-  text-align: center; 
-  background-color:rgb(123, 210, 216);
+.bg-gradient-primary {
+  background: linear-gradient(to right, #15395f, #38879b);
+  text-align: center;
 }
 h5{
-  color:rgb(11, 12, 12);
+  color:rgb(240, 243, 243);
 }
 label{
   font-weight: bold;
