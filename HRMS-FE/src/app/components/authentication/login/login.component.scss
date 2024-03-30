@@ -1,10 +1,4 @@
-/* Overall card styling */
-.forgot-password-card {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+
 
 /* Header styling */
 .card-header {
@@ -12,7 +6,7 @@
   align-items: center;
   padding: 20px 15px; /* Adjust padding as needed */
   background-color: #f8f9fa;
-  border-radius: 5px 5px 0 0;
+  border-radius:20px 20px 0 0;
   color: #333; /* Dark text for contrast */
   font-weight: bold;
 }
@@ -22,10 +16,16 @@
   color: #1e5b85; /* Blue icon color */
 }
 
-/* Body styling */
+// .transparent-background {
+//   background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white background */
+// }
+
 .card-body {
-  padding: 25px; /* Adjust padding as needed */
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.6); /* Ensure override */
+  border-radius:0 0 20px 20px;
 }
+
 
 /* Form styling */
 .form-group {
@@ -34,7 +34,7 @@
 
 /* Label styling */
 .form-label {
-  color: #777; /* Light gray for labels */
+  color: #333131; /* Light gray for labels */
   font-weight: bold;
 }
 
@@ -56,10 +56,12 @@
   background-color: #1e5a7e;
 }
 .row{
-  width:60%;
+  width:25%;
   margin-top: 15%;
-  margin-left: 2%;
+  margin-left: 10%;
+  border-radius:20px;
+
 }
 .extraordinary-link{
-  color:#1e5a7e
+  color:#174563
 }
