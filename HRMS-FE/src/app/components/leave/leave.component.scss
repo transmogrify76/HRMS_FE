@@ -40,7 +40,8 @@
   }
   
   button[type="submit"] {
-    background-color: rgb(25, 59, 75) ;
+    border-color: #1d5eb4;
+    background-color: #1e5a7e;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -64,11 +65,11 @@
     filter: blur(5px); /* Adjust the blur intensity as needed */
     z-index: 0; /* Ensure the background is behind the card */
   }
-  .card-header {
-    text-align: center; 
-    background-color:rgb(25, 59, 75) ;
-    border-radius: 10px;
+
+  .bg-gradient-primary {
+    background: linear-gradient(to right, #15395f, #38879b);
+    text-align: center;
   }
   h5{
-    color:rgb(245, 248, 248);
+    color:rgb(240, 243, 243);
   }

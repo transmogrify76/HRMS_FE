@@ -42,15 +42,15 @@
     background-color: #ffd180; /* Adjust color as needed */
   }
   
-  
-  .calendar-header {
+  .bg-gradient-primary {
+    background: linear-gradient(to right, #15395f, #38879b);
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: rgb(25, 59, 75);
-    color: #fff;
-    font-size: 18px;
   }
   
   .calendar-header button {
