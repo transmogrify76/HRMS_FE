@@ -1,4 +1,5 @@
 .calendar-container {
+
     font-family: 'Roboto', sans-serif;
     display: flex;
     justify-content: center;
@@ -117,3 +118,122 @@
     z-index: 0; /* Ensure the background is behind the card */
   }
   
+=======
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+}
+
+.calendar {
+  width: 700px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-top: 5%;
+}
+
+.legend {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.absent-color,
+.leave-color {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.absent-color {
+  background-color: #e95f53; /* Adjust color as needed */
+}
+
+.leave-color {
+  background-color: #ffd180; /* Adjust color as needed */
+}
+
+.bg-gradient-primary {
+  background: linear-gradient(to right, #15395f, #38879b);
+  text-align: center;
+  color: #fff;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.calendar-header button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.calendar-header button:hover {
+  transform: scale(1.1);
+}
+
+.weekdays {
+  display: flex;
+  background-color: #f0f0f0;
+}
+
+.weekday {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  color: #616161;
+}
+
+.days {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.days td {
+  text-align: center;
+  padding: 15px 10px;
+  font-size: 16px;
+  color: #212121;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.days td:hover {
+  background-color: #f5f5f5;
+}
+
+.absent {
+  background-color: #ffcccc;
+}
+
+.leave {
+  background-color: #ffffcc;
+}
+.container1::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 93.6%;
+  background-image: url('../../../assets/display.jpg'); /* Replace 'your-background-image.jpg' with your background image URL */
+  background-size: cover;
+  background-position: center;
+  filter: blur(5px); /* Adjust the blur intensity as needed */
+  z-index: 0; /* Ensure the background is behind the card */
+}
+
