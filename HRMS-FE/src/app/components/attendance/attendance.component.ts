@@ -1,5 +1,4 @@
-import { Component, OnInit ,ChangeDetectorRef } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-attendance',
@@ -20,15 +19,15 @@ export class AttendanceComponent implements OnInit {
   generateCalendar(): void {
     const firstDayOfMonth = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 1);
     const lastDayOfMonth = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 0);
-  
+
     let startDate = new Date(firstDayOfMonth);
     startDate.setDate(startDate.getDate() - startDate.getDay());
-  
+
     const endDate = new Date(lastDayOfMonth);
     endDate.setDate(endDate.getDate() + (6 - endDate.getDay()));
-  
+
     this.calendar = [];
-  
+
     while (startDate <= endDate) {
       const week: Date[] = [];
       for (let i = 0; i < 7; i++) {
@@ -37,24 +36,23 @@ export class AttendanceComponent implements OnInit {
       }
       this.calendar.push(week);
     }
-  
+
     console.log('Generated Calendar:', this.calendar); // Add this line to log the generated calendar
   }
-  
 
   previousMonth(): void {
-    this.currentDate.setMonth(this.currentDate.getMonth() - 1);
-    console.log('Previous Month:', this.currentDate);
+    // Decrease the month by 1
+    this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() - 1, this.currentDate.getDate());
+  
+    // Regenerate the calendar with the updated date
     this.generateCalendar();
   }
-
+  
   nextMonth(): void {
-    const nextMonthDate = new Date(this.currentDate);
-    nextMonthDate.setMonth(nextMonthDate.getMonth() + 1);
-    if (nextMonthDate.getMonth() === 0) {
-      nextMonthDate.setFullYear(nextMonthDate.getFullYear() + 1);
-    }
-    this.currentDate = nextMonthDate;
+    // Increase the month by 1
+    this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, this.currentDate.getDate());
+  
+    // Regenerate the calendar with the updated date
     this.generateCalendar();
   }
   

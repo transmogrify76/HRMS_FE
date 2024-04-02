@@ -1,25 +1,54 @@
 <div class="container">
-    <!-- Notifications Card -->
-    <div class="card notifications-card">
-        <div class="card-header">
-            Notifications
+  <h2>Dashboard</h2>
+  <div class="card">
+    <div class="card-body">
+      <div class="icon-container">
+        <img src="../../../assets/holiday.png" alt="holiday icon" (click)="toggleOffcanvas()" data-toggle="tooltip" title="Holidays">
+        <span class="icon-text">Holidays</span>
+      </div>
+      <div class="icon-container">
+        <a href="../../../assets/DRESS CODE_PDF.pdf" download>
+          <img src="../../../assets/policy.png" alt="policy icon" data-toggle="tooltip" title="Policies">
+        </a>
+        <span class="icon-text">Policies</span>
+      </div>
+      <div class="icon-container">
+        <img src="../../../assets/markin.png" alt="mark in icon" (click)="markin()" data-toggle="tooltip" title="Mark In">
+        <span class="icon-text">Mark In</span>
+      </div>
+      <div class="icon-container">
+        <img src="../../../assets/markout.png" alt="mark out icon" (click)="markout()" data-toggle="tooltip" title="Mark Out">
+        <span class="icon-text">Mark Out</span>
+      </div>
+    </div>
+  </div>
+  <div class="container1">    
+    <div class="calendar-container">
+        <div class="calendar">
+        <div class="calendar-header bg-gradient-primary">
+            <button (click)="previousMonth()">&lt;</button>
+            <span>{{ currentDate | date: 'MMMM yyyy' }}</span>
+            <button (click)="nextMonth()">&gt;</button>
         </div>
-        <div class="card-body">
-            <!-- Notification content will be dynamically populated -->
-            You have <span class="badge">{{ notificationCount }}</span> new notifications.
+        <div class="weekdays">
+            <div *ngFor="let weekday of weekdays" class="weekday">{{ weekday }}</div>
+        </div>
+        <table class="days">
+            <tr *ngFor="let week of calendar">
+            <td *ngFor="let day of week" class="day" [ngClass]="{ 'absent': isAbsent(day), 'leave': isLeave(day) }" (click)="selectDate(day)">
+                {{ day ? day.getDate() : '' }}
+            </td>
+            </tr>
+        </table>
+        <div class="legend">
+          <span class="absent-color"></span>Absent
+          <span class="leave-color"></span>Leave Application
+          </div>
         </div>
     </div>
-
-    <!-- Box with links -->
-    <div class="box">
-        <a routerLink="/mark-in" routerLinkActive="active">Mark-in</a>
-        <span class="space"></span>
-        <a routerLink="/mark-out" routerLinkActive="active">Mark-out</a>
     </div>
-
-    <!-- Button to toggle offcanvas -->
-    <button class="btn btn-primary" type="button" (click)="toggleOffcanvas()">Holidays</button>
-
+    
+ </div>
     <!-- Offcanvas sidebar -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" [ngClass]="{'show': showOffcanvas}">
         <div class="offcanvas-header">
@@ -45,20 +74,4 @@
                 </tbody>
             </table>
         </div>
-    </div>
-
-    <!-- HR Policies Card -->
-    <div class="hr-policies-box">
-        <div class="card">
-            <div class="card-header">
-                HR Policies
-            </div>
-            <div class="card-body">
-                <!-- HR policies content will be dynamically populated -->
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget felis eget augue ultricies gravida.</p>
-                <p>Integer volutpat ligula id velit scelerisque, sit amet volutpat leo vehicula.</p>
-                <!-- Add more policies as needed -->
-            </div>
-        </div>
-    </div>
 </div>

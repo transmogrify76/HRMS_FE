@@ -1,24 +1,3 @@
-<div class="container">
-
-<div class="card">
-    <h5 class="card-header bg-gradient-primary">Leave Application Form</h5>
-    <div class="card-body">
-      <div class="leave-application">
-        <form (submit)="submitLeaveApplication()">
-          <div class="form-group">
-            <label for="startDate">Start Date:</label>
-            <input type="date" id="startDate" name="startDate" [(ngModel)]="startDate" required>
-          </div>
-          <div class="form-group">
-            <label for="endDate">End Date:</label>
-            <input type="date" id="endDate" name="endDate" [(ngModel)]="endDate" required>
-          </div>
-          <div class="form-group">
-            <label for="reason">Reason:</label>
-            <textarea id="reason" name="reason" [(ngModel)]="reason" required></textarea>
-          </div>
-          <button type="submit">Submit</button>
-        </form>
 
   <div class="card">
       <h5 class="card-header bg-gradient-primary">Leave Application Form</h5>
@@ -42,4 +21,3 @@
         </div>
       </div>
     </div>
-   </div>  
