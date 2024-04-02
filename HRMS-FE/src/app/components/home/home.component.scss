@@ -1,9 +1,4 @@
-// .container {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     height: 93vh;
-//   }
+
   
 .table {
   width: 100%;
@@ -52,11 +47,13 @@
 
 .icon-container {
   text-align: center;
+  cursor: pointer;
 }
 
 .icon-container img {
   width: 35px; /* Adjust the width of the icons as needed */
   height: 35px; /* Ensure the icons maintain their aspect ratio */
+  cursor: pointer;
 }
 
 .icon-text {
