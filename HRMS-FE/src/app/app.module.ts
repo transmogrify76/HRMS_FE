@@ -17,6 +17,8 @@ import { LeaveComponent } from './components/leave/leave.component';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
 import { PayslipComponent } from './components/payslip/payslip.component';
 import { AttendanceComponent } from './components/attendance/attendance.component';
+import { ListOfEmployeesComponent } from './components/admin/list-of-employees/list-of-employees.component';
+import { EmployeeDetailsComponent } from './components/admin/employee-details/employee-details.component';
 
 
 
@@ -35,6 +37,8 @@ import { AttendanceComponent } from './components/attendance/attendance.componen
     MyProfileComponent,
     PayslipComponent,
     AttendanceComponent,
+    ListOfEmployeesComponent,
+    EmployeeDetailsComponent,
 
 
   ],
