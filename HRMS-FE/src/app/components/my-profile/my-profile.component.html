@@ -1,34 +1,17 @@
 <body>
     <div class="container">
         <div class="card">
-            <h5 class="card-header bg-gradient-primary ">Profile</h5>
-            <div class="card-body">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <div class="input-group">
-                        <span class="form-control">John Doe</span>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="id" class="form-label">ID</label>
-                    <div class="input-group">
-                        <span class="form-control">12345</span>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="rm" class="form-label">Remaining Leave</label>
-                    <div class="input-group">
-                        <span class="form-control">10</span>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <div class="input-group">
-                        <span class="form-control">john.doeexample.com</span>
-                    </div>
-                </div>
+            <div class="card-header bg-gradient-primary">
+              My Profile
             </div>
-        </div>
+            <div class="card-body">
+              <p><strong>Employee ID:</strong> {{ employeeDetails.id }}</p>
+              <p><strong>Username:</strong> {{ employeeDetails.username }}</p>
+              <p><strong>First name:</strong> {{ employeeDetails.firstname }}</p>
+              <p><strong>Last name:</strong> {{ employeeDetails.lastname }}</p>
+              <p><strong>Email:</strong> {{ employeeDetails.email }}</p>
+            </div>
+          </div>
     </div>
 </body>
 
