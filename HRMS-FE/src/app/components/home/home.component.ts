@@ -101,4 +101,5 @@ export class HomeComponent {
   markout(){
     this.router.navigate(['/mark-out']);
   }
+  
 }

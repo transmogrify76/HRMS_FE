@@ -19,6 +19,7 @@ import { PayslipComponent } from './components/payslip/payslip.component';
 import { AttendanceComponent } from './components/attendance/attendance.component';
 import { ListOfEmployeesComponent } from './components/admin/list-of-employees/list-of-employees.component';
 import { EmployeeDetailsComponent } from './components/admin/employee-details/employee-details.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -44,6 +45,7 @@ import { EmployeeDetailsComponent } from './components/admin/employee-details/em
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
