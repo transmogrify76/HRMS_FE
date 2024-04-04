@@ -22,7 +22,7 @@ export class EmployeeDetailsComponent implements OnInit {
   selectedEmployee!: number;
   employees: Employee[] = [];
   employeeDetails: Employee = {} as Employee;
-  leaveDetails: LeaveDetails = {} as LeaveDetails;
+  leaveDetails: LeaveDetails[] = [];
 
   constructor(private http: HrmsApiService) {
   }
@@ -43,7 +43,6 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   fetchEmployeeData(): void {
-    // Fetch employee details
     this.http.getEmployeeDetails(this.selectedEmployee).subscribe(
       (employee: Employee) => {
         this.employeeDetails = employee;
@@ -52,12 +51,13 @@ export class EmployeeDetailsComponent implements OnInit {
         console.error('Error fetching employee details:', error);
       }
     );
-
-    // Fetch leave details
     this.http.getLeaveDetails(this.selectedEmployee).subscribe(
-      (leaveDetails: LeaveDetails) => {
-        this.leaveDetails = leaveDetails;
-        console.log('=============' , this.leaveDetails);
+      (leaveDetails: LeaveDetails | LeaveDetails[]) => {
+        if (Array.isArray(leaveDetails)) {
+          this.leaveDetails = leaveDetails;
+        } else {
+          this.leaveDetails = [leaveDetails];
+        }
       },
       (error) => {
         console.error('Error fetching leave details:', error);

@@ -25,11 +25,15 @@
         <div class="card-header bg-gradient-primary">
           Leave Details
         </div>
-        <div class="card-body">
-          <p><strong>Start date:</strong> {{ leaveDetails.startdate }}</p>
-          <p><strong>End date:</strong> {{ leaveDetails.enddate }}</p>
-          <p><strong>:</strong> {{ leaveDetails.reason }}</p>
-          <!-- Add more leave details as needed -->
+        <div *ngIf="leaveDetails.length > 0">
+          <h2>Leave Details</h2>
+          <div *ngFor="let leave of leaveDetails">
+            <div class="card-body">
+              <p><strong>Start Date:</strong> {{ leave.startdate | date: 'medium' }}</p>
+              <p><strong>End Date:</strong> {{ leave.enddate | date: 'medium' }}</p>
+              <p><strong>Reason:</strong> {{ leave.reason }}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
