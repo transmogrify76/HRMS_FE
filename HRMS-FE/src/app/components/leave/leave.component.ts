@@ -27,8 +27,8 @@ export class LeaveComponent {
 
 
     const payload = {
-      startDate: this.startDate,
-      endDate: this.endDate,
+      startdate: this.startDate,
+      enddate: this.endDate,
       reason: this.reason
     };
 

@@ -57,6 +57,7 @@ export class EmployeeDetailsComponent implements OnInit {
     this.http.getLeaveDetails(this.selectedEmployee).subscribe(
       (leaveDetails: LeaveDetails) => {
         this.leaveDetails = leaveDetails;
+        console.log('=============' , this.leaveDetails);
       },
       (error) => {
         console.error('Error fetching leave details:', error);

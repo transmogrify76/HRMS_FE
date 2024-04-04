@@ -30,7 +30,7 @@ export class HrmsApiService {
 
   // Method to fetch leave details for an employee from the API
   getLeaveDetails(userid: number): Observable<LeaveDetails> {
-    return this.http.get<LeaveDetails>(`http://localhost:3000/user/${userid}/leave`);
+    return this.http.get<LeaveDetails>(`http://localhost:3000/leave/${userid}`);
   }
   getAllEmployees(): Observable<Employee[]> {
     return this.http.get<Employee[]>('http://localhost:3000/user');
