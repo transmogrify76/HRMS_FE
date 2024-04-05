@@ -18,11 +18,11 @@
             <div class="mb-3">
               <label for="time" class="form-label">Time</label>
               <div class="input-group">
-                <input type="time" class="form-control" id="time" [(ngModel)]="attendanceDate" placeholder="Choose Time">
+                <input type="time" class="form-control" id="time" [(ngModel)]="attendanceTime" placeholder="Choose Time">
               </div>
             </div>
             <div class="mb-3">
-              <bs-timepicker [(ngModel)]="attendanceDate"></bs-timepicker>
+              <bs-timepicker [(ngModel)]="attendanceTime"></bs-timepicker>
             </div>
             <div class="mb-3 custom-flex-container">
               <button type="button" class="btn btn-success" (click)="submitAttendance()">Submit</button>

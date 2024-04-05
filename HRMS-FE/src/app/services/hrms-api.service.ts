@@ -35,5 +35,10 @@ export class HrmsApiService {
   getAllEmployees(): Observable<Employee[]> {
     return this.http.get<Employee[]>(`${environment.apiUrl}/user`);
   }
-
+  markinByUserId(userid:number,payload:any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/attendance/markin/${userid}` , payload);
+  }
+  markoutByUserId(userid: number, payload: any): Observable<any> {
+    return this.http.patch(`${environment.apiUrl}/attendance/markout/${userid}`, payload);
+  }
 }
