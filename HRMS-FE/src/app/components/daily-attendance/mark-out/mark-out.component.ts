@@ -39,7 +39,6 @@ export class MarkOutComponent {
 
 
     const payload = {
-      date: this.attendanceDate,
       markout: this.attendanceTime
     };
 
@@ -49,7 +48,7 @@ export class MarkOutComponent {
       (data: any) => {
         console.log(payload);
         
-        if (data && data.statusCode === 200) {
+        if (data || data.statusCode === 200) {
           this.submitted = true;
           this.router.navigate(['/home']);
         } else {

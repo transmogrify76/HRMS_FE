@@ -49,7 +49,7 @@ export class MarkInComponent {
       (data: any) => {
         console.log(payload);
         
-        if (data && data.statusCode === 200) {
+        if (data || data.statusCode === 200) {
           this.submitted = true;
           this.router.navigate(['/home']);
         } else {
