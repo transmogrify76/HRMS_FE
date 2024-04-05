@@ -16,7 +16,7 @@
     position: absolute;
     top: 100%;
     left: -8rem;
-    background-color: #ffffff;
+    background-color: #a3deec;
     min-width: 160px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 1;
@@ -71,3 +71,16 @@
         transform: rotate(360deg);
     }
 }  
+.custom-navbar-bg {
+    background-color: rgba(231, 245, 248, 0.2);/* Example blue color */
+  }
+  .white-text {
+    color: white !important;
+    font-style: italic;
+    font-weight: 600;
+  }
+  .navbar-brand{
+    color: white !important;
+    font-style: italic;
+    font-weight: 600;
+  }

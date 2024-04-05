@@ -1,6 +1,6 @@
 <div class="container">
     <h2>Select Employee</h2>
-    <select [(ngModel)]="selectedEmployee" (change)="fetchEmployeeData()" class="custom-select">
+    <select [(ngModel)]="selectedEmployee" (change)="fetchEmployeeData()" class="custom-select" aria-placeholder="select-employee">
         <option value="" disabled selected>Select Employee</option>
         <option *ngFor="let employee of employees" [value]="employee.id">{{ employee.username }}</option>
       </select>
