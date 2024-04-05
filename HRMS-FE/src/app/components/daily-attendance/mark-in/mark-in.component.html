@@ -7,22 +7,21 @@
           <div class="mb-3">
             <label for="date" class="form-label">Date</label>
             <div class="input-group">
-              <input type="text" class="form-control" id="date" [(ngModel)]="attendanceDate" bsDatepicker #datePicker="bsDatepicker" placeholder="Choose Date">
+              <input type="text" class="form-control" id="date" name="date" [(ngModel)]="attendanceDate" bsDatepicker #datePicker="bsDatepicker" placeholder="Choose Date">
               <!-- <span class="input-group-text" (click)="datePicker.show()"><i class="bi bi-calendar"></i></span> -->
             </div>
           </div>
           <div class="mb-3">
             <button type="button" class="btn btn-alert custom-button" (click)="setCurrentDate()">Set Current Date </button>
           </div>
-  
           <div class="mb-3">
             <label for="time" class="form-label">Time</label>
             <div class="input-group">
-              <input type="time" class="form-control" id="time" [(ngModel)]="attendanceDate" placeholder="Choose Time">
+              <input type="time" class="form-control" name="time" id="time" [(ngModel)]="attendanceTime" placeholder="Choose Time">
             </div>
           </div>
           <div class="mb-3">
-            <bs-timepicker [(ngModel)]="attendanceDate"></bs-timepicker>
+            <bs-timepicker [(ngModel)]="attendanceDate" style="z-index: 55;"></bs-timepicker>
           </div>
           <div class="mb-3 custom-flex-container">
             <button type="button" class="btn btn-success" (click)="submitAttendance()">Submit</button>
