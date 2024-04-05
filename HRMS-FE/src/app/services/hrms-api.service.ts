@@ -36,5 +36,4 @@ export class HrmsApiService {
     return this.http.get<Employee[]>('http://localhost:3000/user');
   }
 
-
 }
