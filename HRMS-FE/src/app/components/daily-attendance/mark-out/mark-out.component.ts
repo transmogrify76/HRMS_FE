@@ -1,7 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { BsDatepickerDirective, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { TimepickerComponent, TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { BsDatepickerDirective} from 'ngx-bootstrap/datepicker';
+import { TimepickerComponent } from 'ngx-bootstrap/timepicker';
+import { HrmsApiService } from 'src/app/services/hrms-api.service';
 import {Router} from '@angular/router'
+import { Time } from 'ngx-bootstrap/timepicker/timepicker.models';
 
 @Component({
   selector: 'app-mark-out',
@@ -13,9 +15,10 @@ export class MarkOutComponent {
   @ViewChild(TimepickerComponent) timepicker!: TimepickerComponent;
 
   attendanceDate!: Date;
+  submitted!: boolean;
+  attendanceTime!: Time;
 
-
-  constructor(private router: Router) { }
+  constructor(private router: Router, private http:HrmsApiService) { }
 
   setCurrentDate() {
     this.attendanceDate = new Date();
@@ -32,12 +35,34 @@ export class MarkOutComponent {
   
 
   submitAttendance() {
-   
-    console.log('Attendance Date & Time:', this.attendanceDate);
-    this.router.navigateByUrl('/home');
-  }
-  skip(){
-    this.router.navigateByUrl('/home');
-  }
-}
+    this.submitted = true;
 
+
+    const payload = {
+      date: this.attendanceDate,
+      markout: this.attendanceTime
+    };
+
+    const userId: number = 1; 
+
+    this.http.markinByUserId(userId, payload).subscribe(
+      (data: any) => {
+        console.log(payload);
+        
+        if (data && data.statusCode === 200) {
+          this.submitted = true;
+          this.router.navigate(['/home']);
+        } else {
+          console.error('Failed to give attendance');
+        }
+      },
+      (error: any) => {
+        console.error('Error occurred while giving attendance:', error);
+      }
+    );
+    
+}
+skip(){
+  this.router.navigateByUrl('/home');
+}
+}
