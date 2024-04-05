@@ -1,43 +1,40 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary" >
-    <div class="container-fluid">
-      <!-- Navbar Brand -->
-      <a class="navbar-brand">HRMS</a>
-      
-      <!-- Navbar Toggler -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      
-      <!-- Navbar Items -->
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/home">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/attendance">Attendance</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/leave">Leave</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/payslip">Payslip</a>
-          </li>
-        </ul>
-      </div>
-  
-      <div class="profile-dropdown ms-auto">
-        <img src="https://cdn-icons-png.flaticon.com/128/236/236831.png" alt="Profile" class="profile-icon" (click)="toggleDropdown()">
-        <ul class="dropdown-menu" [class.show]="isDropdownOpen" (clickOutside)="closeDropdown()">
-            <li (click)="myprofile()">My Profile</li>
-            <li (click)="logout()">Logout</li>
-            <div *ngIf="submitted" class="spinner-overlay">
-                <div class="spinner"></div>
-            </div> 
-        </ul>
-    </div>
+<nav class="navbar navbar-expand-lg custom-navbar-bg">
+  <div class="container-fluid">
+    <!-- Navbar Brand -->
+    <a class="navbar-brand" >Human Resource Management System</a>
     
-      
+    <!-- Navbar Toggler -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <!-- Navbar Items -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active white-text" aria-current="page" routerLink="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active white-text" aria-current="page" routerLink="/attendance">Attendance</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active white-text" aria-current="page" routerLink="/leave">Leave</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active white-text" aria-current="page" routerLink="/payslip">Payslip</a>
+        </li>
+      </ul>
     </div>
-  </nav>
-  
+
+    <div class="profile-dropdown ms-auto">
+      <img src="https://cdn-icons-png.flaticon.com/128/236/236831.png" alt="Profile" class="profile-icon" (click)="toggleDropdown()">
+      <ul class="dropdown-menu" [class.show]="isDropdownOpen" (clickOutside)="closeDropdown()">
+          <li (click)="myprofile()">My Profile</li>
+          <li (click)="logout()">Logout</li>
+          <div *ngIf="submitted" class="spinner-overlay">
+              <div class="spinner"></div>
+          </div> 
+      </ul>
+    </div>
+  </div>
+</nav>

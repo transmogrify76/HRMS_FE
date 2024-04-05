@@ -25,15 +25,15 @@ export class HrmsApiService {
     return this.http.post(`${environment.apiUrl}/leave/${userid}` , payload);
   }
   getEmployeeDetails(userid: number): Observable<Employee> {
-    return this.http.get<Employee>(`http://localhost:3000/user/${userid}`);
+    return this.http.get<Employee>(`${environment.apiUrl}/user/${userid}`);
   }
 
   // Method to fetch leave details for an employee from the API
   getLeaveDetails(userid: number): Observable<LeaveDetails> {
-    return this.http.get<LeaveDetails>(`http://localhost:3000/leave/${userid}`);
+    return this.http.get<LeaveDetails>(`${environment.apiUrl}/leave/${userid}`);
   }
   getAllEmployees(): Observable<Employee[]> {
-    return this.http.get<Employee[]>('http://localhost:3000/user');
+    return this.http.get<Employee[]>(`${environment.apiUrl}/user`);
   }
 
 }
