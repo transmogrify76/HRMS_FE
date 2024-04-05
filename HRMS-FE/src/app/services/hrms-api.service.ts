@@ -38,7 +38,7 @@ export class HrmsApiService {
   markinByUserId(userid:number,payload:any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/attendance/markin/${userid}` , payload);
   }
-  markoutByUserId(userid: number, payload: any): Observable<any> {
-    return this.http.patch(`${environment.apiUrl}/attendance/markout/${userid}`, payload);
+  markoutByUserId(userid: number,attendanceId:number, payload: any): Observable<any> {
+    return this.http.patch(`${environment.apiUrl}/attendance/markout/${userid}/${attendanceId}`, payload);
   }
 }
