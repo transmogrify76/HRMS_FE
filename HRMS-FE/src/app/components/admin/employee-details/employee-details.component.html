@@ -32,7 +32,17 @@
               <p><strong>Start Date:</strong> {{ leave.startdate | date: 'medium' }}</p>
               <p><strong>End Date:</strong> {{ leave.enddate | date: 'medium' }}</p>
               <p><strong>Reason:</strong> {{ leave.reason }}</p>
-            </div>
+              <div class="mb-3">
+                  <label for="leaveOptions" class="form-label">Approve leave:</label>
+                  <select class="form-select" id="leaveOptions" name="leaveOptions">
+                      <option value="leaveWithoutPay">Leave without pay</option>
+                      <option value="leaveWithPay">Leave with pay</option>
+                      <option value="decline">Decline</option>
+                  </select>
+              </div>
+              <button type="button" class="btn btn-dark" >Submit</button>
+          </div>
+          
           </div>
         </div>
       </div>
