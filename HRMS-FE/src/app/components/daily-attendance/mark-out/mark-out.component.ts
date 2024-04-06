@@ -43,8 +43,9 @@ export class MarkOutComponent {
     };
 
     const userId: number = 1; 
+    const attendanceId: number = 1; 
 
-    this.http.markinByUserId(userId, payload).subscribe(
+    this.http.markoutByUserId(userId,attendanceId, payload).subscribe(
       (data: any) => {
         console.log(payload);
         
