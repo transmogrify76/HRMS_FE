@@ -47,10 +47,10 @@ export class MarkInComponent {
 
     this.http.markinByUserId(userId, payload).subscribe(
       (data: any) => {
-        console.log(payload);
-        
         if (data || data.statusCode === 200) {
           this.submitted = true;
+          sessionStorage.setItem('AttendanceId', data.attendanceid);     
+          sessionStorage.setItem('UserId', data.user.id);     
           this.router.navigate(['/home']);
         } else {
           console.error('Failed to give attendance');

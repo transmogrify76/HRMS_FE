@@ -15,10 +15,17 @@ export class MarkOutComponent {
   @ViewChild(TimepickerComponent) timepicker!: TimepickerComponent;
 
   attendanceDate!: Date;
+  userId:number=0;
+  attendanceId:number=0;
   submitted!: boolean;
   attendanceTime!: Time;
 
   constructor(private router: Router, private http:HrmsApiService) { }
+
+  ngOnInit(): void {
+    this.userId = Number(sessionStorage.getItem('UserId'));
+    this.attendanceId = Number(sessionStorage.getItem('AttendanceId'));
+  }
 
   setCurrentDate() {
     this.attendanceDate = new Date();
@@ -42,10 +49,7 @@ export class MarkOutComponent {
       markout: this.attendanceTime
     };
 
-    const userId: number = 1; 
-    const attendanceId: number = 1; 
-
-    this.http.markoutByUserId(userId,attendanceId, payload).subscribe(
+    this.http.markoutByUserId(this.userId,this.attendanceId, payload).subscribe(
       (data: any) => {
         console.log(payload);
         
