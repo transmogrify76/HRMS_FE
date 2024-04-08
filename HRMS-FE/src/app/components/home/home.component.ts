@@ -28,7 +28,6 @@ export class HomeComponent {
   currentDate: Date = new Date();
   calendar: Date[][] = [];
   weekdays: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']; // Define weekday names here
-
   ngOnInit(): void {
     this.generateCalendar();
   }
@@ -100,6 +99,9 @@ export class HomeComponent {
   }
   markout(){
     this.router.navigate(['/mark-out']);
+  }
+  listofleaves(){
+    this.router.navigate(['/empdetails']);
   }
   
 }
