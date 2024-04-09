@@ -12,11 +12,13 @@ export class LeaveComponent {
   endDate: string | null = null;
   reason: string = '';
   submitted: boolean = false;
+  empId: any;
   
   constructor(
     private hrmsApiService: HrmsApiService,
     private router: Router
   ) {}
+  
 
   submitLeaveApplication() {
     this.submitted = true;
@@ -24,17 +26,20 @@ export class LeaveComponent {
       console.error('Please select start and end dates.');
       return;
     }
-
+    this.empId=Number(sessionStorage.getItem('empId'));
+    console.log('==========', this.empId);
+    
 
     const payload = {
-      startdate: this.startDate,
-      enddate: this.endDate,
-      reason: this.reason
+      startDate: this.startDate,
+      endDate: this.endDate,
+      reason: this.reason,
+      employee:this.empId
     };
 
-    const userId: number = 1; 
+    
 
-    this.hrmsApiService.leaveByUserId(userId, payload).subscribe(
+    this.hrmsApiService.leaveByUserId( payload).subscribe(
       (data: any) => {
         console.log(payload);
         

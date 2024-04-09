@@ -26,8 +26,8 @@ export class HrmsApiService {
     return this.http.post<any>(`${environment.apiUrl}/employee/login`, {username, password});
   }
 
-  leaveByUserId(userid:number,payload:any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/leave/${userid}` , payload);
+  leaveByUserId(payload:any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/leave` , payload);
   }
   getEmployeeDetails(userid: number): Observable<Employee> {
     return this.http.get<Employee>(`${environment.apiUrl}/user/${userid}`);
