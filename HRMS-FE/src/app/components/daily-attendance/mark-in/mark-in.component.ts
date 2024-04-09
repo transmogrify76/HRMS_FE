@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { BsDatepickerDirective  } from 'ngx-bootstrap/datepicker';
 import { TimepickerComponent } from 'ngx-bootstrap/timepicker';
 import { HrmsApiService } from 'src/app/services/hrms-api.service';
-import {Router} from '@angular/router'
+import { Router } from '@angular/router';
 import { Time } from '@angular/common';
 
 @Component({
@@ -19,31 +19,37 @@ export class MarkInComponent {
   attendanceTime!: Time;
 
 
-  constructor(private router: Router ,private http:HrmsApiService) { }
+  constructor(private router: Router, private http: HrmsApiService) { }
 
   setCurrentDate() {
     this.attendanceDate = new Date();
     this.datepicker.bsValue = this.attendanceDate;
     this.timepicker.writeValue(this.attendanceDate);
   }
+  
   setCurrentTime() {
     // Get current time
-    let currentTime = new Date();
+    const currentTime = new Date();
+    // Format time to HH:MM
+    const hours = currentTime.getHours();
+    const minutes = currentTime.getMinutes();
+    const formattedHours = hours < 10 ? '0' + hours : hours.toString();
+    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes.toString();
+    const currentTimeString = formattedHours + ':' + formattedMinutes;
     // Update timepicker value
-    this.timepicker.writeValue(currentTime);
+    this.attendanceTime = currentTimeString as unknown as Time; // Convert string to Time type
+    this.timepicker.writeValue(currentTimeString);
   }
-  
 
   submitAttendance() {
     this.submitted = true;
-
 
     const payload = {
       date: this.attendanceDate,
       markin: this.attendanceTime
     };
 
-    const userId: number = 1; 
+    const userId: number = 1;
 
     this.http.markinByUserId(userId, payload).subscribe(
       (data: any) => {
@@ -60,9 +66,10 @@ export class MarkInComponent {
         console.error('Error occurred while giving attendance:', error);
       }
     );
-    
-}
-skip(){
-  this.router.navigateByUrl('/home');
-}
+
+  }
+
+  skip() {
+    this.router.navigateByUrl('/home');
+  }
 }

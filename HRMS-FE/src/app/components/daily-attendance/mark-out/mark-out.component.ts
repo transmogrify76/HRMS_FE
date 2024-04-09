@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { BsDatepickerDirective} from 'ngx-bootstrap/datepicker';
+import { BsDatepickerDirective } from 'ngx-bootstrap/datepicker';
 import { TimepickerComponent } from 'ngx-bootstrap/timepicker';
 import { HrmsApiService } from 'src/app/services/hrms-api.service';
-import {Router} from '@angular/router'
+import { Router } from '@angular/router';
 import { Time } from 'ngx-bootstrap/timepicker/timepicker.models';
 
 @Component({
@@ -20,7 +20,7 @@ export class MarkOutComponent {
   submitted!: boolean;
   attendanceTime!: Time;
 
-  constructor(private router: Router, private http:HrmsApiService) { }
+  constructor(private router: Router, private http: HrmsApiService) { }
 
   ngOnInit(): void {
     this.userId = Number(sessionStorage.getItem('UserId'));
@@ -32,18 +32,25 @@ export class MarkOutComponent {
     this.datepicker.bsValue = this.attendanceDate;
     this.timepicker.writeValue(this.attendanceDate);
   }
+
   setCurrentTime() {
     // Get current time
-    let currentTime = new Date();
-    
+    const currentTime = new Date();
+
+    // Format time to HH:MM
+    const hours = currentTime.getHours();
+    const minutes = currentTime.getMinutes();
+    const formattedHours = hours < 10 ? '0' + hours : hours.toString();
+    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes.toString();
+    const currentTimeString = formattedHours + ':' + formattedMinutes;
+
     // Update timepicker value
-    this.timepicker.writeValue(currentTime);
+    this.attendanceTime = currentTimeString as unknown as Time; // Convert string to Time type
+    this.timepicker.writeValue(currentTimeString);
   }
-  
 
   submitAttendance() {
     this.submitted = true;
-
 
     const payload = {
       markout: this.attendanceTime
@@ -52,7 +59,7 @@ export class MarkOutComponent {
     this.http.markoutByUserId(this.userId,this.attendanceId, payload).subscribe(
       (data: any) => {
         console.log(payload);
-        
+
         if (data || data.statusCode === 200) {
           this.submitted = true;
           this.router.navigate(['/home']);
@@ -64,9 +71,9 @@ export class MarkOutComponent {
         console.error('Error occurred while giving attendance:', error);
       }
     );
-    
-}
-skip(){
-  this.router.navigateByUrl('/home');
-}
+  }
+
+  skip() {
+    this.router.navigateByUrl('/home');
+  }
 }
