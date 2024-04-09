@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { HrmsApiService } from 'src/app/services/hrms-api.service';
 
 @Component({
   selector: 'app-login',
@@ -11,12 +13,17 @@ export class LoginComponent {
   showPassword: boolean = false;
   submitted: boolean = false;
 
-  constructor() { }
-  login(): void {
-    // Implement your login logic here
-    // This function should handle submitting the username and password to your backend service for authentication.
-    // You can use a service like HttpClient to make the API call.
+  constructor(public hrmsService : HrmsApiService , private router: Router) { }
+
+  
+  login() {
     console.log('Login attempted with username:', this.username, 'password:', this.password);
+    this.hrmsService.login(this.username, this.password).subscribe(
+      (data : any) => {
+        sessionStorage.setItem('accessToken', data.token);
+        this.router.navigate(['/home']);
+      }
+    );
     this.submitted = true;
   }
 

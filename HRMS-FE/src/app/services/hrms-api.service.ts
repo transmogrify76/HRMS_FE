@@ -21,6 +21,11 @@ export class HrmsApiService {
   // getUserById(customer_id: number): Observable<any> {
   //   return this.http.get<any>(`${environment.apiUrl}/user/${customer_id}/` );
   // } 
+
+  login(username : string , password : string): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/employee/login`, {username, password});
+  }
+
   leaveByUserId(userid:number,payload:any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/leave/${userid}` , payload);
   }
