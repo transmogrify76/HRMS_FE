@@ -17,9 +17,13 @@
           <div class="mb-3">
             <label for="time" class="form-label">Time</label>
             <div class="input-group">
-              <input type="time" class="form-control" name="time" id="time" [(ngModel)]="attendanceTime" placeholder="Choose Time">
+                <input type="time" class="form-control" name="time" id="time" [(ngModel)]="attendanceTime" placeholder="Choose Time">
             </div>
-          </div>
+        </div>
+        <div class="mb-3">
+            <!-- Add a button to set current time -->
+            <button type="button" class="btn btn-alert custom-button" (click)="setCurrentTime()">Set Current Time</button>
+        </div>
           <div class="mb-3">
             <bs-timepicker [(ngModel)]="attendanceDate" style="z-index: 55;"></bs-timepicker>
           </div>
