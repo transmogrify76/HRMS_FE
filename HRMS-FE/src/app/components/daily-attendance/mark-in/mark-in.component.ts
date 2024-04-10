@@ -42,7 +42,7 @@ export class MarkInComponent {
       employee:this.empId
     };
 
-    const userId: number = 1;
+    
 
     this.http.markinByUserId(payload).subscribe(
       (data: any) => {
