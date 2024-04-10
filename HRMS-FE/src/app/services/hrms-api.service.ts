@@ -40,10 +40,10 @@ export class HrmsApiService {
   getAllEmployees(): Observable<Employee[]> {
     return this.http.get<Employee[]>(`${environment.apiUrl}/user`);
   }
-  markinByUserId(userid:number,payload:any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/attendance/markin/${userid}` , payload);
+  markinByUserId(payload:any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/attendance`,payload);
   }
-  markoutByUserId(userid: number,attendanceId:number, payload: any): Observable<any> {
-    return this.http.patch(`${environment.apiUrl}/attendance/markout/${userid}/${attendanceId}`, payload);
+  markoutByUserId(userId: number, payload: any): Observable<any> {
+    return this.http.patch(`${environment.apiUrl}/attendance/${userId}`, payload);
   }
 }

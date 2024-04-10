@@ -16,15 +16,18 @@ export class MarkOutComponent {
 
   attendanceDate!: Date;
   userId:number=0;
-  attendanceId:number=0;
+  attendanceId:number= 0 ;
   submitted!: boolean;
   attendanceTime!: Time;
 
   constructor(private router: Router, private http: HrmsApiService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.userId = Number(sessionStorage.getItem('UserId'));
     this.attendanceId = Number(sessionStorage.getItem('AttendanceId'));
+    console.log( ' 43433434===========' , this.attendanceId);
+    
+
   }
 
   setCurrentDate() {
@@ -48,21 +51,24 @@ export class MarkOutComponent {
     this.attendanceTime = currentTimeString as unknown as Time; // Convert string to Time type
     this.timepicker.writeValue(currentTimeString);
   }
-
+  
   submitAttendance() {
+
     this.submitted = true;
 
     const payload = {
-      markout: this.attendanceTime
+      checkOut: this.attendanceTime
     };
 
-    this.http.markoutByUserId(this.userId,this.attendanceId, payload).subscribe(
+    this.http.markoutByUserId(this.attendanceId, payload).subscribe(
       (data: any) => {
         console.log(payload);
+        sessionStorage.getItem('AttendanceId');
+        
 
         if (data || data.statusCode === 200) {
           this.submitted = true;
-          this.router.navigate(['/home']);
+          // this.router.navigate(['/home']);
         } else {
           console.error('Failed to give attendance');
         }
