@@ -31,10 +31,10 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   fetchEmployees(): void {
-    this.http.getAllEmployees().subscribe(
+    this.http.getEmployees().subscribe(
       (employees:Employee[]) => {
-        console.log(employees);
         this.employees = employees;
+        console.log('4444444444444444444444', employees);
       },
       (error) => {
         console.error('Error fetching employees:', error);

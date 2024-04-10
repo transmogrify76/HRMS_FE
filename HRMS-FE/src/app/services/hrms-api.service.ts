@@ -12,15 +12,8 @@ import { LeaveDetails } from '../components/admin/employee-details/employee-deta
 export class HrmsApiService {
   getCurrentUserRole: any;
   get: any;
-
+  accessToken: any;
   constructor(private http: HttpClient) {}
-
-  // getUser(): Observable<any> {
-  //   return this.http.get<any>(`${environment.apiUrl}/employees/`);
-  // } 
-  // getUserById(customer_id: number): Observable<any> {
-  //   return this.http.get<any>(`${environment.apiUrl}/user/${customer_id}/` );
-  // } 
 
   login(username : string , password : string): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/employee/login`, {username, password});
@@ -33,7 +26,6 @@ export class HrmsApiService {
     return this.http.get<Employee>(`${environment.apiUrl}/user/${userid}`);
   }
 
-  // Method to fetch leave details for an employee from the API
   getLeaveDetails(userid: number): Observable<LeaveDetails> {
     return this.http.get<LeaveDetails>(`${environment.apiUrl}/leave/${userid}`);
   }

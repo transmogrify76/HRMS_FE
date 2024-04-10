@@ -26,6 +26,7 @@
       </div>
     </div>
   </div>
+
   <div class="container1">    
     <div class="calendar-container">
         <div class="calendar">
@@ -33,6 +34,12 @@
             <button (click)="previousMonth()">&lt;</button>
             <span>{{ currentDate | date: 'MMMM yyyy' }}</span>
             <button (click)="nextMonth()">&gt;</button>
+        </div>
+        <div *ngFor="let leave of pendingLeaves">
+          <p>Reason: {{ leave.reason }}</p>
+          <p>Start Date: {{ leave.startDate }}</p>
+          <p>End Date: {{ leave.endDate }}</p>
+          <hr>
         </div>
         <div class="weekdays">
             <div *ngFor="let weekday of weekdays" class="weekday">{{ weekday }}</div>
@@ -43,15 +50,18 @@
                 {{ day ? day.getDate() : '' }}
             </td>
             </tr>
+            
         </table>
         <div class="legend">
           <span class="absent-color"></span>Absent
           <span class="leave-color"></span>Leave Application
           </div>
         </div>
+        
     </div>
     </div>
-    
+  
+ 
  </div>
     <!-- Offcanvas sidebar -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" [ngClass]="{'show': showOffcanvas}">
@@ -78,4 +88,5 @@
                 </tbody>
             </table>
         </div>
+        
 </div>
