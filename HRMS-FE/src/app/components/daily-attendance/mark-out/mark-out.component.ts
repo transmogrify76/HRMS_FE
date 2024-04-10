@@ -19,6 +19,7 @@ export class MarkOutComponent {
   attendanceId:number= 0 ;
   submitted!: boolean;
   attendanceTime!: Time;
+  showSpinner!: boolean;
 
   constructor(private router: Router, private http: HrmsApiService) { }
 
@@ -55,7 +56,7 @@ export class MarkOutComponent {
   submitAttendance() {
 
     this.submitted = true;
-
+    this.showSpinner = true; 
     const payload = {
       checkOut: this.attendanceTime
     };
@@ -75,8 +76,16 @@ export class MarkOutComponent {
       },
       (error: any) => {
         console.error('Error occurred while giving attendance:', error);
+      },
+      () => {
+        // Hide spinner after 2 seconds
+        setTimeout(() => {
+          this.showSpinner = false;
+          this.router.navigateByUrl('/home')
+        }, 2000);
       }
     );
+    
   }
 
   skip() {

@@ -31,9 +31,23 @@
       <ul class="dropdown-menu" [class.show]="isDropdownOpen" (clickOutside)="closeDropdown()">
           <li (click)="myprofile()">My Profile</li>
           <li (click)="logout()">Logout</li>
-          <div *ngIf="submitted" class="spinner-overlay">
-              <div class="spinner"></div>
-          </div> 
+          <div class="overlay" *ngIf="showSpinner">
+            <!-- Spinner container -->
+            <div class="spinner-container">
+              <!-- Your spinner HTML -->
+              <div class="dot-spinner">
+                <!-- Spinner dots -->
+                <div class="dot-spinner__dot"></div>
+                <div class="dot-spinner__dot"></div>
+                <div class="dot-spinner__dot"></div>
+                <div class="dot-spinner__dot"></div>
+                <div class="dot-spinner__dot"></div>
+                <div class="dot-spinner__dot"></div>
+                <div class="dot-spinner__dot"></div>
+                <div class="dot-spinner__dot"></div>
+              </div>
+            </div>
+          </div>
       </ul>
     </div>
   </div>
