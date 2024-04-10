@@ -1,5 +1,5 @@
 <body>
-<div class="container">
+  <div class="container">
     <div class="card">
       <h5 class="card-header bg-gradient-primary">Mark -In</h5>
       <div class="card-body">
@@ -7,7 +7,7 @@
           <div class="mb-3">
             <label for="date" class="form-label">Date & Time </label>
             <div class="input-group">
-              <input type="text" class="form-control" id="date" name="date" [(ngModel)]="checkIn"  placeholder="Choose Date">
+              <input type="text" class="form-control" id="date" name="date" [(ngModel)]="checkIn" placeholder="Choose Date">
               <!-- <span class="input-group-text" (click)="datePicker.show()"><i class="bi bi-calendar"></i></span> -->
             </div>
           </div>
@@ -19,9 +19,29 @@
             <button type="button" class="btn btn-success" (click)="submitAttendance()">Submit</button>
             <button type="button" class="btn btn-danger" (click)="skip()">Skip</button>
           </div>
+
+          <!-- Spinner -->
+          <!-- Add a div to cover the entire screen for the background blur -->
+<div class="overlay" *ngIf="showSpinner">
+  <!-- Spinner container -->
+  <div class="spinner-container">
+    <!-- Your spinner HTML -->
+    <div class="dot-spinner">
+      <!-- Spinner dots -->
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+    </div>
+  </div>
+</div>
+
         </form>
       </div>
     </div>
   </div>
-  </body>
-  
+</body>

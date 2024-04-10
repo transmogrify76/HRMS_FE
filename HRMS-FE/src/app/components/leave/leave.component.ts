@@ -13,6 +13,7 @@ export class LeaveComponent {
   reason: string = '';
   submitted: boolean = false;
   empId: any;
+  showSpinner!: boolean;
   
   constructor(
     private hrmsApiService: HrmsApiService,
@@ -22,6 +23,7 @@ export class LeaveComponent {
 
   submitLeaveApplication() {
     this.submitted = true;
+    this.showSpinner = true; 
     if (!this.startDate || !this.endDate) {
       console.error('Please select start and end dates.');
       return;
@@ -52,6 +54,13 @@ export class LeaveComponent {
       },
       (error: any) => {
         console.error('Error occurred while submitting leave application:', error);
+      },
+      () => {
+        // Hide spinner after 2 seconds
+        setTimeout(() => {
+          this.showSpinner = false;
+          this.router.navigateByUrl('/home')
+        }, 2000);
       }
     );
   }
