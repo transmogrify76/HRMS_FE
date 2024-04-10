@@ -5,28 +5,16 @@
       <div class="card-body">
         <form>
           <div class="mb-3">
-            <label for="date" class="form-label">Date</label>
+            <label for="date" class="form-label">Date & Time </label>
             <div class="input-group">
-              <input type="text" class="form-control" id="date" name="date" [(ngModel)]="attendanceDate" bsDatepicker #datePicker="bsDatepicker" placeholder="Choose Date">
+              <input type="text" class="form-control" id="date" name="date" [(ngModel)]="checkIn"  placeholder="Choose Date">
               <!-- <span class="input-group-text" (click)="datePicker.show()"><i class="bi bi-calendar"></i></span> -->
             </div>
           </div>
           <div class="mb-3">
-            <button type="button" class="btn btn-alert custom-button" (click)="setCurrentDate()">Set Current Date </button>
+            <button type="button" class="btn btn-alert custom-button" (click)="setCurrentDate()">Set Current Date & Time </button>
           </div>
-          <div class="mb-3">
-            <label for="time" class="form-label">Time</label>
-            <div class="input-group">
-                <input type="time" class="form-control" name="time" id="time" [(ngModel)]="attendanceTime" placeholder="Choose Time">
-            </div>
-        </div>
-        <div class="mb-3">
-            <!-- Add a button to set current time -->
-            <button type="button" class="btn btn-alert custom-button" (click)="setCurrentTime()">Set Current Time</button>
-        </div>
-          <div class="mb-3">
-            <bs-timepicker [(ngModel)]="attendanceDate" style="z-index: 55;"></bs-timepicker>
-          </div>
+          
           <div class="mb-3 custom-flex-container">
             <button type="button" class="btn btn-success" (click)="submitAttendance()">Submit</button>
             <button type="button" class="btn btn-danger" (click)="skip()">Skip</button>

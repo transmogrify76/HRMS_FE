@@ -32,27 +32,10 @@ export class HrmsApiService {
   getAllEmployees(): Observable<Employee[]> {
     return this.http.get<Employee[]>(`${environment.apiUrl}/user`);
   }
-  // markinByUserId(payload:any): Observable<any> {
-  //   return this.http.post(`${environment.apiUrl}/attendance/markin/${userid}` , payload);
-  // }
-  // markoutByUserId(userid: number,attendanceId:number, payload: any): Observable<any> {
-  //   return this.http.patch(`${environment.apiUrl}/attendance/markout/${userid}/${attendanceId}`, payload);
-  // }
-  employeebyId(empId:number):Observable<any>{
-    return this.http.get(`${environment.apiUrl}/employee/${empId}`);
+  markinByUserId(payload:any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/attendance`,payload);
   }
-
-  getEmployees(): Observable<any> {
-    this.accessToken = sessionStorage.getItem('accessToken');
-    console.log('======555555' , this.accessToken);
-    
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.accessToken}`
-  });
-  
-    return this.http.get<any>(`${environment.apiUrl}/employee` , {headers}) ;
+  markoutByUserId(userId: number, payload: any): Observable<any> {
+    return this.http.patch(`${environment.apiUrl}/attendance/${userId}`, payload);
   }
-
-
-
 }

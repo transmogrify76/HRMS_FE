@@ -1,6 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-import { BsDatepickerDirective  } from 'ngx-bootstrap/datepicker';
-import { TimepickerComponent } from 'ngx-bootstrap/timepicker';
 import { HrmsApiService } from 'src/app/services/hrms-api.service';
 import { Router } from '@angular/router';
 import { Time } from '@angular/common';
@@ -11,61 +9,56 @@ import { Time } from '@angular/common';
   styleUrls: ['./mark-in.component.scss']
 })
 export class MarkInComponent {
-  @ViewChild(BsDatepickerDirective) datepicker!: BsDatepickerDirective;
-  @ViewChild(TimepickerComponent) timepicker!: TimepickerComponent;
 
-  attendanceDate!: any;
+
+  checkIn!: any;
   submitted!: boolean;
   attendanceTime!: Time;
+  empId: any;
 
 
-  constructor(private router: Router, private http: HrmsApiService) { }
-
+  constructor(private router: Router, private http: HrmsApiService) { 
+  }
   setCurrentDate() {
-    this.attendanceDate = new Date();
-    this.datepicker.bsValue = this.attendanceDate;
-    this.timepicker.writeValue(this.attendanceDate);
-  }
+    const options: Intl.DateTimeFormatOptions = {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true
+    };
+    this.checkIn = new Date().toLocaleString('en-US', options);
+}
+
   
-  setCurrentTime() {
-    // Get current time
-    const currentTime = new Date();
-    // Format time to HH:MM
-    const hours = currentTime.getHours();
-    const minutes = currentTime.getMinutes();
-    const formattedHours = hours < 10 ? '0' + hours : hours.toString();
-    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes.toString();
-    const currentTimeString = formattedHours + ':' + formattedMinutes;
-    // Update timepicker value
-    this.attendanceTime = currentTimeString as unknown as Time; // Convert string to Time type
-    this.timepicker.writeValue(currentTimeString);
-  }
 
   submitAttendance() {
     this.submitted = true;
-
+    this.empId=Number(sessionStorage.getItem('empId'));
+    console.log('==========', this.empId);
     const payload = {
-      date: this.attendanceDate,
-      markin: this.attendanceTime
+      checkIn: this.checkIn,
+      employee:this.empId
     };
 
     const userId: number = 1;
 
-    // this.http.markinByUserId(userId, payload).subscribe(
-    //   (data: any) => {
-    //     if (data || data.statusCode === 200) {
-    //       this.submitted = true;
-    //       sessionStorage.setItem('AttendanceId', data.attendanceid);     
-    //       sessionStorage.setItem('UserId', data.user.id);     
-    //       this.router.navigate(['/home']);
-    //     } else {
-    //       console.error('Failed to give attendance');
-    //     }
-    //   },
-    //   (error: any) => {
-    //     console.error('Error occurred while giving attendance:', error);
-    //   }
-    // );
+    this.http.markinByUserId(payload).subscribe(
+      (data: any) => {
+        if (data || data.statusCode === 200) {
+          this.submitted = true;
+          sessionStorage.setItem('AttendanceId', data.attId);
+          sessionStorage.setItem('UserId', data.user.id);   
+          this.router.navigate(['/home']);
+        } else {
+          console.error('Failed to give attendance');
+        }
+      },
+      (error: any) => {
+        console.error('Error occurred while giving attendance:', error);
+      }
+    );
 
   }
 
