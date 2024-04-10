@@ -2,6 +2,8 @@
 import { Component } from '@angular/core';
 import { HostListener } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -10,7 +12,7 @@ import { Router } from '@angular/router';
 
 export class NavbarComponent {
   showSpinner!: boolean;
-  constructor( private router: Router) { }
+  constructor( private router: Router,private toastr: ToastrService) { }
 
   isDropdownOpen = false;
   submitted = false;
@@ -27,6 +29,10 @@ export class NavbarComponent {
   
     // Clear session storage
     sessionStorage.clear();
+    this.router.navigate(['/login'])
+    this.toastr.success('Logout Successful', '', {
+      positionClass: 'toast-bottom-center'
+    });
   
     // Hide spinner after 2 seconds and navigate to login page
     setTimeout(() => {

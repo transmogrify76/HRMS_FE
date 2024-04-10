@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HrmsApiService } from 'src/app/services/hrms-api.service';
+import { ToastrService } from 'ngx-toastr'; 
 
 
 @Component({
@@ -16,7 +17,7 @@ export class LoginComponent {
   submitted: boolean = false;
  
 
-  constructor(public hrmsService: HrmsApiService, private router: Router) {}
+  constructor(public hrmsService: HrmsApiService, private router: Router , private toastr: ToastrService) {}
 
   login() {
     console.log('Login attempted with username:', this.username, 'password:', this.password);
@@ -32,12 +33,17 @@ export class LoginComponent {
           sessionStorage.setItem('empId', empId.toString());
           sessionStorage.setItem('username', username.toString());
           this.router.navigate(['/home']);
+          this.toastr.success('Login Successful', '', {
+            positionClass: 'toast-bottom-center'
+          });
         }
       );
       this.submitted = true;
     } else {
       console.log('Invalid login credentials');
-      // Handle invalid login credentials (e.g., display error message)
+      this.toastr.error('Login Failed', '', {
+        positionClass: 'toast-bottom-center'
+      }); 
     }
   }
 
