@@ -38,6 +38,14 @@ export class HrmsApiService {
   markoutByUserId(userId: number, payload: any): Observable<any> {
     return this.http.patch(`${environment.apiUrl}/attendance/${userId}`, payload);
   }
+
+  getEmployees(): Observable<any> {
+    this.accessToken = sessionStorage.getItem('accessToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.accessToken}`
+    });
+    return this.http.get<any>(`${environment.apiUrl}/employee` , {headers: headers});
+  }
   employeebyId(empId:any): Observable<any> {
     return this.http.get(`${environment.apiUrl}/employee/${empId}`);
   }
