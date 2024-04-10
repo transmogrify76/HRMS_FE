@@ -28,14 +28,14 @@ export class MyProfileComponent implements OnInit {
     const selectedEmployeeId = 1; 
 
     // Call the service function to fetch employee details
-    this.http.getEmployeeDetails(selectedEmployeeId).subscribe(
-      (employee: Employee) => {
-        // Update employeeDetails with the response from the service
-        this.employeeDetails = employee;
-      },
-      (error) => {
-        console.error('Error fetching employee details:', error);
-      }
-    );
+    // this.http.getEmployeeDetails(selectedEmployeeId).subscribe(
+    //   (employee: Employee) => {
+    //     // Update employeeDetails with the response from the service
+    //     this.employeeDetails = employee;
+    //   },
+    //   (error) => {
+    //     console.error('Error fetching employee details:', error);
+    //   }
+    // );
   }
 }

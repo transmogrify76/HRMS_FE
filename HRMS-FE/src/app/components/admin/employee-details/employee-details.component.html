@@ -2,7 +2,7 @@
   <h2>Select Employee</h2>
   <select [(ngModel)]="selectedEmployee" (change)="fetchEmployeeData()" class="custom-select" aria-placeholder="select-employee">
       <option value="" disabled selected>Select Employee</option>
-      <option *ngFor="let employee of employees" [value]="employee.empId">{{ employee.username }}</option>
+      <option *ngFor="let employee of employees ; let i = index" [value]="employee.empId">{{ employee.username }}</option>
   </select>
     
   
@@ -29,14 +29,13 @@
         <h2>Leave Details</h2>
         <div *ngFor="let leave of leaveDetails">
           <div class="card-body">
-            <p><strong>Start Date:</strong> {{ leave.startDate | date: 'medium' }}</p>
+            <p><strong>Start Date:</strong> {{ leave.startdate | date: 'medium' }}</p>
             <p><strong>End Date:</strong> {{ leave.enddate | date: 'medium' }}</p>
             <p><strong>Reason:</strong> {{ leave.reason }}</p>
             <div class="mb-3">
-                <label for="leaveOptions" class="form-label">Approve leave:</label>
+                <label for="leaveOptions" class="form-label">leave status:</label>
                 <select class="form-select" id="leaveOptions" name="leaveOptions">
-                    <option value="leaveWithoutPay">Leave without pay</option>
-                    <option value="leaveWithPay">Leave with pay</option>
+                    <option value="leaveWithoutPay">Approve</option>
                     <option value="decline">Decline</option>
                 </select>
             </div>

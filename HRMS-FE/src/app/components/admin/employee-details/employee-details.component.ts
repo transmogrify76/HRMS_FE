@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HrmsApiService } from 'src/app/services/hrms-api.service';
 
 export interface LeaveDetails {
-startDate: string|number|Date;
   startdate: number;
   enddate: number;
   reason: string;
@@ -26,6 +25,7 @@ export class EmployeeDetailsComponent implements OnInit {
   employees: Employee[] = [];
   employeeDetails: Employee = {} as Employee;
   leaveDetails: LeaveDetails[] = [];
+employee: any;
 
   constructor(private http: HrmsApiService) {}
 
@@ -46,7 +46,7 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   fetchEmployeeData(): void {
-    this.http.getleavedetails(this.selectedEmployee).subscribe(
+    this.http.employeebyId(this.selectedEmployee).subscribe(
       (employee: Employee) => {
         this.employeeDetails = employee;
       },
@@ -54,6 +54,17 @@ export class EmployeeDetailsComponent implements OnInit {
         console.error('Error fetching employee details:', error);
       }
     );
-
+    this.http.getLeaveDetails(this.selectedEmployee).subscribe(
+      (leaveDetails: LeaveDetails | LeaveDetails[]) => {
+        if (Array.isArray(leaveDetails)) {
+          this.leaveDetails = leaveDetails;
+        } else {
+          this.leaveDetails = [leaveDetails];
+        }
+      },
+      (error) => {
+        console.error('Error fetching leave details:', error);
+      }
+    );
   }
 }
