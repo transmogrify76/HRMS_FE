@@ -1,51 +1,48 @@
 <div class="container">
-    <h2>Select Employee</h2>
-    <select [(ngModel)]="selectedEmployee" (change)="fetchEmployeeData()" class="custom-select" aria-placeholder="select-employee">
-        <option value="" disabled selected>Select Employee</option>
-        <option *ngFor="let employee of employees ; let i = index" [value]="employee.id">{{ employee | json }}</option>
-      </select>
-      
+  <h2>Select Employee</h2>
+  <select [(ngModel)]="selectedEmployee" (change)="fetchEmployeeData()" class="custom-select" aria-placeholder="select-employee">
+      <option value="" disabled selected>Select Employee</option>
+      <option *ngFor="let employee of employees ; let i = index" [value]="employee.empId">{{ employee.username }}</option>
+  </select>
     
-    <div>
-    <div *ngIf="selectedEmployee">
-      <div class="card">
-        <div class="card-header bg-gradient-primary">
-          Employee Details
-        </div>
-        <div class="card-body">
-          <p><strong>Employee ID:</strong> {{ employeeDetails.id }}</p>
-          <p><strong>Username:</strong> {{ employeeDetails.username }}</p>
-          <p><strong>First name:</strong> {{ employeeDetails.firstname }}</p>
-          <p><strong>Last name:</strong> {{ employeeDetails.lastname }}</p>
-          <p><strong>Email:</strong> {{ employeeDetails.email }}</p>
-        </div>
-      </div>
   
-      <div class="card">
-        <div class="card-header bg-gradient-primary">
-          Leave Details
-        </div>
-        <div *ngIf="leaveDetails.length > 0">
-          <h2>Leave Details</h2>
-          <div *ngFor="let leave of leaveDetails">
-            <div class="card-body">
-              <p><strong>Start Date:</strong> {{ leave.startdate | date: 'medium' }}</p>
-              <p><strong>End Date:</strong> {{ leave.enddate | date: 'medium' }}</p>
-              <p><strong>Reason:</strong> {{ leave.reason }}</p>
-              <div class="mb-3">
-                  <label for="leaveOptions" class="form-label">Approve leave:</label>
-                  <select class="form-select" id="leaveOptions" name="leaveOptions">
-                      <option value="leaveWithoutPay">Leave without pay</option>
-                      <option value="leaveWithPay">Leave with pay</option>
-                      <option value="decline">Decline</option>
-                  </select>
-              </div>
-              <button type="button" class="btn btn-dark" >Submit</button>
-          </div>
-          
+  <div>
+  <div *ngIf="selectedEmployee">
+    <div class="card">
+      <div class="card-header bg-gradient-primary">
+        Employee Details
+      </div>
+      <div class="card-body">
+        <p><strong>Employee ID:</strong> {{ employeeDetails.empId }}</p>
+        <p><strong>Username:</strong> {{ employeeDetails.username }}</p>
+        <p><strong>First name:</strong> {{ employeeDetails.firstName }}</p>
+        <p><strong>Last name:</strong> {{ employeeDetails.lastName }}</p>
+        <p><strong>Email:</strong> {{ employeeDetails.email }}</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header bg-gradient-primary">
+        Leave Details
+      </div>
+      <div *ngIf="leaveDetails.length > 0">
+        <h2>Leave Details</h2>
+        <div *ngFor="let leave of leaveDetails">
+          <div class="card-body">
+            <p><strong>Start Date:</strong> {{ leave.startdate | date: 'medium' }}</p>
+            <p><strong>End Date:</strong> {{ leave.enddate | date: 'medium' }}</p>
+            <p><strong>Reason:</strong> {{ leave.reason }}</p>
+            <div class="mb-3">
+                <label for="leaveOptions" class="form-label">leave status:</label>
+                <select class="form-select" id="leaveOptions" name="leaveOptions">
+                    <option value="leaveWithoutPay">Approve</option>
+                    <option value="decline">Decline</option>
+                </select>
+            </div>
+            <button type="button" class="btn btn-dark" >Submit</button>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
+</div>
