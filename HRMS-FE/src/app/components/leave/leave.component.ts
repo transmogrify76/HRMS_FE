@@ -39,13 +39,13 @@ export class LeaveComponent {
 
     
 
-    this.hrmsApiService.leaveByUserId( payload).subscribe(
+    this.hrmsApiService.leaveByUserId(payload).subscribe(
       (data: any) => {
         console.log(payload);
         
         if (data || data.statusCode === 200) {
           this.submitted = true;
-          this.router.navigate(['/leave']);
+          this.router.navigate(['/home']);
         } else {
           console.error('Failed to submit leave application');
         }

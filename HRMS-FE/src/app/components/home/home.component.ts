@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { HrmsApiService } from 'src/app/services/hrms-api.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  constructor( private router: Router) { }
+  constructor( private router: Router,private hrmsApiService: HrmsApiService,) { }
   showOffcanvas: boolean = false;
   notificationCount: number = 3; // Example notification count
   holidays: any[] = [  // Example holiday data
@@ -27,11 +27,24 @@ export class HomeComponent {
   ];
   currentDate: Date = new Date();
   calendar: Date[][] = [];
+  empId: any;
+  pendingLeaves: any[] = [];
   weekdays: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']; // Define weekday names here
   ngOnInit(): void {
     this.generateCalendar();
+    this.leaverequest();
   }
-
+  leaverequest(){
+    this.empId=Number(sessionStorage.getItem('empId'));
+    this.hrmsApiService.employeebyId(this.empId).subscribe(
+      (data: any) => {
+        console.log(data);
+        this.pendingLeaves = data.employee.leaves.filter((leave: { leaveStatus: string; }) => leave.leaveStatus === 'PENDING');
+        console.log(this.pendingLeaves);
+        
+      }
+    );
+  }
 
   generateCalendar(): void {
     const firstDayOfMonth = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 1);
