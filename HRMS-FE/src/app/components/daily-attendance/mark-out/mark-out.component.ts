@@ -60,7 +60,7 @@ export class MarkOutComponent {
       checkOut: this.attendanceTime
     };
 
-    this.http.markoutByUserId(this.attendanceId, payload).subscribe(
+    this.http.markoutByUserId(this.attendanceId , payload).subscribe(
       (data: any) => {
         console.log(payload);
         sessionStorage.getItem('AttendanceId');
