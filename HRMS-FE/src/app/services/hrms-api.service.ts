@@ -38,4 +38,7 @@ export class HrmsApiService {
   markoutByUserId(userId: number, payload: any): Observable<any> {
     return this.http.patch(`${environment.apiUrl}/attendance/${userId}`, payload);
   }
-}
+  employeebyId(empId:any): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/employee/${empId}`);
+  }
+}  
