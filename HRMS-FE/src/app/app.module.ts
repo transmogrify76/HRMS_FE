@@ -20,6 +20,7 @@ import { AttendanceComponent } from './components/attendance/attendance.componen
 import { ListOfEmployeesComponent } from './components/admin/list-of-employees/list-of-employees.component';
 import { EmployeeDetailsComponent } from './components/admin/employee-details/employee-details.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -51,6 +52,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(), 
     TimepickerModule.forRoot(),
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

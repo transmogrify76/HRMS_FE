@@ -23,7 +23,7 @@ export class HrmsApiService {
     return this.http.post(`${environment.apiUrl}/leave` , payload);
   }
   getEmployeeDetails(userid: number): Observable<Employee> {
-    return this.http.get<Employee>(`${environment.apiUrl}/empl/${userid}`);
+    return this.http.get<Employee>(`${environment.apiUrl}/employee/${userid}`);
   }
 
   getLeaveDetails(empId: number): Observable<LeaveDetails> {

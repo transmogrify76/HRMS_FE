@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 
 export class NavbarComponent {
+  showSpinner!: boolean;
   constructor( private router: Router) { }
 
   isDropdownOpen = false;
@@ -21,9 +22,19 @@ export class NavbarComponent {
     this.isDropdownOpen = false;
   }
   logout() {
+    // Show spinner
+    this.showSpinner = true;
+  
+    // Clear session storage
     sessionStorage.clear();
-    this.router.navigate(['/login']);
+  
+    // Hide spinner after 2 seconds and navigate to login page
+    setTimeout(() => {
+      this.showSpinner = false;
+      this.router.navigate(['/login']);
+    }, 2000);
   }
+  
   @HostListener('document:click', ['$event'])
   clickOutside(event: MouseEvent) {
     if (!(event.target as HTMLElement).closest('.profile-dropdown')) {

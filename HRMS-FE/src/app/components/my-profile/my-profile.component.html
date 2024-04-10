@@ -1,18 +1,14 @@
-<body>
-    <div class="container">
-        <div class="card">
-            <div class="card-header bg-gradient-primary">
-              My Profile
-            </div>
-            <div class="card-body">
-              <p><strong>Employee ID:</strong> {{ employeeDetails.id }}</p>
-              <p><strong>Username:</strong> {{ employeeDetails.username }}</p>
-              <p><strong>First name:</strong> {{ employeeDetails.firstname }}</p>
-              <p><strong>Last name:</strong> {{ employeeDetails.lastname }}</p>
-              <p><strong>Email:</strong> {{ employeeDetails.email }}</p>
-            </div>
-          </div>
-    </div>
-</body>
-
-
+<div class="container">
+    <div class="card">
+        <div class="card-header bg-gradient-primary">
+          My Profile
+        </div>
+        <div class="card-body">
+          <p><strong>Employee ID:</strong> {{ employeeDetails.employee.empId }}</p>
+          <p><strong>Username:</strong> {{ employeeDetails.employee.username }}</p>
+          <p><strong>First name:</strong> {{ employeeDetails.employee.firstName }}</p>
+          <p><strong>Last name:</strong> {{ employeeDetails.employee.lastName }}</p>
+          <p><strong>Email:</strong> {{ employeeDetails.employee.email }}</p>
+        </div>
+      </div>
+</div>

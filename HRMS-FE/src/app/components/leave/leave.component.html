@@ -16,6 +16,23 @@
           <textarea id="reason" name="reason" [(ngModel)]="reason" required></textarea>
         </div>
         <button type="submit">Submit</button>
+        <div class="overlay" *ngIf="showSpinner">
+          <!-- Spinner container -->
+          <div class="spinner-container">
+            <!-- Your spinner HTML -->
+            <div class="dot-spinner">
+              <!-- Spinner dots -->
+              <div class="dot-spinner__dot"></div>
+              <div class="dot-spinner__dot"></div>
+              <div class="dot-spinner__dot"></div>
+              <div class="dot-spinner__dot"></div>
+              <div class="dot-spinner__dot"></div>
+              <div class="dot-spinner__dot"></div>
+              <div class="dot-spinner__dot"></div>
+              <div class="dot-spinner__dot"></div>
+            </div>
+          </div>
+        </div>
       </form>
     </div>
   </div>
