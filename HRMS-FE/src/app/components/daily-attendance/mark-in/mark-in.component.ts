@@ -51,21 +51,21 @@ export class MarkInComponent {
 
     const userId: number = 1;
 
-    this.http.markinByUserId(userId, payload).subscribe(
-      (data: any) => {
-        if (data || data.statusCode === 200) {
-          this.submitted = true;
-          sessionStorage.setItem('AttendanceId', data.attendanceid);     
-          sessionStorage.setItem('UserId', data.user.id);     
-          this.router.navigate(['/home']);
-        } else {
-          console.error('Failed to give attendance');
-        }
-      },
-      (error: any) => {
-        console.error('Error occurred while giving attendance:', error);
-      }
-    );
+    // this.http.markinByUserId(userId, payload).subscribe(
+    //   (data: any) => {
+    //     if (data || data.statusCode === 200) {
+    //       this.submitted = true;
+    //       sessionStorage.setItem('AttendanceId', data.attendanceid);     
+    //       sessionStorage.setItem('UserId', data.user.id);     
+    //       this.router.navigate(['/home']);
+    //     } else {
+    //       console.error('Failed to give attendance');
+    //     }
+    //   },
+    //   (error: any) => {
+    //     console.error('Error occurred while giving attendance:', error);
+    //   }
+    // );
 
   }
 

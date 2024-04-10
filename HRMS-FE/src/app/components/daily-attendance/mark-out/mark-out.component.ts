@@ -56,21 +56,21 @@ export class MarkOutComponent {
       markout: this.attendanceTime
     };
 
-    this.http.markoutByUserId(this.userId,this.attendanceId, payload).subscribe(
-      (data: any) => {
-        console.log(payload);
+    // this.http.markoutByUserId(this.userId,this.attendanceId, payload).subscribe(
+    //   (data: any) => {
+    //     console.log(payload);
 
-        if (data || data.statusCode === 200) {
-          this.submitted = true;
-          this.router.navigate(['/home']);
-        } else {
-          console.error('Failed to give attendance');
-        }
-      },
-      (error: any) => {
-        console.error('Error occurred while giving attendance:', error);
-      }
-    );
+    //     if (data || data.statusCode === 200) {
+    //       this.submitted = true;
+    //       this.router.navigate(['/home']);
+    //     } else {
+    //       console.error('Failed to give attendance');
+    //     }
+    //   },
+    //   (error: any) => {
+    //     console.error('Error occurred while giving attendance:', error);
+    //   }
+    // );
   }
 
   skip() {
