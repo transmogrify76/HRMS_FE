@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { HrmsApiService } from 'src/app/services/hrms-api.service';
 import { Router } from '@angular/router';
 import { Time } from '@angular/common';
+import { ToastrService } from 'ngx-toastr'; 
 
 @Component({
   selector: 'app-mark-in',
@@ -18,7 +19,7 @@ export class MarkInComponent {
   showSpinner!: boolean;
 
 
-  constructor(private router: Router, private http: HrmsApiService) { 
+  constructor(private router: Router, private http: HrmsApiService,private toastr: ToastrService) { 
   }
   setCurrentDate() {
     const options: Intl.DateTimeFormatOptions = {
@@ -39,6 +40,7 @@ submitAttendance() {
   this.showSpinner = true; 
   this.empId = Number(sessionStorage.getItem('empId'));
   console.log('==========', this.empId);
+
   const payload = {
     checkIn: this.checkIn,
     employee: this.empId
@@ -46,13 +48,19 @@ submitAttendance() {
 
   this.http.markinByUserId(payload).subscribe(
     (data: any) => {
-      if (data && data.statusCode === 200) {
+      if (data || data.statusCode === 200) {
         this.submitted = true;
         sessionStorage.setItem('AttendanceId', data.attId);
         // Navigate to the home page
         this.router.navigate(['/home']);
+        this.toastr.success('Markin Successful', '', {
+          positionClass: 'toast-bottom-center'
+        });
       } else {
         console.error('Failed to give attendance');
+        this.toastr.error('Markin Failed', '', {
+          positionClass: 'toast-bottom-center'
+        }); 
       }
     },
     (error: any) => {

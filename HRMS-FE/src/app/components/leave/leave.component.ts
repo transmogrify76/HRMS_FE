@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HrmsApiService } from 'src/app/services/hrms-api.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-leave',
@@ -17,7 +18,8 @@ export class LeaveComponent {
   
   constructor(
     private hrmsApiService: HrmsApiService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
   
 
@@ -48,12 +50,18 @@ export class LeaveComponent {
         if (data || data.statusCode === 200) {
           this.submitted = true;
           this.router.navigate(['/home']);
+          this.toastr.success('Leave applied successfully', '', {
+            positionClass: 'toast-bottom-center'
+          });
         } else {
           console.error('Failed to submit leave application');
         }
       },
       (error: any) => {
         console.error('Error occurred while submitting leave application:', error);
+        this.toastr.error('Leave application Failed', '', {
+          positionClass: 'toast-bottom-center'
+        }); 
       },
       () => {
         // Hide spinner after 2 seconds

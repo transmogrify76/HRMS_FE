@@ -4,6 +4,7 @@ import { TimepickerComponent } from 'ngx-bootstrap/timepicker';
 import { HrmsApiService } from 'src/app/services/hrms-api.service';
 import { Router } from '@angular/router';
 import { Time } from 'ngx-bootstrap/timepicker/timepicker.models';
+import { ToastrService } from 'ngx-toastr'; 
 
 @Component({
   selector: 'app-mark-out',
@@ -21,7 +22,7 @@ export class MarkOutComponent {
   attendanceTime!: Time;
   showSpinner!: boolean;
 
-  constructor(private router: Router, private http: HrmsApiService) { }
+  constructor(private router: Router, private http: HrmsApiService ,private toastr: ToastrService) { }
 
   ngOnInit() {
     this.userId = Number(sessionStorage.getItem('UserId'));
@@ -69,9 +70,15 @@ export class MarkOutComponent {
 
         if (data || data.statusCode === 200) {
           this.submitted = true;
-          // this.router.navigate(['/home']);
+          this.router.navigate(['/home']);
+          this.toastr.success('Markout successful', '', {
+            positionClass: 'toast-bottom-center'
+          }); 
         } else {
           console.error('Failed to give attendance');
+          this.toastr.error('Markout Failed', '', {
+            positionClass: 'toast-bottom-center'
+          }); 
         }
       },
       (error: any) => {
