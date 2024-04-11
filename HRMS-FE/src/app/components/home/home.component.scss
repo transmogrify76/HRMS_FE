@@ -1,5 +1,4 @@
-
-  
+/* Table Styles */
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -7,7 +6,6 @@
   font-family: Arial, sans-serif;
 }
 
-/* Styles for table header */
 .table th {
   background-color: rgb(11, 96, 153);
   color: white;
@@ -16,30 +14,30 @@
   text-align: left;
 }
 
-/* Styles for table body */
 .table td {
   border: 1px solid #ddd;
   padding: 12px;
 }
 
-/* Styles for odd rows */
 .table tbody tr:nth-child(odd) {
   background-color: #f2f2f2;
 }
 
-/* Styles for hover effect */
 .table tbody tr:hover {
   background-color: #ddd;
 }
+
+/* Card Styles */
 .card {
-  border: 1px solid #4d8097; /* Border color */
-  border-radius: 8px; /* Border radius */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow */
-  width:40%;
+  border: 1px solid #4d8097;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 40%;
   margin-top: 20px;
   margin-right: 0;
-  background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white background */
+  background-color: rgba(255, 255, 255, 0.1);
 }
+
 .card-body {
   display: flex;
   justify-content: space-between;
@@ -51,34 +49,35 @@
 }
 
 .icon-container img {
-  width: 35px; /* Adjust the width of the icons as needed */
-  height: 35px; /* Ensure the icons maintain their aspect ratio */
+  width: 35px;
+  height: 35px;
   cursor: pointer;
 }
 
 .icon-text {
   display: block;
-  margin-top: 5px; /* Add margin top to create space between icon and text */
-  font-size:small;
-  color:#ddd;
+  margin-top: 5px;
+  font-size: small;
+  color: #ddd;
 }
-h2{
+
+h2 {
   color: #ddd;
   margin-top: 30px;
 }
 
+/* Calendar Styles */
 .calendar-container {
-
-  font-family: 'Roboto', 'sans-serif';
+  font-family: 'Roboto', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  width:30%;
+  width: 80%;
 }
 
 .calendar {
-  width: 700px;
+  width: 80%;
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -103,11 +102,11 @@ h2{
 }
 
 .absent-color {
-  background-color: #e95f53; /* Adjust color as needed */
+  background-color: #e95f53;
 }
 
 .leave-color {
-  background-color: #ffd180; /* Adjust color as needed */
+  background-color: #ffd180;
 }
 
 .bg-gradient-primary {
@@ -171,4 +170,65 @@ h2{
 
 .leave {
   background-color: #ffffcc;
+}
+
+/* List of Leaves Styles */
+// .pending-leaves-container {
+//   margin-top: -95px; /* Adjust the margin-top as needed to move the container upwards */
+//   padding: 20px;
+//   border: 1px solid #ccc;
+//   border-radius: 5px;
+//   background-color: #f9f9f9;
+//   width: 75%;
+
+// }
+.blur-background {
+  backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.897); /* Adjust the color and opacity as needed */
+  border-radius: 10px; /* Optional: Add border radius for a nicer look */
+  padding: 20px; /* Optional: Add padding for better spacing */
+  width: 75%;
+  margin-top: -95px;
+}
+
+.leave-item {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.leave-item p strong {
+  font-weight: bold;
+}
+
+/* Responsive Styles */
+.container1 {
+  display: flex;
+}
+
+.content {
+  flex: 1;
+}
+
+// .calendar-container {
+//   margin-left: auto;
+// }
+.left-panel,
+.right-panel {
+  flex: 1; /* Take up remaining space */
+}
+
+.left-panel {
+  margin-right: 20px; /* Optional margin between panels */
+}
+
+.right-panel {
+  flex: 1; /* Take up remaining space */
+}
+strong{
+  color: #276414;
+}
+h4{
+  color: #1f4f77;
+  font-weight: bold;
+  font-style: italic;
 }
