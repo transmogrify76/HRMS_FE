@@ -20,10 +20,11 @@
         <img src="../../../assets/markout.png" alt="mark out icon" (click)="markout()" data-toggle="tooltip" title="Mark Out">
         <span class="icon-text">Mark Out</span>
       </div>
-      <div class="icon-container">
-        <img src="../../../assets/listofleave.png" alt="mark out icon" (click)="listofleaves()" data-toggle="tooltip" title="Mark Out">
+      <div class="icon-container" *ngIf="!isAdmin()">
+        <img id="listofleaves" src="../../../assets/listofleave.png" alt="mark out icon" (click)="listofleaves()" data-toggle="tooltip" title="listof_leave">
         <span class="icon-text">List of leaves</span>
       </div>
+      
     </div>
   </div>
 

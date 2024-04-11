@@ -34,17 +34,39 @@ export class HomeComponent {
     this.generateCalendar();
     this.leaverequest();
   }
-  leaverequest(){
-    this.empId=Number(sessionStorage.getItem('empId'));
+  leaverequest(): void {
+    this.empId = Number(sessionStorage.getItem('empId'));
     this.hrmsApiService.employeebyId(this.empId).subscribe(
       (data: any) => {
         console.log(data);
         this.pendingLeaves = data.employee.leaves.filter((leave: { leaveStatus: string; }) => leave.leaveStatus === 'PENDING');
         console.log(this.pendingLeaves);
         
+        // Store roleType in session storage
+        const roleType = data.employee.role.roleType;
+        sessionStorage.setItem('roleType', roleType);
+  
+        // Disable "List of leaves" button if roleType is not ADMIN
+        if (roleType !== 'ADMIN') {
+          this.disableListOfLeavesButton();
+        }
       }
     );
   }
+  isAdmin(): boolean {
+    const roleType = sessionStorage.getItem('roleType');
+    return roleType === 'ADMIN';
+  }
+  
+  
+  disableListOfLeavesButton(): void {
+    const listofleavesButton = document.getElementById('listofleaves') as HTMLButtonElement;
+    if (listofleavesButton) {
+      listofleavesButton.disabled = true;
+    }
+  }
+  
+  
 
   generateCalendar(): void {
     const firstDayOfMonth = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 1);
