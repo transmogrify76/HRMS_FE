@@ -46,28 +46,22 @@ export class LeaveComponent {
     this.hrmsApiService.leaveByUserId(payload).subscribe(
       (data: any) => {
         console.log(payload);
-        
         if (data || data.statusCode === 200) {
           this.submitted = true;
-          this.router.navigate(['/home']);
-          this.toastr.success('Leave applied successfully', '', {
-            positionClass: 'toast-bottom-center'
-          });
+          this.toastr.success('Leave applied successfully', 'Success', { positionClass: 'toast-top-center' });
         } else {
           console.error('Failed to submit leave application');
         }
       },
       (error: any) => {
         console.error('Error occurred while submitting leave application:', error);
-        this.toastr.error('Leave application Failed', '', {
-          positionClass: 'toast-bottom-center'
-        }); 
+        this.toastr.error('Leave application Failed',  'Error', { positionClass: 'toast-top-center' }); 
       },
       () => {
         // Hide spinner after 2 seconds
         setTimeout(() => {
           this.showSpinner = false;
-          this.router.navigateByUrl('/home')
+          this.router.navigate(['/home']);
         }, 2000);
       }
     );

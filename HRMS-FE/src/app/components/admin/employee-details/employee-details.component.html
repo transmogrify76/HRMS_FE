@@ -4,7 +4,6 @@
       <option  disabled selected>Select Employee</option>
       <option *ngFor="let employee of employees ; let i = index" [value]="employee.empId">{{ employee.username }}</option>
   </select>
-  <div>
 
 
     
@@ -39,11 +38,31 @@
                 <option value="APPROVED">Approved</option>
                 <option value="REJECTED">Decline</option>
               </select>
-              <button type="button" class="btn btn-dark" (click)="updateLeaveStatus(leaves?.leaveId, selectedLeaveStatus)">Submit</button>
-            </div>
+              <button type="button" class="btn btn-dark" (click)="updateLeaveStatus(leaves?.leaveId, selectedLeaveStatus)">
+                Submit
+              </button>
+            </div>       
+            <div class="overlay" *ngIf="showSpinner">
+              <!-- Spinner container -->
+              <div class="spinner-container">
+                <!-- Your spinner HTML -->
+                <div class="dot-spinner">
+                  <!-- Spinner dots -->
+                  <div class="dot-spinner__dot"></div>
+                  <div class="dot-spinner__dot"></div>
+                  <div class="dot-spinner__dot"></div>
+                  <div class="dot-spinner__dot"></div>
+                  <div class="dot-spinner__dot"></div>
+                  <div class="dot-spinner__dot"></div>
+                  <div class="dot-spinner__dot"></div>
+                  <div class="dot-spinner__dot"></div>
+                </div>
+              </div>
+            </div>     
           </div>
         </div> 
       </div>
     </div>
   </div>
 </div>
+

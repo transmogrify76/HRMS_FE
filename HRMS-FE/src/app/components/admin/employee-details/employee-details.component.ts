@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HrmsApiService } from 'src/app/services/hrms-api.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 export interface LeaveDetails {
   startdate: number;
@@ -29,8 +31,9 @@ export class EmployeeDetailsComponent implements OnInit {
   leaveDetails: LeaveDetails[] = [];
   employee: any;
   selectedLeaveStatus: string = '';
+  showSpinner: boolean = false;
 
-  constructor(private http: HrmsApiService) {}
+  constructor(private http: HrmsApiService ,private router: Router, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.fetchEmployees();
@@ -74,16 +77,33 @@ export class EmployeeDetailsComponent implements OnInit {
   updateLeaveStatus(leaveId: number, selectedLeaveStatus: string) {
     if (selectedLeaveStatus) {
       const payload = { leaveStatus: selectedLeaveStatus };
+      this.showSpinner = true;
   
-      this.http.updateLeaveStatus(leaveId, payload).subscribe(
-        (response) => {
-          console.log('Leave status updated successfully:', response);
-        },
-        (error) => {
-          console.error('Error updating leave status:', error);
-        }
-      );
+      // Simulate a delay of 2 seconds before making the HTTP request
+      setTimeout(() => {
+        this.http.updateLeaveStatus(leaveId, payload).subscribe(
+          (response) => {
+            console.log('Leave status updated successfully:', response);
+            this.showSpinner = false;
+  
+            // Display toaster message based on the selectedLeaveStatus
+            if (selectedLeaveStatus === 'APPROVED') {
+              this.toastr.success('Leave approved successfully', 'Success', { positionClass: 'toast-top-center' });
+            } else if (selectedLeaveStatus === 'REJECTED') {
+              this.toastr.error('Leave rejected', 'Error', { positionClass: 'toast-top-center' });
+            }
+            this.router.navigateByUrl('/home');
+          },
+          (error) => {
+            console.error('Error updating leave status:', error);
+            this.showSpinner = false;
+            this.toastr.error('Error updating leave status', 'Error', { positionClass: 'toast-top-center' });
+            this.router.navigateByUrl('/home');
+          }
+        );
+      }, 2000); // 2000 milliseconds = 2 seconds
     }
   }
   
-}
+  }
+
