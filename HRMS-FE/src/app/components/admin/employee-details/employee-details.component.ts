@@ -7,25 +7,28 @@ export interface LeaveDetails {
   reason: string;
 }
 
-export interface Employee {
-  empId: number;
-  username: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-}
+// export interface Employee {
+//   empId: number;
+//   username: string;
+//   firstName: string;
+//   lastName: string;
+//   email: string;
+// }
 
 @Component({
   selector: 'app-employee-details',
   templateUrl: './employee-details.component.html',
-  styleUrls: ['./employee-details.component.scss']
+  styleUrls: ['./employee-details.component.scss'],
 })
 export class EmployeeDetailsComponent implements OnInit {
   selectedEmployee!: number;
-  employees: Employee[] = [];
-  employeeDetails: Employee = {} as Employee;
+  // employees: Employee[] = [];
+  employees: any;
+  // employeeDetails: Employee = {} as Employee;
+  employeeDetails: any = null;
   leaveDetails: LeaveDetails[] = [];
-employee: any;
+  employee: any;
+  selectedLeaveStatus: string = '';
 
   constructor(private http: HrmsApiService) {}
 
@@ -37,7 +40,6 @@ employee: any;
     this.http.getEmployees().subscribe(
       (response: any) => {
         this.employees = response.employees;
-        console.log('Employees:', this.employees);
       },
       (error) => {
         console.error('Error fetching employees:', error);
@@ -47,8 +49,9 @@ employee: any;
 
   fetchEmployeeData(): void {
     this.http.employeebyId(this.selectedEmployee).subscribe(
-      (employee: Employee) => {
+      (employee) => {
         this.employeeDetails = employee;
+        console.log('ppppppppppppppppp', this.employeeDetails.employee.leaves);
       },
       (error) => {
         console.error('Error fetching employee details:', error);
@@ -67,4 +70,20 @@ employee: any;
       }
     );
   }
+
+  updateLeaveStatus(leaveId: number, selectedLeaveStatus: string) {
+    if (selectedLeaveStatus) {
+      const payload = { leaveStatus: selectedLeaveStatus };
+  
+      this.http.updateLeaveStatus(leaveId, payload).subscribe(
+        (response) => {
+          console.log('Leave status updated successfully:', response);
+        },
+        (error) => {
+          console.error('Error updating leave status:', error);
+        }
+      );
+    }
+  }
+  
 }

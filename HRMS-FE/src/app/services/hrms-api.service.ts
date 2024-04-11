@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environment/environments';
 import { Observable } from 'rxjs';
-import { Employee } from '../components/admin/employee-details/employee-details.component';
+// import { Employee } from '../components/admin/employee-details/employee-details.component';
 import { LeaveDetails } from '../components/admin/employee-details/employee-details.component';
 
 
@@ -22,15 +22,15 @@ export class HrmsApiService {
   leaveByUserId(payload:any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/leave` , payload);
   }
-  getEmployeeDetails(userid: number): Observable<Employee> {
-    return this.http.get<Employee>(`${environment.apiUrl}/employee/${userid}`);
+  getEmployeeDetails(userid: number): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/employee/${userid}`);
   }
 
   getLeaveDetails(empId: number): Observable<LeaveDetails> {
     return this.http.get<LeaveDetails>(`${environment.apiUrl}/leave?empId=${empId}`);
   }
-  getAllEmployees(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(`${environment.apiUrl}/user`);
+  getAllEmployees(): Observable<any[]> {
+    return this.http.get<any>(`${environment.apiUrl}/user`);
   }
   markinByUserId(payload:any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/attendance`,payload);
@@ -48,5 +48,9 @@ export class HrmsApiService {
   }
   employeebyId(empId:any): Observable<any> {
     return this.http.get(`${environment.apiUrl}/employee/${empId}`);
+  }
+
+  updateLeaveStatus(leaveId: number, payload: any): Observable<any> {
+    return this.http.patch(`${environment.apiUrl}/leave/${leaveId}`, payload);
   }
 }  
