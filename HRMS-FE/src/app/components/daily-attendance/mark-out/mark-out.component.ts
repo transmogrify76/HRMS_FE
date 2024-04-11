@@ -21,6 +21,7 @@ export class MarkOutComponent {
   submitted!: boolean;
   attendanceTime!: Time;
   showSpinner!: boolean;
+  checkIn!: string;
 
   constructor(private router: Router, private http: HrmsApiService ,private toastr: ToastrService) { }
 
@@ -33,26 +34,16 @@ export class MarkOutComponent {
   }
 
   setCurrentDate() {
-    this.attendanceDate = new Date();
-    this.datepicker.bsValue = this.attendanceDate;
-    this.timepicker.writeValue(this.attendanceDate);
-  }
-
-  setCurrentTime() {
-    // Get current time
-    const currentTime = new Date();
-
-    // Format time to HH:MM
-    const hours = currentTime.getHours();
-    const minutes = currentTime.getMinutes();
-    const formattedHours = hours < 10 ? '0' + hours : hours.toString();
-    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes.toString();
-    const currentTimeString = formattedHours + ':' + formattedMinutes;
-
-    // Update timepicker value
-    this.attendanceTime = currentTimeString as unknown as Time; // Convert string to Time type
-    this.timepicker.writeValue(currentTimeString);
-  }
+    const options: Intl.DateTimeFormatOptions = {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true
+    };
+    this.checkIn = new Date().toLocaleString('en-US', options);
+}
   
   submitAttendance() {
 

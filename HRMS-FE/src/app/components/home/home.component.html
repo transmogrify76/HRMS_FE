@@ -28,42 +28,55 @@
     </div>
   </div>
 
-  <div class="container1">    
-    <div class="calendar-container">
+  <div class="container1">
+    <div class="left-panel">
+      <!-- Calendar Component -->
+      <div class="calendar-container">
+        <!-- Your calendar HTML goes here -->
         <div class="calendar">
-        <div class="calendar-header bg-gradient-primary">
+          <div class="calendar-header bg-gradient-primary">
             <button (click)="previousMonth()">&lt;</button>
             <span>{{ currentDate | date: 'MMMM yyyy' }}</span>
             <button (click)="nextMonth()">&gt;</button>
-        </div>
-        <div *ngFor="let leave of pendingLeaves">
-          <p>Reason: {{ leave.reason }}</p>
-          <p>Start Date: {{ leave.startDate }}</p>
-          <p>End Date: {{ leave.endDate }}</p>
-          <hr>
-        </div>
-        <div class="weekdays">
-            <div *ngFor="let weekday of weekdays" class="weekday">{{ weekday }}</div>
-        </div>
-        <table class="days">
-            <tr *ngFor="let week of calendar">
-            <td *ngFor="let day of week" class="day" [ngClass]="{ 'absent': isAbsent(day), 'leave': isLeave(day) }" (click)="selectDate(day)">
-                {{ day ? day.getDate() : '' }}
-            </td>
-            </tr>
-            
-        </table>
-        <div class="legend">
-          <span class="absent-color"></span>Absent
-          <span class="leave-color"></span>Leave Application
           </div>
+          <div class="weekdays">
+            <div *ngFor="let weekday of weekdays" class="weekday">{{ weekday }}</div>
+          </div>
+          <table class="days">
+            <tr *ngFor="let week of calendar">
+              <td *ngFor="let day of week" class="day" [ngClass]="{ 'absent': isAbsent(day), 'leave': isLeave(day) }" (click)="selectDate(day)">
+                {{ day ? day.getDate() : '' }}
+              </td>
+            </tr>
+            <div class="legend">
+              <span class="absent-color"></span>Absent
+              <span class="leave-color"></span>Leave Application
+            </div>
+          </table>
+          <!-- <div class="legend">
+            <span class="absent-color"></span>Absent
+            <span class="leave-color"></span>Leave Application
+          </div> -->
         </div>
-        
-    </div>
+      </div>
     </div>
   
- 
- </div>
+    <div class="right-panel">
+      <!-- List of Leaves Component -->
+      <div class="pending-leaves-container blur-background">
+        <!-- Your list of leaves HTML goes here -->
+        <h4>Pending Leaves</h4><br>
+        <div *ngFor="let leave of pendingLeaves" class="leave-item">
+          <p><strong>Reason:</strong> {{ leave.reason }}</p>
+          <p><strong>Start Date:</strong> {{ leave.startDate }}</p>
+          <p><strong>End Date:</strong> {{ leave.endDate }}</p>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+
     <!-- Offcanvas sidebar -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" [ngClass]="{'show': showOffcanvas}">
         <div class="offcanvas-header">
