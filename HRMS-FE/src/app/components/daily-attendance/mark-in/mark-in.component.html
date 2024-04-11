@@ -1,47 +1,46 @@
-<body>
-  <div class="container">
-    <div class="card">
-      <h5 class="card-header bg-gradient-primary">Mark -In</h5>
-      <div class="card-body">
-        <form>
-          <div class="mb-3">
-            <label for="date" class="form-label">Date & Time </label>
-            <div class="input-group">
-              <input type="text" class="form-control" id="date" name="date" [(ngModel)]="checkIn" placeholder="Choose Date">
-              <!-- <span class="input-group-text" (click)="datePicker.show()"><i class="bi bi-calendar"></i></span> -->
+<div class="container">
+  <div class="card">
+    <h5 class="card-header bg-gradient-primary">Mark -In</h5>
+    <div class="card-body">
+      <form>
+        <div class="mb-3">
+          <label for="date" class="form-label">Date & Time </label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="date" name="date" [(ngModel)]="checkIn" placeholder="Choose Date" required>
+            <!-- <span class="input-group-text" (click)="datePicker.show()"><i class="bi bi-calendar"></i></span> -->
+          </div>
+        </div>
+        <div class="mb-3">
+          <button type="button" class="btn btn-alert custom-button" (click)="setCurrentDate()">Set Current Date & Time </button>
+        </div>
+
+        <div class="mb-3 custom-flex-container">
+          <button type="button" class="btn btn-success" (click)="submitAttendance()" [disabled]="!checkIn">Submit</button>
+          <!-- Add the disabled attribute and bind it to the condition whether checkIn has a value -->
+          <button type="button" class="btn btn-danger" (click)="skip()">Skip</button>
+        </div>
+
+        <!-- Spinner -->
+        <!-- Add a div to cover the entire screen for the background blur -->
+        <div class="overlay" *ngIf="showSpinner">
+          <!-- Spinner container -->
+          <div class="spinner-container">
+            <!-- Your spinner HTML -->
+            <div class="dot-spinner">
+              <!-- Spinner dots -->
+              <div class="dot-spinner__dot"></div>
+              <div class="dot-spinner__dot"></div>
+              <div class="dot-spinner__dot"></div>
+              <div class="dot-spinner__dot"></div>
+              <div class="dot-spinner__dot"></div>
+              <div class="dot-spinner__dot"></div>
+              <div class="dot-spinner__dot"></div>
+              <div class="dot-spinner__dot"></div>
             </div>
           </div>
-          <div class="mb-3">
-            <button type="button" class="btn btn-alert custom-button" (click)="setCurrentDate()">Set Current Date & Time </button>
-          </div>
-          
-          <div class="mb-3 custom-flex-container">
-            <button type="button" class="btn btn-success" (click)="submitAttendance()">Submit</button>
-            <button type="button" class="btn btn-danger" (click)="skip()">Skip</button>
-          </div>
+        </div>
 
-          <!-- Spinner -->
-          <!-- Add a div to cover the entire screen for the background blur -->
-<div class="overlay" *ngIf="showSpinner">
-  <!-- Spinner container -->
-  <div class="spinner-container">
-    <!-- Your spinner HTML -->
-    <div class="dot-spinner">
-      <!-- Spinner dots -->
-      <div class="dot-spinner__dot"></div>
-      <div class="dot-spinner__dot"></div>
-      <div class="dot-spinner__dot"></div>
-      <div class="dot-spinner__dot"></div>
-      <div class="dot-spinner__dot"></div>
-      <div class="dot-spinner__dot"></div>
-      <div class="dot-spinner__dot"></div>
-      <div class="dot-spinner__dot"></div>
+      </form>
     </div>
   </div>
 </div>
-
-        </form>
-      </div>
-    </div>
-  </div>
-</body>

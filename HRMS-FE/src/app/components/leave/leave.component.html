@@ -2,7 +2,7 @@
   <h5 class="card-header bg-gradient-primary">Leave Application Form</h5>
   <div class="card-body">
     <div class="leave-application">
-      <form (submit)="submitLeaveApplication()">
+      <form (submit)="submitLeaveApplication()" #leaveForm="ngForm">
         <div class="form-group">
           <label for="startDate">Start Date:</label>
           <input type="date" id="startDate" name="startDate" [(ngModel)]="startDate" required>
@@ -15,7 +15,8 @@
           <label for="reason">Reason:</label>
           <textarea id="reason" name="reason" [(ngModel)]="reason" required></textarea>
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" [disabled]="!leaveForm.valid">Submit</button>
+        <!-- Disable the button if the form is not valid -->
         <div class="overlay" *ngIf="showSpinner">
           <!-- Spinner container -->
           <div class="spinner-container">
