@@ -44,7 +44,7 @@ export class EmployeeDetailsComponent implements OnInit {
       (response: any) => {
         this.employees = response.employees;
       },
-      (error) => {
+      (error: any) => {
         console.error('Error fetching employees:', error);
       }
     );
@@ -52,11 +52,11 @@ export class EmployeeDetailsComponent implements OnInit {
 
   fetchEmployeeData(): void {
     this.http.employeebyId(this.selectedEmployee).subscribe(
-      (employee) => {
+      (employee: any) => {
         this.employeeDetails = employee;
         console.log('ppppppppppppppppp', this.employeeDetails.employee.leaves);
       },
-      (error) => {
+      (error: any) => {
         console.error('Error fetching employee details:', error);
       }
     );
@@ -68,7 +68,7 @@ export class EmployeeDetailsComponent implements OnInit {
           this.leaveDetails = [leaveDetails];
         }
       },
-      (error) => {
+      (error: any) => {
         console.error('Error fetching leave details:', error);
       }
     );
@@ -82,7 +82,7 @@ export class EmployeeDetailsComponent implements OnInit {
       // Simulate a delay of 2 seconds before making the HTTP request
       setTimeout(() => {
         this.http.updateLeaveStatus(leaveId, payload).subscribe(
-          (response) => {
+          (response: any) => {
             console.log('Leave status updated successfully:', response);
             this.showSpinner = false;
   
@@ -94,7 +94,7 @@ export class EmployeeDetailsComponent implements OnInit {
             }
             this.router.navigateByUrl('/home');
           },
-          (error) => {
+          (error: any) => {
             console.error('Error updating leave status:', error);
             this.showSpinner = false;
             this.toastr.error('Error updating leave status', 'Error', { positionClass: 'toast-top-center' });

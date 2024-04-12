@@ -12,6 +12,7 @@ import { MyProfileComponent } from './components/my-profile/my-profile.component
 import { PayslipComponent } from './components/payslip/payslip.component';
 import { AttendanceComponent } from './components/attendance/attendance.component';
 import { EmployeeDetailsComponent } from './components/admin/employee-details/employee-details.component';
+import { ListOfAttendanceComponent } from './components/admin/list-of-attendance/list-of-attendance.component';
 
 
 
@@ -65,6 +66,11 @@ const routes: Routes = [
     path: 'empdetails',
     component: EmployeeDetailsComponent,
   },
+  
+  {
+    path:'list-of-attendance',
+    component:ListOfAttendanceComponent
+   }  
 ];
 
 @NgModule({
