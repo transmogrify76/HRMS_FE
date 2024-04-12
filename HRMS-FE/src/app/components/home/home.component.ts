@@ -138,5 +138,8 @@ export class HomeComponent {
   listofleaves(){
     this.router.navigate(['/empdetails']);
   }
+  personalleave(){
+    this.router.navigate(['/personalleave'])
+  }
   
 }
