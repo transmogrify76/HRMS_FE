@@ -141,5 +141,8 @@ export class HomeComponent {
   listofattendance(){
     this.router.navigate(['/list-of-attendance']);
   }
+  personalleave(){
+    this.router.navigate(['/personalleave'])
+  }
   
 }

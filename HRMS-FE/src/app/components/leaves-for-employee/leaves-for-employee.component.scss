@@ -1,0 +1,51 @@
+.blur-background {
+    backdrop-filter: blur(5px);
+    background-color: rgba(255, 255, 255, 0.897); /* Adjust the color and opacity as needed */
+    border-radius: 10px; /* Optional: Add border radius for a nicer look */
+    padding: 20px; /* Optional: Add padding for better spacing */
+    width: 50%;
+    margin: 0 auto;
+  }
+  
+  .leave-item {
+    margin-bottom: 10px;
+    width: 80%;
+  }
+  
+  .leave-item p strong {
+    font-weight: bold;
+  }
+  
+  /* Responsive Styles */
+  .container1 {
+    display: flex;
+  }
+  
+  .content {
+    flex: 1;
+  }
+  
+  // .calendar-container {
+  //   margin-left: auto;
+  // }
+  .left-panel,
+  .right-panel {
+    flex: 1; /* Take up remaining space */
+  }
+  
+  .left-panel {
+    margin-right: 20px; /* Optional margin between panels */
+  }
+  
+  .right-panel {
+    flex: 1; /* Take up remaining space */
+  }
+  strong{
+    color: #276414;
+  }
+  h4{
+    color: #1f4f77;
+    font-weight: bold;
+    margin-left: 40%;
+    font-style: italic;
+  }

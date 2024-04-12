@@ -20,8 +20,12 @@
         <img src="../../../assets/markout.png" alt="mark out icon" (click)="markout()" data-toggle="tooltip" title="Mark Out">
         <span class="icon-text">Mark Out</span>
       </div>
+      <div class="icon-container">
+        <img src="../../../assets/leave.png" alt="personal leave icon" (click)="personalleave()" data-toggle="tooltip" title="personal leave">
+        <span class="icon-text">Leave updates</span>
+      </div>
       <div class="icon-container" *ngIf="isAdmin()">
-        <img id="listofleaves" src="../../../assets/listofleave.png" alt="mark out icon" (click)="listofleaves()" data-toggle="tooltip" title="listof_leave">
+        <img id="listofleaves" src="../../../assets/listofleave.png" alt="list of leave icon" (click)="listofleaves()" data-toggle="tooltip" title="listof_leave">
         <span class="icon-text">List of leaves</span>
       </div>
       <div class="icon-container" *ngIf="isAdmin()">

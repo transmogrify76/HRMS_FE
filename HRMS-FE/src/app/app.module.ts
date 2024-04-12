@@ -23,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { ListOfAttendanceComponent } from './components/admin/list-of-attendance/list-of-attendance.component';
 
+import { LeavesForEmployeeComponent } from './components/leaves-for-employee/leaves-for-employee.component';
 
 
 
@@ -45,6 +46,7 @@ import { ListOfAttendanceComponent } from './components/admin/list-of-attendance
     EmployeeDetailsComponent,
     ListOfAttendanceComponent,
 
+    LeavesForEmployeeComponent,
 
 
   ],
