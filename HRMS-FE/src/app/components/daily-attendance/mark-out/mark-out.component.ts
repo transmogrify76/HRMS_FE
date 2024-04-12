@@ -27,7 +27,8 @@ export class MarkOutComponent {
 
   ngOnInit() {
     this.userId = Number(sessionStorage.getItem('UserId'));
-    this.attendanceId = Number(sessionStorage.getItem('AttendanceId'));
+    // this.attendanceId = Number(sessionStorage.getItem('AttendanceId'));
+    this.attendanceId = Number(localStorage.getItem('AttendanceId'));
     console.log( ' 43433434===========' , this.attendanceId);
     
 
@@ -50,7 +51,7 @@ export class MarkOutComponent {
     this.submitted = true;
     this.showSpinner = true; 
     const payload = {
-      checkOut: this.attendanceTime
+      checkOut: this.checkIn
     };
 
     this.http.markoutByUserId(this.attendanceId , payload).subscribe(

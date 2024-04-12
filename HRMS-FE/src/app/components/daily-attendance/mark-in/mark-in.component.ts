@@ -50,7 +50,8 @@ submitAttendance() {
     (data: any) => {
       if (data || data.statusCode === 200) {
         this.submitted = true;
-        sessionStorage.setItem('AttendanceId', data.attId);
+        // sessionStorage.setItem('AttendanceId', data.attId);
+        localStorage.setItem('AttendanceId', data.attId);
         // Navigate to the home page
         this.router.navigate(['/home']);
         this.toastr.success('Markin Successful', '', {

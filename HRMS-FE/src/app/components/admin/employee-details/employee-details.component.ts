@@ -30,7 +30,7 @@ export class EmployeeDetailsComponent implements OnInit {
   employeeDetails: any = null;
   leaveDetails: LeaveDetails[] = [];
   employee: any;
-  selectedLeaveStatus: string = '';
+  selectedLeaveStatus: string[] = [];
   showSpinner: boolean = false;
 
   constructor(private http: HrmsApiService ,private router: Router, private toastr: ToastrService) {}
@@ -64,6 +64,8 @@ export class EmployeeDetailsComponent implements OnInit {
       (leaveDetails: LeaveDetails | LeaveDetails[]) => {
         if (Array.isArray(leaveDetails)) {
           this.leaveDetails = leaveDetails;
+          console.log('ppppppppppppppppp', this.leaveDetails);
+          
         } else {
           this.leaveDetails = [leaveDetails];
         }
@@ -73,6 +75,10 @@ export class EmployeeDetailsComponent implements OnInit {
       }
     );
   }
+
+  initializeSelectedLeaveStatuses() {
+    this.selectedLeaveStatus = this.employeeDetails.employee.leaves.map(() => 'PENDING');
+}
 
   updateLeaveStatus(leaveId: number, selectedLeaveStatus: string) {
     if (selectedLeaveStatus) {
