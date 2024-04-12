@@ -1,0 +1,36 @@
+<div class="container">
+  <h2>Select Employee</h2>
+  <select [(ngModel)]="selectedEmployee" (change)="fetchEmployeeData()" class="custom-select" aria-label="select-employee">
+      <option  disabled selected>Select Employee</option>
+      <option *ngFor="let employee of employees ; let i = index" [value]="employee.empId">{{ employee.username }}</option>
+  </select>
+
+
+    
+  <div *ngIf="selectedEmployee">
+    <div class="card">
+      <div class="card-header bg-gradient-primary">
+        Employee Details
+      </div>
+      <div class="card-body">
+        <table>
+            <thead>
+              <tr>
+                <th>Check In</th>
+                <th>Check Out</th>
+                <th>Check In Date</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let attendance of this.employeeDetails.employee.attendances">
+                <td>{{ attendance.checkIn | date:'HH:mm' }}</td>
+                <td>{{ attendance.checkOut | date:'HH:mm' }}</td>           
+                <td>{{ attendance.checkIn | date:'dd/mm/yyyy' }}</td>
+
+
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>

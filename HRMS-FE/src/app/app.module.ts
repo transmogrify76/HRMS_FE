@@ -21,6 +21,8 @@ import { ListOfEmployeesComponent } from './components/admin/list-of-employees/l
 import { EmployeeDetailsComponent } from './components/admin/employee-details/employee-details.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { ListOfAttendanceComponent } from './components/admin/list-of-attendance/list-of-attendance.component';
+
 import { LeavesForEmployeeComponent } from './components/leaves-for-employee/leaves-for-employee.component';
 
 
@@ -42,6 +44,8 @@ import { LeavesForEmployeeComponent } from './components/leaves-for-employee/lea
     AttendanceComponent,
     ListOfEmployeesComponent,
     EmployeeDetailsComponent,
+    ListOfAttendanceComponent,
+
     LeavesForEmployeeComponent,
 
 
