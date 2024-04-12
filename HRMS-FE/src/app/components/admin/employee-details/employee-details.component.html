@@ -27,18 +27,18 @@
       </div>
       <div *ngIf="leaveDetails.length > 0">
         <h2>Leave Details</h2>
-        <div *ngFor="let leaves of this.employeeDetails.employee.leaves">
+        <div *ngFor="let leaves of this.employeeDetails.employee.leaves ; let i = index">
           <div class="card-body">
             <p><strong>Start Date:</strong> {{ leaves.startDate | date: 'medium' }}</p>
             <p><strong>End Date:</strong> {{ leaves.endDate | date: 'medium' }}</p>
             <p><strong>Reason:</strong> {{ leaves.reason }}</p>
             <div class="mb-3">
-              <label for="leaveOptions" class="form-label">Leave status:</label>
-              <select class="form-select" id="leaveOptions" name="leaveOptions" [(ngModel)]="selectedLeaveStatus">
+              <label for="leaveOptions{{i}}" class="form-label">Leave status:</label>
+              <select class="form-select" id="leaveOptions{{i}}" name="leaveOptions{{i}}" [(ngModel)]="selectedLeaveStatus[i]">
                 <option value="APPROVED">Approved</option>
                 <option value="REJECTED">Decline</option>
               </select>
-              <button type="button" class="btn btn-dark" (click)="updateLeaveStatus(leaves?.leaveId, selectedLeaveStatus)">
+              <button type="button" class="btn btn-dark" (click)="updateLeaveStatus(leaves?.leaveId, selectedLeaveStatus[i])">
                 Submit
               </button>
             </div>       
