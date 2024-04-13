@@ -1,5 +1,6 @@
 <div class="container">
-  <h2>Dashboard</h2>
+  <h2 *ngIf="this.roleType === 'ADMIN'">Admin Dashboard</h2>
+  <h2 *ngIf="this.roleType === 'EMPLOYEE'">Dashboard</h2>
   <div class="card">
     <div class="card-body">
       <div class="icon-container">
@@ -12,11 +13,11 @@
         </a>
         <span class="icon-text">Policies</span>
       </div>
-      <div class="icon-container">
+      <div class="icon-container" *ngIf="this.roleType === 'EMPLOYEE'">
         <img src="../../../assets/markin.png" alt="mark in icon" (click)="markin()" data-toggle="tooltip" title="Mark In">
         <span class="icon-text">Mark In</span>
       </div>
-      <div class="icon-container">
+      <div class="icon-container" *ngIf="this.roleType === 'EMPLOYEE'">
         <img src="../../../assets/markout.png" alt="mark out icon" (click)="markout()" data-toggle="tooltip" title="Mark Out">
         <span class="icon-text">Mark Out</span>
       </div>
@@ -36,40 +37,8 @@
     </div>
   </div>
 
-  <div class="container1">
-    <div class="left-panel">
-      <!-- Calendar Component -->
-      <div class="calendar-container">
-        <!-- Your calendar HTML goes here -->
-        <div class="calendar">
-          <div class="calendar-header bg-gradient-primary">
-            <button (click)="previousMonth()">&lt;</button>
-            <span>{{ currentDate | date: 'MMMM yyyy' }}</span>
-            <button (click)="nextMonth()">&gt;</button>
-          </div>
-          <div class="weekdays">
-            <div *ngFor="let weekday of weekdays" class="weekday">{{ weekday }}</div>
-          </div>
-          <table class="days">
-            <tr *ngFor="let week of calendar">
-              <td *ngFor="let day of week" class="day" [ngClass]="{ 'absent': isAbsent(day), 'leave': isLeave(day) }" (click)="selectDate(day)">
-                {{ day ? day.getDate() : '' }}
-              </td>
-            </tr>
-            <div class="legend">
-              <span class="absent-color"></span>Absent
-              <span class="leave-color"></span>Leave Application
-            </div>
-          </table>
-          <!-- <div class="legend">
-            <span class="absent-color"></span>Absent
-            <span class="leave-color"></span>Leave Application
-          </div> -->
-        </div>
-      </div>
-    </div>
-  
-    <div class="right-panel">
+  <div class="container1">  
+    <div class="right-panel" *ngIf="this.roleType === 'EMPLOYEE'">
       <!-- List of Leaves Component -->
       <div class="pending-leaves-container blur-background">
         <!-- Your list of leaves HTML goes here -->

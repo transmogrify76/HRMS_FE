@@ -3,7 +3,7 @@
     <div class="pending-leaves-container blur-background">
       <!-- Your list of leaves HTML goes here -->
       <h4>Total Leaves</h4><br>
-      <div *ngFor="let leave of this.pendingLeaves.leaves" class="leave-item">
+      <div *ngFor="let leave of this.pendingLeaves.leaves" class="leave-item" [ngClass]="{ 'approved': leave.leaveStatus === 'APPROVED', 'rejected': leave.leaveStatus === 'REJECTED', 'pending': leave.leaveStatus === 'PENDING' }">
         <p><strong>Reason:</strong> {{ leave.reason}}</p>
         <p><strong>Start Date:</strong> {{ leave.startDate }}</p>
         <p><strong>End Date:</strong> {{ leave.endDate }}</p>

@@ -12,8 +12,10 @@ import { ToastrService } from 'ngx-toastr';
 
 export class NavbarComponent {
   showSpinner!: boolean;
-  constructor( private router: Router,private toastr: ToastrService) { }
-
+  roleType: any;
+  constructor( private router: Router,private toastr: ToastrService) {
+    this.roleType = sessionStorage.getItem('roleType');
+  }
   isDropdownOpen = false;
   submitted = false;
   toggleDropdown() {

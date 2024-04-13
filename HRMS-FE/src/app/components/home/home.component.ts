@@ -23,16 +23,17 @@ export class HomeComponent {
     { occasion: 'Laksmi Puja', date: '16-10-2024', day: 'Wednesday' },
     { occasion: 'Kali Puja', date: '31-10-2024', day: 'Thursday' },
     { occasion: 'Christmas Day', date: '25-12-2024', day: 'Wednesday' },
-    // Add more holidays as needed
   ];
   currentDate: Date = new Date();
   calendar: Date[][] = [];
+  roleType: any;
   empId: any;
   pendingLeaves: any[] = [];
   weekdays: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']; // Define weekday names here
   ngOnInit(): void {
     this.generateCalendar();
     this.leaverequest();
+    this.roleType = sessionStorage.getItem('roleType');
   }
   leaverequest(): void {
     this.empId = Number(sessionStorage.getItem('empId'));

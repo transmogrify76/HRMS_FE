@@ -1,51 +1,73 @@
-.blur-background {
-    backdrop-filter: blur(5px);
-    background-color: rgba(255, 255, 255, 0.897); /* Adjust the color and opacity as needed */
-    border-radius: 10px; /* Optional: Add border radius for a nicer look */
-    padding: 20px; /* Optional: Add padding for better spacing */
-    width: 50%;
-    margin: 0 auto;
+.right-panel {
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto;
+  margin-top: 7vh;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
-  
-  .leave-item {
-    margin-bottom: 10px;
-    width: 80%;
+
+  .pending-leaves-container {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+
+    h4 {
+      margin-bottom: 20px;
+      color: #007bff;
+      font-size: 1.5rem;
+      font-weight: bold;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #0056b3;
+      }
+    }
+
+    .leave-item {
+      margin-bottom: 20px;
+      padding: 20px;
+      border-radius: 5px;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+        background-color: rgba(0, 123, 255, 0.1);
+      }
+
+      p {
+        margin: 0;
+        line-height: 1.5;
+        color: #495057;
+        font-size: 1rem;
+
+        strong {
+          font-weight: bold;
+        }
+      }
+
+      hr {
+        border: 0;
+        border-top: 1px solid #dee2e6;
+        margin: 10px 0;
+      }
+
+      &.pending {
+        background-color: #ffc107; // yellow
+      }
+
+      &.approved {
+        background-color: #28a745; // green
+      }
+
+      &.rejected {
+        background-color: #dc3545; // red
+      }
+    }
   }
-  
-  .leave-item p strong {
-    font-weight: bold;
-  }
-  
-  /* Responsive Styles */
-  .container1 {
-    display: flex;
-  }
-  
-  .content {
-    flex: 1;
-  }
-  
-  // .calendar-container {
-  //   margin-left: auto;
-  // }
-  .left-panel,
-  .right-panel {
-    flex: 1; /* Take up remaining space */
-  }
-  
-  .left-panel {
-    margin-right: 20px; /* Optional margin between panels */
-  }
-  
-  .right-panel {
-    flex: 1; /* Take up remaining space */
-  }
-  strong{
-    color: #276414;
-  }
-  h4{
-    color: #1f4f77;
-    font-weight: bold;
-    margin-left: 40%;
-    font-style: italic;
-  }
+}

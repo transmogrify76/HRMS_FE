@@ -5,7 +5,7 @@
     
     <!-- Navbar Toggler -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon" ></span>
     </button>
     
     <!-- Navbar Items -->
@@ -18,7 +18,7 @@
           <a class="nav-link active white-text" aria-current="page" routerLink="/attendance">Attendance</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active white-text" aria-current="page" routerLink="/leave">Leave</a>
+          <a class="nav-link active white-text" aria-current="page" routerLink="/leave" *ngIf="roleType === 'EMPLOYEE'">Leave</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active white-text" aria-current="page" routerLink="/payslip">Payslip</a>
