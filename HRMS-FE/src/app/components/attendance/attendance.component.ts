@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { HrmsApiService } from 'src/app/services/hrms-api.service';
 
 @Component({
   selector: 'app-attendance',
@@ -6,71 +9,32 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./attendance.component.scss']
 })
 export class AttendanceComponent implements OnInit {
-  currentDate: Date = new Date();
-  calendar: Date[][] = [];
-  weekdays: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']; // Define weekday names here
+  selectedEmployee: number | undefined;
+  employees: any[] = [];
+  employeeDetails: any = null;
+  attendanceDetails: any;
+  empId: number = 0;
+  selectedLeaveStatus = '';
+  showSpinner = false;
 
-  constructor() { }
+  constructor(
+    private hrmsApiService: HrmsApiService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
-    this.generateCalendar();
   }
-
-  generateCalendar(): void {
-    const firstDayOfMonth = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 1);
-    const lastDayOfMonth = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 0);
-
-    let startDate = new Date(firstDayOfMonth);
-    startDate.setDate(startDate.getDate() - startDate.getDay());
-
-    const endDate = new Date(lastDayOfMonth);
-    endDate.setDate(endDate.getDate() + (6 - endDate.getDay()));
-
-    this.calendar = [];
-
-    while (startDate <= endDate) {
-      const week: Date[] = [];
-      for (let i = 0; i < 7; i++) {
-        week.push(new Date(startDate));
-        startDate.setDate(startDate.getDate() + 1);
+  fetchEmployeeData(): void {
+    this.empId = Number(sessionStorage.getItem('empId'));
+    this.hrmsApiService.getattendance(this.empId).subscribe(
+      (employee: any) => {
+        this.employeeDetails = employee;
+        console.log('Employee details:', this.employeeDetails.attendances);
+      },
+      (error: any) => {
+        console.error('Error fetching employee details:', error);
       }
-      this.calendar.push(week);
-    }
-
-    console.log('Generated Calendar:', this.calendar); // Add this line to log the generated calendar
-  }
-
-  previousMonth(): void {
-    // Decrease the month by 1
-    this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() - 1, this.currentDate.getDate());
-  
-    // Regenerate the calendar with the updated date
-    this.generateCalendar();
-  }
-  
-  nextMonth(): void {
-    // Increase the month by 1
-    this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, this.currentDate.getDate());
-  
-    // Regenerate the calendar with the updated date
-    this.generateCalendar();
-  }
-  
-
-  isAbsent(day: Date): boolean {
-    // Logic to determine if the day is marked as absent
-    // For demonstration purposes, let's mark every 3rd day as absent
-    return day.getDate() % 3 === 0;
-  }
-
-  isLeave(day: Date): boolean {
-    // Logic to determine if the day is marked as leave application
-    // For demonstration purposes, let's mark every 5th day as leave
-    return day.getDate() % 5 === 0;
-  }
-
-  selectDate(selectedDate: Date): void {
-    // Logic to handle when a date is selected
-    console.log('Selected Date:', selectedDate);
+    );
   }
 }

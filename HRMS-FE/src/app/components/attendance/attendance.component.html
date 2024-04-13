@@ -1,26 +1,32 @@
-<div class="container1">    
-    <div class="calendar-container">
-        <div class="calendar">
-        <div class="calendar-header bg-gradient-primary">
-            <button (click)="previousMonth()">&lt;</button>
-            <span>{{ currentDate | date: 'MMMM yyyy' }}</span>
-            <button (click)="nextMonth()">&gt;</button>
+<br><br>
+<button class="btn btn-success" style="margin-left:44%;" (click)="fetchEmployeeData()">Fetch Attendance</button>
+<br><br><br>
+
+<div class="container">
+    <div>
+        <div class="card">
+            <div class="card-header bg-gradient-primary">
+                Employee Details
+            </div>
+            <div class="card-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Check In</th>
+                            <th>Check Out</th>
+                            <th>Check In Date</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let attendance of this.employeeDetails.attendances">
+                            <td>{{ attendance.checkIn | date:'HH:mm  a' }}</td>
+                            <td>{{ attendance.checkOut | date:'HH:mm  a' }}</td>
+                            <td>{{ attendance.checkIn | date:'dd/mm/yyyy' }}</td>
+
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="weekdays">
-            <div *ngFor="let weekday of weekdays" class="weekday">{{ weekday }}</div>
-        </div>
-        <table class="days">
-            <tr *ngFor="let week of calendar">
-            <td *ngFor="let day of week" class="day" [ngClass]="{ 'absent': isAbsent(day), 'leave': isLeave(day) }" (click)="selectDate(day)">
-                {{ day ? day.getDate() : '' }}
-            </td>
-            </tr>
-        </table>
-        </div>
-        <div class="legend">
-        <span class="absent-color"></span>Absent
-        <span class="leave-color"></span>Leave Application
-        </div>
-    </div>
-    </div>
-    
