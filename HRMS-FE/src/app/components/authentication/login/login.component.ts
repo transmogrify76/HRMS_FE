@@ -15,8 +15,8 @@ export class LoginComponent {
   password: string = '';
   showPassword: boolean = false;
   submitted: boolean = false;
+
   showSpinner!: boolean;
- 
 
   constructor(public hrmsService: HrmsApiService, private router: Router , private toastr: ToastrService) {}
 

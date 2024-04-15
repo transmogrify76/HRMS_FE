@@ -15,7 +15,7 @@
           <a class="nav-link active white-text" aria-current="page" routerLink="/home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active white-text" aria-current="page" routerLink="/attendance">Attendance</a>
+          <a class="nav-link active white-text" aria-current="page" routerLink="/attendance" *ngIf="roleType === 'EMPLOYEE'">Attendance</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active white-text" aria-current="page" routerLink="/leave" *ngIf="roleType === 'EMPLOYEE'">Leave</a>
