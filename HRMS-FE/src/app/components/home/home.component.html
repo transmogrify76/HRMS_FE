@@ -1,6 +1,6 @@
 <div class="container">
-  <h2 *ngIf="this.roleType === 'ADMIN'">Admin Dashboard</h2>
-  <h2 *ngIf="this.roleType === 'EMPLOYEE'">Dashboard</h2>
+  <h2 *ngIf="isAdmin()">Admin Dashboard</h2>
+  <h2 *ngIf="!isAdmin()">Dashboard</h2>
   <div class="card">
     <div class="card-body">
       <div class="icon-container">
@@ -13,11 +13,11 @@
         </a>
         <span class="icon-text">Policies</span>
       </div>
-      <div class="icon-container" *ngIf="this.roleType === 'EMPLOYEE'">
+      <div class="icon-container" *ngIf="!isAdmin()">
         <img src="../../../assets/markin.png" alt="mark in icon" (click)="markin()" data-toggle="tooltip" title="Mark In">
         <span class="icon-text">Mark In</span>
       </div>
-      <div class="icon-container" *ngIf="this.roleType === 'EMPLOYEE'">
+      <div class="icon-container" *ngIf="!isAdmin()">
         <img src="../../../assets/markout.png" alt="mark out icon" (click)="markout()" data-toggle="tooltip" title="Mark Out">
         <span class="icon-text">Mark Out</span>
       </div>

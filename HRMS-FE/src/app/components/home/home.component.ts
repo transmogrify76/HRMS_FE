@@ -9,6 +9,7 @@ import { HrmsApiService } from 'src/app/services/hrms-api.service';
 export class HomeComponent {
   constructor( private router: Router,private hrmsApiService: HrmsApiService,) { }
   showOffcanvas: boolean = false;
+  private hasRunOnce: boolean = true;
   notificationCount: number = 3; // Example notification count
   holidays: any[] = [  // Example holiday data
     { occasion: 'New Year', date: '01-01-2024', day: 'Wednesday' },
@@ -35,14 +36,15 @@ export class HomeComponent {
     this.leaverequest();
     this.roleType = sessionStorage.getItem('roleType');
   }
+
+
   leaverequest(): void {
     this.empId = Number(sessionStorage.getItem('empId'));
     this.hrmsApiService.employeebyId(this.empId).subscribe(
       (data: any) => {
         console.log(data);
         this.pendingLeaves = data.employee.leaves.filter((leave: { leaveStatus: string; }) => leave.leaveStatus === 'PENDING');
-        console.log(this.pendingLeaves);
-        
+        console.log(this.pendingLeaves);        
         // Store roleType in session storage
         const roleType = data.employee.role.roleType;
         sessionStorage.setItem('roleType', roleType);
@@ -58,7 +60,7 @@ export class HomeComponent {
     const roleType = sessionStorage.getItem('roleType');
     return roleType === 'ADMIN';
   }
-  
+
   
   disableListOfLeavesButton(): void {
     const listofleavesButton = document.getElementById('listofleaves') as HTMLButtonElement;
