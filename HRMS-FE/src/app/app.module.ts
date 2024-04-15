@@ -22,7 +22,7 @@ import { EmployeeDetailsComponent } from './components/admin/employee-details/em
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { ListOfAttendanceComponent } from './components/admin/list-of-attendance/list-of-attendance.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { LeavesForEmployeeComponent } from './components/leaves-for-employee/leaves-for-employee.component';
 import { RegisterEmployeeComponent } from './components/admin/register-employee/register-employee.component';
 
@@ -46,7 +46,7 @@ import { RegisterEmployeeComponent } from './components/admin/register-employee/
     ListOfEmployeesComponent,
     EmployeeDetailsComponent,
     ListOfAttendanceComponent,
-
+    
     LeavesForEmployeeComponent,
       RegisterEmployeeComponent,
 
@@ -57,6 +57,7 @@ import { RegisterEmployeeComponent } from './components/admin/register-employee/
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(), 
     TimepickerModule.forRoot(),
