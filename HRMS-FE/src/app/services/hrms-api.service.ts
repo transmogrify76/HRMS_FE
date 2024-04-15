@@ -56,4 +56,7 @@ export class HrmsApiService {
   getattendance(empId: number): Observable<LeaveDetails> {
     return this.http.get<LeaveDetails>(`${environment.apiUrl}/attendance?empId=${empId}`);
   }
+  register(data:any):Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/employee/register` , data);
+  }
 }  
