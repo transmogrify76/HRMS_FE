@@ -1,0 +1,51 @@
+/* Center the card vertically and horizontally */
+.container {
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Style for the card */
+.card {
+    width: 100%;
+    max-width: 500px;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the card body */
+.card-body {
+    padding: 30px;
+}
+
+/* Style for form elements */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}

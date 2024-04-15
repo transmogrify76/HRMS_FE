@@ -15,10 +15,14 @@ export class LoginComponent {
   password: string = '';
   showPassword: boolean = false;
   submitted: boolean = false;
+
+  showSpinner!: boolean;
+
   constructor(public hrmsService: HrmsApiService, private router: Router , private toastr: ToastrService) {}
 
   login() {
     console.log('Login attempted with username:', this.username, 'password:', this.password);
+    this.showSpinner =true ;
     if (this.isValidLogin()) {
       this.hrmsService.login(this.username, this.password).subscribe(
         (data: any) => {
@@ -42,6 +46,13 @@ export class LoginComponent {
       this.toastr.error('Login Failed', '', {
         positionClass: 'toast-bottom-center'
       }); 
+      () => {
+        // Hide spinner after 2 seconds
+        setTimeout(() => {
+          this.showSpinner = false;
+          this.router.navigateByUrl('/home')
+        }, 2000); // Adjust the duration as needed (2000 milliseconds = 2 seconds)
+      }
     }
   }
 

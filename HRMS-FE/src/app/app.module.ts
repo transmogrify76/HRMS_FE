@@ -24,6 +24,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ListOfAttendanceComponent } from './components/admin/list-of-attendance/list-of-attendance.component';
 
 import { LeavesForEmployeeComponent } from './components/leaves-for-employee/leaves-for-employee.component';
+import { RegisterEmployeeComponent } from './components/admin/register-employee/register-employee.component';
 
 
 
@@ -47,6 +48,7 @@ import { LeavesForEmployeeComponent } from './components/leaves-for-employee/lea
     ListOfAttendanceComponent,
 
     LeavesForEmployeeComponent,
+      RegisterEmployeeComponent,
 
 
   ],
