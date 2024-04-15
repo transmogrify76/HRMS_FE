@@ -19,6 +19,25 @@
           <a routerLink="/forgot-password" class="extraordinary-link">Forgot Password?</a>
         </div>
         <button type="submit" class="btn btn-primary btn-block" [disabled]="loginForm.invalid">Login</button>
+         <!-- Add a div to cover the entire screen for the background blur -->
+         <div class="overlay" *ngIf="showSpinner">
+          <!-- Spinner container -->
+          <div class="spinner-container">
+            <!-- Your spinner HTML -->
+            <div class="dot-spinner">
+              <!-- Spinner dots -->
+              <div class="dot-spinner__dot"></div>
+              <div class="dot-spinner__dot"></div>
+              <div class="dot-spinner__dot"></div>
+              <div class="dot-spinner__dot"></div>
+              <div class="dot-spinner__dot"></div>
+              <div class="dot-spinner__dot"></div>
+              <div class="dot-spinner__dot"></div>
+              <div class="dot-spinner__dot"></div>
+            </div>
+          </div>
+        </div>
+
       </form>
     </div>
   </div>

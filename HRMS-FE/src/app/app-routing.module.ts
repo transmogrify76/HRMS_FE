@@ -14,6 +14,7 @@ import { AttendanceComponent } from './components/attendance/attendance.componen
 import { EmployeeDetailsComponent } from './components/admin/employee-details/employee-details.component';
 import { ListOfAttendanceComponent } from './components/admin/list-of-attendance/list-of-attendance.component';
 import { LeavesForEmployeeComponent } from './components/leaves-for-employee/leaves-for-employee.component';
+import { RegisterEmployeeComponent } from './components/admin/register-employee/register-employee.component';
 
 
 
@@ -71,6 +72,10 @@ const routes: Routes = [
   {
     path:'list-of-attendance',
     component:ListOfAttendanceComponent
+   }  ,
+   {
+    path:'register-employee',
+    component: RegisterEmployeeComponent
    }  ,
   {
 
