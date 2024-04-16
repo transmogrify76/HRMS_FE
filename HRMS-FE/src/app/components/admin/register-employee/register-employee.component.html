@@ -2,9 +2,12 @@
     <div class="row justify-content-center align-items-center" style="height: 100vh;">
         <div class="col-md-6">
             <div class="card">
+                <div class="card-header">                    
+                    <h4 class="text-center">Register</h4></div>
                 <div class="card-body">
-                    <h1 class="text-center">Register</h1>
                     <form (ngSubmit)="registerData()" [formGroup]="signUpForm">
+                    
+                    <form>
                         <div class="form-group">
                             <label for="firstName">First Name</label>
                             <input type="text" id="firstName" formControlName="firstName" placeholder="First Name" class="form-control">
@@ -25,12 +28,12 @@
                             <label for="password">Password</label>
                             <input type="password" id="password" formControlName="password" placeholder="Password" class="form-control">
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                        <button type="submit" class="btn btn-primary btn-block">Register</button>
                     </form>
-                    
-                </div>
-            </div>
-        </div>
-    </div>
+                    </form>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
 </div>
 
