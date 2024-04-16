@@ -1,11 +1,12 @@
 .right-panel {
   width: 80%;
-  max-width: 500px;
+  max-width: 550px;
   margin: 0 auto;
   margin-top: 7vh;
   padding: 20px;
   border-radius: 10px;
-  background-color: #f8f9fa;
+  background-color: rgba(255, 255, 255, 0.8); /* Transparent white */
+  backdrop-filter: blur(10px); /* Blur effect */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
 
@@ -19,7 +20,7 @@
 
     h4 {
       margin-bottom: 20px;
-      color: #007bff;
+      color: #194a81;
       font-size: 1.5rem;
       font-weight: bold;
       transition: color 0.3s ease;
@@ -43,7 +44,7 @@
       p {
         margin: 0;
         line-height: 1.5;
-        color: #495057;
+        color: #2a2e2e;
         font-size: 1rem;
 
         strong {

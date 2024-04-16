@@ -4,7 +4,7 @@
     padding: 20px;
     
     h2 {
-      color: #333;
+      color: #fffbfb;
       font-size: 24px;
       margin-bottom: 20px;
     }
@@ -36,6 +36,8 @@
         color: #fff;
         font-size: 20px;
         padding: 15px;
+        background: linear-gradient(to right, #15395f, #38879b);
+        text-align: center;
       }
   
       .card-body {
