@@ -25,6 +25,8 @@ import { ListOfAttendanceComponent } from './components/admin/list-of-attendance
 import { ReactiveFormsModule } from '@angular/forms';
 import { LeavesForEmployeeComponent } from './components/leaves-for-employee/leaves-for-employee.component';
 import { RegisterEmployeeComponent } from './components/admin/register-employee/register-employee.component';
+import { ForgotMarkinComponent } from './components/daily-attendance/forgot-markin/forgot-markin.component';
+import { ForgotToMarkoutComponent } from './components/daily-attendance/forgot-to-markout/forgot-to-markout.component';
 
 
 
@@ -49,6 +51,8 @@ import { RegisterEmployeeComponent } from './components/admin/register-employee/
     
     LeavesForEmployeeComponent,
       RegisterEmployeeComponent,
+      ForgotMarkinComponent,
+      ForgotToMarkoutComponent,
 
 
   ],
