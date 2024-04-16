@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environment/environments';
 import { Observable } from 'rxjs';
 // import { Employee } from '../components/admin/employee-details/employee-details.component';
-import { LeaveDetails } from '../components/admin/employee-details/employee-details.component';
 
 
 @Injectable({
@@ -26,8 +25,8 @@ export class HrmsApiService {
     return this.http.get<any>(`${environment.apiUrl}/employee/${userid}`);
   }
 
-  getLeaveDetails(empId: number): Observable<LeaveDetails> {
-    return this.http.get<LeaveDetails>(`${environment.apiUrl}/leave?empId=${empId}`);
+  getLeaveDetails(empId: number): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/leave?empId=${empId}`);
   }
   getAllEmployees(): Observable<any[]> {
     return this.http.get<any>(`${environment.apiUrl}/user`);
@@ -53,8 +52,8 @@ export class HrmsApiService {
   updateLeaveStatus(leaveId: number, payload: any): Observable<any> {
     return this.http.patch(`${environment.apiUrl}/leave/${leaveId}`, payload);
   }
-  getattendance(empId: number): Observable<LeaveDetails> {
-    return this.http.get<LeaveDetails>(`${environment.apiUrl}/attendance?empId=${empId}`);
+  getattendance(empId: number): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/attendance?empId=${empId}`);
   }
   register(data:any):Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/employee/register` , data);

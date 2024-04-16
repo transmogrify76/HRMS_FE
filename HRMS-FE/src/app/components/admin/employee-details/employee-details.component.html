@@ -28,7 +28,7 @@
       <div *ngIf="leaveDetails.length > 0">
         <h2>Leave Details</h2>
         <div *ngFor="let leaves of this.employeeDetails.employee.leaves ; let i = index">
-          <div class="card-body">
+          <div class="card-body" *ngIf="leaves.leaveStatus === 'PENDING'">
             <p><strong>Start Date:</strong> {{ leaves.startDate | date: 'medium' }}</p>
             <p><strong>End Date:</strong> {{ leaves.endDate | date: 'medium' }}</p>
             <p><strong>Reason:</strong> {{ leaves.reason }}</p>

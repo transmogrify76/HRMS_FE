@@ -3,11 +3,11 @@ import { HrmsApiService } from 'src/app/services/hrms-api.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
-export interface LeaveDetails {
-  startdate: number;
-  enddate: number;
-  reason: string;
-}
+// export interface LeaveDetails {
+//   startdate: number;
+//   enddate: number;
+//   reason: string;
+// }
 
 // export interface Employee {
 //   empId: number;
@@ -28,7 +28,7 @@ export class EmployeeDetailsComponent implements OnInit {
   employees: any;
   // employeeDetails: Employee = {} as Employee;
   employeeDetails: any = null;
-  leaveDetails: LeaveDetails[] = [];
+  leaveDetails: any;
   employee: any;
   selectedLeaveStatus: string[] = [];
   showSpinner: boolean = false;
@@ -61,7 +61,7 @@ export class EmployeeDetailsComponent implements OnInit {
       }
     );
     this.http.getLeaveDetails(this.selectedEmployee).subscribe(
-      (leaveDetails: LeaveDetails | LeaveDetails[]) => {
+      (leaveDetails: any) => {
         if (Array.isArray(leaveDetails)) {
           this.leaveDetails = leaveDetails;
           console.log('ppppppppppppppppp', this.leaveDetails);
