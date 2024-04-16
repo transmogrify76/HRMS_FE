@@ -59,16 +59,21 @@ $transition-speed: 0.3s;
 
 .container1 {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-top: 20px;
+  background-color: #fcfcfc;
+  width:35%;
+  margin-left: 30%;
+  background-color: rgba(255, 255, 255, 0.9); /* Transparent white */
+    backdrop-filter: blur(10px); /* Blur effect */   
 
   .left-panel,
   .right-panel {
-    width: 48%;
+    // width: 48%;
     padding: 20px;
     border-radius: $border-radius;
     .card {
-    background-color: rgba(255, 255, 255, 0.8); /* Transparent white */
+    background-color: rgba(255, 255, 255, 0.1); /* Transparent white */
     backdrop-filter: blur(10px); /* Blur effect */   
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: box-shadow $transition-speed;

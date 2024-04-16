@@ -24,6 +24,7 @@ export class AttendanceComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.fetchEmployeeData()
   }
   fetchEmployeeData(): void {
     this.empId = Number(sessionStorage.getItem('empId'));
