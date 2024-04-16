@@ -1,14 +1,38 @@
-<div class="container">
-    <div class="card">
-        <div class="card-header bg-gradient-primary">
-          My Profile
-        </div>
-        <div class="card-body">
-          <p><strong>Employee ID:</strong> {{ employeeDetails.employee.empId }}</p>
-          <p><strong>Username:</strong> {{ employeeDetails.employee.username }}</p>
-          <p><strong>First name:</strong> {{ employeeDetails.employee.firstName }}</p>
-          <p><strong>Last name:</strong> {{ employeeDetails.employee.lastName }}</p>
-          <p><strong>Email:</strong> {{ employeeDetails.employee.email }}</p>
-        </div>
-      </div>
+<div class="employee-details-container">
+  <!-- Display employee details -->
+  <div *ngIf="employeeDetails" class="employee-details">
+    <h2>Employee Details</h2>
+    <div class="detail-item">
+      <span class="label">Employee ID:</span>
+      <span class="value">{{ employeeDetails.employee.empId }}</span>
+    </div>
+    <div class="detail-item">
+      <span class="label">Full Name:</span>
+      <span class="value">{{ employeeDetails.employee.firstName }} {{ employeeDetails.employee.lastName }}</span>
+    </div>
+    <div class="detail-item">
+      <span class="label">Email:</span>
+      <span class="value">{{ employeeDetails.employee.email }}</span>
+    </div>
+    <div class="detail-item">
+      <span class="label">Username:</span>
+      <span class="value">{{ employeeDetails.employee.username }}</span>
+    </div>
+    <div class="detail-item">
+      <span class="label">Joining Date:</span>
+      <span class="value">{{ employeeDetails.employee.joiningDate }}</span>
+    </div>
+    <div class="detail-item">
+      <span class="label">Current Working Days:</span>
+      <span class="value">{{ currentWorkingDays }}</span>
+    </div>
+    <!-- Available Leaves section -->
+    <div class="detail-item">
+      <span class="label">Available Leaves:</span>
+      <span class="value">{{ creditLeaves }}</span>
+    </div>
+  </div>
+  
+  <!-- Loading indicator -->
+  <div *ngIf="!employeeDetails" class="loading-indicator">Loading employee details...</div>
 </div>

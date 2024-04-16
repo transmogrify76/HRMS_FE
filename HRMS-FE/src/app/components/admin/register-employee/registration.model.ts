@@ -4,4 +4,5 @@ export interface RegistrationData {
     username: string;
     password: string;
     email:any;
+    joiningDate:string;
 }
