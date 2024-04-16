@@ -15,6 +15,8 @@ import { EmployeeDetailsComponent } from './components/admin/employee-details/em
 import { ListOfAttendanceComponent } from './components/admin/list-of-attendance/list-of-attendance.component';
 import { LeavesForEmployeeComponent } from './components/leaves-for-employee/leaves-for-employee.component';
 import { RegisterEmployeeComponent } from './components/admin/register-employee/register-employee.component';
+import { ForgotMarkinComponent } from './components/daily-attendance/forgot-markin/forgot-markin.component';
+import { ForgotToMarkoutComponent } from './components/daily-attendance/forgot-to-markout/forgot-to-markout.component';
 
 
 
@@ -76,6 +78,14 @@ const routes: Routes = [
    {
     path:'register-employee',
     component: RegisterEmployeeComponent
+   }  ,
+   {
+    path:'forgot-markin',
+    component: ForgotMarkinComponent
+   }  ,
+   {
+    path:'forgot-markout',
+    component:ForgotToMarkoutComponent
    }  ,
   {
 
