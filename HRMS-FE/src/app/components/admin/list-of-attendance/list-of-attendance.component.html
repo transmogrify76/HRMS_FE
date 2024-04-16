@@ -1,36 +1,54 @@
 <div class="container">
   <h2>Select Employee</h2>
   <select [(ngModel)]="selectedEmployee" (change)="fetchEmployeeData()" class="custom-select" aria-label="select-employee">
-      <option  disabled selected>Select Employee</option>
-      <option *ngFor="let employee of employees ; let i = index" [value]="employee.empId">{{ employee.username }}</option>
+    <option disabled selected>Select Employee</option>
+    <option *ngFor="let employee of employees" [value]="employee.empId">{{ employee.username }}</option>
   </select>
 
+  <h2>Select Month</h2>
+  <select [(ngModel)]="selectedMonth" (change)="fetchEmployeeData()" class="custom-select" aria-label="select-month">
+    <option disabled selected>Select Month</option>
+    <option value="1">January</option>
+    <option value="2">February</option>
+    <option value="3">March</option>
+    <option value="4">April</option>
+    <option value="5">May</option>
+    <option value="6">June</option>
+    <option value="7">July</option>
+    <option value="8">August</option>
+    <option value="9">September</option>
+    <option value="10">October</option>
+    <option value="11">November</option>
+    <option value="12">December</option>
+  </select>
 
-    
-  <div *ngIf="selectedEmployee">
+  <div *ngIf="selectedEmployee && employeeDetails">
     <div class="card">
       <div class="card-header bg-gradient-primary">
         Employee Details
+        
+      </div>
+      <div *ngIf="totalAttendance !== undefined">
+        Total Attendance for Selected Month: {{ totalAttendance }}
       </div>
       <div class="card-body">
         <table>
-            <thead>
-              <tr>
-                <th>Check In</th>
-                <th>Check Out</th>
-                <th>Check In Date</th>
-
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let attendance of this.employeeDetails.employee.attendances">
-                <td>{{ attendance.checkIn | date:'hh:mm a' }}</td>
-                <td>{{ attendance.checkOut | date:'hh:mm a' }}</td>           
-                <td>{{ attendance.checkIn | date:'d/MM/YYYY' }}</td>
-
-
-              </tr>
-            </tbody>
-          </table>
+          <thead>
+            <tr>
+              <th>Check In</th>
+              <th>Check Out</th>
+              <th>Check In Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let attendance of attendanceDetails">
+              <td>{{ attendance.checkIn | date:'hh:mm a' }}</td>
+              <td>{{ attendance.checkOut | date:'hh:mm a' }}</td>
+              <td>{{ attendance.checkIn | date:'d/MM/YYYY' }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
+  </div>
+</div>

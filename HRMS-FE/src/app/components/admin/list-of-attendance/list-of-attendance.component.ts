@@ -21,6 +21,8 @@ export class ListOfAttendanceComponent implements OnInit {
   attendanceDetails: AttendanceDetails[] = [];
   selectedLeaveStatus = '';
   showSpinner = false;
+  selectedMonth!: number;
+  totalAttendance!: number;
 
   constructor(
     private hrmsApiService: HrmsApiService,
@@ -47,12 +49,41 @@ export class ListOfAttendanceComponent implements OnInit {
     this.hrmsApiService.employeebyId(this.selectedEmployee).subscribe(
       (employee: any) => {
         this.employeeDetails = employee;
-        console.log('Employee details:', this.employeeDetails.employee.attendances);
+        console.log('Employee attendance details:', this.employeeDetails.employee.attendances);
+        this.filterAttendancesByMonth();
+        this.calculateTotalAttendance();
       },
       (error: any) => {
         console.error('Error fetching employee details:', error);
       }
     );
   }
+  
+  filterAttendancesByMonth(): void {
+    if (!this.employeeDetails || !this.selectedMonth) {
+      return;
+    }
+  
+    const selectedMonthNumber = this.selectedMonth;
+    console.log(selectedMonthNumber);
+    
+    const filteredAttendances = this.employeeDetails.employee.attendances.filter((attendance: { checkIn: string | number | Date; }) => {
+      const checkInTimestamp = new Date(attendance.checkIn);
+      return checkInTimestamp.getMonth()  === selectedMonthNumber-1; 
+    });
+  
+    this.attendanceDetails = filteredAttendances; 
+    console.log(this.attendanceDetails)
+  }
+  
+  calculateTotalAttendance(): void {
+    if (!this.attendanceDetails) {
+      return;
+    }
+    this.totalAttendance = this.attendanceDetails.length;
+    console.log(this.totalAttendance);
+    
+  }
+  
 }
 
