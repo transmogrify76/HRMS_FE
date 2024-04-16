@@ -26,6 +26,7 @@ export class RegisterEmployeeComponent {
       username: ['', Validators.required],
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],
+      joiningDate:['', [Validators.required]],
     });
   }
 
