@@ -1,19 +1,3 @@
-/* Styles for the button */
-.btn-success {
-  background-color: #28a745;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s, transform 0.3s;
-}
-
-.btn-success:hover {
-  background-color: #218838;
-  transform: scale(1.05);
-}
 
 /* Styles for the table */
 table {
@@ -30,7 +14,8 @@ th, td {
 }
 
 th {
-  background-color: #007bff;
+  background: linear-gradient(to right, #15395f, #38879b);
+  text-align: center;
   color: white;
 }
 
@@ -47,12 +32,17 @@ th {
 }
 
 .card-header {
-  background-color: #007bff;
+  background: linear-gradient(to right, #15395f, #38879b);
+  text-align: center;
   color: white;
   padding: 10px;
   border-radius: 10px 10px 0 0;
+  font-weight: 500;
 }
 
 .card-body {
   padding: 20px;
+}
+.container{
+  width:40%;
 }
