@@ -147,5 +147,8 @@ export class HomeComponent {
   personalleave(){
     this.router.navigate(['/personalleave'])
   }
+  register(){
+    this.router.navigate(['/register-employee'])
+  }
   
 }

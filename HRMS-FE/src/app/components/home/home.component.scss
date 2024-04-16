@@ -1,8 +1,7 @@
 // Variables
-$primary-color: #007bff;
-$secondary-color: #6c757d;
-$background-color: #f8f9fa;
-$card-background: #ffffff;
+$primary-color: #fcfcfc;
+$secondary-color: #101111;
+$background-color: #81b3e6;
 $border-radius: 8px;
 $transition-speed: 0.3s;
 
@@ -17,9 +16,11 @@ $transition-speed: 0.3s;
   }
 
   .card {
-    background-color: $card-background;
+    background-color: rgba(255, 255, 255, 0.6); /* Transparent white */
+    backdrop-filter: blur(10px); /* Blur effect */   
     border-radius: $border-radius;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-color: #0c4d81;
     transition: box-shadow $transition-speed;
 
     &:hover {
@@ -30,6 +31,7 @@ $transition-speed: 0.3s;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+      font-weight:600;
 
       .icon-container {
         margin: 20px;
@@ -65,7 +67,9 @@ $transition-speed: 0.3s;
     width: 48%;
     padding: 20px;
     border-radius: $border-radius;
-    background-color: $card-background;
+    .card {
+    background-color: rgba(255, 255, 255, 0.8); /* Transparent white */
+    backdrop-filter: blur(10px); /* Blur effect */   
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: box-shadow $transition-speed;
 
@@ -110,10 +114,10 @@ $transition-speed: 0.3s;
 
 .offcanvas {
   max-width: 400px;
-  background-color: $card-background;
   border-radius: $border-radius;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform $transition-speed;
+  background-color: #f4f4f4; /* Light gray background */
 
   &.show {
     transform: translateX(0);
@@ -123,31 +127,60 @@ $transition-speed: 0.3s;
     background-color: $primary-color;
     color: #fff;
     border-radius: $border-radius $border-radius 0 0;
-    padding: 10px 20px;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     .offcanvas-title {
       margin: 0;
+      font-size: 1.2em;
+    }
+
+    .close-btn {
+      cursor: pointer;
+      font-size: 1.5em;
+      color: #fff;
+      transition: color 0.3s;
+
+      &:hover {
+        color: darken($primary-color, 10%); /* Darken the primary color */
+      }
     }
   }
 
   .offcanvas-body {
-    padding: 20px;
+    padding: 25px;
     color: $secondary-color;
+
+    p {
+      margin-bottom: 15px;
+    }
 
     table {
       width: 100%;
-      border-collapse: collapse;
+      border-collapse: separate;
+      border-spacing: 0 10px;
 
       th,
       td {
-        padding: 10px;
-        border-bottom: 1px solid $secondary-color;
+        padding: 12px 15px;
+        border: 1px solid $secondary-color;
         text-align: left;
+        background-color: #fff; /* White background for table cells */
 
         &:last-child {
           border-right: none;
         }
+
+        &.highlight {
+          background-color: lighten($primary-color, 60%); /* Lighten the primary color for highlighted rows */
+        }
+      }
+
+      th {
+        background-color: $primary-color;
+        color: #fff;
       }
     }
-  }
-}
+  }}}
