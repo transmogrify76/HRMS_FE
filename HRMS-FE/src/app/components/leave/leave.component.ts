@@ -38,7 +38,7 @@ export class LeaveComponent {
       startDate: this.startDate,
       endDate: this.endDate,
       reason: this.reason,
-      employee:this.empId
+      empId:this.empId
     };
 
     
