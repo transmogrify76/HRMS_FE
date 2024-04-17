@@ -32,8 +32,10 @@ export class LoginComponent {
           console.log(decodedToken);
           const empId = decodedToken.employee.empId; 
           const username = decodedToken.employee.username;
+          const roleType = decodedToken.employee.roleType;
           sessionStorage.setItem('empId', empId.toString());
           sessionStorage.setItem('username', username.toString());
+          localStorage.setItem('roleType', roleType.toString());
           this.router.navigate(['/home']);
           this.toastr.success('Login Successful', '', {
             positionClass: 'toast-bottom-center'
