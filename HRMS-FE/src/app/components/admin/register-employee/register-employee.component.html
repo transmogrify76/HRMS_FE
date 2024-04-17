@@ -32,6 +32,23 @@
                             <input type="password" id="password" formControlName="password" placeholder="Password" class="form-control">
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Register</button>
+                        <div class="overlay" *ngIf="showSpinner">
+                            <!-- Spinner container -->
+                            <div class="spinner-container">
+                              <!-- Your spinner HTML -->
+                              <div class="dot-spinner">
+                                <!-- Spinner dots -->
+                                <div class="dot-spinner__dot"></div>
+                                <div class="dot-spinner__dot"></div>
+                                <div class="dot-spinner__dot"></div>
+                                <div class="dot-spinner__dot"></div>
+                                <div class="dot-spinner__dot"></div>
+                                <div class="dot-spinner__dot"></div>
+                                <div class="dot-spinner__dot"></div>
+                                <div class="dot-spinner__dot"></div>
+                              </div>
+                            </div>
+                          </div>
                     </form>
                 </div>
             </div>

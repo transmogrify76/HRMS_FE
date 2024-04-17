@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HrmsApiService } from 'src/app/services/hrms-api.service';
 import { ToastrService } from 'ngx-toastr';
@@ -8,19 +8,24 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './leave.component.html',
   styleUrls: ['./leave.component.scss']
 })
-export class LeaveComponent {
+export class LeaveComponent implements OnInit {
   startDate: String | null = null;
   endDate: string | null = null;
   reason: string = '';
   submitted: boolean = false;
   empId: any;
   showSpinner!: boolean;
+  minDate!: string;
   
   constructor(
     private hrmsApiService: HrmsApiService,
     private router: Router,
     private toastr: ToastrService
   ) {}
+ ngOnInit() {
+    const today = new Date();
+    this.minDate = today.toISOString().split('T')[0];
+  }
   
 
   submitLeaveApplication() {
