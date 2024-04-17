@@ -14,7 +14,7 @@ export class NavbarComponent {
   showSpinner!: boolean;
   roleType: any;
   constructor( private router: Router,private toastr: ToastrService) {
-    this.roleType = sessionStorage.getItem('roleType');
+    this.roleType = localStorage.getItem('roleType');
   }
   isDropdownOpen = false;
   submitted = false;

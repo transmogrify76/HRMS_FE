@@ -46,20 +46,27 @@
   </div>
 
   <div class="container1">  
-    <div class="right-panel" *ngIf="this.roleType === 'EMPLOYEE'">
-      <!-- List of Leaves Component -->
-      <div class="pending-leaves-container blur-background">
-        <!-- Your list of leaves HTML goes here -->
-        <h4>Pending Leaves</h4><br>
-        <div *ngFor="let leave of pendingLeaves" class="leave-item">
-          <p><strong>Reason:</strong> {{ leave.reason }}</p>
-          <p><strong>Start Date:</strong> {{ leave.startDate }}</p>
-          <p><strong>End Date:</strong> {{ leave.endDate }}</p>
-          <hr>
+    <div class="card">
+      <div class="card-header bg-gradient-primary ">
+        <h5 class="card-title">Pending Leaves</h5>
+      </div>
+      <div class="card-body ">
+        <div class="right-panel" *ngIf="this.roleType === 'EMPLOYEE'">
+          <!-- List of Leaves Component -->
+          <div class="pending-leaves-container blur-background">
+            <!-- Your list of leaves HTML goes here -->
+            <div *ngFor="let leave of pendingLeaves" class="leave-item">
+              <p><strong>Reason:</strong> {{ leave.reason }}</p>
+              <p><strong>Start Date:</strong> {{ leave.startDate }}</p>
+              <p><strong>End Date:</strong> {{ leave.endDate }}</p>
+              <hr>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  
     </div>
 
     <!-- Offcanvas sidebar -->
