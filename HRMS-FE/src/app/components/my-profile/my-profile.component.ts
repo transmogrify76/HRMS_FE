@@ -10,6 +10,7 @@ export class MyProfileComponent implements OnInit {
   employeeDetails: any;
   empId: number = 0;
   currentWorkingDays: number = 0;
+  leaveBalance: number = 0;
 
   constructor(private http: HrmsApiService) { }
 
@@ -51,31 +52,15 @@ export class MyProfileComponent implements OnInit {
     const timeDifference = endDate.getTime() - joinDate.getTime();
     const daysDifference = Math.floor(timeDifference / (1000 * 3600 * 24));
 
-    let workingDays = daysDifference;
-    const startDate = new Date(joinDate);
-    for (let i = 0; i <= daysDifference; i++) {
-        if (startDate.getDay() === 0 || startDate.getDay() === 6) {
-            workingDays--;
-        }
-        startDate.setDate(startDate.getDate() + 1);
-    }
+    return daysDifference;
+}
 
-    return workingDays; // Return the calculated working days
-  }
 
-  creditLeaves(numLeaves: number): void {
-    // Implement logic to credit leaves here
-    // You can call a service to credit the leaves to the employee
-    // For example:
-    // this.http.creditLeaves(this.empId, numLeaves).subscribe(
-    //   (response) => {
-    //     console.log('Leaves credited successfully:', response);
-    //   },
-    //   (error) => {
-    //     console.error('Error crediting leaves:', error);
-    //   }
-    // );
-    // For now, let's just log a message to simulate the leaves being credited
-    console.log(`${numLeaves} leaves credited to employee.`);
+creditLeaves(numLeaves: number): void {
+  if (this.currentWorkingDays < 180) {
+      this.leaveBalance = 0;
+  } else {
+      this.leaveBalance = 6;
   }
+}
 }
