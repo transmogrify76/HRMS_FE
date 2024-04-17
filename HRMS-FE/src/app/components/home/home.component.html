@@ -37,6 +37,10 @@
         <img id="register" src="../../../assets/pen.png" alt="register icon" (click)="register()" data-toggle="tooltip" title="register">
         <span class="icon-text">Register Employee</span>
       </div>
+      <div class="icon-container" *ngIf="isEMP()">
+        <img src="../../../assets/leave.png" alt="personal leave icon" (click)="empdetailsupload()" data-toggle="tooltip" title="personal leave">
+        <span class="icon-text">Upload details</span>
+      </div>
       
     </div>
   </div>

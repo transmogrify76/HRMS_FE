@@ -60,6 +60,10 @@ export class HomeComponent {
     const roleType = sessionStorage.getItem('roleType');
     return roleType === 'ADMIN';
   }
+  isEMP(): boolean {
+    const roleType = sessionStorage.getItem('roleType');
+    return roleType === 'EMPLOYEE';
+  }
 
   
   disableListOfLeavesButton(): void {
@@ -149,6 +153,9 @@ export class HomeComponent {
   }
   register(){
     this.router.navigate(['/register-employee'])
+  }
+  empdetailsupload(){
+    this.router.navigate(['/emp-details-upload'])
   }
   
 }

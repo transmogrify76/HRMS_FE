@@ -58,4 +58,7 @@ export class HrmsApiService {
   register(data:any):Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/employee/register` , data);
   }
+  empdetails( payload: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/employeedetails`, payload);
+  }
 }  

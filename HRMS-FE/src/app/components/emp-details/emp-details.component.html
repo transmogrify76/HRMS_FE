@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="height: 100vh;">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">                    
+                    <h4 class="text-center">Employee Details</h4>
+                </div>
+                <div class="card-body">
+                    <form (ngSubmit)="empdetails()" #empdetailsForm="ngForm">
+                        <div class="form-group">
+                            <label for="firstName">adhaarCardNo</label>
+                            <input type="text" id="adhaarCardNo" name="adhaarCardNo" [(ngModel)]="adhaarCardNo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">bankAccountNo </label>
+                            <input type="text" id="bankAccountNo" name="bankAccountNo" [(ngModel)]="bankAccountNo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">IFSCno</label>
+                            <input type="text" id="IFSCno" name="IFSCno" [(ngModel)]="IFSCno" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block" [disabled]="!empdetailsForm.valid">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

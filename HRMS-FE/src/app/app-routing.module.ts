@@ -17,6 +17,7 @@ import { LeavesForEmployeeComponent } from './components/leaves-for-employee/lea
 import { RegisterEmployeeComponent } from './components/admin/register-employee/register-employee.component';
 import { ForgotMarkinComponent } from './components/daily-attendance/forgot-markin/forgot-markin.component';
 import { ForgotToMarkoutComponent } from './components/daily-attendance/forgot-to-markout/forgot-to-markout.component';
+import { EmpDetailsComponent } from './components/emp-details/emp-details.component';
 
 
 
@@ -91,6 +92,11 @@ const routes: Routes = [
 
     path: 'personalleave',
     component: LeavesForEmployeeComponent,
+  },
+  {
+
+    path: 'emp-details-upload',
+    component: EmpDetailsComponent,
   }
 ];
 
