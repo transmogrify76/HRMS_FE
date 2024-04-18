@@ -73,8 +73,12 @@ export class MarkOutComponent {
           }
         },
         (error: any) => {
-          console.error('Error occurred while giving attendance:', error);
-        },
+          this.showSpinner = false;
+        console.error('Error occurred while giving attendance:', error);
+          this.toastr.error('Invalid input', '', {
+          positionClass: 'toast-bottom-center'
+        });
+      },
         () => {
           // Hide spinner after 2 seconds
           setTimeout(() => {
