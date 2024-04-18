@@ -27,11 +27,8 @@ export class MarkOutComponent {
 
   ngOnInit() {
     this.userId = Number(sessionStorage.getItem('UserId'));
-    // this.attendanceId = Number(sessionStorage.getItem('AttendanceId'));
     this.attendanceId = Number(localStorage.getItem('AttendanceId'));
-    console.log( ' 43433434===========' , this.attendanceId);
-    
-
+    console.log('Attendance ID:', this.attendanceId);
   }
 
   setCurrentDate() {
@@ -45,46 +42,53 @@ export class MarkOutComponent {
     };
     this.checkIn = new Date().toLocaleString('en-US', options);
 }
-  
+
   submitAttendance() {
+    const markedInToday = localStorage.getItem('markedInToday');
 
-    this.submitted = true;
-    this.showSpinner = true; 
-    const payload = {
-      checkOut: this.checkIn
-    };
-
-    this.http.markoutByUserId(this.attendanceId , payload).subscribe(
-      (data: any) => {
-        console.log(payload);
-        sessionStorage.getItem('AttendanceId');
-        
-
-        if (data || data.statusCode === 200) {
-          this.submitted = true;
-          this.router.navigate(['/home']);
-          this.toastr.success('Markout successful', '', {
-            positionClass: 'toast-bottom-center'
-          }); 
-        } else {
-          console.error('Failed to give attendance');
-          this.toastr.error('Markout Failed', '', {
-            positionClass: 'toast-bottom-center'
-          }); 
-        }
-      },
-      (error: any) => {
-        console.error('Error occurred while giving attendance:', error);
-      },
-      () => {
-        // Hide spinner after 2 seconds
-        setTimeout(() => {
-          this.showSpinner = false;
-          this.router.navigateByUrl('/home')
-        }, 2000);
-      }
-    );
+    if (markedInToday === 'true') {
+      // Proceed with mark-out process
+      this.submitted = true;
+      this.showSpinner = true; 
     
+      const payload = {
+        checkOut: this.checkIn
+      };
+
+      this.http.markoutByUserId(this.attendanceId, payload).subscribe(
+        (data: any) => {
+          if (data || data.statusCode === 200) {
+            localStorage.setItem('markedInToday', 'false'); 
+            this.submitted = true;
+            this.router.navigate(['/home']);
+            this.toastr.success('Markout successful', '', {
+              positionClass: 'toast-bottom-center'
+            }); 
+          } else {
+
+            console.error('Failed to give attendance');
+            this.toastr.error('Markout Failed', '', {
+              positionClass: 'toast-bottom-center'
+            }); 
+          }
+        },
+        (error: any) => {
+          console.error('Error occurred while giving attendance:', error);
+        },
+        () => {
+          // Hide spinner after 2 seconds
+          setTimeout(() => {
+            this.showSpinner = false;
+            this.router.navigateByUrl('/home')
+          }, 2000);
+        }
+      );
+    } else {
+      this.toastr.error('Markin First', '', {
+        positionClass: 'toast-bottom-center'})
+      console.log('Cannot mark out. Not marked in today.');
+      
+    }
   }
 
   skip() {
