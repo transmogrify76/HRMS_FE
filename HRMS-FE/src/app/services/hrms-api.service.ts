@@ -49,8 +49,8 @@ export class HrmsApiService {
     return this.http.get(`${environment.apiUrl}/employee/${empId}`);
   }
 
-  updateLeaveStatus(leaveId: number, payload: any): Observable<any> {
-    return this.http.patch(`${environment.apiUrl}/leave/${leaveId}`, payload);
+  updateLeaveStatus(leaveId: number, empId:number,payload: any): Observable<any> {
+    return this.http.patch(`${environment.apiUrl}/leave/${empId}/${leaveId}`, payload);
   }
   getattendance(empId: number): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/attendance?empId=${empId}`);

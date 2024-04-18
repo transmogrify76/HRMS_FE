@@ -30,6 +30,7 @@ export class EmployeeDetailsComponent implements OnInit {
   employeeDetails: any = null;
   leaveDetails: any;
   employee: any;
+  empId: number = 0;
   selectedLeaveStatus: string[] = [];
   showSpinner: boolean = false;
 
@@ -54,15 +55,8 @@ export class EmployeeDetailsComponent implements OnInit {
     this.http.employeebyId(this.selectedEmployee).subscribe(
       (employee: any) => {
         this.employeeDetails = employee;
-        console.log('Employee Details:', this.employeeDetails);
-        // Fetch Aadhar Card number from the last item in the employeedetails array
-        if (this.employeeDetails.employee.employeedetails.length > 0) {
-          this.employeeDetails.employee.adhaarCardNo = this.employeeDetails.employee.employeedetails[this.employeeDetails.employee.employeedetails.length - 1].adhaarCardNo;
-          // Fetch bank account number and IFSC code similarly
-          this.employeeDetails.employee.bankAccountNo = this.employeeDetails.employee.employeedetails[this.employeeDetails.employee.employeedetails.length - 1].bankAccountNo;
-          this.employeeDetails.employee.IFSCno = this.employeeDetails.employee.employeedetails[this.employeeDetails.employee.employeedetails.length - 1].IFSCno;
-          this.employeeDetails.employee.panNo = this.employeeDetails.employee.employeedetails[this.employeeDetails.employee.employeedetails.length - 1].panNo;
-        }
+        this.empId = this.employeeDetails.employee.empId;
+        console.log('ppppppppppppppppp', this.employeeDetails.employee.empId);
       },
       (error: any) => {
         console.error('Error fetching employee details:', error);
@@ -72,7 +66,8 @@ export class EmployeeDetailsComponent implements OnInit {
       (leaveDetails: any) => {
         if (Array.isArray(leaveDetails)) {
           this.leaveDetails = leaveDetails;
-          console.log('Leave Details:', this.leaveDetails);
+          console.log('ppppppppppppppppp', this.leaveDetails);
+          
         } else {
           this.leaveDetails = [leaveDetails];
         }
@@ -82,20 +77,23 @@ export class EmployeeDetailsComponent implements OnInit {
       }
     );
   }
-  
 
   initializeSelectedLeaveStatuses() {
     this.selectedLeaveStatus = this.employeeDetails.employee.leaves.map(() => 'PENDING');
 }
 
   updateLeaveStatus(leaveId: number, selectedLeaveStatus: string) {
+
     if (selectedLeaveStatus) {
-      const payload = { leaveStatus: selectedLeaveStatus };
+      const payload = { 
+        leaveStatus: selectedLeaveStatus ,
+        // empId : this.empId
+      };
       this.showSpinner = true;
   
       // Simulate a delay of 2 seconds before making the HTTP request
       setTimeout(() => {
-        this.http.updateLeaveStatus(leaveId, payload).subscribe(
+        this.http.updateLeaveStatus(leaveId, this.empId, payload).subscribe(
           (response: any) => {
             console.log('Leave status updated successfully:', response);
             this.showSpinner = false;

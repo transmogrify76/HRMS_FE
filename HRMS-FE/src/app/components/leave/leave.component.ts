@@ -16,19 +16,21 @@ export class LeaveComponent implements OnInit {
   empId: any;
   showSpinner!: boolean;
   minDate!: string;
+  email!: string;
   
   constructor(
     private hrmsApiService: HrmsApiService,
     private router: Router,
     private toastr: ToastrService
   ) {}
- ngOnInit() {
+ngOnInit() {
     const today = new Date();
     this.minDate = today.toISOString().split('T')[0];
   }
   
-
+  
   submitLeaveApplication() {
+    this.email = sessionStorage.getItem('email') || '';
     this.submitted = true;
     this.showSpinner = true; 
     if (!this.startDate || !this.endDate) {
@@ -43,7 +45,8 @@ export class LeaveComponent implements OnInit {
       startDate: this.startDate,
       endDate: this.endDate,
       reason: this.reason,
-      empId:this.empId
+      empId:this.empId,
+      employeeEmail:this.email
     };
 
     
