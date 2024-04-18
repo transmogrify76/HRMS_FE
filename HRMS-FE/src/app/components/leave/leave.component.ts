@@ -60,7 +60,7 @@ export class LeaveComponent implements OnInit {
       },
       (error: any) => {
         console.error('Error occurred while submitting leave application:', error);
-        this.toastr.error('Leave application Failed',  'Error', { positionClass: 'toast-top-center' }); 
+        this.toastr.error('Leave application Failed',  'Error', { positionClass: 'toast-bottom-center' }); 
       },
       () => {
         // Hide spinner after 2 seconds

@@ -32,6 +32,7 @@ export class MyProfileComponent implements OnInit {
         this.employeeDetails.employee.adhaarCardNo = lastEmployeeDetail.adhaarCardNo;
         this.employeeDetails.employee.bankAccountNo = lastEmployeeDetail.bankAccountNo;
         this.employeeDetails.employee.IFSCno = lastEmployeeDetail.IFSCno;
+        this.employeeDetails.employee.panNo = lastEmployeeDetail.panNo;
 
         // Call function to calculate current working days
         this.calculateCurrentWorkingDays();

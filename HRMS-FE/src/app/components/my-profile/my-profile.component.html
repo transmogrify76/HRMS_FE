@@ -1,24 +1,27 @@
-<div class="employee-details-container">
-  <!-- Display employee details -->
-  <div *ngIf="employeeDetails" class="employee-details">
-    <h2>Employee Details</h2>
-    <div class="detail-item">
-      <span class="label">Employee ID:</span>
-      <span class="value">{{ employeeDetails.employee.empId }}</span>
-    </div>
-    <div class="detail-item">
-      <span class="label">Full Name:</span>
-      <span class="value">{{ employeeDetails.employee.firstName }} {{ employeeDetails.employee.lastName }}</span>
-    </div>
-    <div class="detail-item">
-      <span class="label">Email:</span>
-      <span class="value">{{ employeeDetails.employee.email }}</span>
-    </div>
-    <div class="detail-item">
-      <span class="label">Username:</span>
-      <span class="value">{{ employeeDetails.employee.username }}</span>
-    </div>
-    <div class="detail-item">
+<div class="card">
+  <div class="card-header bg-gradient-primary">
+    <h4>Employee Details</h4>
+  </div>
+  <div class="employee-details-container">
+    <!-- Display employee details -->
+    <div *ngIf="employeeDetails" class="employee-details">
+      <div class="detail-item">
+        <span class="label">Employee ID:</span>
+        <span class="value">{{ employeeDetails.employee.empId }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="label">Full Name:</span>
+        <span class="value">{{ employeeDetails.employee.firstName }} {{ employeeDetails.employee.lastName }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="label">Email:</span>
+        <span class="value">{{ employeeDetails.employee.email }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="label">Username:</span>
+        <span class="value">{{ employeeDetails.employee.username }}</span>
+      </div>
+      <div class="detail-item">
       <span class="label">Bank Account No:</span>
       <span class="value">{{employeeDetails?.employee?.bankAccountNo}}</span>
     </div>
@@ -31,20 +34,24 @@
       <span class="value">{{employeeDetails?.employee?.IFSCno}}</span>
     </div>
     <div class="detail-item">
-      <span class="label">Joining Date:</span>
-      <span class="value">{{ employeeDetails.employee.joiningDate }}</span>
+      <span class="label">PAN No:</span>
+      <span class="value">{{employeeDetails?.employee?.panNo}}</span>
     </div>
     <div class="detail-item">
-      <span class="label">Current Working Days:</span>
-      <span class="value">{{ currentWorkingDays }}</span>
+        <span class="label">Joining Date:</span>
+        <span class="value">{{ employeeDetails.employee.joiningDate }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="label">Current Working Days:</span>
+        <span class="value">{{ currentWorkingDays }}</span>
+      </div>
+      <!-- Available Leaves section -->
+      <div class="detail-item">
+        <span class="label">Available Leaves:</span>
+        <span class="value">{{ leaveBalance }}</span>
+      </div>
     </div>
-    <!-- Available Leaves section -->
-    <div class="detail-item">
-      <span class="label">Available Leaves:</span>
-      <span class="value">{{ leaveBalance }}</span>
-    </div>
+    <!-- Loading indicator -->
+    <div *ngIf="!employeeDetails" class="loading-indicator">Loading employee details...</div>
   </div>
-  
-  <!-- Loading indicator -->
-  <div *ngIf="!employeeDetails" class="loading-indicator">Loading employee details...</div>
 </div>

@@ -1,15 +1,21 @@
-.employee-details-container {
-  font-family: Arial, sans-serif;
-  max-width: 500px;
-  margin: auto;
-  padding: 20px;
+.card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  width:40%;
+  margin-left: 30%;
+  margin-top: 7%;
 }
 
-.employee-details {
-  background-color: #f9f9f9;
-  border: 1px solid #ccc;
+.bg-gradient-primary {
+  background: linear-gradient(to right, #15395f, #38879b);
+  text-align: center;
+  color:aliceblue;
+}
+
+.employee-details-container {
   padding: 20px;
-  border-radius: 5px;
 }
 
 .detail-item {
@@ -18,10 +24,14 @@
 
 .label {
   font-weight: bold;
+  margin-right: 10px;
+}
+
+.value {
+  color: #555;
 }
 
 .loading-indicator {
-  margin-top: 20px;
+  padding: 20px;
   text-align: center;
-  color: #666;
 }
