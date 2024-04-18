@@ -1,23 +1,24 @@
 <div class="container">
   <h2>Select Employee</h2>
   <select [(ngModel)]="selectedEmployee" (change)="fetchEmployeeData()" class="custom-select" aria-label="select-employee">
-      <option  disabled selected>Select Employee</option>
-      <option *ngFor="let employee of employees ; let i = index" [value]="employee.empId">{{ employee.username }}</option>
+      <option disabled selected>Select Employee</option>
+      <option *ngFor="let employee of employees; let i = index" [value]="employee.empId">{{ employee.username }}</option>
   </select>
 
-
-    
   <div *ngIf="selectedEmployee">
     <div class="card">
       <div class="card-header bg-gradient-primary">
         Employee Details
       </div>
       <div class="card-body">
-        <p><strong>Employee ID:</strong> {{ this.employeeDetails.employee.empId }}</p>
-        <p><strong>Username:</strong> {{ this.employeeDetails.employee.username }}</p>
-        <p><strong>First name:</strong> {{ this.employeeDetails.employee.firstName }}</p>
-        <p><strong>Last name:</strong> {{ this.employeeDetails.employee.lastName }}</p>
-        <p><strong>Email:</strong> {{ this.employeeDetails.employee.email }}</p>
+        <p><strong>Employee ID:</strong> {{ employeeDetails?.employee?.empId }}</p>
+        <p><strong>Username:</strong> {{ employeeDetails?.employee?.username }}</p>
+        <p><strong>First name:</strong> {{ employeeDetails?.employee?.firstName }}</p>
+        <p><strong>Last name:</strong> {{ employeeDetails?.employee?.lastName }}</p>
+        <p><strong>Email:</strong> {{ employeeDetails?.employee?.email }}</p>
+        <p><strong>Aadhar Card No:</strong> {{ employeeDetails?.employee?.adhaarCardNo }}</p>
+        <p><strong>Bank Account No:</strong> {{ employeeDetails?.employee?.bankAccountNo }}</p>
+        <p><strong>IFSC No:</strong> {{ employeeDetails?.employee?.IFSCno }}</p>
       </div>
     </div>
 
@@ -27,7 +28,7 @@
       </div>
       <div *ngIf="leaveDetails.length > 0">
         <h2>Leave Details</h2>
-        <div *ngFor="let leaves of this.employeeDetails.employee.leaves ; let i = index">
+        <div *ngFor="let leaves of employeeDetails?.employee?.leaves; let i = index">
           <div class="card-body" *ngIf="leaves.leaveStatus === 'PENDING'">
             <p><strong>Start Date:</strong> {{ leaves.startDate | date: 'medium' }}</p>
             <p><strong>End Date:</strong> {{ leaves.endDate | date: 'medium' }}</p>
@@ -65,4 +66,3 @@
     </div>
   </div>
 </div>
-

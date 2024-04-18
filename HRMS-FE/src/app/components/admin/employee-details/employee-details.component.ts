@@ -54,7 +54,14 @@ export class EmployeeDetailsComponent implements OnInit {
     this.http.employeebyId(this.selectedEmployee).subscribe(
       (employee: any) => {
         this.employeeDetails = employee;
-        console.log('ppppppppppppppppp', this.employeeDetails.employee.leaves);
+        console.log('Employee Details:', this.employeeDetails);
+        // Fetch Aadhar Card number from the last item in the employeedetails array
+        if (this.employeeDetails.employee.employeedetails.length > 0) {
+          this.employeeDetails.employee.adhaarCardNo = this.employeeDetails.employee.employeedetails[this.employeeDetails.employee.employeedetails.length - 1].adhaarCardNo;
+          // Fetch bank account number and IFSC code similarly
+          this.employeeDetails.employee.bankAccountNo = this.employeeDetails.employee.employeedetails[this.employeeDetails.employee.employeedetails.length - 1].bankAccountNo;
+          this.employeeDetails.employee.IFSCno = this.employeeDetails.employee.employeedetails[this.employeeDetails.employee.employeedetails.length - 1].IFSCno;
+        }
       },
       (error: any) => {
         console.error('Error fetching employee details:', error);
@@ -64,8 +71,7 @@ export class EmployeeDetailsComponent implements OnInit {
       (leaveDetails: any) => {
         if (Array.isArray(leaveDetails)) {
           this.leaveDetails = leaveDetails;
-          console.log('ppppppppppppppppp', this.leaveDetails);
-          
+          console.log('Leave Details:', this.leaveDetails);
         } else {
           this.leaveDetails = [leaveDetails];
         }
@@ -75,6 +81,7 @@ export class EmployeeDetailsComponent implements OnInit {
       }
     );
   }
+  
 
   initializeSelectedLeaveStatuses() {
     this.selectedLeaveStatus = this.employeeDetails.employee.leaves.map(() => 'PENDING');

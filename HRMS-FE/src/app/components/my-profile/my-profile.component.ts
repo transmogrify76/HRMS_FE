@@ -26,6 +26,13 @@ export class MyProfileComponent implements OnInit {
         this.employeeDetails = employee;
         console.log('====-----====', this.employeeDetails.employee);
 
+        // Extract Aadhar card number, bank account number, and IFSC code from the last element of employeedetails array
+        const lastIndex = this.employeeDetails.employee.employeedetails.length - 1;
+        const lastEmployeeDetail = this.employeeDetails.employee.employeedetails[lastIndex];
+        this.employeeDetails.employee.adhaarCardNo = lastEmployeeDetail.adhaarCardNo;
+        this.employeeDetails.employee.bankAccountNo = lastEmployeeDetail.bankAccountNo;
+        this.employeeDetails.employee.IFSCno = lastEmployeeDetail.IFSCno;
+
         // Call function to calculate current working days
         this.calculateCurrentWorkingDays();
 
@@ -53,14 +60,13 @@ export class MyProfileComponent implements OnInit {
     const daysDifference = Math.floor(timeDifference / (1000 * 3600 * 24));
 
     return daysDifference;
-}
-
-
-creditLeaves(numLeaves: number): void {
-  if (this.currentWorkingDays < 180) {
-      this.leaveBalance = 0;
-  } else {
-      this.leaveBalance = 6;
   }
-}
+
+  creditLeaves(numLeaves: number): void {
+    if (this.currentWorkingDays < 180) {
+      this.leaveBalance = 0;
+    } else {
+      this.leaveBalance = numLeaves;
+    }
+  }
 }

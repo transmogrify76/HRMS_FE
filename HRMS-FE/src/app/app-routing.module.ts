@@ -18,7 +18,7 @@ import { RegisterEmployeeComponent } from './components/admin/register-employee/
 import { ForgotMarkinComponent } from './components/daily-attendance/forgot-markin/forgot-markin.component';
 import { ForgotToMarkoutComponent } from './components/daily-attendance/forgot-to-markout/forgot-to-markout.component';
 import { EmpDetailsComponent } from './components/emp-details/emp-details.component';
-
+import { UserDetailsComponent } from './components/admin/user-details/user-details.component';
 
 
 const routes: Routes = [
@@ -97,7 +97,13 @@ const routes: Routes = [
 
     path: 'emp-details-upload',
     component: EmpDetailsComponent,
-  }
+  },
+  {
+
+    path: 'user-details',
+    component: UserDetailsComponent,
+  },
+
 ];
 
 @NgModule({
