@@ -16,9 +16,6 @@ function accountNumberValidator(): ValidatorFn {
     return isValid ? null : { 'invalidAccountNumber': { value: control.value } };
   };
 }
-
-
-
 @Component({
   selector: 'app-emp-details',
   templateUrl: './emp-details.component.html',
