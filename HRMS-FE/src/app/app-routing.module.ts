@@ -19,6 +19,7 @@ import { ForgotMarkinComponent } from './components/daily-attendance/forgot-mark
 import { ForgotToMarkoutComponent } from './components/daily-attendance/forgot-to-markout/forgot-to-markout.component';
 import { EmpDetailsComponent } from './components/emp-details/emp-details.component';
 import { UserDetailsComponent } from './components/admin/user-details/user-details.component';
+import { ListOfEmployeesComponent } from './components/admin/list-of-employees/list-of-employees.component';
 
 
 const routes: Routes = [
@@ -103,6 +104,11 @@ const routes: Routes = [
     path: 'user-details',
     component: UserDetailsComponent,
   },
+  {
+
+    path: 'list-of-employees',
+    component: ListOfEmployeesComponent,
+  }
 
 ];
 

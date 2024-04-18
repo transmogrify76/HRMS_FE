@@ -30,7 +30,7 @@
         <span class="icon-text">List of leaves</span>
       </div>
       <div class="icon-container" *ngIf="isAdmin()">
-        <img id="listofleaves" src="../../../assets/listofleave.png" alt="mark out icon" (click)="listofattendance()" data-toggle="tooltip" title="listof_leave">
+        <img id="listofleaves" src="../../../assets/immigration.png" alt="list of attendance icon" (click)="listofattendance()" data-toggle="tooltip" title="listof_leave">
         <span class="icon-text">List of Attendance</span>
       </div>
       <div class="icon-container" *ngIf="isAdmin()">
@@ -38,8 +38,12 @@
         <span class="icon-text">Register Employee</span>
       </div>
       <div class="icon-container" *ngIf="isEMP()">
-        <img src="../../../assets/file.png" alt="personal leave icon" (click)="empdetailsupload()" data-toggle="tooltip" title="personal leave">
+        <img src="../../../assets/file.png" alt="upload details icon" (click)="empdetailsupload()" data-toggle="tooltip" title="personal leave">
         <span class="icon-text">Upload details</span>
+      </div>
+      <div class="icon-container" *ngIf="isAdmin()">
+        <img id="listofleaves" src="../../../assets/staff.png" alt="list of emp icon" (click)="listofemployees()" data-toggle="tooltip" title="listof_emp">
+        <span class="icon-text">List of Employees</span>
       </div>
       
     </div>
