@@ -11,6 +11,7 @@ export class MyProfileComponent implements OnInit {
   empId: number = 0;
   currentWorkingDays: number = 0;
   leaveBalance: number = 0;
+  username:any;
 
   constructor(private http: HrmsApiService) { }
 
@@ -20,6 +21,7 @@ export class MyProfileComponent implements OnInit {
 
   fetchEmployeeDetails(): void {
     this.empId = Number(sessionStorage.getItem('empId'));
+    this.username=sessionStorage.getItem('username')
 
     this.http.getEmployeeDetails(this.empId).subscribe(
       (employee) => {
