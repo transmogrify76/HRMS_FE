@@ -22,7 +22,7 @@ export class LoginComponent {
 
   login() {
     console.log('Login attempted with username:', this.username, 'password:', this.password);
-    this.showSpinner =true ;
+    this.showSpinner = true;
     if (this.isValidLogin()) {
       this.hrmsService.login(this.username, this.password).subscribe(
         (data: any) => {
@@ -42,24 +42,27 @@ export class LoginComponent {
           this.toastr.success('Login Successful', '', {
             positionClass: 'toast-bottom-center'
           });
-        }
+        },
+        error => {
+          console.log('Login failed:', error);
+          setTimeout(() => {
+            this.showSpinner = false;
+          }, 1000);
+          this.toastr.error('Login Failed', '', {
+            positionClass: 'toast-bottom-center'
+          });
+        },
       );
       this.submitted = true;
     } else {
       console.log('Invalid login credentials');
-      this.toastr.error('Login Failed', '', {
+      this.toastr.error('Invalid Login Credentials', '', {
         positionClass: 'toast-bottom-center'
-      }); 
-      () => {
-        // Hide spinner after 2 seconds
-        setTimeout(() => {
-          this.showSpinner = false;
-          this.router.navigateByUrl('/home')
-        }, 2000); // Adjust the duration as needed (2000 milliseconds = 2 seconds)
-      }
+      });
+      this.showSpinner = false; // Hide spinner if login credentials are invalid
     }
   }
-
+  
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }
