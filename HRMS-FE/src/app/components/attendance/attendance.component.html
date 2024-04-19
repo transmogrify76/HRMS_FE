@@ -20,8 +20,8 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let attendance of this.employeeDetails.attendances">
-                            <td>{{ attendance.checkIn | date:'h:mm a' }}</td>
-                            <td>{{ attendance.checkOut | date:'h:mm  a' }}</td>
+                            <td>{{ attendance.checkIn | subtractHours |date:'h:mm a' }}</td>
+                            <td>{{ attendance.checkOut | subtractHours |date:'h:mm  a' }}</td>
                             <td>{{ attendance.checkIn | date:'yyyy-MM-dd' }}</td>
                         </tr>
                     </tbody>
