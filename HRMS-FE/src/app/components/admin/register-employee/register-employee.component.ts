@@ -77,6 +77,8 @@ export class RegisterEmployeeComponent {
           // Hide spinner after 2 seconds and route to home page
           setTimeout(() => {
             this.showSpinner = false;
+            this.router.navigate(['/home']);
+
           }, 2000);
         },
         error => {
