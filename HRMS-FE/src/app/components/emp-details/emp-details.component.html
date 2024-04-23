@@ -1,4 +1,9 @@
 <div class="container">
+  <h2 style="color: aliceblue;">Select Employee</h2>
+  <select [(ngModel)]="selectedEmployee" (change)="fetchEmployeeData()" class="custom-select" aria-label="select-employee">
+      <option disabled selected>Select Employee</option>
+      <option *ngFor="let employee of employees; let i = index" [value]="employee.empId">{{ employee.username }}</option>
+  </select>
     <div class="row justify-content-center align-items-center" style="height: 100vh;">
         <div class="col-md-6">
             <div class="card">

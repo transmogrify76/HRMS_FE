@@ -5,6 +5,38 @@
     height: 100vh;
 }
 
+.select-employee-container {
+  margin-bottom: 20px;
+}
+
+.select-employee-header {
+  color: aliceblue;
+  margin-bottom: 10px;
+}
+
+.custom-select {
+  width: 20%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f7f7f7;
+  color: #333;
+}
+
+.custom-select option {
+  color: #333;
+}
+
+.custom-select:focus {
+  outline: none;
+  border-color: dodgerblue;
+  box-shadow: 0 0 5px dodgerblue;
+}
+
+
+
+
 /* Style for the card */
 .card {
     width: 100%;
@@ -205,4 +237,3 @@ label {
       opacity: 1;
     }
   }
-  
