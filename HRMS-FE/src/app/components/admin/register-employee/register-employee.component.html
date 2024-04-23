@@ -16,12 +16,47 @@
                             <input type="text" id="lastName" formControlName="lastName" placeholder="Last Name" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" formControlName="email" placeholder="Email" class="form-control">
-                        </div>
+                            <label for="mobileNo">Phone number</label>
+                            <input type="text" id="mobileNo" formControlName="mobileNo" placeholder="Phone number" class="form-control">
+                            <div *ngIf="signUpForm.controls['mobileNo'].invalid && (signUpForm.controls['mobileNo'].dirty || signUpForm.controls['mobileNo'].touched)" class="text-danger">
+                              Please enter 10 digit valid phone number.
+                            </div>
+                          </div>
+                        <div class="form-group">
+                            <label for="aadhaarNo">Aadhaar Card Number</label>
+                            <input type="text" id="aadhaarNo" formControlName="aadhaarNo" placeholder="Aadhaar Card Number" class="form-control">
+                            <div *ngIf="signUpForm.controls['aadhaarNo'].errors?.['invalidAdhaarCard']" class="text-danger">
+                              Aadhaar Card Number must be a 16-digit number.
+                            </div>
+                          </div>                                                 
+                          <div class="form-group">
+                            <label for="panNo">PAN no.</label>
+                            <input type="text" id="panNo" formControlName="panNo" placeholder="Pan card no." class="form-control">
+                            <div *ngIf="signUpForm.controls['panNo'].invalid && (signUpForm.controls['panNo'].dirty || signUpForm.controls['panNo'].touched)" class="text-danger">
+                              PAN number is required.
+                            </div>
+                          </div>
+                          <!-- <div class="form-group">
+                            <label for="bankAccountNo">Bank Account Number</label>
+                            <input type="text" id="bankAccountNo" formControlName="bankAccountNo" class="form-control">
+                            <div *ngIf="signUpForm.controls['bankAccountNo'].errors?.['invalidAccountNumber']" class="text-danger">
+                              Bank Account Number must contain only numbers.
+                            </div>
+                          </div> -->
+                          <!-- <div class="form-group">
+                            <label for="IFSCno">IFSC Code</label>
+                            <input type="text" id="IFSCno" formControlName="IFSCno" class="form-control">
+                            <div *ngIf="signUpForm.controls['IFSCno'].invalid && (signUpForm.controls['IFSCno'].dirty || signUpForm.controls['IFSCno'].touched)" class="text-danger">
+                              Please enter a valid IFSC code.
+                            </div>
+                          </div> -->
                         <div class="form-group">
                             <label for="joiningDate">Joining Date</label>
                             <input type="date" id="joiningDate" formControlName="joiningDate" placeholder="joiningDate" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" formControlName="email" placeholder="Email" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="username">Username</label>
@@ -31,6 +66,10 @@
                             <label for="password">Password</label>
                             <input type="password" id="password" formControlName="password" placeholder="Password" class="form-control">
                         </div>
+                        <!-- <div class="form-group">
+                            <label for="resignDate">Resign Date</label>
+                            <input type="date" id="resignDate" formControlName="resignDate" placeholder="Resign Date" class="form-control">
+                        </div> -->
                         <button type="submit" class="btn btn-primary btn-block">Register</button>
                         <div class="overlay" *ngIf="showSpinner">
                             <!-- Spinner container -->

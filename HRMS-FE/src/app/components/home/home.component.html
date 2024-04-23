@@ -37,9 +37,9 @@
         <img id="register" src="../../../assets/pen.png" alt="register icon" (click)="register()" data-toggle="tooltip" title="register">
         <span class="icon-text">Register Employee</span>
       </div>
-      <div class="icon-container" *ngIf="isEMP()">
+      <div class="icon-container" *ngIf="isAdmin()">
         <img src="../../../assets/file.png" alt="upload details icon" (click)="empdetailsupload()" data-toggle="tooltip" title="personal leave">
-        <span class="icon-text">Upload details</span>
+        <span class="icon-text">Banking credentials</span>
       </div>
       <div class="icon-container" *ngIf="isAdmin()">
         <img id="listofleaves" src="../../../assets/staff.png" alt="list of emp icon" (click)="listofemployees()" data-toggle="tooltip" title="listof_emp">
