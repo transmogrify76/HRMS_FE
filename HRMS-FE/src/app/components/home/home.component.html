@@ -21,7 +21,7 @@
         <img src="../../../assets/markout.png" alt="mark out icon" (click)="markout()" data-toggle="tooltip" title="Mark Out">
         <span class="icon-text">Mark Out</span>
       </div>
-      <div class="icon-container">
+      <div class="icon-container" *ngIf="isEMP()">
         <img src="../../../assets/leave.png" alt="personal leave icon" (click)="personalleave()" data-toggle="tooltip" title="personal leave">
         <span class="icon-text">Leave updates</span>
       </div>
@@ -49,7 +49,7 @@
     </div>
   </div>
 
-  <div class="container1">  
+  <div class="container1"*ngIf="isEMP()">  
     <div class="card">
       <div class="card-header bg-gradient-primary ">
         <h5 class="card-title">Pending Leaves</h5>
