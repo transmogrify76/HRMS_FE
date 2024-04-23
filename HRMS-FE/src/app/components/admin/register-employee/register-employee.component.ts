@@ -78,6 +78,7 @@ export class RegisterEmployeeComponent {
           setTimeout(() => {
             this.showSpinner = false;
             this.router.navigate(['/home']);
+
           }, 2000);
         },
         error => {

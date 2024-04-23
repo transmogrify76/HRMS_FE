@@ -26,15 +26,18 @@ export class EmpDetailsComponent {
   empDetailsForm: FormGroup; // Define FormGroup
 
   // Define other variables
+  employees: any;
+  selectedEmployee!: number;
   submitted: boolean = false;
   showSpinner: boolean = false;
+  employeeDetails: any = null;
   empId: number | null = null;
 
   constructor(
     private formBuilder: FormBuilder, // Inject FormBuilder
     private toastr: ToastrService,
     private hrmsService: HrmsApiService,
-    public router: Router
+    public router: Router,
   ) {
     // Initialize the form in the constructor
     this.empDetailsForm = this.formBuilder.group({
@@ -45,23 +48,48 @@ export class EmpDetailsComponent {
     });
   }
 
+  ngOnInit(): void {
+    this.fetchEmployees();
+  }
+
+  fetchEmployees(): void {
+    this.hrmsService.getEmployees().subscribe(
+      (response: any) => {
+        this.employees = response.employees;
+      },
+      (error: any) => {
+        console.error('Error fetching employees:', error);
+      }
+    );
+  }
+
+  fetchEmployeeData(): void {
+    this.hrmsService.employeebyId(this.selectedEmployee).subscribe(
+      (employee: any) => {
+        this.employeeDetails = employee;
+        this.empId = this.employeeDetails.employee.empId;
+      },
+      (error: any) => {
+        console.error('Error fetching employee details:', error);
+      }
+    );
+  }
+
   // Function to submit employee details
   empdetails() {
+    console.log('=====================================================================' , this.empId);
+    
     this.submitted = true;
-    if (this.empDetailsForm.invalid) {
-      this.toastr.error('Please fill all the required fields correctly.', 'Invalid Input', { positionClass: 'toast-top-center' }); 
-      return;
-    }
+    // if (this.empDetailsForm.invalid) {
+    //   this.toastr.error('Please fill all the required fields correctly.', 'Invalid Input', { positionClass: 'toast-top-center' }); 
+    //   return;
+    // }
 
     this.showSpinner = true;
-    this.empId = Number(sessionStorage.getItem('empId'));
-
     const payload = {
-      adhaarCardNo: this.empDetailsForm.value.adhaarCardNo,
       bankAccountNo: this.empDetailsForm.value.bankAccountNo,
       IFSCno: this.empDetailsForm.value.IFSCno,
       employee: this.empId,
-      panNo:this.empDetailsForm.value.panNo
     };
 
     this.hrmsService.empdetails(payload).subscribe(

@@ -42,9 +42,9 @@
           </thead>
           <tbody>
             <tr *ngFor="let attendance of attendanceDetails">
-              <td>{{ attendance.checkIn | date:'hh:mm a' }}</td>
-              <td>{{ attendance.checkOut | date:'hh:mm a' }}</td>
-              <td>{{ attendance.checkIn | date:'d/MM/YYYY' }}</td>
+              <td>{{ attendance.checkIn | subtractHours |date:'h:mm a' }}</td>
+              <td>{{ attendance.checkOut | subtractHours |date:'h:mm a' }}</td>
+              <td>{{ attendance.checkIn | date:'yyyy-MM-dd' }}</td>
             </tr>
           </tbody>
         </table>
