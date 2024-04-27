@@ -41,7 +41,7 @@ export class EmpDetailsComponent {
   ) {
     // Initialize the form in the constructor
     this.empDetailsForm = this.formBuilder.group({
-      adhaarCardNo: ['', [Validators.required, adhaarCardValidator()]], // Apply the custom validator
+      aadhaarNo: ['', [Validators.required, adhaarCardValidator()]], // Apply the custom validator
       bankAccountNo: ['', [Validators.required, accountNumberValidator()]], 
       IFSCno: ['', [Validators.required, Validators.pattern('[A-Za-z]{4}[0-9]{7}')]], // Example IFSC pattern, adjust as needed
       panNo: ['', Validators.required]
