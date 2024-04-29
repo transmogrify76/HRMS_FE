@@ -1,1 +1,137 @@
-<p>payslip works!</p>
+<div class="container">
+    <div class="select-container">
+        <h2 class="title">Select Employee</h2>
+        <select [(ngModel)]="selectedEmployee" (change)="fetchEmployeeData()" class="form-select-sm mb-2" aria-label="Default select example">
+            <option disabled selected>Select Employee</option>
+            <option *ngFor="let employee of employees; let i = index" [value]="employee.empId">{{ employee.username }}</option>
+        </select>
+    </div>
+</div>
+
+<div class="row justify-content-center align-items-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="text-center">Employee Payroll Details</h4>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="payrollDetailsForm" (ngSubmit)="addPayrollDetails()">
+                    <!-- Earnings -->
+                    <div class="earnings">
+                        <h5>Earnings</h5>
+                        <div class="form-group">
+                            <label for="basicSalary">Basic Salary</label>
+                            <input type="number" id="basicSalary" formControlName="basicSalary" class="form-control"
+                                (input)="calculateTotalEarnings()">
+                            <div *ngIf="payrollDetailsForm.get('basicSalary')?.touched && payrollDetailsForm.get('basicSalary')?.errors"
+                                class="text-danger">
+                                Basic Salary must contain only numeric values.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="HRA">House Rent Allowance (HRA)</label>
+                            <input type="number" id="HRA" formControlName="HRA" class="form-control"
+                                (input)="calculateTotalEarnings()">
+                            <div *ngIf="payrollDetailsForm.get('HRA')?.touched && payrollDetailsForm.get('HRA')?.errors"
+                                class="text-danger">
+                                HRA must contain only numeric values.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="CityAllowance">City Allowances</label>
+                            <input type="number" id="CityAllowance" formControlName="CityAllowance" class="form-control"
+                                (input)="calculateTotalEarnings()">
+                            <div *ngIf="payrollDetailsForm.get('CityAllowance')?.touched && payrollDetailsForm.get('CityAllowance')?.errors"
+                                class="text-danger">
+                                City Allowance must contain only numeric values.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Con_Allowance">Convenience Allowances</label>
+                            <input type="number" id="Con_Allowance" formControlName="Con_Allowance" class="form-control"
+                                (input)="calculateTotalEarnings()">
+                            <div *ngIf="payrollDetailsForm.get('Con_Allowance')?.touched && payrollDetailsForm.get('Con_Allowance')?.errors"
+                                class="text-danger">
+                                Basic Salary must contain only numeric values.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Other">Other</label>
+                            <input type="number" id="Other" formControlName="Other" class="form-control"
+                                (input)="calculateTotalEarnings()">
+                            <div *ngIf="payrollDetailsForm.get('Other')?.touched && payrollDetailsForm.get('Other')?.errors"
+                                class="text-danger">
+                                This field must contain only numeric values.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Deductions -->
+                    <div class="deductions">
+                        <h5>Deductions</h5>
+                        <div class="form-group">
+                            <label>Disable Provident Fund</label><br>
+                            <label class="switch">
+                                <input type="checkbox" id="togglePF" (change)="toggleProvidentFund($event)">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="Provident_Fund">Provident Fund (P.F)</label>
+                            <input type="number" id="Provident_Fund" formControlName="Provident_Fund" class="form-control" [disabled]="isProvidentFundEnabled">
+                        </div>
+                        
+                        <!-- <div class="form-group">
+                            <label for="Provident_Fund">Provident Fund (P.F)</label>
+                            <input type="number" id="Provident_Fund" formControlName="Provident_Fund" class="form-control">
+                        </div> -->
+                        <div class="form-group">
+                            <label for="professionalTax">Professional Tax (P.Tax)</label>
+                            <select id="professionalTax" formControlName="Professional_Tax" class="form-control">
+                                <option value="110">Rs. 110 (Total Earnings: Rs. 10,000 - Rs. 14,999)</option>
+                                <option value="130">Rs. 130 (Total Earnings: Rs. 15,000 - Rs. 19,999)</option>
+                                <option value="150">Rs. 150 (Total Earnings: Rs. 20,000 or more)</option>
+                            </select>
+                            <div *ngIf="payrollDetailsForm.get('Professional_Tax')?.touched && payrollDetailsForm.get('Professional_Tax')?.errors" class="text-danger">
+                                This field must contain only numeric values.
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="ESI_Mediclaim">Employee State Insurance (ESI)</label>
+                            <input type="number" id="ESI_Mediclaim" formControlName="ESI_Mediclaim" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Total_Earnings">Total Earning</label>
+                        <input type="number" id="Total_Earnings" formControlName="Total_Earnings" class="form-control">
+                        <div *ngIf="payrollDetailsForm.get('Total_Earnings')?.touched && payrollDetailsForm.get('Total_Earnings')?.errors"
+                            class="text-danger">
+                            Total Earnings must contain only numeric values.
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                    <div class="overlay" *ngIf="showSpinner">
+                        <!-- Spinner container -->
+                        <div class="spinner-container">
+                            <!-- Your spinner HTML -->
+                            <div class="dot-spinner">
+                                <!-- Spinner dots -->
+                                <div class="dot-spinner__dot"></div>
+                                <div class="dot-spinner__dot"></div>
+                                <div class="dot-spinner__dot"></div>
+                                <div class="dot-spinner__dot"></div>
+                                <div class="dot-spinner__dot"></div>
+                                <div class="dot-spinner__dot"></div>
+                                <div class="dot-spinner__dot"></div>
+                                <div class="dot-spinner__dot"></div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -61,4 +61,7 @@ export class HrmsApiService {
   empdetails( payload: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/employeedetails`, payload);
   }
+  payrollDetails( payload: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/payroll`, payload);
+  }
 }  

@@ -12,11 +12,30 @@ export class MyProfileComponent implements OnInit {
   currentWorkingDays: number = 0;
   leaveBalance: number = 0;
   username: any;
+  profilePicture: string | ArrayBuffer | null = null;
 
   constructor(private http: HrmsApiService) { }
 
   ngOnInit(): void {
     this.fetchEmployeeDetails();
+  }
+
+   // Function to handle file selection
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+
+    // Check if a file is selected
+    if (file) {
+      // Read the file as a data URL
+      const reader: FileReader = new FileReader();
+      reader.readAsDataURL(file);
+
+      // When the file is loaded
+      reader.onload = () => {
+        // Set the profilePicture variable to the data URL of the selected image
+        this.profilePicture = reader.result;
+      };
+    }
   }
 
   fetchEmployeeDetails(): void {

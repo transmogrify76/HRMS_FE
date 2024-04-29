@@ -3,12 +3,15 @@
     <h4>Employee Details</h4>
   </div>
   <div class="employee-details-container">
-    <!-- Display employee details -->
-    <div *ngIf="employeeDetails" class="employee-details">
-      <div class="detail-item">
-        <span class="label">Username</span>
-        <span class="value">{{ this.username }}</span>
+    <!-- Profile picture -->
+    <div class="profile-picture-section">
+      <div class="profile-picture-container">
+        <input type="file" accept="image/*" (change)="onFileSelected($event)">
+        <img *ngIf="profilePicture" [src]="profilePicture" alt="Profile Picture" class="profile-picture">
       </div>
+    </div>
+    <!-- Employee details -->
+    <div *ngIf="employeeDetails" class="employee-details">
       <div class="detail-item">
         <span class="label">Full Name:</span>
         <span class="value">{{ employeeDetails.employee.firstName }} {{ employeeDetails.employee.lastName }}</span>
@@ -22,22 +25,22 @@
         <span class="value">{{ employeeDetails.employee.username }}</span>
       </div>
       <div class="detail-item">
-      <span class="label">Bank Account No:</span>
-      <span class="value">{{employeeDetails?.employee?.bankAccountNo}}</span>
-    </div>
-    <div class="detail-item">
-      <span class="label">Aadhar Card No:</span>
-      <span class="value">{{employeeDetails?.employee?.aadhaarNo}}</span>
-    </div>
-    <div class="detail-item">
-      <span class="label">IFSC No:</span>
-      <span class="value">{{employeeDetails?.employee?.IFSCno}}</span>
-    </div>
-    <div class="detail-item">
-      <span class="label">PAN No:</span>
-      <span class="value">{{employeeDetails?.employee?.panNo}}</span>
-    </div>
-    <div class="detail-item">
+        <span class="label">Bank Account No:</span>
+        <span class="value">{{employeeDetails?.employee?.bankAccountNo}}</span>
+      </div>
+      <div class="detail-item">
+        <span class="label">Aadhar Card No:</span>
+        <span class="value">{{employeeDetails?.employee?.aadhaarNo}}</span>
+      </div>
+      <div class="detail-item">
+        <span class="label">IFSC No:</span>
+        <span class="value">{{employeeDetails?.employee?.IFSCno}}</span>
+      </div>
+      <div class="detail-item">
+        <span class="label">PAN No:</span>
+        <span class="value">{{employeeDetails?.employee?.panNo}}</span>
+      </div>
+      <div class="detail-item">
         <span class="label">Joining Date:</span>
         <span class="value">{{ employeeDetails.employee.joiningDate }}</span>
       </div>
