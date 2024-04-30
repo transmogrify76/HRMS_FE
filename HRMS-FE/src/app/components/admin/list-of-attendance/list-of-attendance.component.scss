@@ -61,7 +61,7 @@
       }
     }
   }
-  .download-button {
+  .download-button , .download-all-button {
   background-color: #4CAF50; /* Green */
   border: none;
   color: white;
@@ -76,7 +76,7 @@
   border-radius: 8px;
 }
 
-.download-button:hover {
+.download-button:hover , .download-all-button:hover {
   background-color: #45a049; /* Darker green */
 }
 
