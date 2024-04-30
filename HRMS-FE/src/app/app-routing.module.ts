@@ -20,6 +20,8 @@ import { ForgotToMarkoutComponent } from './components/daily-attendance/forgot-t
 import { EmpDetailsComponent } from './components/emp-details/emp-details.component';
 import { UserDetailsComponent } from './components/admin/user-details/user-details.component';
 import { ListOfEmployeesComponent } from './components/admin/list-of-employees/list-of-employees.component';
+import { FetchSalaryComponent } from './components/fetch-salary/fetch-salary.component';
+import { PayslipDetailsComponent } from './components/payslip-details/payslip-details.component';
 
 
 const routes: Routes = [
@@ -76,19 +78,20 @@ const routes: Routes = [
   {
     path:'list-of-attendance',
     component:ListOfAttendanceComponent
-   }  ,
-   {
+  }  ,
+  {
     path:'register-employee',
     component: RegisterEmployeeComponent
-   }  ,
-   {
+  }  ,
+  
+  {
     path:'forgot-markin',
     component: ForgotMarkinComponent
-   }  ,
-   {
+  }  ,
+  {
     path:'forgot-markout',
     component:ForgotToMarkoutComponent
-   }  ,
+  }  ,
   {
 
     path: 'personalleave',
@@ -108,6 +111,16 @@ const routes: Routes = [
 
     path: 'list-of-employees',
     component: ListOfEmployeesComponent,
+  } , 
+  {
+
+    path: 'fetch-salary',
+    component: FetchSalaryComponent,
+  },
+  {
+
+    path: 'payslip-details',
+    component: PayslipDetailsComponent,
   }
 
 ];
