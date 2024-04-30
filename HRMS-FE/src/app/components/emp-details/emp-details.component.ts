@@ -32,6 +32,10 @@ export class EmpDetailsComponent {
   showSpinner: boolean = false;
   employeeDetails: any = null;
   empId: number | null = null;
+  acc:any |null = null
+  n:any|null
+  ifsc:any|null
+  bankAccountNo:any|null
 
   constructor(
     private formBuilder: FormBuilder, // Inject FormBuilder
@@ -39,12 +43,12 @@ export class EmpDetailsComponent {
     private hrmsService: HrmsApiService,
     public router: Router,
   ) {
-    // Initialize the form in the constructor
+ 
     this.empDetailsForm = this.formBuilder.group({
-      aadhaarNo: ['', [Validators.required, adhaarCardValidator()]], // Apply the custom validator
-      bankAccountNo: ['', [Validators.required, accountNumberValidator()]], 
+
+      bankAccountNo: [''], 
       IFSCno: ['', [Validators.required, Validators.pattern('[A-Za-z]{4}[0-9]{7}')]], // Example IFSC pattern, adjust as needed
-      panNo: ['', Validators.required]
+
     });
   }
 
@@ -68,6 +72,23 @@ export class EmpDetailsComponent {
       (employee: any) => {
         this.employeeDetails = employee;
         this.empId = this.employeeDetails.employee.empId;
+        console.log(this.employeeDetails)
+       
+        console.log(this.employeeDetails.employee.employeedetails)
+        if (this.employeeDetails.employee.employeedetails && this.employeeDetails.employee.employeedetails.length>0){
+          this.acc=this.employeeDetails.employee.employeedetails[0];
+          console.log(this.acc);
+          this.bankAccountNo=this.acc.bankAccountNo;
+          this.ifsc=this.acc.IFSCno
+          console.log(this.bankAccountNo);
+          console.log(this.ifsc) 
+
+        }
+        else{
+          this.bankAccountNo = null;
+          this.ifsc=null;
+        }
+
       },
       (error: any) => {
         console.error('Error fetching employee details:', error);

@@ -14,14 +14,14 @@
                     <form [formGroup]="empDetailsForm" (ngSubmit)="empdetails()">
                         <div class="form-group">
                             <label for="bankAccountNo">Bank Account Number</label>
-                            <input type="text" id="bankAccountNo" formControlName="bankAccountNo" class="form-control">
+                            <input type="text" id="bankAccountNo" [value]="this.bankAccountNo" class="form-control">
                             <div *ngIf="empDetailsForm.controls['bankAccountNo'].errors?.['invalidAccountNumber']" class="text-danger">
                               Bank Account Number must contain only numbers.
                             </div>
                           </div>
                           <div class="form-group">
                             <label for="IFSCno">IFSC Code</label>
-                            <input type="text" id="IFSCno" formControlName="IFSCno" class="form-control">
+                            <input type="text" id="IFSCno"  [value]="this.ifsc"  class="form-control">
                             <div *ngIf="empDetailsForm.controls['IFSCno'].invalid && (empDetailsForm.controls['IFSCno'].dirty || empDetailsForm.controls['IFSCno'].touched)" class="text-danger">
                               Please enter a valid IFSC code.
                             </div>
