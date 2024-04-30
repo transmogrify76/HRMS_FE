@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 
 function adhaarCardValidator(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
-    const isValid = /^\d{16}$/.test(control.value);
+    const isValid = /^\d{12}$/.test(control.value);
     return isValid ? null : { 'invalidAdhaarCard': { value: control.value } };
   };
 }
@@ -40,8 +40,12 @@ export class RegisterEmployeeComponent {
       aadhaarNo: ['', [Validators.required, adhaarCardValidator()]],
       panNo: ['', Validators.required],
       mobileNo: ['', [Validators.required, Validators.pattern('[0-9]{10}')]],
-      // bankAccountNo: ['', this.validateAccountNumber],
-      // IFSCno: ['', this.validateIFSC],
+      bloodGroup: [''],
+      confirmationData: [''],
+      emergencyNo: [''],
+      empIDNO: [''],
+      Permanent_Address: [''],
+      Present_Address: [''],
     });
   }
 
