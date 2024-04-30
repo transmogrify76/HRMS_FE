@@ -18,6 +18,7 @@ export class MyProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchEmployeeDetails();
+    this.calculateCurrentWorkingDays();
   }
 
    // Function to handle file selection

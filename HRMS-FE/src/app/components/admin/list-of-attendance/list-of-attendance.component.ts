@@ -89,7 +89,7 @@ export class ListOfAttendanceComponent implements OnInit {
       "July", "August", "September", "October", "November", "December"
     ];
   
-    const lastMonth = monthNames[new Date().getMonth() - 1];
+    const selectedMonth = monthNames[this.selectedMonth - 1]; // Adjust index
   
     let y = 20; // Initial y position for text
   
@@ -104,57 +104,139 @@ export class ListOfAttendanceComponent implements OnInit {
     doc.setFontSize(18);
     doc.setTextColor("#333"); // Dark gray
     doc.setFont("times", "normal");
-    doc.text(`Month: ${lastMonth}`, 105, y, { align: "center" });
+    doc.text(`Month: ${selectedMonth}`, 105, y, { align: "center" });
     y += 15;
   
     // Line
     doc.setLineWidth(0.5);
     doc.setDrawColor("#999"); // Light gray
-    doc.line(20, y, 190, y);
+    doc.line(0, y, 230, y);
     y += 10;
   
-    // Fetch data for all employees
-    this.hrmsApiService.getEmployees().subscribe(
-      (response: any) => {
-        const employeesData = response.employees;
-        employeesData.forEach((employee: any, index: number) => {
-          this.hrmsApiService.employeebyId(employee.empId).subscribe(
-            (employeeData: any) => {
-              const totalAttendance = this.calculateTotalAttendance(employeeData.employee.attendances);
+    // Fetch data for selected employee
+    this.hrmsApiService.employeebyId(this.selectedEmployee).subscribe(
+      (employeeData: any) => {
+        const totalAttendance = this.calculateTotalAttendance(employeeData.employee.attendances);
+        const weekdaysAttendance = this.calculateWeekdaysAttendance(employeeData.employee.attendances);
+        const weekendsAttendance = this.calculateWeekendsAttendance(employeeData.employee.attendances);
+
+        // Add border
+        doc.setDrawColor("#333"); // Dark gray
+        doc.setLineWidth(0.5);
+        doc.rect(20, y - 5, 170, 49, "S"); // S for "stroke"
   
-              // Add border
-              doc.setDrawColor("#333"); // Dark gray
-              doc.setLineWidth(0.5);
-              doc.rect(20, y - 5, 170, 35, "S"); // S for "stroke"
-  
-              // Employee details
-              doc.setFontSize(14);
-              doc.setTextColor("#2c3e50"); // Dark blue
-              doc.setFont("times", "bold");
-              doc.text(`Employee Name: ${employeeData.employee.username}`, 25, y);
-              y += 10;
-              doc.setTextColor("#e74c3c"); // Red
-              doc.setFont("times", "normal");
-              doc.text(`Total Attendance: ${totalAttendance} days`, 25, y);
-              y += 15;
-  
-              if (index === employeesData.length - 1) {
-                // Save PDF when all employees' data is added
-                doc.save('attendance_report.pdf');
-              }
-            },
-            (error: any) => {
-              console.error('Error fetching employee details:', error);
-            }
-          );
-        });
+        // Employee details
+        doc.setFontSize(14);
+        doc.setTextColor("#2c3e50"); // Dark blue
+        doc.setFont("times", "bold");
+        doc.text(`Employee Name: ${employeeData.employee.username}`, 25, y);
+        y += 10;
+        doc.setTextColor("#e74c3c"); // Red
+        doc.setFont("times", "normal");
+        doc.text(`Total Working Days: ${totalAttendance}`, 25, y); // Adjust here
+        y += 10;
+        doc.text(`Weekdays Present: ${weekdaysAttendance.present}`, 25, y);
+        y += 10;
+        doc.text(`Weekdays Absent: ${weekdaysAttendance.absent}`, 25, y);
+        y += 10;
+        doc.text(`Weekends (Sundays): ${weekendsAttendance}`, 25, y);
+        y += 15;
+
+        // Save PDF
+        doc.save('attendance_report.pdf');
       },
       (error: any) => {
-        console.error('Error fetching employees:', error);
+        console.error('Error fetching employee details:', error);
       }
     );
   }
-  
-  
-  
+
+
+  calculateWeekdaysAttendance(attendances: any[]): { present: number; absent: number } {
+    let present = 0;
+    let absent = 0;
+    attendances.forEach((attendance) => {
+      const checkInTimestamp = new Date(attendance.checkIn);
+      if (checkInTimestamp.getDay() !== 0) { // Exclude Sundays
+        if (attendance.checkOut !== null) {
+          present++;
+        } else {
+          absent++;
+        }
+      }
+    });
+    return { present, absent };
+  }
+
+  calculateWeekendsAttendance(attendances: any[]): number {
+    let weekends = 0;
+    attendances.forEach((attendance) => {
+      const checkInTimestamp = new Date(attendance.checkIn);
+      if (checkInTimestamp.getDay() === 0) { // Sundays
+        weekends++;
+      }
+    });
+    return weekends;
+  }
+downloadAllEmployeesPDF(): void {
+  const monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  // Initialize the PDF document
+  const doc = new jsPDF();
+
+  // Set initial y position for text
+  let y = 20;
+
+  // Set font styles
+  doc.setFont('helvetica', 'normal');
+
+  // Set font size for employee name
+  doc.setFontSize(16);
+
+  // Iterate over each employee
+  this.employees.forEach((employee, index) => {
+    // Fetch data for the current employee
+    this.hrmsApiService.employeebyId(employee.empId).subscribe(
+      (employeeData: any) => {
+        // Extract employee details
+        const employeeName = employeeData.employee.username;
+        const totalAttendance = this.calculateTotalAttendance(employeeData.employee.attendances);
+        const weekdaysAttendance = this.calculateWeekdaysAttendance(employeeData.employee.attendances);
+        const weekendsAttendance = this.calculateWeekendsAttendance(employeeData.employee.attendances);
+
+        // Set font size for attendance details
+        doc.setFontSize(12);
+
+        // Generate content for the current employee
+        const content = `
+          Employee Name: ${employeeName}
+          Total Working Days: ${totalAttendance}
+          Weekdays Present: ${weekdaysAttendance.present}
+          Weekdays Absent: ${weekdaysAttendance.absent}
+          Weekends (Sundays): ${weekendsAttendance}
+        `;
+
+        // Add content to the PDF document
+        doc.text(content, 10, y);
+        
+        // Add border around the content
+        doc.rect(8, y - 5, 190, 40);
+
+        // Increase y position for the next employee
+        y += 50; // Adjust as needed for spacing between employees
+
+        // If this is the last employee, save the PDF
+        if (index === this.employees.length - 1) {
+          doc.save('all_employees_attendance_report.pdf');
+        }
+      },
+      (error: any) => {
+        console.error('Error fetching employee details:', error);
+      }
+    );
+  });
+}
+
 }
