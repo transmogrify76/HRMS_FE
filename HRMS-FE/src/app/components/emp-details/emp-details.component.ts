@@ -58,12 +58,19 @@ export class EmpDetailsComponent implements OnInit {
           const bankAccountNo = lastEntry.bankAccountNo;
           const ifsc = lastEntry.IFSCno;
   
+          // Update form controls with new values
           if (bankAccountNo && ifsc) {
             this.empDetailsForm.patchValue({
               bankAccountNo: bankAccountNo,
               IFSCno: ifsc
             });
           }
+        } else {
+          // Reset form controls to empty values
+          this.empDetailsForm.patchValue({
+            bankAccountNo: '',
+            IFSCno: ''
+          });
         }
       },
       (error: any) => {
@@ -71,6 +78,7 @@ export class EmpDetailsComponent implements OnInit {
       }
     );
   }
+  
   
 
   empdetails(): void {
