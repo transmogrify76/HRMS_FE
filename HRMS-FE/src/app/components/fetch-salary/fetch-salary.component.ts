@@ -95,7 +95,7 @@ export class FetchSalaryComponent implements OnInit {
 
     const updatedPayrollData = {
         ...this.payrollDetailsForm.value,
-        Provident_Fund: providentFundValue,
+        Provident_Fund:parseInt( providentFundValue),
         ESI_Mediclaim: esiValue
     };
 
