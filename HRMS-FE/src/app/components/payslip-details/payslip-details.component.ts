@@ -19,10 +19,12 @@ export class PayslipDetailsComponent {
   payrollDetailsForm!: FormGroup;
   payrollData:any;
 
+
+
   months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-  // Subscriptions
   private formValueChangesSubscription: Subscription | undefined;
+  workingDays1: any;
 
   constructor(private hrmsService: HrmsApiService, private fb: FormBuilder) {}
 
@@ -97,11 +99,11 @@ export class PayslipDetailsComponent {
   onWorkingDaysChange(workingDaysInputValue: any): void {
     // Parse the input value to a number
     const workingDays = parseFloat(workingDaysInputValue);
+    this.workingDays1 = parseInt(workingDaysInputValue);
   
     // Check if workingDays is a valid number
     if (!isNaN(workingDays)) {
-      // Calculate total earnings for each component based on working days
-      // const formValue = this.payrollDetailsForm.value;
+
       const perDaybasicSalary = this.payrollData.basicSalary / 30 ;
       const perDayHRA = this.payrollData.HRA / 30 || 0;
       const perDayCityAllowance = this.payrollData.CityAllowance / 30 || 0;
@@ -122,8 +124,8 @@ export class PayslipDetailsComponent {
         Con_Allowance: totalEarningsConAllowance,
         Other: totalEarningsOther,
         Total_Earnings: totalEarningsBasicSalary + totalEarningsHRA + totalEarningsCityAllowance + totalEarningsConAllowance + totalEarningsOther ,
-        Provident_Fund:   this.payrollData.Provident_Fund !== null ?    (totalEarningsBasicSalary + totalEarningsHRA) * 0.24 : "N/A",
-        Total_Deductions:   ((totalEarningsBasicSalary + totalEarningsHRA) * 0.24) + this.payrollData.Professional_Tax + this.payrollData.ESI_Mediclaim,
+        Provident_Fund: this.payrollData.Provident_Fund !== null ?    (totalEarningsBasicSalary + totalEarningsHRA) * 0.24 : "N/A",
+        Total_Deductions:((totalEarningsBasicSalary + totalEarningsHRA) * 0.24) + this.payrollData.Professional_Tax + this.payrollData.ESI_Mediclaim,
         Amount_Transferred:(totalEarningsBasicSalary + totalEarningsHRA + totalEarningsCityAllowance + totalEarningsConAllowance + totalEarningsOther) - ( ((totalEarningsBasicSalary + totalEarningsHRA) * 0.24) + this.payrollData.Professional_Tax + this.payrollData.ESI_Mediclaim)
       });
     } else {
@@ -136,6 +138,7 @@ export class PayslipDetailsComponent {
       });
     }
   }
+
 
   calculateTotalEarnings(): void {
     const formValue = this.payrollDetailsForm.value;
@@ -162,6 +165,28 @@ export class PayslipDetailsComponent {
         this.calculateTotalEarnings();
       });
     }
+  }
+  submit(){
+    const payload = {
+      basicSalary: this.payrollDetailsForm.value.basicSalary,
+      HRA: this.payrollDetailsForm.value.HRA,
+      CityAllowance: this.payrollDetailsForm.value.CityAllowance,
+      Con_Allowance: this.payrollDetailsForm.value.Con_Allowance,
+      Other: this.payrollDetailsForm.value.Other,
+      Total_Earnings: this.payrollDetailsForm.value.Total_Earnings,
+      workingDays: this.workingDays1,
+      employee: this.empId,
+      month:this.selectedMonth
+    };
+    console.log(payload)
+    this.hrmsService.Payrolldetails(payload).subscribe(
+      (data: any) => {   
+      },
+      (error: any) => {
+        console.error('Error occurred while uploading details:', error);
+        },
+
+    );
   }
 
 }

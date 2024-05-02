@@ -110,7 +110,7 @@
                 <button class="btn" [ngClass]="isReadOnly ? 'btn-secondary' : 'btn-danger'" (click)="toggleEditMode()">
                     {{ isReadOnly ? 'Edit' : 'Cancel' }}
                 </button>                
-                <button class="btn btn-success mx-2">Update Salary</button>
+                <button class="btn btn-success mx-2"(click)="submit()">Submit</button>
             </div>
         </div>        
     </div>
