@@ -61,4 +61,16 @@ export class HrmsApiService {
   empdetails( payload: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/employeedetails`, payload);
   }
+  payrollDetails( payload: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/payroll`, payload);
+  }
+  updatePayroll(empId: number , payload: any): Observable<any> {
+    return this.http.put<any>(`${environment.apiUrl}/payroll/${empId} `, payload);
+  }
+  allAttendancebyMonth(month:number):Observable<any>{
+    return this.http.get<any>(`${environment.apiUrl}/attendance/${month} `)
+  }
+  Payrolldetails(payload: any):Observable<any> {
+    return this.http.post(`${environment.apiUrl}/payrolldetails`, payload);
+  }
 }  

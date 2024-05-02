@@ -29,7 +29,10 @@ import { ForgotMarkinComponent } from './components/daily-attendance/forgot-mark
 import { ForgotToMarkoutComponent } from './components/daily-attendance/forgot-to-markout/forgot-to-markout.component';
 import { EmpDetailsComponent } from './components/emp-details/emp-details.component';
 import { UserDetailsComponent } from './components/admin/user-details/user-details.component';
-import {SubtractHoursPipe } from    'src/app/time.pipe'
+import {SubtractHoursPipe } from    'src/app/time.pipe';
+import { FetchSalaryComponent } from './components/fetch-salary/fetch-salary.component';
+import { PayslipDetailsComponent } from './components/payslip-details/payslip-details.component'
+import { AttendanceAdminComponent } from './attendance-admin/attendance-admin.component';
 
 
 
@@ -49,14 +52,16 @@ import {SubtractHoursPipe } from    'src/app/time.pipe'
     ListOfEmployeesComponent,
     EmployeeDetailsComponent,
     ListOfAttendanceComponent,
-    
+    AttendanceAdminComponent,
     LeavesForEmployeeComponent,
       RegisterEmployeeComponent,
       ForgotMarkinComponent,
       ForgotToMarkoutComponent,
       EmpDetailsComponent,
       UserDetailsComponent,
-      SubtractHoursPipe
+      SubtractHoursPipe,
+      FetchSalaryComponent,
+      PayslipDetailsComponent
 
 
   ],

@@ -1,50 +1,34 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormControl, ValidatorFn, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HrmsApiService } from 'src/app/services/hrms-api.service';
 import { ToastrService } from 'ngx-toastr';
 
-function adhaarCardValidator(): ValidatorFn {
-  return (control: AbstractControl): { [key: string]: any } | null => {
-    const isValid = /^\d{16}$/.test(control.value);
-    return isValid ? null : { 'invalidAdhaarCard': { value: control.value } };
-  };
-}
-function accountNumberValidator(): ValidatorFn {
-  return (control: AbstractControl): { [key: string]: any } | null => {
-    const isValid = /^\d+$/.test(control.value); // This regex ensures that the value contains only digits
-    return isValid ? null : { 'invalidAccountNumber': { value: control.value } };
-  };
-}
 @Component({
   selector: 'app-emp-details',
   templateUrl: './emp-details.component.html',
   styleUrls: ['./emp-details.component.scss']
 })
-export class EmpDetailsComponent {
-
-  empDetailsForm: FormGroup; // Define FormGroup
-
-  // Define other variables
+export class EmpDetailsComponent implements OnInit {
+  empDetailsForm: FormGroup;
   employees: any;
-  selectedEmployee!: number;
+  selectedEmployee: number = 0;
   submitted: boolean = false;
   showSpinner: boolean = false;
   employeeDetails: any = null;
   empId: number | null = null;
+  bankAccountNo: any = null;
+  ifsc: any = null;
 
   constructor(
-    private formBuilder: FormBuilder, // Inject FormBuilder
+    private formBuilder: FormBuilder,
     private toastr: ToastrService,
     private hrmsService: HrmsApiService,
     public router: Router,
   ) {
-    // Initialize the form in the constructor
     this.empDetailsForm = this.formBuilder.group({
-      adhaarCardNo: ['', [Validators.required, adhaarCardValidator()]], // Apply the custom validator
-      bankAccountNo: ['', [Validators.required, accountNumberValidator()]], 
-      IFSCno: ['', [Validators.required, Validators.pattern('[A-Za-z]{4}[0-9]{7}')]], // Example IFSC pattern, adjust as needed
-      panNo: ['', Validators.required]
+      bankAccountNo: [''],
+      IFSCno: ['', [Validators.required, Validators.pattern('[A-Za-z]{4}[0-9]{7}')]],
     });
   }
 
@@ -68,22 +52,42 @@ export class EmpDetailsComponent {
       (employee: any) => {
         this.employeeDetails = employee;
         this.empId = this.employeeDetails.employee.empId;
+  
+        if (this.employeeDetails.employee.employeedetails && this.employeeDetails.employee.employeedetails.length > 0) {
+          const lastEntry = this.employeeDetails.employee.employeedetails[this.employeeDetails.employee.employeedetails.length - 1];
+          const bankAccountNo = lastEntry.bankAccountNo;
+          const ifsc = lastEntry.IFSCno;
+  
+          // Update form controls with new values
+          if (bankAccountNo && ifsc) {
+            this.empDetailsForm.patchValue({
+              bankAccountNo: bankAccountNo,
+              IFSCno: ifsc
+            });
+          }
+        } else {
+          // Reset form controls to empty values
+          this.empDetailsForm.patchValue({
+            bankAccountNo: '',
+            IFSCno: ''
+          });
+        }
       },
       (error: any) => {
         console.error('Error fetching employee details:', error);
       }
     );
   }
+  
+  
 
-  // Function to submit employee details
-  empdetails() {
-    console.log('=====================================================================' , this.empId);
-    
+  empdetails(): void {
     this.submitted = true;
-    // if (this.empDetailsForm.invalid) {
-    //   this.toastr.error('Please fill all the required fields correctly.', 'Invalid Input', { positionClass: 'toast-top-center' }); 
-    //   return;
-    // }
+
+    if (this.empDetailsForm.invalid) {
+      this.toastr.error('Please fill all the required fields correctly.', 'Invalid Input', { positionClass: 'toast-top-center' });
+      return;
+    }
 
     this.showSpinner = true;
     const payload = {
@@ -102,10 +106,9 @@ export class EmpDetailsComponent {
       },
       (error: any) => {
         console.error('Error occurred while uploading details:', error);
-        this.toastr.error('Upload failed',  'Error', { positionClass: 'toast-top-center' }); 
+        this.toastr.error('Upload failed', 'Error', { positionClass: 'toast-top-center' });
       },
       () => {
-        // Hide spinner after 2 seconds and navigate to home
         setTimeout(() => {
           this.showSpinner = false;
           this.router.navigate(['/home']);

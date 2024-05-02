@@ -35,11 +35,10 @@ export class ListOfEmployeesComponent implements OnInit {
         console.log('Employee Details:', this.employeeDetails);
         // Fetch Aadhar Card number from the last item in the employeedetails array
         if (this.employeeDetails.employee.employeedetails.length > 0) {
-          this.employeeDetails.employee.adhaarCardNo = this.employeeDetails.employee.employeedetails[this.employeeDetails.employee.employeedetails.length - 1].adhaarCardNo;
           // Fetch bank account number and IFSC code similarly
           this.employeeDetails.employee.bankAccountNo = this.employeeDetails.employee.employeedetails[this.employeeDetails.employee.employeedetails.length - 1].bankAccountNo;
           this.employeeDetails.employee.IFSCno = this.employeeDetails.employee.employeedetails[this.employeeDetails.employee.employeedetails.length - 1].IFSCno;
-          this.employeeDetails.employee.panNo = this.employeeDetails.employee.employeedetails[this.employeeDetails.employee.employeedetails.length - 1].panNo;
+          
         }
       },
       (error: any) => {

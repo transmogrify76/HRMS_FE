@@ -24,6 +24,7 @@
     "bootstrap": "^5.3.3",
     "jquery": "^3.7.1",
     "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.2",
     "ngx-bootstrap": "^11.0.2",
     "ngx-toastr": "^18.0.0",
     "pdfjs-dist": "^4.1.392",

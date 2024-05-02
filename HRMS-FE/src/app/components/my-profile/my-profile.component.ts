@@ -11,30 +11,41 @@ export class MyProfileComponent implements OnInit {
   empId: number = 0;
   currentWorkingDays: number = 0;
   leaveBalance: number = 0;
-  username:any;
+  username: any;
+  profilePicture: string | ArrayBuffer | null = null;
 
   constructor(private http: HrmsApiService) { }
 
   ngOnInit(): void {
     this.fetchEmployeeDetails();
+    this.calculateCurrentWorkingDays();
+  }
+
+   // Function to handle file selection
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+
+    // Check if a file is selected
+    if (file) {
+      // Read the file as a data URL
+      const reader: FileReader = new FileReader();
+      reader.readAsDataURL(file);
+
+      // When the file is loaded
+      reader.onload = () => {
+        // Set the profilePicture variable to the data URL of the selected image
+        this.profilePicture = reader.result;
+      };
+    }
   }
 
   fetchEmployeeDetails(): void {
     this.empId = Number(sessionStorage.getItem('empId'));
-    this.username=sessionStorage.getItem('username')
+    this.username = sessionStorage.getItem('username');
 
     this.http.getEmployeeDetails(this.empId).subscribe(
       (employee) => {
         this.employeeDetails = employee;
-        console.log('====-----====', this.employeeDetails.employee);
-
-        // Extract Aadhar card number, bank account number, and IFSC code from the last element of employeedetails array
-        const lastIndex = this.employeeDetails.employee.employeedetails.length - 1;
-        const lastEmployeeDetail = this.employeeDetails.employee.employeedetails[lastIndex];
-        this.employeeDetails.employee.adhaarCardNo = lastEmployeeDetail.adhaarCardNo;
-        this.employeeDetails.employee.bankAccountNo = lastEmployeeDetail.bankAccountNo;
-        this.employeeDetails.employee.IFSCno = lastEmployeeDetail.IFSCno;
-        this.employeeDetails.employee.panNo = lastEmployeeDetail.panNo;
 
         // Call function to calculate current working days
         this.calculateCurrentWorkingDays();
@@ -59,10 +70,33 @@ export class MyProfileComponent implements OnInit {
   calculateWorkingDays(joiningDate: string, currentDate: string): number {
     const joinDate = new Date(joiningDate);
     const endDate = new Date(currentDate);
+
+    // Calculate time difference in milliseconds
     const timeDifference = endDate.getTime() - joinDate.getTime();
+
+    // Convert milliseconds to days
     const daysDifference = Math.floor(timeDifference / (1000 * 3600 * 24));
 
-    return daysDifference;
+    // Calculate number of weekend days
+    const weekends = this.countWeekendDays(joinDate, endDate);
+
+    // Subtract weekends and holidays from total days to get working days
+    const workingDays = daysDifference;
+
+    return workingDays;
+  }
+
+  countWeekendDays(startDate: Date, endDate: Date): number {
+    let count = 0;
+    const currentDate = new Date(startDate);
+
+    while (currentDate <= endDate) {
+      if (currentDate.getDay() === 0 || currentDate.getDay() === 6) {
+        count++;
+      }
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+    return count;
   }
 
   creditLeaves(numLeaves: number): void {
