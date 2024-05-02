@@ -48,7 +48,7 @@ export class LoginComponent {
           setTimeout(() => {
             this.showSpinner = false;
           }, 1000);
-          this.toastr.error('Login Failed', '', {
+          this.toastr.error('Invalid username or password Login Failed', '', {
             positionClass: 'toast-bottom-center'
           });
         },

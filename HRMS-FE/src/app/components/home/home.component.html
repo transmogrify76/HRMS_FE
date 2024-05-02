@@ -75,28 +75,28 @@
 
     <!-- Offcanvas sidebar -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" [ngClass]="{'show': showOffcanvas}">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasRightLabel">List of holidays</h5>
-            <button type="button" class="btn-close" (click)="toggleOffcanvas()" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <!-- Holiday table -->
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Occasion</th>
-                        <th>Date</th>
-                        <th>Day</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let holiday of holidays">
-                        <td>{{ holiday.occasion }}</td>
-                        <td>{{ holiday.date }}</td>
-                        <td>{{ holiday.day }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
-</div>
+      <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasRightLabel">List of holidays</h5>
+          <button type="button" class="btn-close" (click)="toggleOffcanvas()" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+          <!-- Holiday table -->
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th>Occasion</th>
+                      <th>Date</th>
+                      <th>Day</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let holiday of holidays">
+                      <td>{{ holiday.occasion }}</td>
+                      <td>{{ holiday.date }}</td>
+                      <td>{{ holiday.day }}</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+  
