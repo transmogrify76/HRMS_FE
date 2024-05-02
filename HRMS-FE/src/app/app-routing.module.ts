@@ -22,6 +22,7 @@ import { UserDetailsComponent } from './components/admin/user-details/user-detai
 import { ListOfEmployeesComponent } from './components/admin/list-of-employees/list-of-employees.component';
 import { FetchSalaryComponent } from './components/fetch-salary/fetch-salary.component';
 import { PayslipDetailsComponent } from './components/payslip-details/payslip-details.component';
+import { AttendanceAdminComponent } from './attendance-admin/attendance-admin.component';
 
 
 const routes: Routes = [
@@ -121,7 +122,11 @@ const routes: Routes = [
 
     path: 'payslip-details',
     component: PayslipDetailsComponent,
-  }
+  },
+{
+  path: 'attendance-admin',
+  component:AttendanceAdminComponent
+}
 
 ];
 

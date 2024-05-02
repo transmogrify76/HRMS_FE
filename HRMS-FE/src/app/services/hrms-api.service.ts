@@ -67,4 +67,7 @@ export class HrmsApiService {
   updatePayroll(empId: number , payload: any): Observable<any> {
     return this.http.put<any>(`${environment.apiUrl}/payroll/${empId} `, payload);
   }
+  allAttendancebyMonth(month:number):Observable<any>{
+    return this.http.get<any>(`${environment.apiUrl}/attendance/${month} `)
+  }
 }  
