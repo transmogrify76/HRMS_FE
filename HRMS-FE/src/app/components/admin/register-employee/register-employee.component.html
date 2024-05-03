@@ -38,15 +38,21 @@
                             <label for="Permanent_Address">Permanent Address</label>
                             <input type="text" id="Permanent_Address" formControlName="Permanent_Address" placeholder="Permanent Address " class="form-control">
                           </div>
+                          <div class="form-group">
                         <div class="form-group">
                             <label for="aadhaarNo">Aadhaar Card Number</label>
                             <input type="text" id="aadhaarNo" formControlName="aadhaarNo" placeholder="Aadhaar Card Number" class="form-control">
-                            <div *ngIf="signUpForm.controls['aadhaarNo'].errors?.['invalidAdhaarCard']" class="text-danger">
-                              Aadhaar Card Number must be a 16-digit number.
+                            
+                            <!-- Error message for invalid Aadhaar card number -->
+                            <div *ngIf="signUpForm.get('aadhaarNo')?.invalid && (signUpForm.get('aadhaarNo')?.touched || signUpForm.get('aadhaarNo')?.dirty)" class="text-danger">
+                              <div *ngIf="signUpForm.get('aadhaarNo')?.hasError('invalidAdhaarCard')">
+                                Aadhaar Card Number must be a 12-digit number.
+                              </div>
                             </div>
-                          </div>                                                 
+                          </div>
+                                                                       
                           <div class="form-group">
-                            <label for="panNo">PAN no.</label>
+                            <label for="panNo">PAN number</label>
                             <input type="text" id="panNo" formControlName="panNo" placeholder="Pan card no." class="form-control">
                             <div *ngIf="signUpForm.controls['panNo'].invalid && (signUpForm.controls['panNo'].dirty || signUpForm.controls['panNo'].touched)" class="text-danger">
                               PAN number is required.
@@ -79,6 +85,7 @@
                             <input type="email" id="email" formControlName="email" placeholder="Email" class="form-control">
                         </div>
                         <div class="form-group">
+                          <label for="bloodGroup">Blood Group</label>
                           <label for="bloodGroup">bloodGroup</label>
                           <input type="bloodGroup" id="bloodGroup" formControlName="bloodGroup" placeholder="bloodGroup" class="form-control">
                       </div>
@@ -117,8 +124,9 @@
                               </div>
                             </div>
                           </div>
-                    </form>
+                    
                 </div>
+              </form>
             </div>
         </div>
     </div>

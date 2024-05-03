@@ -68,3 +68,10 @@ input:checked + .slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
+
+.bg-gradient-primary {
+    background: linear-gradient(to right, #15395f, #38879b);
+    text-align: center;
+    color:white;
+  }
+

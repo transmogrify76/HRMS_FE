@@ -1,28 +1,32 @@
-<div class="select-container">
-    <span class="select-label">Select Employee:</span>
-    <select [(ngModel)]="selectedEmployee" (change)="fetchEmployeeData()" class="col-md-2">
-        <option disabled selected>Select Employee</option>
-        <option *ngFor="let user of employees" [value]="user.empId">{{ user.username }}</option>
-    </select>
-
-    <span class="select-label">Select Month:</span>
-    <select [(ngModel)]="selectedMonth"  class="col-md-2">
-        <option disabled selected>Select Month</option>
-        <option *ngFor="let month of months" [value]="month">{{ month }}</option>
-    </select> 
-
-
-    <div class="col-md-1 d-flex">
-        <label for="workingDays" class="working-days-label">Enter Days:</label>
-        <input type="number" id="workingDays" formControlName="workingDays" class="working-days-input" #workingDaysInput (blur)="onWorkingDaysChange(workingDaysInput.value)">
+<div class="select-container row align-items-center">
+    <div class="col-md-4 d-flex align-items-center">
+        <span class="select-label">Select Employee:</span>
+        <select [(ngModel)]="selectedEmployee" (change)="fetchEmployeeData()" class="form-control">
+            <option disabled selected>Select Employee</option>
+            <option *ngFor="let user of employees" [value]="user.empId">{{ user.username }}</option>
+        </select>
     </div>
-</div> 
+
+    <div class="col-md-4 d-flex align-items-center">
+        <span class="select-label">Select Month:</span>
+        <select [(ngModel)]="selectedMonth" class="form-control">
+            <option disabled selected>Select Month</option>
+            <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+        </select>
+    </div>
+
+    <div class="col-md-4 d-flex align-items-center">
+        <span class="select-label">Enter Days:</span>
+        <input type="number" id="workingDays" formControlName="workingDays" class="form-control working-days-input" #workingDaysInput (blur)="onWorkingDaysChange(workingDaysInput.value)">
+    </div>
+</div>
+
 
 <div class="row justify-content-center align-items-center" [formGroup]="payrollDetailsForm">
     <!-- Earnings Card -->
-    <div class="col-md-5">
+    <div class="col-md-6">
         <div class="card">
-            <div class="card-header bg-primary text-white">
+            <div class="card-header bg-gradient-primary">
                 <h4 class="text-center">Earnings</h4>
             </div>
             <div class="card-body">
@@ -60,7 +64,7 @@
     </div>
 
     <!-- Deductions Card -->
-    <div class="col-md-5">
+    <div class="col-md-6">
         <div class="card">
             <div class="card-header bg-danger text-white">
                 <h4 class="text-center">Deductions</h4>
@@ -88,6 +92,9 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
 
         <!-- Additional Card -->
 <div class="col-md-5">
@@ -113,7 +120,5 @@
                 <button class="btn btn-success mx-2"(click)="submit()">Submit</button>
             </div>
         </div>        
-    </div>
 
-</div>
 
