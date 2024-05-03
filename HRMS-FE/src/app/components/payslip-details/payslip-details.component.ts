@@ -175,6 +175,10 @@ export class PayslipDetailsComponent {
       Other: this.payrollDetailsForm.value.Other,
       Total_Earnings: this.payrollDetailsForm.value.Total_Earnings,
       workingDays: this.workingDays1,
+      Provident_Fund: parseInt(this.payrollDetailsForm.value.Provident_Fund),
+      Professional_Tax: parseInt(this.payrollDetailsForm.value.Professional_Tax),
+      ESI_Mediclaim: parseInt(this.payrollDetailsForm.value.ESI_Mediclaim),
+      deduction:this.payrollDetailsForm.value.Total_Deductions,
       employee: this.empId,
       month:this.selectedMonth
     };
