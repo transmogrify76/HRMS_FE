@@ -1,4 +1,4 @@
-<div class="select-container row align-items-center">
+<div class="select-container row align-items-center" style="max-width: 100%;">
     <div class="col-md-4 d-flex align-items-center">
         <span class="select-label">Select Employee:</span>
         <select [(ngModel)]="selectedEmployee" (change)="fetchEmployeeData()" class="form-control">
@@ -22,7 +22,7 @@
 </div>
 
 
-<div class="row justify-content-center align-items-center" [formGroup]="payrollDetailsForm">
+<div class="row justify-content-center align-items-center" [formGroup]="payrollDetailsForm" style="max-width: 100%;">
     <!-- Earnings Card -->
     <div class="col-md-6">
         <div class="card">
