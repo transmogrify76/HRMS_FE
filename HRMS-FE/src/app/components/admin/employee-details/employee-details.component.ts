@@ -100,16 +100,16 @@ export class EmployeeDetailsComponent implements OnInit {
   
             // Display toaster message based on the selectedLeaveStatus
             if (selectedLeaveStatus === 'APPROVED') {
-              this.toastr.success('Leave approved successfully', 'Success', { positionClass: 'toast-top-center' });
+              this.toastr.success('Leave approved successfully', '', { positionClass: 'toast-top-center' });
             } else if (selectedLeaveStatus === 'REJECTED') {
-              this.toastr.error('Leave rejected', 'Error', { positionClass: 'toast-top-center' });
+              this.toastr.error('Leave rejected', '', { positionClass: 'toast-top-center' });
             }
             this.router.navigateByUrl('/home');
           },
           (error: any) => {
             console.error('Error updating leave status:', error);
             this.showSpinner = false;
-            this.toastr.error('Error updating leave status', 'Error', { positionClass: 'toast-top-center' });
+            this.toastr.error('Error updating leave status', '', { positionClass: 'toast-top-center' });
             this.router.navigateByUrl('/home');
           }
         );

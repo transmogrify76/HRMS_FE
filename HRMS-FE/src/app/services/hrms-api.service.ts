@@ -70,4 +70,7 @@ export class HrmsApiService {
   allAttendancebyMonth(month:number):Observable<any>{
     return this.http.get<any>(`${environment.apiUrl}/attendance/${month} `)
   }
+  Payrolldetails(payload: any):Observable<any> {
+    return this.http.post(`${environment.apiUrl}/payrolldetails`, payload);
+  }
 }  

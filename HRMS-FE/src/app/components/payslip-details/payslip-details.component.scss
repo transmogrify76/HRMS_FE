@@ -1,0 +1,97 @@
+.select-container .select-label {
+    margin-right: 10px;
+    margin-top: 2%;
+}
+
+.select-container select,
+.select-container input[type="number"] {
+    width: 60%;
+    margin-top: 5%;
+}
+
+.working-days-input {
+    margin-left: 5px;
+}
+.select-label{
+    color:aliceblue;
+    font-weight: 600;
+}
+.card {
+    margin-bottom: 20px;
+}
+
+.card-header h4 {
+    margin: 0;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="number"],
+input[type="text"] {
+    width: 90%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.btn {
+    margin-top: 30px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.btn-success:hover,
+.btn-danger:hover,
+.btn-secondary:hover {
+    opacity: 0.8;
+}
+
+.working-days-input {
+    margin-left: 10px;
+}
+.col-md-6 {
+    flex: 0 0 auto;
+    width: 36%;
+    margin-top: 3%;
+}
+.col-md-5{
+    margin-left: 40%;
+    width:30%;
+}
+.btn{
+    margin-bottom: 10%;
+}
+.bg-gradient-primary {
+    background: linear-gradient(to right, #15395f, #38879b);
+    text-align: center;
+    color:white;
+  }
