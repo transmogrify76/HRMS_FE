@@ -1,68 +1,53 @@
-/* attendance-admin.component.scss */
-
-/* Style for the select dropdown */
+/* CSS Styles */
 .custom-select {
-    width: 200px;
-    padding: 8px;
-    font-size: 16px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    background-color: #fff;
-    cursor: pointer;
-  }
-  
-  .custom-select:focus {
-    outline: none;
-    border-color: #4d90fe;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-  }
-  
-  /* Style for the employee attendance section */
-  .employee-section {
-    margin-top: 20px;
-  }
-  
-  /* Style for the employee details */
-  .employee-details {
-    margin-bottom: 10px;
-  }
-  
-  .employee-name {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  /* Style for the attendance list */
-  .attendance-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  /* Style for each attendance item */
-  .attendance-item {
-    margin-bottom: 5px;
-  }
-  
-  /* Style for the attendance details */
-  .attendance-details {
-    font-size: 14px;
-    color: #666;
-  }
-  
-  /* Style for the check-in/out time */
-  .check-time {
-    font-weight: bold;
-  }
-  
-  /* Style for the attendance status */
-  .attendance-status {
-    font-style: italic;
-  }
-  
-  /* Hover effect for attendance list items */
-  .attendance-item:hover {
-    background-color: #f5f5f5;
-    border-radius: 4px;
-  }
-  
+  width: 200px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.attendance-employee {
+  margin-bottom: 20px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  color: #333;
+}
+
+td {
+  background-color: #fff;
+  color: #333;
+}
+
+h2 {
+  color: #333;
+}
+
+h3 {
+  color: #444;
+  margin-bottom: 5px;
+}
+
+p {
+  color: #666;
+  margin-top: 5px;
+}
+.ReportB{
+  color: red;
+}

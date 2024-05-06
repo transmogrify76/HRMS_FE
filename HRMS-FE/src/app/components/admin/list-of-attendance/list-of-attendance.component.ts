@@ -136,13 +136,13 @@ export class ListOfAttendanceComponent implements OnInit {
         y += 10;
         doc.setTextColor("#e74c3c"); // Red
         doc.setFont("times", "normal");
-        doc.text(`Total Working Days: ${totalAttendance} + ${weekendsAttendance} = ${totalWorkingDays}`, 25, y); // Adjust here
+        doc.text(`Total Working Days:  ${totalWorkingDays}`, 25, y); // Adjust here
         y += 10;
         doc.text(`Weekdays Present: ${weekdaysAttendance.present}`, 25, y);
         y += 10;
         doc.text(`Weekdays Absent: ${weekdaysAttendance.absent}`, 25, y);
         y += 10;
-        doc.text(`Weekends (Sundays): ${weekendsAttendance}`, 25, y);
+        doc.text(`Holidays (Sundays Included): ${weekendsAttendance}`, 25, y);
         y += 15;
   
         // Save PDF
@@ -180,14 +180,14 @@ export class ListOfAttendanceComponent implements OnInit {
       1: 4,  // February
       2: 5,  // March
       3: 4,  // April
-      4: 5,  // May
+      4: 4,  // May
       5: 5,  // June
       6: 4,  // July
-      7: 5,  // August
+      7: 4,  // August
       8: 5,  // September
-      9: 10,  // October
+      9: 4,  // October
       10: 4, // November
-      11: 6, // December
+      11: 5, // December
     };
   
     // Get the hardcoded Sundays count for the given month
@@ -195,78 +195,118 @@ export class ListOfAttendanceComponent implements OnInit {
   
     return sundaysCount;
   }
+  calculateHolidaysCount(month: number): number {
+    // Define an object to store hardcoded holidays count for each month
+    const hardcodedHolidays: { [key: number]: number } = {
+      0: 2,  // January
+      1: 0,  // February
+      2: 1,  // March
+      3: 0,  // April
+      4: 1,  // May
+      5: 0,  // June
+      6: 0,  // July
+      7: 1,  // August
+      8: 0,  // September
+      9: 6,  // October
+      10: 0, // November
+      11: 1, // December
+    };
   
-  downloadAllEmployeesPDF(): void {
-    const monthNames = [
-      "January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December"
-    ];
+    // Get the hardcoded holidays count for the given month
+    const holidaysCount = hardcodedHolidays[month];
   
-    // Initialize the PDF document
-    const doc = new jsPDF();
-  
-    // Set initial y position for text
-    let y = 20;
-  
-    // Set font styles
-    doc.setFont('helvetica', 'normal');
-  
-    // Set font size for employee name
-    doc.setFontSize(16);
-  
-    // Iterate over each employee
-    this.employees.forEach((employee, index) => {
-      // Fetch data for the current employee
-      this.hrmsApiService.employeebyId(employee.empId).subscribe(
-        (employeeData: any) => {
-          // Extract employee details
-          const employeeName = employeeData.employee.username;
-          const totalAttendance = this.calculateTotalAttendance(employeeData.employee.attendances);
-          const weekdaysAttendance = this.calculateWeekdaysAttendance(employeeData.employee.attendances);
-          const monthIndex = (new Date()).getMonth(); // Get current month index
-          const weekendsAttendance = this.calculateWeekendsAttendance(monthIndex); // Calculate weekends for the current month
-  
-          // Set font size for attendance details
-          doc.setFontSize(12);
-          const totalWorkingDays = weekdaysAttendance.present + weekendsAttendance;
-  
-          // Generate content for the current employee
-          const content = `
-            Employee Name: ${employeeName}
-            Total Working Days: ${weekdaysAttendance.present} + ${weekendsAttendance} = ${totalWorkingDays}
-            Weekdays Present: ${weekdaysAttendance.present}
-            Holidays (Sundays Included): ${weekendsAttendance}
-          `;
-  
-          // Check if content exceeds the page height
-          const pageHeight = doc.internal.pageSize.height;
-          const lineHeight = doc.getTextDimensions(content).h;
-          if (y + lineHeight > pageHeight - 20) {
-            // If content exceeds the page height, add a new page
-            doc.addPage();
-            y = 20; // Reset y position for the new page
-          }
-  
-          // Add content to the PDF document
-          doc.text(content, 10, y);
-  
-          // Add border around the content
-          doc.rect(8, y - 5, 190, 40);
-  
-          // Increase y position for the next employee
-          y += 50; // Adjust as needed for spacing between employees
-  
-          // If this is the last employee, save the PDF
-          if (index === this.employees.length - 1) {
-            doc.save('all_employees_attendance_report.pdf');
-          }
-        },
-        (error: any) => {
-          console.error('Error fetching employee details:', error);
-        }
-      );
-    });
+    return holidaysCount;
   }
   
   
+  
+  downloadAllEmployeesPDF(): void {
+    const monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    // Initialize the PDF document
+    const doc = new jsPDF();
+
+    // Set initial y position for text
+    let y = 20;
+
+    // Define column widths for the table
+    const columnWidths = [60, 40, 40, 40, 30]; // Adjust as needed
+
+    // Define table header
+    const headers = [
+        { label: 'Employee Name', width: columnWidths[0] },
+        { label: 'TWD', width: columnWidths[1] },
+        { label: 'PD', width: columnWidths[2] },
+        { label: 'WO', width: columnWidths[3] },
+        { label: 'Holidays', width: columnWidths[4] }
+    ];
+
+    // Set font size for table header
+    doc.setFontSize(12);
+
+    // Generate table header
+    headers.forEach((header, index) => {
+        doc.setFillColor(210, 210, 210); // Light gray
+        doc.rect(10, y, header.width, 10, 'F'); // Draw filled rectangle as header background
+        doc.setTextColor(0, 0, 0); // Black
+        doc.text(header.label, 15, y + 8); // Center text vertically
+    });
+
+    y += 10; // Move to next row
+
+    // Iterate over each employee
+    this.employees.forEach((employee, index) => {
+        // Fetch data for the current employee
+        this.hrmsApiService.employeebyId(employee.empId).subscribe(
+            (employeeData: any) => {
+                // Extract employee details
+                const employeeName = employeeData.employee.username;
+                const weekdaysAttendance = this.calculateWeekdaysAttendance(employeeData.employee.attendances);
+                const monthIndex = (new Date()).getMonth(); // Get current month index
+                const weekendsAttendance = this.calculateWeekendsAttendance(monthIndex); // Calculate weekends for the current month
+                const holidaysCount = this.calculateHolidaysCount(monthIndex);
+                const totalWorkingDays = weekdaysAttendance.present + weekendsAttendance + holidaysCount;
+
+                // Generate table row for the current employee
+                const rowData = [
+                    { value: employeeName, width: columnWidths[0] },
+                    { value: totalWorkingDays.toString(), width: columnWidths[1] },
+                    { value: weekdaysAttendance.present.toString(), width: columnWidths[2] },
+                    { value: weekendsAttendance.toString(), width: columnWidths[3] },
+                    { value: holidaysCount.toString(), width: columnWidths[4] }
+                ];
+
+                // Set font size for table body
+                doc.setFontSize(10);
+
+                // Generate table row
+                rowData.forEach((data, index) => {
+                    doc.text(data.value, 15 + index * (columnWidths[index] + 5), y + 8); // Center text vertically
+                });
+
+                y += 10; // Move to next row
+
+                // Check if content exceeds the page height
+                const pageHeight = doc.internal.pageSize.height;
+                if (y > pageHeight - 20) {
+                    // If content exceeds the page height, add a new page
+                    doc.addPage();
+                    y = 20; // Reset y position for the new page
+                }
+
+                // If this is the last employee, save the PDF
+                if (index === this.employees.length - 1) {
+                    doc.save('all_employees_attendance_report.pdf');
+                }
+            },
+            (error: any) => {
+                console.error('Error fetching employee details:', error);
+            }
+        );
+    });
+}
+
 }

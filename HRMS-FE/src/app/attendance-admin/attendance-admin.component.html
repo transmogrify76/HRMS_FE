@@ -1,3 +1,4 @@
+<!-- HTML Template -->
 <h2>Select Month</h2>
 <select [(ngModel)]="selectedMonth" (change)="fetchEmployeeData()" class="custom-select" aria-label="select-month">
   <option disabled selected>Select Month</option>
@@ -16,12 +17,26 @@
 </select>
 
 <h2>Employee Attendance</h2>
-<div *ngFor="let employee of employees">
+<div *ngFor="let employee of employees" class="attendance-employee">
   <h3>{{ employee.firstName }} {{ employee.lastName }}</h3>
   <p>Attendance Days: {{ countAttendanceDays(employee) }}</p>
-  <ul>
-    <li *ngFor="let attendance of employee.attendances">
-      {{ attendance.checkIn }} - {{ attendance.checkOut }} (Status: {{ attendance.attStatus }})
-    </li>
-  </ul>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Check In</th>
+        <th>Check Out</th>
+        <th>Check In Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let attendance of employee.attendances">
+        <td>{{ attendance.checkIn | date:'h:mm a' }}</td>
+        <td>{{ attendance.checkOut | date:'h:mm a' }}</td>
+        <td>{{ attendance.checkIn | date:'yyyy-MM-dd' }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+
+<!-- Add Download Button for Attendance Report PDF -->
+<button (click)="downloadPDF()">Download Attendance Report PDF</button>
