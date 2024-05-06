@@ -26,6 +26,8 @@ export class AttendanceAdminComponent {
   selectedMonth!: number;
   attendanceDetails: any;
   employeeDetails: any;
+  leavedetails:any;
+
   hardcodedWorkingDays: { [key: number]: number } = {
     1: 31,  // January
     2: 29,  // February
@@ -57,102 +59,108 @@ export class AttendanceAdminComponent {
   };
 
   hardcodedWeekends: { [key: number]: number } = {
-    0: 4,  // January
-    1: 4,  // February
-    2: 5,  // March
-    3: 4,  // April
-    4: 4,  // May
-    5: 5,  // June
-    6: 4,  // July
-    7: 4,  // August
-    8: 5,  // September
-    9: 4,  // October
-    10: 4, // November
-    11: 5, // December
+    1: 4,  // January
+    2: 4,  // February
+    3: 5,  // March
+    4: 4,  // April
+    5: 4,  // May
+    6: 5,  // June
+    7: 4,  // July
+    8: 4,  // August
+    9: 5,  // September
+    10: 4,  // October
+    11: 4, // November
+    12: 5, // December
   };
 
   constructor(private hrmsApiService: HrmsApiService) {}
 
-  fetchEmployeeData(): void {
+  fetchEmployeeData(){
+    this.hrmsApiService.allLeavebyMonth(this.selectedMonth).subscribe(
+      (response:any) =>{
+        this.leavedetails = response;
+        console.log(this.leavedetails)
+      }
+    )
     this.hrmsApiService.allAttendancebyMonth(this.selectedMonth).subscribe(
-      (response: any[]) => {
+      (response: any) => {
         this.attendanceDetails = response;
-        console.log('Employee attendance details:', this.attendanceDetails);
-
+        console.log('Employee attendance details:',  this.attendanceDetails );
+        
         this.employees = this.attendanceDetails.map((item: any) => {
           return {
             empId: item.employee.empId,
             firstName: item.employee.firstName,
             lastName: item.employee.lastName,
             attendances: item.attendances
-          } as EmployeeData; // Convert to EmployeeData
+          };
         });
       },
       (error: any) => {
         console.error('Error fetching employee details:', error);
       }
     );
+  
   }
 
   countAttendanceDays(employee: EmployeeData): number {
     return employee.attendances.length;
   }
-
   downloadPDF(): void {
     const doc = new jsPDF();
-
-    // Add content to the PDF
     doc.text('Employee Attendance Report', 105, 10, { align: 'center' });
     doc.text(`Selected Month: ${this.getMonthName(this.selectedMonth)}`, 105, 20, { align: 'center' });
 
-    let y = 30; // Initial y position for the table
+    let y = 30; 
 
-    // Define column widths for the table
-    const columnWidths = [55, 30, 30, 30, 30]; // Adjust as needed
+    const columnWidths = [50, 40, 30, 25, 25, 25,25]; // Updated for all columns 
 
-    // Define table header
     const headers = [
-        { label: 'Employee Name', width: columnWidths[0] },
-        { label: 'PD', width: columnWidths[1] },
-        { label: 'Holidays', width: columnWidths[2] },
-        { label: 'WO', width: columnWidths[3] },
-        { label: 'AD', width: columnWidths[4] }
+        { label: 'Emp Name', width: columnWidths[0] },
+        { label: 'P', width: columnWidths[1] },
+        { label: 'H', width: columnWidths[2] },
+        { label: 'Wo', width: columnWidths[3] },
+        { label: 'Ab', width: columnWidths[4] },
+        { label: 'Pe', width: columnWidths[5] },
+        { label: 'Tw', width: columnWidths[5] }
     ];
 
-    // Set font size for table header
     doc.setFontSize(12);
 
-    // Generate table header
     headers.forEach((header, index) => {
-        doc.text(header.label, 10 + index * (columnWidths[index] + 5), y + 8); // Center text vertically
+        doc.text(header.label, 10 + index * (columnWidths[index] + 5), y + 8); 
     });
 
-    y += 10; // Move to next row
+    y += 10; 
 
-    // Iterate over each employee
     this.employees.forEach((employee, index) => {
-        // Extract employee details
-        const employeeName = `${employee.firstName} ${employee.lastName}`;
-
-        // Use hardcoded arrays for calculation
-        const presentDays = this.countAttendanceDays(employee); // Count of present days
+        const presentDays = this.countAttendanceDays(employee); 
         const holidaysCount = this.hardcodedHolidays[this.selectedMonth];
         const weekendsAttendance = this.hardcodedWeekends[this.selectedMonth];
         const totalDays = this.hardcodedWorkingDays[this.selectedMonth];
 
-        // Calculate week offs
-        const weekOffs = totalDays - (presentDays + holidaysCount + weekendsAttendance);
-
-        // Calculate absent days
+        const weekOffs = weekendsAttendance;
         const absentDays = totalDays - (presentDays + holidaysCount + weekOffs);
 
-        // Generate table row for the current employee
+        const leaveDetails = this.leavedetails.find((details: any) => details.employee.empId === employee.empId);
+        let totalPendingLeaveDuration = 0;
+    if (leaveDetails) {
+        leaveDetails.leave.forEach((leave: any) => {
+            if (leave.leaveStatus === 'PENDING') {
+                totalPendingLeaveDuration += leave.duration || 0;
+            }
+        });
+    }
+    const pendingLeaves=totalPendingLeaveDuration;
+        const total = (presentDays+holidaysCount+weekOffs)
         const rowData = [
-            { value: employeeName, width: columnWidths[0] },
+            { value: `${employee.firstName} ${employee.lastName}`, width: columnWidths[0] },
             { value: presentDays.toString(), width: columnWidths[1] },
             { value: holidaysCount.toString(), width: columnWidths[2] },
-            { value: absentDays.toString(), width: columnWidths[3] }, // Switched 'AD' with 'WO'
-            { value: weekOffs.toString(), width: columnWidths[4] } // Switched 'WO' with 'AD'
+            { value: weekOffs.toString(), width: columnWidths[3] },
+            { value: absentDays.toString(), width: columnWidths[4] },
+            { value: pendingLeaves.toString(), width: columnWidths[5] },
+            { value: total.toString(), width: columnWidths[5] }
         ];
 
         // Set font size for table body
@@ -167,8 +175,11 @@ export class AttendanceAdminComponent {
     });
 
     // Save the PDF
-    doc.save('all_employees_attendance_report.pdf');
+    doc.save('employees_attendance_report.pdf');
 }
+
+
+
 
   getMonthName(month: number): string {
     const monthNames = [
