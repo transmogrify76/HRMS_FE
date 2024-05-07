@@ -1,78 +1,78 @@
-<div>
-  <label for="month" style="color: whitesmoke; margin-right: 2rem;">Select Month: </label>
-  <select id="month" [(ngModel)]="selectedmonth" (change)="filter()" (click)="showcaseEarnings()">
-    <option *ngFor="let month of months" [value]="month">{{ month }}</option>
-  </select>
+<div class="container">
+  <div class="header">
+    <h2>Select Month:</h2>
+    <select id="month" [(ngModel)]="selectedmonth" (change)="filter()" (click)="showcaseEarnings()">
+      <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+    </select>
+  </div>
+
+  <div class="payslip-container" *ngIf="filterdata">
+    <div class="company-details">
+      <div class="company-logo">
+        <img src="../../../assets/transmogrify logo.jpg" alt="Company Logo">
+      </div>
+      <div class="company-address">
+        <p>Company Name: Transmogrify Global Private Limited</p>
+        <p>Email: tgwbin@gmail.com</p>
+      </div>
+    </div>
+
+    <div class="employee">
+      <div class="employee-details">
+        <h3>Employee Details</h3>
+        <p>Employee Name: {{ this.employee?.firstName }} {{this.employee?.lastName}}</p>
+        <p>Employee ID: {{ this.employee?.empIDNO }}</p>
+        <p>Date of Joining: {{ this.employee?.joiningDate }}</p>
+        <p>PAN: {{ this.employee?.panNo }}</p>
+        <p>Standard Days: 30</p>
+      </div>
+
+      <div class="employee-address-details">
+        <h3>Address & Bank Details</h3>
+        <p>Present Address: {{ this.employee?.Present_Address ? this.employee?.Present_Address : 'Error retrieving address'}}</p>
+        <p>Permanent Address: {{ this.employee?.Permanent_Address ? this.employee?.Permanent_Address : 'Error retrieving address'}}</p>
+        <p>Date of Joining: {{ this.employee?.joiningDate }}</p>
+        <p>Mobile Number: {{ this.employee?.mobileNo }}</p>
+        <p>IFSC Code: {{this.employee?.role?.roleId}}</p>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="section earnings">
+        <h3>Earnings</h3>
+        <ul>
+          <li>Basic Salary: {{ this.filterdata?.basicSalary }}</li>
+          <li>HRA: {{ this.filterdata?.HRA }}</li>
+          <li>City Allowance: {{ this.filterdata?.CityAllowance }}</li>
+          <li>Convenience Allowance: {{ this.filterdata?.Con_Allowance }}</li>
+          <li>Other: {{ this.filterdata?.Other }}</li>
+          <li>Total Earnings: {{ this.filterdata?.Total_Earnings }}</li>
+        </ul>
+      </div>
+
+      <div class="section deductions">
+        <h3>Deductions</h3>
+        <ul>
+          <li>Provident Fund: {{ this.filterdata?.Provident_Fund }}</li>
+          <li>Professional Tax: {{ this.filterdata?.Professional_Tax }}</li>
+          <li>ESI/Mediclaim: {{ this.filterdata?.ESI_Mediclaim }}</li>
+          <li>Other Deductions: {{ this.filterdata?.otherdeduction }}</li>
+          <li>Total Deductions: {{ this.filterdata?.totaldeduction }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="net-payable">
+      <h3>Amount Payable</h3>
+      <p>Net Payable: {{ this.filterdata?.transferred_amount }}</p>
+    </div>
+
+    <div class="footer">
+      <p>Registered Office: Unit No 10ES6, 10th floor, EAST TOWER, MANI CASADONA IT BUILDING, International Financial Hub(CBD), Newtown, Kolkata, Chakpachuria, West Bengal 700156</p>
+      <p>Visit our Official Website: <a href="https://transmogriffy.com/">Transmogrify Global Private Limited</a></p>
+      <p>Disclaimer: This is a computer-generated document and does not require a signature.</p>
+    </div>
+  </div>
+
+  <button (click)="downloadPdf()">Download Payslip</button>
 </div>
-
-
-<div class="payslip-container" *ngIf="filterdata" id="payslip-container">
-  <div class="company-details">
-    <div class="company-logo">
-      <img src="../../../assets/transmogrify logo.jpg" alt="Company Logo">
-    </div>
-    <div class="company-address">
-      <p>Company Name: Transmogrify Global Private Limited</p>
-      <p>Email: tgwbin@gmail.com</p>
-    </div>
-  </div>
-
-<div class="employee">
-  <div class="employee-details">
-    <h3>Employee Details</h3>
-    <p>Employee Name: {{ this.employee?.firstName }} {{this.employee?.lastName}}</p>
-    <p>Employee ID: {{ this.employee?.empIDNO }}</p>
-    <p>Date of Joining : {{ this.employee?.joiningDate }}</p>
-    <p>PAN : {{ this.employee?.panNo }}</p>
-    <p>Standard Days : 30</p>
-  </div>
-
-  <div class="employee-address-details">
-    <h3>Address & Bank Details</h3>
-    <p>Present Address: {{ this.employee?.Present_Address ? this.employee?.Present_Address : 'Error retreiving address'}}</p>
-    <p>Permanent Address: {{ this.employee?.Permanent_Address ? this.employee?.Permanent_Address : 'Error retreiving address'}}</p>
-    <p>Date of Joining : {{ this.employee?.joiningDate }}</p>
-    <p>Mobile Number : {{ this.employee?.mobileNo }}</p>
-    <p>IFSC Code : {{this.employee?.role?.roleId}}</p>
-  </div>
-</div>
-
-  <div class="content">
-    <div class="section earnings">
-      <h3>Earnings</h3>
-      <ul>
-        <li>Basic Salary: {{ this.filterdata?.basicSalary }}</li>
-        <li>HRA: {{ this.filterdata?.HRA }}</li>
-        <li>City Allowance: {{ this.filterdata?.CityAllowance }}</li>
-        <li>Convenience Allowance: {{ this.filterdata?.Con_Allowance }}</li>
-        <li>Other: {{ this.filterdata?.Other }}</li>
-        <li>Total Earnings: {{ this.filterdata?.Total_Earnings }}</li>
-      </ul>
-    </div>
-
-    <div class="section deductions">
-      <h3>Deductions</h3>
-      <ul>
-        <li>Provident Fund: {{ this.filterdata?.Provident_Fund }}</li>
-        <li>Professional Tax: {{ this.filterdata?.Professional_Tax }}</li>
-        <li>ESI/Mediclaim: {{ this.filterdata?.ESI_Mediclaim }}</li>
-        <li>Other Deductions: {{ this.filterdata?.otherdeduction }}</li>
-        <li>Total Deductions: {{ this.filterdata?.totaldeduction }}</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="net-payable">
-    <h3>Amount Payable</h3>
-    <p>Net Payable: {{ this.filterdata?.transferred_amount }}</p>
-  </div>
-
-  <div class="footer">
-    <p>Registered Office: Unit No 10ES6, 10th floor, EAST TOWER, MANI CASADONA IT BUILDING, International Finalcial Hub(CBD), Newtown, Kolkata, Chakpachuria, West Bengal 700156</p>
-    <p>Visit our Official Website: <a href="https://transmogriffy.com/">Transmogriffy Global Private Limited</a></p>
-    <p>Disclaimer: This is a computer-generated document and does not require a signature.</p>
-  </div>
-</div>
-
-
-<button (click)="downloadPdf()"> Download payslip</button>
