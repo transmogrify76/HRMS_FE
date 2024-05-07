@@ -1,0 +1,68 @@
+<div>
+    <label for="month">Select Month:</label>
+    <select id="month" [(ngModel)]="selectedmonth" (change)="filter()">
+      <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+    </select>
+  </div>
+  
+  <div *ngIf="filterdata">
+    <form>
+      <div>
+        <label for="CityAllowance">City Allowance:</label>
+        <input type="text" id="CityAllowance" name="CityAllowance" [(ngModel)]="filterdata.CityAllowance" disabled>
+      </div>
+      <div>
+        <label for="Con_Allowance">Conveyance Allowance:</label>
+        <input type="text" id="Con_Allowance" name="Con_Allowance" [(ngModel)]="filterdata.Con_Allowance" disabled>
+      </div>
+      <div>
+        <label for="ESI_Mediclaim">ESI Mediclaim:</label>
+        <input type="text" id="ESI_Mediclaim" name="ESI_Mediclaim" [(ngModel)]="filterdata.ESI_Mediclaim" disabled>
+      </div>
+      <div>
+        <label for="HRA">HRA:</label>
+        <input type="text" id="HRA" name="HRA" [(ngModel)]="filterdata.HRA" disabled>
+      </div>
+      <div>
+        <label for="Other">Other:</label>
+        <input type="text" id="Other" name="Other" [(ngModel)]="filterdata.Other" disabled>
+      </div>
+      <div>
+        <label for="Professional_Tax">Professional Tax:</label>
+        <input type="text" id="Professional_Tax" name="Professional_Tax" [(ngModel)]="filterdata.Professional_Tax" disabled>
+      </div>
+      <div>
+        <label for="Provident_Fund">Provident Fund:</label>
+        <input type="text" id="Provident_Fund" name="Provident_Fund" [(ngModel)]="filterdata.Provident_Fund" disabled>
+      </div>
+      <div>
+        <label for="Total_Earnings">Total Earnings:</label>
+        <input type="text" id="Total_Earnings" name="Total_Earnings" [(ngModel)]="filterdata.Total_Earnings" disabled>
+      </div>
+      <div>
+        <label for="basicSalary">Basic Salary:</label>
+        <input type="text" id="basicSalary" name="basicSalary" [(ngModel)]="filterdata.basicSalary" disabled>
+      </div>
+      <div>
+        <label for="month">Month:</label>
+        <input type="text" id="month" name="month" [(ngModel)]="filterdata.month" disabled>
+      </div>
+      <div>
+        <label for="otherdeduction">Other Deduction:</label>
+        <input type="text" id="otherdeduction" name="otherdeduction" [(ngModel)]="filterdata.otherdeduction" disabled>
+      </div>
+      <div>
+        <label for="totaldeduction">Total Deduction:</label>
+        <input type="text" id="totaldeduction" name="totaldeduction" [(ngModel)]="filterdata.totaldeduction" disabled>
+      </div>
+      <div>
+        <label for="transferred_amount">Transferred Amount:</label>
+        <input type="text" id="transferred_amount" name="transferred_amount" [(ngModel)]="filterdata.transferred_amount" disabled>
+      </div>
+      <div>
+        <label for="workingDays">Working Days:</label>
+        <input type="text" id="workingDays" name="workingDays" [(ngModel)]="filterdata.workingDays" disabled>
+      </div>
+    </form>
+  </div>
+  
