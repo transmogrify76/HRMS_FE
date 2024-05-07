@@ -1,6 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HrmsApiService } from 'src/app/services/hrms-api.service';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+
+
+
 
 @Component({
   selector: 'app-emp-payrolls',
@@ -10,6 +15,7 @@ import { HrmsApiService } from 'src/app/services/hrms-api.service';
 export class EmpPayrollsComponent {
   
   employeeDetails: any = null;
+  employee: any;
   empId:any;
   filterdata:any;
   months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -17,6 +23,9 @@ export class EmpPayrollsComponent {
   filterdata1:any;
   payrollDetailsForm!: FormGroup;
 
+
+  @ViewChild('content') content!: ElementRef;
+  
   constructor(
     private hrmsApiService: HrmsApiService,
     private fb: FormBuilder
@@ -45,9 +54,7 @@ export class EmpPayrollsComponent {
   }
 
 
-  showcaseEarnings():void {
-    console.log('function calelledddff');
-    
+  showcaseEarnings():void {    
     const formValue = this.filterdata;
     const otherdeduction = formValue.otherdeduction == 0 ? 'N/A' : formValue.otherdeduction  ;
     const Provident_Fund = formValue.Provident_Fund == 0 ? 'N/A' : formValue.Provident_Fund  ;
@@ -68,7 +75,8 @@ export class EmpPayrollsComponent {
     this.hrmsApiService.employeebyId(this.empId).subscribe(
       (employee: any) => {
         this.employeeDetails = employee.employee.payrolldetails;
-        console.log('Employee details:', this.employeeDetails);
+        this.employee = employee.employee;
+        
       },
       (error: any) => {
         console.error('Error fetching employee details:', error);
@@ -79,7 +87,20 @@ export class EmpPayrollsComponent {
     if(this.selectedmonth){
       this.filterdata1=this.employeeDetails.filter((data: { month: any; }) => data.month == this.selectedmonth)
       this.filterdata=this.filterdata1[0];
-      console.log('---oooo-----',this.filterdata)
     }
   }
+
+  downloadPdf() {
+    const content = document.getElementById('payslip-container')!;
+  
+    html2canvas(content).then((canvas: HTMLCanvasElement) => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const imgWidth = 210; // A4 width in mm
+      const imgHeight = canvas.height * imgWidth / canvas.width;
+      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+      pdf.save('payslip.pdf');
+    });
+  }  
+  
 }
