@@ -15,14 +15,14 @@
         </select>
     </div>
 
-    <div class="col-md-4 d-flex align-items-center">
+    <div class="col-md-4 d-flex align-items-center" [formGroup]="payrollDetailsForm">
         <span class="select-label">Enter Days:</span>
         <input type="number" id="workingDays" formControlName="workingDays" class="form-control working-days-input" #workingDaysInput (blur)="onWorkingDaysChange(workingDaysInput.value)">
     </div>
 </div>
 
 
-<div class="row justify-content-center align-items-center" [formGroup]="payrollDetailsForm" style="max-width: 100%;">
+<form class="row justify-content-center align-items-center" [formGroup]="payrollDetailsForm" style="max-width: 100%;">
     <!-- Earnings Card -->
     <div class="col-md-6">
         <div class="card">
@@ -87,30 +87,37 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="Total_Deductions">Total Deductions</label>
-                    <input type="number" id="Total_Deductions" formControlName="Total_Deductions" class="form-control"  >
+                    <label for="otherdeduction">Others (If any)</label>
+                    <input type="text" id="otherdeduction" formControlName="otherdeduction" class="form-control" (change)="calculateTotalDeductionOnOthers(otherDeductionValue.value)" #otherDeductionValue>
+                </div>
+
+                <div class="form-group">
+                    <label for="totaldeduction">Total Deductions</label>
+                    <input type="number" id="totaldeduction" formControlName="totaldeduction" class="form-control"  >
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
-        <!-- Additional Card -->
-<div class="col-md-5">
-    <div class="card">
-        <div class="card-header bg-success text-white">
-            <h4 class="text-center">Amount to be Transferred</h4>
-        </div>
-        <div class="card-body">
-            <!-- Form field for amount to be transferred -->
-            <div class="form-group">
-                <label for="Amount_Transferred">Amount to be Transferred</label>
-                <input type="number" id="Amount_Transferred" formControlName="Amount_Transferred" class="form-control">
+    <!-- Additional Card -->
+    <div class="col-md-5">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h4 class="text-center">Amount to be Transferred</h4>
+            </div>
+            <div class="card-body">
+                <!-- Form field for amount to be transferred -->
+                <div class="form-group">
+                    <label for="transferred_amount">Payable Amount</label>
+                    <input type="number" id="transferred_amount" formControlName="transferred_amount" class="form-control">
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>
+
+
 
         <div class="d-flex justify-content-center">
             <div class="">

@@ -17,6 +17,7 @@ export class PayslipComponent implements OnInit, OnDestroy {
   employees: any;
   empId: number | undefined;
   totalEarnings: number = 0;
+  selectedProfessionalTax: string = '';
   providentFund:number = 0;
   professionalTax: number = 0;
   isProvidentFundEnabled: boolean = false;
@@ -40,7 +41,8 @@ export class PayslipComponent implements OnInit, OnDestroy {
         Total_Earnings: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
         Provident_Fund: [''],
         Professional_Tax: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
-        ESI_Mediclaim: ['']
+        ESI_Mediclaim: [''],
+        deduction: ['', [Validators.required, Validators.pattern]]
     });
   
     this.formValueChangesSubscription = this.payrollDetailsForm.valueChanges.subscribe(() => {
@@ -105,6 +107,8 @@ export class PayslipComponent implements OnInit, OnDestroy {
     const HRA = parseFloat(this.payrollDetailsForm.value.HRA) || 0;
     
     const newProvidentFund = (basicSalary + HRA) * 0.24;
+    console.log('=== pffffffffffff' , newProvidentFund);
+    
     
     if (newProvidentFund !== this.providentFund) {
       this.providentFund = newProvidentFund;
@@ -114,6 +118,48 @@ export class PayslipComponent implements OnInit, OnDestroy {
       });
     }
   }
+
+  // Calculate_deduction(): void {
+  //   const formValue = this.payrollDetailsForm.value;
+    
+  //   // Get the selected Professional Tax value
+  //   const providentFund = parseInt(formValue.Provident_Fund);
+  //   const professionalTaxValue = parseInt(this.selectedProfessionalTax);
+  //   console.log('typeeeeeof' , typeof(professionalTaxValue));
+    
+  //   const esiMediclaim = parseInt(formValue.ESI_Mediclaim);
+
+
+  //   // Calculate total deductions
+  //   const deduction = providentFund +
+  //                     professionalTaxValue +
+  //                     esiMediclaim;
+  //                     console.log('deductionssssssssssssssssss' , deduction , '------====' , professionalTaxValue);
+                      
+  //   // Update deduction in the form
+  //   this.payrollDetailsForm.patchValue({
+  //     deduction: deduction
+  //   });
+  // }
+
+  Calculate_deduction(): void {
+    const formValue = this.payrollDetailsForm.value;
+  
+    // Get the selected Professional Tax value
+    const providentFund = formValue.Provident_Fund ? parseInt(formValue.Provident_Fund) : 0;
+    const professionalTaxValue = parseInt(this.selectedProfessionalTax);
+    const esiMediclaim = formValue.ESI_Mediclaim ? parseInt(formValue.ESI_Mediclaim) : 0;
+  
+    // Calculate total deductions
+    const deduction = providentFund + professionalTaxValue + esiMediclaim;
+    console.log('deductionssssssssssssssssss' , deduction , '------====' , professionalTaxValue);
+  
+    // Update deduction in the form
+    this.payrollDetailsForm.patchValue({
+      deduction: deduction
+    });
+  }
+  
 
   fetchEmployees(): void {
     this.hrmsService.getEmployees().subscribe(
@@ -148,6 +194,7 @@ export class PayslipComponent implements OnInit, OnDestroy {
       Provident_Fund: this.payrollDetailsForm.value.Provident_Fund,
       Professional_Tax: parseInt(this.payrollDetailsForm.value.Professional_Tax),
       ESI_Mediclaim: parseInt(this.payrollDetailsForm.value.ESI_Mediclaim),
+      deduction: parseInt(this.payrollDetailsForm.value.deduction),
       employee: this.empId
     };
 

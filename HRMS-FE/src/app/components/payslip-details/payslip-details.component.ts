@@ -41,6 +41,7 @@ export class PayslipDetailsComponent {
 
   initForm() {
     this.payrollDetailsForm = this.fb.group({
+      workingDays: [null],
       basicSalary: [null],
       HRA: [null],
       CityAllowance: [null],
@@ -50,8 +51,9 @@ export class PayslipDetailsComponent {
       Provident_Fund: [null],
       Professional_Tax: [null],
       ESI_Mediclaim: [null],
-      Total_Deductions: [null],
-      Amount_Transferred: [null],
+      totaldeduction: [null],
+      transferred_amount: [null],
+      otherdeduction: [null],
     });
   }
   fetchEmployeeData(): void {
@@ -68,10 +70,11 @@ export class PayslipDetailsComponent {
           Con_Allowance:   this.payrollData.Con_Allowance,
           Other:   this.payrollData.Other,
           Total_Earnings:   this.payrollData.Total_Earnings,
+          otherdeduction:   this.payrollData.otherdeduction ? this.payrollData.otherdeduction : 0,
           Provident_Fund:   this.payrollData.Provident_Fund !== null ?   this.payrollData.Provident_Fund : "N/A",
           Professional_Tax:   this.payrollData.Professional_Tax,
           ESI_Mediclaim:   this.payrollData.ESI_Mediclaim !== null ?   this.payrollData.ESI_Mediclaim : "N/A",
-          Total_Deductions:   this.payrollData.Provident_Fund + this.payrollData.Professional_Tax + this.payrollData.ESI_Mediclaim,
+          totaldeduction:   this.payrollData.deduction,
         });
       },
       (error: any) => {
@@ -98,7 +101,7 @@ export class PayslipDetailsComponent {
 
   onWorkingDaysChange(workingDaysInputValue: any): void {
     // Parse the input value to a number
-    const workingDays = parseFloat(workingDaysInputValue);
+    const workingDays = parseInt(workingDaysInputValue);
     this.workingDays1 = parseInt(workingDaysInputValue);
   
     // Check if workingDays is a valid number
@@ -118,16 +121,19 @@ export class PayslipDetailsComponent {
   
       // Update the form fields with calculated total earnings
       this.payrollDetailsForm.patchValue({
-        basicSalary: totalEarningsBasicSalary,
-        HRA: totalEarningsHRA,
-        CityAllowance: totalEarningsCityAllowance,
-        Con_Allowance: totalEarningsConAllowance,
-        Other: totalEarningsOther,
-        Total_Earnings: totalEarningsBasicSalary + totalEarningsHRA + totalEarningsCityAllowance + totalEarningsConAllowance + totalEarningsOther ,
+        basicSalary: totalEarningsBasicSalary.toFixed(2),
+        HRA: totalEarningsHRA.toFixed(2),
+        CityAllowance: totalEarningsCityAllowance.toFixed(2),
+        Con_Allowance: totalEarningsConAllowance.toFixed(2),
+        Other: totalEarningsOther.toFixed(2),
+        Total_Earnings: (totalEarningsBasicSalary + totalEarningsHRA + totalEarningsCityAllowance + totalEarningsConAllowance + totalEarningsOther).toFixed(2) ,
         Provident_Fund: this.payrollData.Provident_Fund !== null ?    (totalEarningsBasicSalary + totalEarningsHRA) * 0.24 : "N/A",
-        Total_Deductions:((totalEarningsBasicSalary + totalEarningsHRA) * 0.24) + this.payrollData.Professional_Tax + this.payrollData.ESI_Mediclaim,
-        Amount_Transferred:(totalEarningsBasicSalary + totalEarningsHRA + totalEarningsCityAllowance + totalEarningsConAllowance + totalEarningsOther) - ( ((totalEarningsBasicSalary + totalEarningsHRA) * 0.24) + this.payrollData.Professional_Tax + this.payrollData.ESI_Mediclaim)
+        otherdeduction: this.payrollData.otherdeduction ? this.payrollData.otherdeduction : 0 ,
+        totaldeduction:(((totalEarningsBasicSalary + totalEarningsHRA) * 0.24) + this.payrollData.Professional_Tax + this.payrollData.ESI_Mediclaim).toFixed(2),
+        transferred_amount:((totalEarningsBasicSalary + totalEarningsHRA + totalEarningsCityAllowance + totalEarningsConAllowance + totalEarningsOther) - ( ((totalEarningsBasicSalary + totalEarningsHRA) * 0.24) + this.payrollData.Professional_Tax + this.payrollData.ESI_Mediclaim)).toFixed(2),
       });
+      console.log('formvalueeeeeeeeeeeeee',this.payrollDetailsForm.value);
+      
     } else {
       this.payrollDetailsForm.patchValue({
         basicSalary: null,
@@ -137,6 +143,22 @@ export class PayslipDetailsComponent {
         Other: null
       });
     }
+  }
+
+  calculateTotalDeductionOnOthers(otherDeductionValue: any): void {
+    const formValue = this.payrollDetailsForm.value;
+    const totalDeduction = parseInt(formValue.Provident_Fund || 0) + parseInt(formValue.Professional_Tax || 0) + parseInt(formValue.ESI_Mediclaim || 0) + parseInt(otherDeductionValue) ;
+    console.log('==========' , otherDeductionValue , totalDeduction);
+    this.payrollDetailsForm.patchValue({
+      totaldeduction: totalDeduction
+    });
+
+    const totalEarnings = parseInt(formValue.Total_Earnings || 0);
+    const transferredAmount = totalEarnings - totalDeduction;
+
+    this.payrollDetailsForm.patchValue({
+      transferred_amount: transferredAmount.toFixed(2)
+    });
   }
 
 
@@ -168,17 +190,19 @@ export class PayslipDetailsComponent {
   }
   submit(){
     const payload = {
-      basicSalary: this.payrollDetailsForm.value.basicSalary,
-      HRA: this.payrollDetailsForm.value.HRA,
-      CityAllowance: this.payrollDetailsForm.value.CityAllowance,
-      Con_Allowance: this.payrollDetailsForm.value.Con_Allowance,
-      Other: this.payrollDetailsForm.value.Other,
-      Total_Earnings: this.payrollDetailsForm.value.Total_Earnings,
+      basicSalary: parseInt(this.payrollDetailsForm.value.basicSalary),
+      HRA: parseInt(this.payrollDetailsForm.value.HRA),
+      CityAllowance: parseInt(this.payrollDetailsForm.value.CityAllowance),
+      Con_Allowance: parseInt(this.payrollDetailsForm.value.Con_Allowance),
+      Other: parseInt(this.payrollDetailsForm.value.Other),
+      Total_Earnings: parseInt((this.payrollDetailsForm.value.Total_Earnings)),
       workingDays: this.workingDays1,
       Provident_Fund: parseInt(this.payrollDetailsForm.value.Provident_Fund),
       Professional_Tax: parseInt(this.payrollDetailsForm.value.Professional_Tax),
+      otherdeduction: this.payrollDetailsForm.value.otherdeduction ? this.payrollDetailsForm.value.otherdeduction : 0 ,
       ESI_Mediclaim: parseInt(this.payrollDetailsForm.value.ESI_Mediclaim),
-      deduction:this.payrollDetailsForm.value.Total_Deductions,
+      totaldeduction:parseInt(this.payrollDetailsForm.value.totaldeduction),
+      transferred_amount: parseInt(this.payrollDetailsForm.value.transferred_amount),
       employee: this.empId,
       month:this.selectedMonth
     };

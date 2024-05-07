@@ -17,26 +17,26 @@
                 <!-- Form fields for earnings -->
                 <div class="form-group">
                     <label for="basicSalary">Basic Salary</label>
-                    <input type="number" id="basicSalary" formControlName="basicSalary" class="form-control" [readonly]="isReadOnly">
+                    <input type="number" id="basicSalary" formControlName="basicSalary" class="form-control" [readonly]="isReadOnly" (input)="calculateTotalEarnings() ; calculateProvidentFund()">
                 </div>
 
                 <div class="form-group">
                     <label for="HRA">House Rent Allowance (HRA)</label>
-                    <input type="number" id="HRA" formControlName="HRA" class="form-control" [readonly]="isReadOnly">
+                    <input type="number" id="HRA" formControlName="HRA" class="form-control" [readonly]="isReadOnly" (input)="calculateTotalEarnings()  ; calculateProvidentFund()">
                 </div>
 
                 <div class="form-group">
                     <label for="CityAllowance">City Allowances</label>
-                    <input type="number" id="CityAllowance" formControlName="CityAllowance" class="form-control" [readonly]="isReadOnly">
+                    <input type="number" id="CityAllowance" formControlName="CityAllowance" class="form-control" [readonly]="isReadOnly" (input)="calculateTotalEarnings()">
                 </div>
                 <div class="form-group">
                     <label for="Con_Allowance">Convenience Allowances</label>
-                    <input type="number" id="Con_Allowance" formControlName="Con_Allowance" class="form-control" [readonly]="isReadOnly">
+                    <input type="number" id="Con_Allowance" formControlName="Con_Allowance" class="form-control" [readonly]="isReadOnly" (input)="calculateTotalEarnings()">
                 </div>
 
                 <div class="form-group">
                     <label for="Other">Other</label>
-                    <input type="number" id="Other" formControlName="Other" class="form-control" [readonly]="isReadOnly">
+                    <input type="number" id="Other" formControlName="Other" class="form-control" [readonly]="isReadOnly" (input)="calculateTotalEarnings()">
                 </div>
 
                 <div class="form-group">
@@ -57,22 +57,22 @@
                 <!-- Form fields for deductions -->
                 <div class="form-group">
                     <label for="Provident_Fund">Provident Fund (P.F)</label>
-                    <input type="text" id="Provident_Fund" formControlName="Provident_Fund" class="form-control" [readonly]="isReadOnly">
+                    <input type="number" id="Provident_Fund" formControlName="Provident_Fund" class="form-control" [readonly]="isReadOnly" (input)="Calculate_deduction()">
                 </div>
 
                 <div class="form-group">
                     <label for="Professional_Tax">Professional Tax (P.Tax)</label>
-                    <input type="number" id="Professional_Tax" formControlName="Professional_Tax" class="form-control" [readonly]="isReadOnly">
+                    <input type="number" id="Professional_Tax" formControlName="Professional_Tax" class="form-control" [readonly]="isReadOnly" (input)="Calculate_deduction()">
                 </div>
 
                 <div class="form-group">
                     <label for="ESI_Mediclaim">Employee State Insurance (ESI) / Mediclaim</label>
-                    <input type="text" id="ESI_Mediclaim" formControlName="ESI_Mediclaim" class="form-control" [readonly]="isReadOnly">
+                    <input type="number" id="ESI_Mediclaim" formControlName="ESI_Mediclaim" class="form-control" [readonly]="isReadOnly" (input)="Calculate_deduction()">
                 </div>
 
                 <div class="form-group">
-                    <label for="Total_Deductions">Total Deductions</label>
-                    <input type="number" id="Total_Deductions" formControlName="Total_Deductions" class="form-control" [readonly]="isReadOnly">
+                    <label for="deduction">Total Deductions</label>
+                    <input type="number" id="deduction" formControlName="deduction" class="form-control" [readonly]="isReadOnly">
                 </div>
             </div>
         </div>
