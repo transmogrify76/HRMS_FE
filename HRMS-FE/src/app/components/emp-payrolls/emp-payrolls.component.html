@@ -1,103 +1,78 @@
-<div>
-  <label for="month" style="color: whitesmoke; margin-right: 2rem;">Select Month: </label>
-  <select id="month" [(ngModel)]="selectedmonth" (change)="filter()" (click)="showcaseEarnings()">
-    <option *ngFor="let month of months" [value]="month">{{ month }}</option>
-  </select>
-</div>
+<div class="container">
+  <div class="header">
+    <h2>Select Month:</h2>
+    <select id="month" [(ngModel)]="selectedmonth" (change)="filter()" (click)="showcaseEarnings()">
+      <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+    </select>
+  </div>
 
-<div *ngIf="filterdata">
-  <form>
-    <div class="row justify-content-center align-items-center" [formGroup]="payrollDetailsForm">
-      <!-- Earnings Card -->
-      <div class="col-md-5">
-        <div class="card">
-          <div class="card-header bg-primary text-white">
-            <h4 class="text-center">Earnings</h4>
-          </div>
-          <div class="card-body">
-            <!-- Form fields for earnings -->
-            <div class="form-group">
-              <label for="basicSalary">Basic Salary</label>
-              <input type="number" id="basicSalary" formControlName="basicSalary" class="form-control" readonly>
-            </div>
-
-            <div class="form-group">
-              <label for="HRA">House Rent Allowance (HRA)</label>
-              <input type="number" id="HRA" formControlName="HRA" class="form-control" readonly>
-            </div>
-
-            <div class="form-group">
-              <label for="CityAllowance">City Allowances</label>
-              <input type="number" id="CityAllowance" formControlName="CityAllowance" class="form-control" readonly>
-            </div>
-            <div class="form-group">
-              <label for="Con_Allowance">Convenience Allowances</label>
-              <input type="number" id="Con_Allowance" formControlName="Con_Allowance" class="form-control" readonly>
-            </div>
-
-            <div class="form-group">
-              <label for="Other">Other</label>
-              <input type="number" id="Other" formControlName="Other" class="form-control" readonly>
-            </div>
-
-            <div class="form-group">
-              <label for="Total_Earnings">Total Earning</label>
-              <input type="number" id="Total_Earnings" formControlName="Total_Earnings" class="form-control" readonly>
-            </div>
-          </div>
-        </div>
+  <div class="payslip-container" *ngIf="filterdata">
+    <div class="company-details">
+      <div class="company-logo">
+        <img src="../../../assets/transmogrify logo.jpg" alt="Company Logo">
       </div>
-
-      <!-- Deductions Card -->
-      <div class="col-md-5">
-        <div class="card">
-          <div class="card-header bg-danger text-white">
-            <h4 class="text-center">Deductions</h4>
-          </div>
-          <div class="card-body">
-            <!-- Form fields for deductions -->
-            <div class="form-group">
-              <label for="Provident_Fund">Provident Fund (P.F)</label>
-              <input type="text" id="Provident_Fund" formControlName="Provident_Fund" class="form-control" readonly>
-            </div>
-
-            <div class="form-group">
-              <label for="otherdeduction">Others (If any)</label>
-              <input type="text" id="otherdeduction" formControlName="otherdeduction" class="form-control" readonly>
-            </div>
-
-            <div class="form-group">
-              <label for="Professional_Tax">Professional Tax (P.Tax)</label>
-              <input type="number" id="Professional_Tax" formControlName="Professional_Tax" class="form-control"
-                readonly>
-            </div>
-
-            <div class="form-group">
-              <label for="ESI_Mediclaim">Employee State Insurance (ESI) / Mediclaim</label>
-              <input type="text" id="ESI_Mediclaim" formControlName="ESI_Mediclaim" class="form-control" readonly>
-            </div>
-            <div class="form-group">
-              <label for="totaldeduction">Total Deductions</label>
-              <input type="number" id="totaldeduction" formControlName="totaldeduction" class="form-control" readonly>
-            </div>
-          </div>
-        </div>
-        <!-- Additional Card -->
-        <div class="col-md-5">
-          <div class="card">
-            <div class="card-header bg-success text-white">
-              <h4 class="text-center">Transferred Amount</h4>
-            </div>
-            <div class="card-body">
-              <!-- Form field for amount to be transferred -->
-              <div class="form-group">
-                <label for="transferred_amount">Recieved Amount</label>
-                <input type="number" id="transferred_amount" formControlName="transferred_amount" class="form-control">
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="company-address">
+        <p>Company Name: Transmogrify Global Private Limited</p>
+        <p>Email: tgwbin@gmail.com</p>
       </div>
     </div>
-  </form>
+
+    <div class="employee">
+      <div class="employee-details">
+        <h3>Employee Details</h3>
+        <p>Employee Name: {{ this.employee?.firstName }} {{this.employee?.lastName}}</p>
+        <p>Employee ID: {{ this.employee?.empIDNO }}</p>
+        <p>Date of Joining: {{ this.employee?.joiningDate }}</p>
+        <p>PAN: {{ this.employee?.panNo }}</p>
+        <p>Standard Days: 30</p>
+      </div>
+
+      <div class="employee-address-details">
+        <h3>Address & Bank Details</h3>
+        <p>Present Address: {{ this.employee?.Present_Address ? this.employee?.Present_Address : 'Error retrieving address'}}</p>
+        <p>Permanent Address: {{ this.employee?.Permanent_Address ? this.employee?.Permanent_Address : 'Error retrieving address'}}</p>
+        <p>Date of Joining: {{ this.employee?.joiningDate }}</p>
+        <p>Mobile Number: {{ this.employee?.mobileNo }}</p>
+        <p>IFSC Code: {{this.employee?.role?.roleId}}</p>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="section earnings">
+        <h3>Earnings</h3>
+        <ul>
+          <li>Basic Salary: {{ this.filterdata?.basicSalary }}</li>
+          <li>HRA: {{ this.filterdata?.HRA }}</li>
+          <li>City Allowance: {{ this.filterdata?.CityAllowance }}</li>
+          <li>Convenience Allowance: {{ this.filterdata?.Con_Allowance }}</li>
+          <li>Other: {{ this.filterdata?.Other }}</li>
+          <li>Total Earnings: {{ this.filterdata?.Total_Earnings }}</li>
+        </ul>
+      </div>
+
+      <div class="section deductions">
+        <h3>Deductions</h3>
+        <ul>
+          <li>Provident Fund: {{ this.filterdata?.Provident_Fund }}</li>
+          <li>Professional Tax: {{ this.filterdata?.Professional_Tax }}</li>
+          <li>ESI/Mediclaim: {{ this.filterdata?.ESI_Mediclaim }}</li>
+          <li>Other Deductions: {{ this.filterdata?.otherdeduction }}</li>
+          <li>Total Deductions: {{ this.filterdata?.totaldeduction }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="net-payable">
+      <h3>Amount Payable</h3>
+      <p>Net Payable: {{ this.filterdata?.transferred_amount }}</p>
+    </div>
+
+    <div class="footer">
+      <p>Registered Office: Unit No 10ES6, 10th floor, EAST TOWER, MANI CASADONA IT BUILDING, International Financial Hub(CBD), Newtown, Kolkata, Chakpachuria, West Bengal 700156</p>
+      <p>Visit our Official Website: <a href="https://transmogriffy.com/">Transmogrify Global Private Limited</a></p>
+      <p>Disclaimer: This is a computer-generated document and does not require a signature.</p>
+    </div>
+  </div>
+
+  <button (click)="downloadPdf()">Download Payslip</button>
 </div>
