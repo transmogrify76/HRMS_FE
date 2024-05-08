@@ -80,6 +80,7 @@ export class AttendanceAdminComponent {
       (response:any) =>{
         this.leavedetails = response;
         console.log(this.leavedetails)
+
       }
     )
     this.hrmsApiService.allAttendancebyMonth(this.selectedMonth).subscribe(
@@ -95,6 +96,7 @@ export class AttendanceAdminComponent {
             attendances: item.attendances
           };
         });
+
       },
       (error: any) => {
         console.error('Error fetching employee details:', error);
@@ -121,7 +123,7 @@ export class AttendanceAdminComponent {
         { label: 'H', width: columnWidths[2] },
         { label: 'Wo', width: columnWidths[3] },
         { label: 'Ab', width: columnWidths[4] },
-        { label: 'Pe', width: columnWidths[5] },
+        { label: 'AL', width: columnWidths[5] },
         { label: 'Tw', width: columnWidths[5] }
     ];
 
@@ -133,26 +135,28 @@ export class AttendanceAdminComponent {
 
     y += 10; 
 
-    this.employees.forEach((employee, index) => {
+    this.employees.forEach((employee, ) => {
         const presentDays = this.countAttendanceDays(employee); 
         const holidaysCount = this.hardcodedHolidays[this.selectedMonth];
         const weekendsAttendance = this.hardcodedWeekends[this.selectedMonth];
         const totalDays = this.hardcodedWorkingDays[this.selectedMonth];
 
         const weekOffs = weekendsAttendance;
-        const absentDays = totalDays - (presentDays + holidaysCount + weekOffs);
+       
 
         const leaveDetails = this.leavedetails.find((details: any) => details.employee.empId === employee.empId);
+
         let totalPendingLeaveDuration = 0;
     if (leaveDetails) {
         leaveDetails.leave.forEach((leave: any) => {
-            if (leave.leaveStatus === 'PENDING') {
-                totalPendingLeaveDuration += leave.duration || 0;
+            if (leave.leaveStatus === 'APPROVED') {
+                totalPendingLeaveDuration += leave.duration;
             }
         });
     }
-    const pendingLeaves=totalPendingLeaveDuration;
-        const total = (presentDays+holidaysCount+weekOffs)
+        const pendingLeaves = totalPendingLeaveDuration ;
+        const absentDays = totalDays - (presentDays + holidaysCount + weekOffs + pendingLeaves);
+        const total = (presentDays + holidaysCount + weekOffs + totalPendingLeaveDuration)
         const rowData = [
             { value: `${employee.firstName} ${employee.lastName}`, width: columnWidths[0] },
             { value: presentDays.toString(), width: columnWidths[1] },
@@ -163,18 +167,16 @@ export class AttendanceAdminComponent {
             { value: total.toString(), width: columnWidths[5] }
         ];
 
-        // Set font size for table body
+
         doc.setFontSize(10);
 
-        // Generate table row
         rowData.forEach((data, index) => {
-            doc.text(data.value, 10 + index * (columnWidths[index] + 5), y + 8); // Center text vertically
+            doc.text(data.value, 10 + index * (columnWidths[index] + 5), y + 8);
         });
 
-        y += 10; // Move to next row
+        y += 10; 
     });
 
-    // Save the PDF
     doc.save('employees_attendance_report.pdf');
 }
 

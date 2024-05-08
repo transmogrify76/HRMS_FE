@@ -21,8 +21,8 @@
             <div class="mb-3">
               <label for="leaveOptions{{i}}" class="form-label">Leave status:</label>
               <select class="form-select" id="leaveOptions{{i}}" name="leaveOptions{{i}}" [(ngModel)]="selectedLeaveStatus[i]">
-                <option value="APPROVED">Approved</option>
-                <option value="REJECTED">Decline</option>      
+                <option value="APPROVED">Approved(With Pay)</option>
+                <option value="REJECTED">Approved(Without Pay)</option>      
               </select>
               <button type="button" class="btn btn-dark" (click)="updateLeaveStatus(leaves?.leaveId, selectedLeaveStatus[i])">
                 Submit

@@ -96,7 +96,7 @@ export class HomeComponent {
       this.calendar.push(week);
     }
 
-    console.log('Generated Calendar:', this.calendar); // Add this line to log the generated calendar
+    console.log(); // Add this line to log the generated calendar
   }
 
   previousMonth(): void {
