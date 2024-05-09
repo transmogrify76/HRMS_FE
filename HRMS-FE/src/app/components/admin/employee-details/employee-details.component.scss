@@ -95,6 +95,13 @@
     height: 100%;
     width: 100%;
   }
+  input[type="text"],
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
   
   .dot-spinner {
     --uib-size: 2.8rem;

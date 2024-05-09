@@ -33,6 +33,7 @@ export class EmployeeDetailsComponent implements OnInit {
   empId: number = 0;
   selectedLeaveStatus: string[] = [];
   showSpinner: boolean = false;
+  remark: any;
 
   constructor(private http: HrmsApiService ,private router: Router, private toastr: ToastrService) {}
 
@@ -89,7 +90,7 @@ export class EmployeeDetailsComponent implements OnInit {
     if (selectedLeaveStatus) {
       const payload = { 
         leaveStatus: selectedLeaveStatus ,
-        // empId : this.empId
+        remark: this.remark
       };
       this.showSpinner = true;
   
