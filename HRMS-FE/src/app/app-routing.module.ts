@@ -22,8 +22,8 @@ import { UserDetailsComponent } from './components/admin/user-details/user-detai
 import { ListOfEmployeesComponent } from './components/admin/list-of-employees/list-of-employees.component';
 import { FetchSalaryComponent } from './components/fetch-salary/fetch-salary.component';
 import { PayslipDetailsComponent } from './components/payslip-details/payslip-details.component';
-import { AttendanceAdminComponent } from './attendance-admin/attendance-admin.component';
 import { EmpPayrollsComponent } from './components/emp-payrolls/emp-payrolls.component';
+import { LeavesAdminComponent } from './components/admin/leaves-admin/leaves-admin.component';
 
 
 const routes: Routes = [
@@ -125,8 +125,8 @@ const routes: Routes = [
     component: PayslipDetailsComponent,
   },
 {
-  path: 'attendance-admin',
-  component:AttendanceAdminComponent
+  path: 'leaves-admin',
+  component:LeavesAdminComponent
 },
 {
   path: 'emp-payroll',

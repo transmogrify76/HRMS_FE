@@ -17,11 +17,11 @@ interface EmployeeData {
 }
 
 @Component({
-  selector: 'app-attendance',
-  templateUrl: './attendance-admin.component.html',
-  styleUrls: ['./attendance-admin.component.scss']
+  selector: 'app-leaves-admin',
+  templateUrl: './leaves-admin.component.html',
+  styleUrls: ['./leaves-admin.component.scss']
 })
-export class AttendanceAdminComponent {
+export class LeavesAdminComponent {
   employees: EmployeeData[] = [];
   selectedMonth!: number;
   attendanceDetails: any;
