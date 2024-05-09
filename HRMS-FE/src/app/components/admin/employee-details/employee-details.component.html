@@ -21,8 +21,8 @@
             <p><strong>Duration:</strong> {{ leaves.duration }}</p>
             <p><strong>Remaining Leave: </strong>{{this.leavecount}}</p>
             <div class="form-group">
-              <label for="remark">Remark:</label>
-              <textarea id="remark" name="remark" [(ngModel)]="remark" required></textarea>
+              <label for="remark{{i}}">Remark:</label>
+              <textarea id="remark{{i}}" name="remark{{i}}" [(ngModel)]="remark[i]" required></textarea>
             </div>
             <div class="mb-3">
               <label for="leaveOptions{{i}}" class="form-label">Leave status:</label>

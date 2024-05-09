@@ -33,7 +33,7 @@ export class EmployeeDetailsComponent implements OnInit {
   empId: number = 0;
   selectedLeaveStatus: string[] = [];
   showSpinner: boolean = false;
-  remark: any;
+  remark: string[] = [];
 
   constructor(private http: HrmsApiService ,private router: Router, private toastr: ToastrService) {}
 
@@ -86,11 +86,11 @@ export class EmployeeDetailsComponent implements OnInit {
 }
 
   updateLeaveStatus(leaveId: number, selectedLeaveStatus: string) {
-
+    const remarksString: string = this.remark.join('');
     if (selectedLeaveStatus) {
       const payload = { 
         leaveStatus: selectedLeaveStatus ,
-        remark: this.remark
+        remark: remarksString
       };
       this.showSpinner = true;
   
@@ -116,7 +116,7 @@ export class EmployeeDetailsComponent implements OnInit {
             this.router.navigateByUrl('/home');
           }
         );
-      }, 2000); // 2000 milliseconds = 2 seconds
+      }, 2000);
     }
   }
   

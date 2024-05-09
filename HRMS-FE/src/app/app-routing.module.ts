@@ -79,7 +79,7 @@ const routes: Routes = [
   
   {
     path:'list-of-attendance',
-    component:ListOfAttendanceComponent
+    component:LeavesAdminComponent
   }  ,
   {
     path:'register-employee',
