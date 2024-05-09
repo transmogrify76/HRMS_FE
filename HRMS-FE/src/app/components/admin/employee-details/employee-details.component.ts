@@ -26,7 +26,7 @@ export class EmployeeDetailsComponent implements OnInit {
   selectedEmployee!: number;
   // employees: Employee[] = [];
   employees: any;
-  // employeeDetails: Employee = {} as Employee;
+  leavecount:any;
   employeeDetails: any = null;
   leaveDetails: any;
   employee: any;
@@ -56,6 +56,8 @@ export class EmployeeDetailsComponent implements OnInit {
       (employee: any) => {
         this.employeeDetails = employee;
         this.empId = this.employeeDetails.employee.empId;
+        this.leavecount = this.employeeDetails.employee.leaveCount
+        console.log(this.leavecount)
         console.log('ppppppppppppppppp', this.employeeDetails.employee.empId);
       },
       (error: any) => {

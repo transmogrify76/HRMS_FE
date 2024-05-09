@@ -18,6 +18,8 @@
             <p><strong>Start Date:</strong> {{ leaves.startDate | date: 'medium' }}</p>
             <p><strong>End Date:</strong> {{ leaves.endDate | date: 'medium' }}</p>
             <p><strong>Reason:</strong> {{ leaves.reason }}</p>
+            <p><strong>Duration:</strong> {{ leaves.duration }}</p>
+            <p><strong>Remaining Leave: </strong>{{this.leavecount}}</p>
             <div class="mb-3">
               <label for="leaveOptions{{i}}" class="form-label">Leave status:</label>
               <select class="form-select" id="leaveOptions{{i}}" name="leaveOptions{{i}}" [(ngModel)]="selectedLeaveStatus[i]">

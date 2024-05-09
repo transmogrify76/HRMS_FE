@@ -4,7 +4,7 @@
     <div class="leave-application">
       <form (submit)="submitLeaveApplication()" #leaveForm="ngForm">
         <div class="form-group">
-          <label for="month">Select Month:</label>
+          <label for="month">Select Month: </label>
           <select id="month" name="month" [(ngModel)]="selectedMonth" (change)="setMinMaxDates()">
             <option value="1">January</option>
             <option value="2">February</option>
