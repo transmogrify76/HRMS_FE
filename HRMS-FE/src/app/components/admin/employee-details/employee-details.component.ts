@@ -34,6 +34,7 @@ export class EmployeeDetailsComponent implements OnInit {
   selectedLeaveStatus: string[] = [];
   showSpinner: boolean = false;
   remark: string[] = [];
+  leaveDuration : number = 0;
 
   constructor(private http: HrmsApiService ,private router: Router, private toastr: ToastrService) {}
 
@@ -57,9 +58,7 @@ export class EmployeeDetailsComponent implements OnInit {
       (employee: any) => {
         this.employeeDetails = employee;
         this.empId = this.employeeDetails.employee.empId;
-        this.leavecount = this.employeeDetails.employee.leaveCount
-        console.log(this.leavecount)
-        console.log('ppppppppppppppppp', this.employeeDetails.employee.empId);
+        this.leavecount = this.employeeDetails.employee.leaveCount;
       },
       (error: any) => {
         console.error('Error fetching employee details:', error);
@@ -69,7 +68,6 @@ export class EmployeeDetailsComponent implements OnInit {
       (leaveDetails: any) => {
         if (Array.isArray(leaveDetails)) {
           this.leaveDetails = leaveDetails;
-          console.log('ppppppppppppppppp', this.leaveDetails);
           
         } else {
           this.leaveDetails = [leaveDetails];
@@ -80,34 +78,46 @@ export class EmployeeDetailsComponent implements OnInit {
       }
     );
   }
-
+  
   initializeSelectedLeaveStatuses() {
     this.selectedLeaveStatus = this.employeeDetails.employee.leaves.map(() => 'PENDING');
-}
-
+  }
+  
   updateLeaveStatus(leaveId: number, selectedLeaveStatus: string) {
     const remarksString: string = this.remark.join('');
+    // this.leaveDuration = this.employeeDetails.employee.leaves[leaveId];
+    this.leaveDuration = this.employeeDetails.employee.leaves[leaveId - 1].duration
+    
     if (selectedLeaveStatus) {
       const payload = { 
         leaveStatus: selectedLeaveStatus ,
         remark: remarksString
       };
+      
       this.showSpinner = true;
   
       // Simulate a delay of 2 seconds before making the HTTP request
       setTimeout(() => {
         this.http.updateLeaveStatus(leaveId, this.empId, payload).subscribe(
           (response: any) => {
-            console.log('Leave status updated successfully:', response);
-            this.showSpinner = false;
-  
+            
             // Display toaster message based on the selectedLeaveStatus
             if (selectedLeaveStatus === 'APPROVED') {
+              this.leavecount = this.leavecount -  this.leaveDuration;
+              const payload = {
+                leaveCount : this.leavecount
+              }
+              this.http.employeeDetailsUpdate(this.empId, payload).subscribe(
+                (response: any) => {
+                  this.showSpinner = false;
+                }
+              )
               this.toastr.success('Leave approved successfully', '', { positionClass: 'toast-top-center' });
             } else if (selectedLeaveStatus === 'REJECTED') {
               this.toastr.error('Leave rejected', '', { positionClass: 'toast-top-center' });
             }
             this.router.navigateByUrl('/home');
+            this.showSpinner = false;
           },
           (error: any) => {
             console.error('Error updating leave status:', error);
