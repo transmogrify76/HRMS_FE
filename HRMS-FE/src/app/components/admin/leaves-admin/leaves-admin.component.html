@@ -31,15 +31,15 @@
                     <table class="table table-bordered table-light text-white">
                         <thead>
                             <tr>
-                                <th>Check In</th>
-                                <th>Check Out</th>
+                                <th>Check In </th>
+                                <th>Check Out </th>
                                 <th>Check In Date</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let attendance of employee.attendances">
-                                <td>{{ attendance.checkIn | date:'h:mm a' }}</td>
-                                <td>{{ attendance.checkOut | date:'h:mm a' }}</td>
+                                <td>{{ attendance.checkIn | subtractHours |date:'h:mm a' }}</td>
+                                <td>{{ attendance.checkOut | subtractHours |date:'h:mm a' }}</td>
                                 <td>{{ attendance.checkIn | date:'yyyy-MM-dd' }}</td>
                             </tr>
                         </tbody>
