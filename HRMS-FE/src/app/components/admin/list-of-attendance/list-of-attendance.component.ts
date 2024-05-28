@@ -202,8 +202,8 @@ export class ListOfAttendanceComponent implements OnInit {
       1: 0,  // February
       2: 1,  // March
       3: 0,  // April
-      4: 1,  // May
-      5: 0,  // June
+      4: 3,  // May
+      5: 1,  // June
       6: 0,  // July
       7: 1,  // August
       8: 0,  // September
