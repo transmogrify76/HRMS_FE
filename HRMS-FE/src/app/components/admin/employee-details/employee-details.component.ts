@@ -2,20 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HrmsApiService } from 'src/app/services/hrms-api.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-
-// export interface LeaveDetails {
-//   startdate: number;
-//   enddate: number;
-//   reason: string;
-// }
-
-// export interface Employee {
-//   empId: number;
-//   username: string;
-//   firstName: string;
-//   lastName: string;
-//   email: string;
-// }
+import { Duration } from 'ngx-bootstrap/chronos/duration/constructor';
 
 @Component({
   selector: 'app-employee-details',
@@ -83,10 +70,28 @@ export class EmployeeDetailsComponent implements OnInit {
     this.selectedLeaveStatus = this.employeeDetails.employee.leaves.map(() => 'PENDING');
   }
   
-  updateLeaveStatus(leaveId: number, selectedLeaveStatus: string) {
+  updateLeaveStatus(leaveId: number, selectedLeaveStatus: string, duration:number) {
     const remarksString: string = this.remark.join('');
-    // this.leaveDuration = this.employeeDetails.employee.leaves[leaveId];
-    this.leaveDuration = this.employeeDetails.employee.leaves[leaveId - 1].duration
+  //   // this.leaveDuration = this.employeeDetails.employee.leaves[leaveId];
+  //   if (!this.employeeDetails || !this.employeeDetails.employee || !this.employeeDetails.employee.leaves) {
+  //     console.error('Employee details or leaves data is missing.');
+  //     this.toastr.error('Employee details or leaves data is missing.', '', { positionClass: 'toast-top-center' });
+  //     return;
+  // }
+
+  // // Validate leaveId
+  // let leaveIndex = this.employeeDetails.employee.leaves.length;
+  // if (leaveIndex < 0 || leaveIndex >= this.employeeDetails.employee.leaves.length) {
+  //     console.error('Invalid leave ID.');
+    
+  //     this.toastr.error('Invalid leave ID.', '', { positionClass: 'toast-top-center' });
+  //     return;
+  // }
+  
+
+  // Retrieve the leave duration
+  this.leaveDuration = duration;
+  console.log(this.leaveDuration)
     
     if (selectedLeaveStatus) {
       const payload = { 
@@ -95,8 +100,6 @@ export class EmployeeDetailsComponent implements OnInit {
       };
       
       this.showSpinner = true;
-  
-      // Simulate a delay of 2 seconds before making the HTTP request
       setTimeout(() => {
         this.http.updateLeaveStatus(leaveId, this.empId, payload).subscribe(
           (response: any) => {
