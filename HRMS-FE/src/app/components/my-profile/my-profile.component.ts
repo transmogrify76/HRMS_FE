@@ -21,19 +21,17 @@ export class MyProfileComponent implements OnInit {
     this.calculateCurrentWorkingDays();
   }
 
-   // Function to handle file selection
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
 
-    // Check if a file is selected
+
     if (file) {
-      // Read the file as a data URL
+
       const reader: FileReader = new FileReader();
       reader.readAsDataURL(file);
 
-      // When the file is loaded
       reader.onload = () => {
-        // Set the profilePicture variable to the data URL of the selected image
+     
         this.profilePicture = reader.result;
       };
     }
@@ -47,12 +45,15 @@ export class MyProfileComponent implements OnInit {
       (employee) => {
         this.employeeDetails = employee;
 
-        // Call function to calculate current working days
-        this.calculateCurrentWorkingDays();
+        if (this.employeeDetails.employee.employeedetails.length > 0) {
+          this.employeeDetails.employee.bankAccountNo = this.employeeDetails.employee.employeedetails[this.employeeDetails.employee.employeedetails.length - 1].bankAccountNo;
+          this.employeeDetails.employee.IFSCno = this.employeeDetails.employee.employeedetails[this.employeeDetails.employee.employeedetails.length - 1].IFSCno;
+          
+        }
 
-        // Check if current working days crossed 180 and credit leaves
+        this.calculateCurrentWorkingDays();
         if (this.currentWorkingDays > 180) {
-          this.creditLeaves(6); // Credit 6 leaves
+          this.creditLeaves(6); 
         }
       },
       (error) => {
@@ -63,7 +64,7 @@ export class MyProfileComponent implements OnInit {
 
   calculateCurrentWorkingDays(): void {
     const joiningDate = this.employeeDetails.employee.joiningDate;
-    const currentDate = new Date().toISOString().split('T')[0]; // Current date in yyyy-mm-dd format
+    const currentDate = new Date().toISOString().split('T')[0]; 
     this.currentWorkingDays = this.calculateWorkingDays(joiningDate, currentDate);
   }
 
@@ -71,16 +72,12 @@ export class MyProfileComponent implements OnInit {
     const joinDate = new Date(joiningDate);
     const endDate = new Date(currentDate);
 
-    // Calculate time difference in milliseconds
     const timeDifference = endDate.getTime() - joinDate.getTime();
 
-    // Convert milliseconds to days
     const daysDifference = Math.floor(timeDifference / (1000 * 3600 * 24));
 
-    // Calculate number of weekend days
     const weekends = this.countWeekendDays(joinDate, endDate);
 
-    // Subtract weekends and holidays from total days to get working days
     const workingDays = daysDifference;
 
     return workingDays;
