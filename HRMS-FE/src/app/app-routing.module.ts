@@ -23,6 +23,7 @@ import { ListOfEmployeesComponent } from './components/admin/list-of-employees/l
 import { FetchSalaryComponent } from './components/fetch-salary/fetch-salary.component';
 import { PayslipDetailsComponent } from './components/payslip-details/payslip-details.component';
 import { EmpPayrollsComponent } from './components/emp-payrolls/emp-payrolls.component';
+import { UserManagementComponent } from './components/admin/user-management/user-management.component';
 
 
 const routes: Routes = [
@@ -69,6 +70,10 @@ const routes: Routes = [
   {
     path: 'my-profile',
     component: MyProfileComponent,
+  },
+  {
+    path: 'user-management',
+    component: UserManagementComponent,
   },
   {
 

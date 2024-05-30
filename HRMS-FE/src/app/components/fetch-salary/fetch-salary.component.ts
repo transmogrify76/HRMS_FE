@@ -88,7 +88,7 @@ export class FetchSalaryComponent implements OnInit {
   }
 
   getEmployees() {
-    this.hrmsService.getEmployees().subscribe((res: any) => {
+    this.hrmsService.getAllActiveEmployees().subscribe((res: any) => {
       this.employees = res.employees;
     });
   }

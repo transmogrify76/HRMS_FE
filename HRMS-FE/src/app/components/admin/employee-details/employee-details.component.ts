@@ -30,7 +30,7 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   fetchEmployees(): void {
-    this.http.getEmployees().subscribe(
+    this.http.getAllActiveEmployees().subscribe(
       (response: any) => {
         this.employees = response.employees;
       },

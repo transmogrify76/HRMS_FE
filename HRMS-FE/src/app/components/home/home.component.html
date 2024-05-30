@@ -45,7 +45,10 @@
         <img id="listofleaves" src="../../../assets/staff.png" alt="list of emp icon" (click)="listofemployees()" data-toggle="tooltip" title="listof_emp">
         <span class="icon-text">List of Employees</span>
       </div>
-      
+      <div class="icon-container" *ngIf="isAdmin()">
+        <img id="listofleaves" src="https://cdn-icons-png.flaticon.com/128/11511/11511392.png" alt="User Management" routerLink="/user-management" data-toggle="tooltip" title="user-management">
+        <span class="icon-text">User Management</span>
+      </div>
     </div>
   </div>
 
