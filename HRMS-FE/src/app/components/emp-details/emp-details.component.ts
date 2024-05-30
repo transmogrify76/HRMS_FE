@@ -28,7 +28,7 @@ export class EmpDetailsComponent implements OnInit {
   ) {
     this.empDetailsForm = this.formBuilder.group({
       bankAccountNo: [''],
-      IFSCno: ['', [Validators.required, Validators.pattern('[A-Za-z]{4}[0-9]{7}')]],
+      IFSCno: [''],
     });
   }
 
