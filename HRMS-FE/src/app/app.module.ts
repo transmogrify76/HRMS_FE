@@ -33,6 +33,7 @@ import {SubtractHoursPipe } from    'src/app/time.pipe';
 import { FetchSalaryComponent } from './components/fetch-salary/fetch-salary.component';
 import { PayslipDetailsComponent } from './components/payslip-details/payslip-details.component'
 import { EmpPayrollsComponent } from './components/emp-payrolls/emp-payrolls.component';
+import { UserManagementComponent } from './components/admin/user-management/user-management.component';
 
 
 
@@ -61,7 +62,8 @@ import { EmpPayrollsComponent } from './components/emp-payrolls/emp-payrolls.com
       SubtractHoursPipe,
       FetchSalaryComponent,
       PayslipDetailsComponent,
-      EmpPayrollsComponent
+      EmpPayrollsComponent,
+      UserManagementComponent
 
 
   ],

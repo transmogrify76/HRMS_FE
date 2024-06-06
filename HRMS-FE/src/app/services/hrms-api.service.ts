@@ -28,8 +28,8 @@ export class HrmsApiService {
   getLeaveDetails(empId: number): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/leave?empId=${empId}`);
   }
-  getAllEmployees(): Observable<any[]> {
-    return this.http.get<any>(`${environment.apiUrl}/user`);
+  getAllActiveEmployees(): Observable<any[]> {
+    return this.http.get<any>(`${environment.apiUrl}/employee/active`);
   }
   markinByUserId(payload:any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/attendance`,payload);
@@ -78,5 +78,8 @@ export class HrmsApiService {
   }
   employeeDetailsUpdate(empId: number , payload: any): Observable<any> {
     return this.http.patch<any>(`${environment.apiUrl}/employee/${empId} `, payload);
+  }
+  deactivateUser(payload: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/employee/deactivate`, payload);
   }
 }  

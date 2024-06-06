@@ -28,7 +28,7 @@ export class EmpDetailsComponent implements OnInit {
   ) {
     this.empDetailsForm = this.formBuilder.group({
       bankAccountNo: [''],
-      IFSCno: ['', [Validators.required, Validators.pattern('[A-Za-z]{4}[0-9]{7}')]],
+      IFSCno: [''],
     });
   }
 
@@ -37,7 +37,7 @@ export class EmpDetailsComponent implements OnInit {
   }
 
   fetchEmployees(): void {
-    this.hrmsService.getEmployees().subscribe(
+    this.hrmsService.getAllActiveEmployees().subscribe(
       (response: any) => {
         this.employees = response.employees;
       },
