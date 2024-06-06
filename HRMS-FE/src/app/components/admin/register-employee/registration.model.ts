@@ -14,4 +14,8 @@ export interface RegistrationData {
     emergencyNo: string;
     confirmationData: string;
     bloodGroup: string;
+    p_email: string;
+    post: string;
+    dept: string;
+    Education_qualification: string;
 }

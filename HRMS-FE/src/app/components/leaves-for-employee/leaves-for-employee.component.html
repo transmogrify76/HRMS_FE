@@ -7,7 +7,7 @@
         <p><strong>Reason:</strong> {{ leave.reason}}</p>
         <p><strong>Start Date:</strong> {{ leave.startDate }}</p>
         <p><strong>End Date:</strong> {{ leave.endDate }}</p>
-        <p><strong>STATUS:</strong> {{ leave.leaveStatus }}</p>
+        <p><strong>STATUS:</strong> {{ leave.leaveStatus == 'APPROVED' ? 'Leave with Pay' : 'Leave without Pay' }}</p>
         <hr>
       </div>
     </div>
