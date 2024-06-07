@@ -12,32 +12,78 @@ export class MyProfileComponent implements OnInit {
   currentWorkingDays: number = 0;
   leaveBalance: number = 0;
   username: any;
-  profilePicture: string | ArrayBuffer | null = null;
+  profilePicture: string | undefined;
+  imgId: number = 0;
+  isUploading: boolean = false;
 
   constructor(private http: HrmsApiService) { }
 
   ngOnInit(): void {
     this.fetchEmployeeDetails();
     this.calculateCurrentWorkingDays();
+
   }
 
    // Function to handle file selection
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
-
-    // Check if a file is selected
     if (file) {
-      // Read the file as a data URL
-      const reader: FileReader = new FileReader();
-      reader.readAsDataURL(file);
-
-      // When the file is loaded
-      reader.onload = () => {
-        // Set the profilePicture variable to the data URL of the selected image
-        this.profilePicture = reader.result;
-      };
+      this.isUploading = true;
+      this.http.uploadProfilePic(file).subscribe(
+        (response: any) => {
+          const imageId = response.id; // Extract image ID from the response
+          this.imgId = imageId;
+          sessionStorage.setItem('ImageID' , imageId);
+          console.log('-------------------' , imageId ,  this.imgId) ;          
+          this.isUploading = false;
+          
+        },
+        (error: any) => {
+          console.error('File upload failed', error);
+          this.isUploading = false;
+        }
+      );
     }
   }
+
+  getProfilePic(){
+    this.imgId = Number(sessionStorage.getItem('ImageID'));
+    console.log('--------qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq-----------' , this.imgId) ;
+    
+    
+     // After successful upload, fetch the profile picture URL using imageId
+    this.http.getProfilePicture(this.imgId).subscribe(
+      (profilePictureResponse: any) => {
+        this.profilePicture = profilePictureResponse.path;
+        console.log('------3333333333333-------------' , this.profilePicture);
+        
+        this.isUploading = false;
+      },
+      (error: any) => {
+        console.error('Error fetching profile picture:', error);
+        this.isUploading = false;
+      }
+    );
+  }
+  
+  // onFileSelected(event: any) {
+  //   const file: File = event.target.files[0];
+  //   if (file) {
+  //     this.isUploading = true;
+  //     this.http.uploadProfilePic(file).subscribe(
+  //       (response: any) => {
+  //         this.profilePicture = response.path; // Set profilePicture directly from the upload response
+  //         this.isUploading = false;
+  //       },
+  //       (error: any) => {
+  //         console.error('File upload failed', error);
+  //         this.isUploading = false;
+  //       }
+  //     );
+  //   }
+  // }
+  
+  
 
   fetchEmployeeDetails(): void {
     this.empId = Number(sessionStorage.getItem('empId'));

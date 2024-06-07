@@ -79,4 +79,18 @@ export class HrmsApiService {
   employeeDetailsUpdate(empId: number , payload: any): Observable<any> {
     return this.http.patch<any>(`${environment.apiUrl}/employee/${empId} `, payload);
   }
+  deactivateUser(payload: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/employee/deactivate`, payload);
+  }
+
+  uploadProfilePic(file: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('file', file, file.name);
+    return this.http.post(`${environment.apiUrl}/images/upload`, formData);
+  }
+
+  getProfilePicture(imageId : number) : Observable<any> {
+    console.warn('Getting profile pic from Database' , imageId);
+    return this.http.get(`${environment.apiUrl}/images/${imageId}`);
+  }
 }  
