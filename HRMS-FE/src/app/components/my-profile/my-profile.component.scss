@@ -141,22 +141,20 @@
   animation: spin 1s linear infinite;
 }
 
-.btn-get-profile {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+.profile-picture-container {
+  width: 150px; /* Adjust the size of the circular container */
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative; /* Added for positioning */
 }
 
-.btn-get-profile:hover {
-  background-color: #0056b3;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+.profile-picture-container img.circular {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 50%; /* Make the image circular */
+  position: absolute; /* Position the image within the circular container */
+  top: 0; /* Align the image to the top */
+  left: 0; /* Align the image to the left */
 }

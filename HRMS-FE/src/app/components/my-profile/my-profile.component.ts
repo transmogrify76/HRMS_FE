@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HrmsApiService } from 'src/app/services/hrms-api.service';
+import { CookieService } from 'ngx-cookie-service';
+
 
 @Component({
   selector: 'app-my-profile',
@@ -16,23 +18,23 @@ export class MyProfileComponent implements OnInit {
   imgId: number = 0;
   isUploading: boolean = false;
 
-  constructor(private http: HrmsApiService) { }
+  constructor(private http: HrmsApiService , private cookieService: CookieService) { }
 
   ngOnInit(): void {
     this.fetchEmployeeDetails();
-    this.calculateCurrentWorkingDays();
-
+    this.retrieveAndDisplayProfilePic();
   }
+
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (file) {
       this.isUploading = true;
       this.http.uploadProfilePic(file).subscribe(
         (response: any) => {
-          const imageId = response.id; // Extract image ID from the response
+          const imageId = response.id;
+          this.cookieService.set('profileImageId', imageId.toString());
           this.imgId = imageId;
-          sessionStorage.setItem('ImageID', imageId.toString()); // Store image ID in session storage
-          this.getProfilePic(); // After successful upload, fetch the profile picture
+          this.getProfilePic(this.imgId);
         },
         (error: any) => {
           console.error('File upload failed', error);
@@ -42,10 +44,9 @@ export class MyProfileComponent implements OnInit {
     }
   }
 
-  getProfilePic() {
-    if (this.imgId) {
-      // After successful upload, fetch the profile picture URL using imageId
-      this.http.getProfilePicture(this.imgId).subscribe(
+  getProfilePic(imageId: number) {
+    if (imageId) {
+      this.http.getProfilePicture(imageId).subscribe(
         (profilePictureResponse: Blob) => {
           this.profilePicture = URL.createObjectURL(profilePictureResponse);
           this.isUploading = false;
@@ -57,6 +58,16 @@ export class MyProfileComponent implements OnInit {
       );
     }
   }
+
+  retrieveAndDisplayProfilePic() {
+    const profileImageIdString = this.cookieService.get('profileImageId');
+    if (profileImageIdString) {
+      const profileImageId = Number(profileImageIdString);
+      this.getProfilePic(profileImageId);
+    }
+  }
+  
+
   fetchEmployeeDetails(): void {
     this.empId = Number(sessionStorage.getItem('empId'));
     this.username = sessionStorage.getItem('username');
