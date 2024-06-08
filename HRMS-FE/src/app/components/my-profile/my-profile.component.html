@@ -3,30 +3,23 @@
     <h4>Employee Details</h4>
   </div>
   <div class="employee-details-container">
+    
     <!-- Profile picture -->
-
     <div class="profile-picture-section">
       <div class="profile-picture-container">
         <input #fileInput type="file" accept="image/*" (change)="onFileSelected($event)" class="file-input">
-        <div class="upload-area circular-container" *ngIf="!isUploading && !profilePicture" (click)="fileInput.click()">
-          <span class="upload-icon">+</span>
-          <span class="upload-text">Upload</span>
+        <div class="upload-area" *ngIf="!isUploading && !profilePicture" (click)="fileInput.click()">
+          <span class="upload-text">Upload Photo</span>
         </div>
-        <div class="upload-area circular-container" *ngIf="isUploading">
+        <div class="upload-area" *ngIf="isUploading">
           <div class="spinner"></div>
         </div>
-        <div class="circular-container" *ngIf="profilePicture">
-          <img [src]="profilePicture" alt="Profile Picture" class="profile-picture circular">
+        <div class="profile-picture" *ngIf="profilePicture" (click)="fileInput.click()">
+          <img [src]="profilePicture" alt="Profile Picture">
         </div>
       </div>
-      <button class="btn-danger">Get</button>
+      <button class="btn-get-profile" (click)="getProfilePic()">Get Profile Picture</button>
     </div>
-    
-
-    
-    
-    
-    
     
     <!-- Employee details -->
     <div *ngIf="employeeDetails" class="employee-details">

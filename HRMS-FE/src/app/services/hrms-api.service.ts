@@ -89,8 +89,7 @@ export class HrmsApiService {
     return this.http.post(`${environment.apiUrl}/images/upload`, formData);
   }
 
-  getProfilePicture(imageId : number) : Observable<any> {
-    console.warn('Getting profile pic from Database' , imageId);
-    return this.http.get(`${environment.apiUrl}/images/${imageId}`);
+  getProfilePicture(imageId : number) : Observable<Blob> {
+    return this.http.get(`${environment.apiUrl}/images/${imageId}` , { responseType: 'blob' });
   }
 }  

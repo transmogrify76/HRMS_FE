@@ -23,8 +23,6 @@ export class MyProfileComponent implements OnInit {
     this.calculateCurrentWorkingDays();
 
   }
-
-   // Function to handle file selection
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (file) {
@@ -33,10 +31,8 @@ export class MyProfileComponent implements OnInit {
         (response: any) => {
           const imageId = response.id; // Extract image ID from the response
           this.imgId = imageId;
-          sessionStorage.setItem('ImageID' , imageId);
-          console.log('-------------------' , imageId ,  this.imgId) ;          
-          this.isUploading = false;
-          
+          sessionStorage.setItem('ImageID', imageId.toString()); // Store image ID in session storage
+          this.getProfilePic(); // After successful upload, fetch the profile picture
         },
         (error: any) => {
           console.error('File upload failed', error);
@@ -46,45 +42,21 @@ export class MyProfileComponent implements OnInit {
     }
   }
 
-  getProfilePic(){
-    this.imgId = Number(sessionStorage.getItem('ImageID'));
-    console.log('--------qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq-----------' , this.imgId) ;
-    
-    
-     // After successful upload, fetch the profile picture URL using imageId
-    this.http.getProfilePicture(this.imgId).subscribe(
-      (profilePictureResponse: any) => {
-        this.profilePicture = profilePictureResponse.path;
-        console.log('------3333333333333-------------' , this.profilePicture);
-        
-        this.isUploading = false;
-      },
-      (error: any) => {
-        console.error('Error fetching profile picture:', error);
-        this.isUploading = false;
-      }
-    );
+  getProfilePic() {
+    if (this.imgId) {
+      // After successful upload, fetch the profile picture URL using imageId
+      this.http.getProfilePicture(this.imgId).subscribe(
+        (profilePictureResponse: Blob) => {
+          this.profilePicture = URL.createObjectURL(profilePictureResponse);
+          this.isUploading = false;
+        },
+        (error: any) => {
+          console.error('Error fetching profile picture:', error);
+          this.isUploading = false;
+        }
+      );
+    }
   }
-  
-  // onFileSelected(event: any) {
-  //   const file: File = event.target.files[0];
-  //   if (file) {
-  //     this.isUploading = true;
-  //     this.http.uploadProfilePic(file).subscribe(
-  //       (response: any) => {
-  //         this.profilePicture = response.path; // Set profilePicture directly from the upload response
-  //         this.isUploading = false;
-  //       },
-  //       (error: any) => {
-  //         console.error('File upload failed', error);
-  //         this.isUploading = false;
-  //       }
-  //     );
-  //   }
-  // }
-  
-  
-
   fetchEmployeeDetails(): void {
     this.empId = Number(sessionStorage.getItem('empId'));
     this.username = sessionStorage.getItem('username');
