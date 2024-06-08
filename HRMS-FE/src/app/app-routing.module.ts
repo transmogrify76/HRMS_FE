@@ -65,7 +65,7 @@ const routes: Routes = [
   {
 
     path: 'payslip',
-    component: EmpPayrollsComponent,
+    component: PayslipComponent,
   },
   {
     path: 'my-profile',
