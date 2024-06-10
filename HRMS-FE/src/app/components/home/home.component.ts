@@ -145,6 +145,9 @@ export class HomeComponent {
   listofleaves(){
     this.router.navigate(['/empdetails']);
   }
+  listoftotalleaves(){
+    this.router.navigate(['/total-leaves']);
+  }
   listofattendance(){
     this.router.navigate(['/list-of-attendance']);
   }

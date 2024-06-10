@@ -34,6 +34,7 @@ import { FetchSalaryComponent } from './components/fetch-salary/fetch-salary.com
 import { PayslipDetailsComponent } from './components/payslip-details/payslip-details.component'
 import { EmpPayrollsComponent } from './components/emp-payrolls/emp-payrolls.component';
 import { LeavesAdminComponent } from './components/admin/leaves-admin/leaves-admin.component';
+import { TotalLeavesComponent } from './components/admin/total-leaves/total-leaves.component';
 
 
 
@@ -63,7 +64,8 @@ import { LeavesAdminComponent } from './components/admin/leaves-admin/leaves-adm
       FetchSalaryComponent,
       PayslipDetailsComponent,
       EmpPayrollsComponent,
-      LeavesAdminComponent
+      LeavesAdminComponent,
+      TotalLeavesComponent
 
 
   ],

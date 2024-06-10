@@ -27,11 +27,15 @@
       </div>
       <div class="icon-container" *ngIf="isAdmin()">
         <img id="listofleaves" src="../../../assets/listofleave.png" alt="list of leave icon" (click)="listofleaves()" data-toggle="tooltip" title="listof_leave">
-        <span class="icon-text">List of leaves</span>
+        <span class="icon-text">Pending leaves</span>
       </div>
       <div class="icon-container" *ngIf="isAdmin()">
         <img id="listofleaves" src="../../../assets/immigration.png" alt="list of attendance icon" (click)="listofattendance()" data-toggle="tooltip" title="listof_leave">
         <span class="icon-text">List of Attendance</span>
+      </div>
+      <div class="icon-container" *ngIf="isAdmin()">
+        <img id="listofleaves" src="https://cdn-icons-png.flaticon.com/128/10294/10294057.png" alt="list of leave" (click)="listoftotalleaves()" data-toggle="tooltip" title="listof_leave">
+        <span class="icon-text">List of leaves</span>
       </div>
       <div class="icon-container" *ngIf="isAdmin()">
         <img id="register" src="../../../assets/pen.png" alt="register icon" (click)="register()" data-toggle="tooltip" title="register">
