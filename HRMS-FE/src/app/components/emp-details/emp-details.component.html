@@ -14,13 +14,9 @@
           <form [formGroup]="empDetailsForm" (ngSubmit)="empdetails()">
 
             <div class="form-group">
-              <label for="bankAccountNo">Bank Account Name and Branch</label>
+              <label for="bankAccountName">Bank Name</label>
               <input type="text" id="bankAccountName" formControlName="bankAccountName" class="form-control">
-              <div *ngIf="empDetailsForm.controls['bankAccountName'].errors?.['invalidAccountName']" class="text-danger">
-                Bank Account Name must contain only Words.
-              </div>
             </div>
-
             <div class="form-group">
               <label for="bankAccountNo">Bank Account Number</label>
               <input type="text" id="bankAccountNo" formControlName="bankAccountNo" class="form-control">
