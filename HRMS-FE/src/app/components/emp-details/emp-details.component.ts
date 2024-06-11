@@ -19,6 +19,7 @@ export class EmpDetailsComponent implements OnInit {
   empId: number | null = null;
   bankAccountNo: any = null;
   ifsc: any = null;
+  bankAccountName: any = null
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,7 +29,8 @@ export class EmpDetailsComponent implements OnInit {
   ) {
     this.empDetailsForm = this.formBuilder.group({
       bankAccountNo: [''],
-      IFSCno: ['', [Validators.required, Validators.pattern('[A-Za-z]{4}[0-9]{7}')]],
+      IFSCno: [''],
+      bankAccountName: ['']
     });
   }
 
@@ -37,7 +39,7 @@ export class EmpDetailsComponent implements OnInit {
   }
 
   fetchEmployees(): void {
-    this.hrmsService.getEmployees().subscribe(
+    this.hrmsService.getAllActiveEmployees().subscribe(
       (response: any) => {
         this.employees = response.employees;
       },
@@ -57,19 +59,22 @@ export class EmpDetailsComponent implements OnInit {
           const lastEntry = this.employeeDetails.employee.employeedetails[this.employeeDetails.employee.employeedetails.length - 1];
           const bankAccountNo = lastEntry.bankAccountNo;
           const ifsc = lastEntry.IFSCno;
+          const bankAccountName = lastEntry.bankAccountName
   
           // Update form controls with new values
-          if (bankAccountNo && ifsc) {
+          if (bankAccountNo && ifsc && bankAccountName) {
             this.empDetailsForm.patchValue({
               bankAccountNo: bankAccountNo,
-              IFSCno: ifsc
+              IFSCno: ifsc,
+              bankAccountName: bankAccountName
             });
           }
         } else {
           // Reset form controls to empty values
           this.empDetailsForm.patchValue({
             bankAccountNo: '',
-            IFSCno: ''
+            IFSCno: '',
+            bankAccountName: ''
           });
         }
       },
@@ -94,6 +99,7 @@ export class EmpDetailsComponent implements OnInit {
       bankAccountNo: this.empDetailsForm.value.bankAccountNo,
       IFSCno: this.empDetailsForm.value.IFSCno,
       employee: this.empId,
+      bankAccountName:this.empDetailsForm.value.bankAccountName
     };
 
     this.hrmsService.empdetails(payload).subscribe(

@@ -1,0 +1,52 @@
+<table class="employee-table">
+    <thead>
+        <tr>
+            <th>SR. No</th>
+            <th>Employee ID</th>
+            <th>Username</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
+            <th>Joining Date</th>
+            <th>Confirmation Date</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let employee of employees; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ employee.empIDNO }}</td>
+            <td>{{ employee?.username }}</td>
+            <td>{{ employee.firstName }}</td>
+            <td>{{ employee?.lastName }}</td>
+            <td>{{ employee?.email }}</td>
+            <td>{{ employee?.joiningDate }}</td>
+            <td>{{ employee?.confirmationData }}</td>
+            <td>{{employee.isActive ? 'Active' : 'Deactive'}}</td>
+            <td class="status-container">
+                <label class="switch">
+                    <input type="checkbox" [checked]="employee.isActive" (change)="toggleStatus(employee)">
+                    <span class="slider round"></span>
+                </label>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="overlay" *ngIf="showSpinner">
+    <!-- Spinner container -->
+    <div class="spinner-container">
+        <!-- Your spinner HTML -->
+        <div class="dot-spinner">
+            <!-- Spinner dots -->
+            <div class="dot-spinner__dot"></div>
+            <div class="dot-spinner__dot"></div>
+            <div class="dot-spinner__dot"></div>
+            <div class="dot-spinner__dot"></div>
+            <div class="dot-spinner__dot"></div>
+            <div class="dot-spinner__dot"></div>
+            <div class="dot-spinner__dot"></div>
+            <div class="dot-spinner__dot"></div>
+        </div>
+    </div>
+</div>

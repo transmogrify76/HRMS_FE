@@ -162,7 +162,7 @@ export class PayslipComponent implements OnInit, OnDestroy {
   
 
   fetchEmployees(): void {
-    this.hrmsService.getEmployees().subscribe(
+    this.hrmsService.getAllActiveEmployees().subscribe(
       (response: any) => {
         this.employees = response.employees;
       },

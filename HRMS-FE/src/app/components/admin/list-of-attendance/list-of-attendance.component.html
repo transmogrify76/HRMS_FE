@@ -1,58 +1,57 @@
 <div class="container">
-  <h2>Select Employee</h2>
-  <select [(ngModel)]="selectedEmployee" (change)="fetchEmployeeData()" class="custom-select" aria-label="select-employee">
-    <option disabled selected>Select Employee</option>
-    <option *ngFor="let employee of employees" [value]="employee.empId">{{ employee.username }}</option>
-  </select>
-
-  <h2>Select Month</h2>
-  <select [(ngModel)]="selectedMonth" (change)="fetchEmployeeData()" class="custom-select" aria-label="select-month">
-    <option disabled selected>Select Month</option>
-    <option value="1">January</option>
-    <option value="2">February</option>
-    <option value="3">March</option>
-    <option value="4">April</option>
-    <option value="5">May</option>
-    <option value="6">June</option>
-    <option value="7">July</option>
-    <option value="8">August</option>
-    <option value="9">September</option>
-    <option value="10">October</option>
-    <option value="11">November</option>
-    <option value="12">December</option>
-  </select>
-
-  <div *ngIf="selectedEmployee && employeeDetails">
-    <div class="card">
-      <div class="card-header ">
-        Employee Details
-        
-      </div>
-      <div *ngIf="totalAttendance !== undefined">
-        Total Attendance for Selected Month: {{ totalAttendance }}
-      </div>
-      <div class="card-body">
-        <table>
-          <thead>
-            <tr>
-              <th>Check In</th>
-              <th>Check Out</th>
-              <th>Check In Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let attendance of attendanceDetails">
-              <td>{{ attendance.checkIn | subtractHours |date:'h:mm a' }}</td>
-              <td>{{ attendance.checkOut | subtractHours |date:'h:mm a' }}</td>
-              <td>{{ attendance.checkIn | date:'yyyy-MM-dd' }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-white">Select Month</h2>
+            <select [(ngModel)]="selectedMonth" (change)="fetchEmployeeData()" class="form-select mb-3"
+                aria-label="select-month">
+                <option disabled selected>Select Month</option>
+                <option value="1" class="text-black">January</option>
+                <option value="2" class="text-black">February</option>
+                <option value="3" class="text-black">March</option>
+                <option value="4" class="text-black">April</option>
+                <option value="5" class="text-black">May</option>
+                <option value="6" class="text-black">June</option>
+                <option value="7" class="text-black">July</option>
+                <option value="8" class="text-black">August</option>
+                <option value="9" class="text-black">September</option>
+                <option value="10" class="text-black">October</option>
+                <option value="11" class="text-black">November</option>
+                <option value="12" class="text-black">December</option>
+            </select>
+        </div>
     </div>
-  </div>
 
-  <button (click)="downloadPDF()" class="download-button">Download All Attendance</button>
-  <button (click)="downloadAllEmployeesPDF()" class="download-all-button">Download All Employees</button>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="mt-5 text-white">Employee Attendance</h2>
+            <div *ngFor="let employee of employees" class="attendance-employee mt-4">
+                <h3 class="text-white">{{ employee.firstName }} {{ employee.lastName }}</h3>
+                <p class="text-white">Attendance Days: {{ countAttendanceDays(employee) }}</p>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-light text-white">
+                        <thead>
+                            <tr>
+                                <th>Check In </th>
+                                <th>Check Out </th>
+                                <th>Check In Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let attendance of employee.attendances">
+                                <td>{{ attendance.checkIn | subtractHours |date:'h:mm a' }}</td>
+                                <td>{{ attendance.checkOut | subtractHours |date:'h:mm a' }}</td>
+                                <td>{{ attendance.checkIn | date:'yyyy-MM-dd' }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <button class="btn btn-primary" (click)="downloadPDF()">Download Attendance Report PDF</button>
+        </div>
+    </div>
 </div>

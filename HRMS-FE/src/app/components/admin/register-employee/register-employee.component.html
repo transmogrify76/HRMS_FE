@@ -1,133 +1,149 @@
 <div class="container">
-    <div class="row justify-content-center align-items-center" style="height: 100vh;">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">                    
-                    <h4 class="text-center">Register</h4>
-                </div>
-                <div class="card-body">
-                    <form (ngSubmit)="registerData()" [formGroup]="signUpForm">
-                        <div class="form-group">
-                            <label for="firstName">First Name</label>
-                            <input type="text" id="firstName" formControlName="firstName" placeholder="First Name" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName">Last Name</label>
-                            <input type="text" id="lastName" formControlName="lastName" placeholder="Last Name" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="mobileNo">Phone number</label>
-                            <input type="text" id="mobileNo" formControlName="mobileNo" placeholder="Phone number" class="form-control">
-                            <div *ngIf="signUpForm.controls['mobileNo'].invalid && (signUpForm.controls['mobileNo'].dirty || signUpForm.controls['mobileNo'].touched)" class="text-danger">
-                              Please enter 10 digit valid phone number.
-                            </div>
-                          </div>
-
-                          <div class="form-group">
-                            <label for="emergencyNo">Emergency Phone number</label>
-                            <input type="text" id="emergencyNo" formControlName="emergencyNo" placeholder="Phone number" class="form-control">
-                            <div *ngIf="signUpForm.controls['emergencyNo'].invalid && (signUpForm.controls['emergencyNo'].dirty || signUpForm.controls['emergencyNo'].touched)" class="text-danger">
-                              Please enter 10 digit valid phone number.
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label for="Present_Address">Present Address</label>
-                            <input type="text" id="Present_Address" formControlName="Present_Address" placeholder="Present Address " class="form-control">
-                          </div>
-                          <div class="form-group">
-                            <label for="Permanent_Address">Permanent Address</label>
-                            <input type="text" id="Permanent_Address" formControlName="Permanent_Address" placeholder="Permanent Address " class="form-control">
-                          </div>
-                          <div class="form-group">
-                        <div class="form-group">
-                            <label for="aadhaarNo">Aadhaar Card Number</label>
-                            <input type="text" id="aadhaarNo" formControlName="aadhaarNo" placeholder="Aadhaar Card Number" class="form-control">
-                            
-                            <!-- Error message for invalid Aadhaar card number -->
-                            <div *ngIf="signUpForm.get('aadhaarNo')?.invalid && (signUpForm.get('aadhaarNo')?.touched || signUpForm.get('aadhaarNo')?.dirty)" class="text-danger">
-                              <div *ngIf="signUpForm.get('aadhaarNo')?.hasError('invalidAdhaarCard')">
-                                Aadhaar Card Number must be a 12-digit number.
-                              </div>
-                            </div>
-                          </div>
-                                                                       
-                          <div class="form-group">
-                            <label for="panNo">PAN number</label>
-                            <input type="text" id="panNo" formControlName="panNo" placeholder="Pan card no." class="form-control">
-                            <div *ngIf="signUpForm.controls['panNo'].invalid && (signUpForm.controls['panNo'].dirty || signUpForm.controls['panNo'].touched)" class="text-danger">
-                              PAN number is required.
-                            </div>
-                          </div>
-                          <!-- <div class="form-group">
-                            <label for="bankAccountNo">Bank Account Number</label>
-                            <input type="text" id="bankAccountNo" formControlName="bankAccountNo" class="form-control">
-                            <div *ngIf="signUpForm.controls['bankAccountNo'].errors?.['invalidAccountNumber']" class="text-danger">
-                              Bank Account Number must contain only numbers.
-                            </div>
-                          </div> -->
-                          <!-- <div class="form-group">
-                            <label for="IFSCno">IFSC Code</label>
-                            <input type="text" id="IFSCno" formControlName="IFSCno" class="form-control">
-                            <div *ngIf="signUpForm.controls['IFSCno'].invalid && (signUpForm.controls['IFSCno'].dirty || signUpForm.controls['IFSCno'].touched)" class="text-danger">
-                              Please enter a valid IFSC code.
-                            </div>
-                          </div> -->
-                        <div class="form-group">
-                            <label for="joiningDate">Joining Date</label>
-                            <input type="date" id="joiningDate" formControlName="joiningDate" placeholder="joiningDate" class="form-control">
-                        </div>
-                        <div class="form-group">
-                          <label for="confirmationData">Confirmation Date</label>
-                          <input type="date" id="confirmationData" formControlName="confirmationData" placeholder="confirmationData" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" formControlName="email" placeholder="Email" class="form-control">
-                        </div>
-                        <div class="form-group">
-                          <label for="bloodGroup">Blood Group</label>
-                          <label for="bloodGroup">bloodGroup</label>
-                          <input type="bloodGroup" id="bloodGroup" formControlName="bloodGroup" placeholder="bloodGroup" class="form-control">
-                      </div>
-                      <div class="form-group">
-                        <label for="empIDNO">empIDNO</label>
-                        <input type="empIDNO" id="empIDNO" formControlName="empIDNO" placeholder="empIDNO" class="form-control">
-                    </div>
-                        <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text" id="username" formControlName="username" placeholder="Username" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" id="password" formControlName="password" placeholder="Password" class="form-control">
-                        </div>
-
-                        <!-- <div class="form-group">
-                            <label for="resignDate">Resign Date</label>
-                            <input type="date" id="resignDate" formControlName="resignDate" placeholder="Resign Date" class="form-control">
-                        </div> -->
-                        <button type="submit" class="btn btn-primary btn-block">Register</button>
-                        <div class="overlay" *ngIf="showSpinner">
-                            <!-- Spinner container -->
-                            <div class="spinner-container">
-                              <!-- Your spinner HTML -->
-                              <div class="dot-spinner">
-                                <!-- Spinner dots -->
-                                <div class="dot-spinner__dot"></div>
-                                <div class="dot-spinner__dot"></div>
-                                <div class="dot-spinner__dot"></div>
-                                <div class="dot-spinner__dot"></div>
-                                <div class="dot-spinner__dot"></div>
-                                <div class="dot-spinner__dot"></div>
-                                <div class="dot-spinner__dot"></div>
-                                <div class="dot-spinner__dot"></div>
-                              </div>
-                            </div>
-                          </div>
-                    
-                </div>
-              </form>
-            </div>
+  <div class="row justify-content-center align-items-center" style="height: 100vh;">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="text-center">Register</h4>
         </div>
+        <div class="card-body">
+          <form (ngSubmit)="registerData()" [formGroup]="signUpForm">
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" formControlName="firstName" placeholder="First Name"
+                class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" formControlName="lastName" placeholder="Last Name" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="mobileNo">Phone number</label>
+              <input type="text" id="mobileNo" formControlName="mobileNo" placeholder="Phone number"
+                class="form-control">
+              <div
+                *ngIf="signUpForm.controls['mobileNo'].invalid && (signUpForm.controls['mobileNo'].dirty || signUpForm.controls['mobileNo'].touched)"
+                class="text-danger">
+                Please enter 10 digit valid phone number.
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="emergencyNo">Emergency Phone number</label>
+              <input type="text" id="emergencyNo" formControlName="emergencyNo" placeholder="Phone number"
+                class="form-control">
+              <div
+                *ngIf="signUpForm.controls['emergencyNo'].invalid && (signUpForm.controls['emergencyNo'].dirty || signUpForm.controls['emergencyNo'].touched)"
+                class="text-danger">
+                Please enter 10 digit valid phone number.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="Present_Address">Present Address</label>
+              <input type="text" id="Present_Address" formControlName="Present_Address" placeholder="Present Address "
+                class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="Permanent_Address">Permanent Address</label>
+              <input type="text" id="Permanent_Address" formControlName="Permanent_Address"
+                placeholder="Permanent Address " class="form-control">
+            </div>
+            <div class="form-group">
+              <div class="form-group">
+                <label for="aadhaarNo">Aadhaar Card Number</label>
+                <input type="text" id="aadhaarNo" formControlName="aadhaarNo" placeholder="Aadhaar Card Number"
+                  class="form-control">
+                <div
+                  *ngIf="signUpForm.get('aadhaarNo')?.invalid && (signUpForm.get('aadhaarNo')?.touched || signUpForm.get('aadhaarNo')?.dirty)"
+                  class="text-danger">
+                  <div *ngIf="signUpForm.get('aadhaarNo')?.hasError('invalidAdhaarCard')">
+                    Aadhaar Card Number must be a 12-digit number.
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="panNo">PAN number</label>
+                <input type="text" id="panNo" formControlName="panNo" placeholder="Pan card no." class="form-control">
+                <div
+                  *ngIf="signUpForm.controls['panNo'].invalid && (signUpForm.controls['panNo'].dirty || signUpForm.controls['panNo'].touched)"
+                  class="text-danger">
+                  PAN number is required.
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="joiningDate">Joining Date</label>
+                <input type="date" id="joiningDate" formControlName="joiningDate" placeholder="joiningDate"
+                  class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="confirmationData">Confirmation Date</label>
+                <input type="date" id="confirmationData" formControlName="confirmationData"
+                  placeholder="confirmationData" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" formControlName="email" placeholder="Email" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="bloodGroup">Blood Group</label>
+                <input type="bloodGroup" id="bloodGroup" formControlName="bloodGroup" placeholder="bloodGroup"
+                  class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="empIDNO">empIDNO</label>
+                <input type="empIDNO" id="empIDNO" formControlName="empIDNO" placeholder="empIDNO" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" formControlName="username" placeholder="Username" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" formControlName="password" placeholder="Password"
+                  class="form-control">
+              </div>              
+              <div class="form-group">
+                <label for="Education_qualification">Education Qualification</label>
+                <input type="Education_qualification" id="Education_qualification" formControlName="Education_qualification" placeholder="Education_qualification"
+                  class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="dept">Department</label>
+                <input type="dept" id="dept" formControlName="dept" placeholder="dept"
+                  class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="post">Designation</label>
+                <input type="post" id="post" formControlName="post" placeholder="post"
+                  class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="p_email">Personal Email</label>
+                <input type="p_email" id="p_email" formControlName="p_email" placeholder="p_email"
+                  class="form-control">
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Register</button>
+              <div class="overlay" *ngIf="showSpinner">
+                <!-- Spinner container -->
+                <div class="spinner-container">
+                  <!-- Your spinner HTML -->
+                  <div class="dot-spinner">
+                    <!-- Spinner dots -->
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-</div>
+  </div>

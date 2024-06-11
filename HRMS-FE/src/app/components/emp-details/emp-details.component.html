@@ -12,6 +12,11 @@
         </div>
         <div class="card-body">
           <form [formGroup]="empDetailsForm" (ngSubmit)="empdetails()">
+
+            <div class="form-group">
+              <label for="bankAccountName">Bank Name</label>
+              <input type="text" id="bankAccountName" formControlName="bankAccountName" class="form-control">
+            </div>
             <div class="form-group">
               <label for="bankAccountNo">Bank Account Number</label>
               <input type="text" id="bankAccountNo" formControlName="bankAccountNo" class="form-control">

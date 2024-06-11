@@ -1,30 +1,43 @@
-<br><br>
-
-<br><br><br>
-
-<div class="container">
+<div class="container" *ngIf="employeeDetails">
     <div>
+        <div class="monthSelectContainer">
+            <label for="monthSelect">Select Month:</label>
+            <select id="monthSelect" (change)="onMonthChange($event)">
+                <option value="" selected>All Months</option>
+                <option *ngFor="let month of months" [value]="month.value">{{ month.name }}</option>
+            </select>
+        </div>
         <div class="card">
             <div class="card-header bg-gradient-primary">
                 Employee Details
             </div>
             <div class="card-body">
-                <table>
+                <!-- Dropdown for Month Selection -->
+                
+
+                <table *ngIf="filteredAttendances && filteredAttendances.length > 0">
                     <thead>
                         <tr>
                             <th>Check In</th>
                             <th>Check Out</th>
                             <th>Check In Date</th>
-
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let attendance of this.employeeDetails.attendances">
-                            <td>{{ attendance.checkIn | subtractHours |date:'h:mm a' }}</td>
-                            <td>{{ attendance.checkOut | subtractHours |date:'h:mm  a' }}</td>
+                        <tr *ngFor="let attendance of filteredAttendances">
+                            <td>{{ attendance.checkIn | date:'h:mm a' }}</td>
+                            <td>{{ attendance.checkOut | date:'h:mm a' }}</td>
                             <td>{{ attendance.checkIn | date:'yyyy-MM-dd' }}</td>
                         </tr>
                     </tbody>
                 </table>
+                <div *ngIf="!filteredAttendances || filteredAttendances.length === 0">
+                    No attendance records found for the selected month.
+                </div>
             </div>
         </div>
+    </div>
+</div>
+<div *ngIf="!employeeDetails">
+    Loading employee details...
+</div>

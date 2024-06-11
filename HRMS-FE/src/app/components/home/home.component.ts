@@ -117,14 +117,10 @@ export class HomeComponent {
   
 
   isAbsent(day: Date): boolean {
-    // Logic to determine if the day is marked as absent
-    // For demonstration purposes, let's mark every 3rd day as absent
     return day.getDate() % 3 === 0;
   }
 
   isLeave(day: Date): boolean {
-    // Logic to determine if the day is marked as leave application
-    // For demonstration purposes, let's mark every 5th day as leave
     return day.getDate() % 5 === 0;
   }
 

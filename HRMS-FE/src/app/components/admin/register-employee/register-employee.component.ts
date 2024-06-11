@@ -46,6 +46,10 @@ export class RegisterEmployeeComponent {
       empIDNO: [''],
       Permanent_Address: [''],
       Present_Address: [''],
+      p_email: [''],
+      post: [''],
+      dept: [''],
+      Education_qualification: [''],
     });
   }
 

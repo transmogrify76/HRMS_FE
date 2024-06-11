@@ -46,3 +46,35 @@ th {
 .container{
   width:40%;
 }
+.monthSelectContainer {
+  padding-top: 5%;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+
+  label {
+    font-weight: bold;
+    margin-right: 10px;
+    color: #ffffff; // Darker color for better readability
+  }
+
+  select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease;
+
+    &:hover {
+      border-color: #888;
+    }
+
+    &:focus {
+      border-color: #007bff; // Primary color for focus state
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+  }
+}

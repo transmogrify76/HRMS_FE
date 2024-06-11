@@ -23,7 +23,7 @@ import { ListOfEmployeesComponent } from './components/admin/list-of-employees/l
 import { FetchSalaryComponent } from './components/fetch-salary/fetch-salary.component';
 import { PayslipDetailsComponent } from './components/payslip-details/payslip-details.component';
 import { EmpPayrollsComponent } from './components/emp-payrolls/emp-payrolls.component';
-import { LeavesAdminComponent } from './components/admin/leaves-admin/leaves-admin.component';
+import { UserManagementComponent } from './components/admin/user-management/user-management.component';
 import { TotalLeavesComponent } from './components/admin/total-leaves/total-leaves.component';
 
 
@@ -71,11 +71,15 @@ const routes: Routes = [
   {
 
     path: 'payslip',
-    component: EmpPayrollsComponent,
+    component: PayslipComponent,
   },
   {
     path: 'my-profile',
     component: MyProfileComponent,
+  },
+  {
+    path: 'user-management',
+    component: UserManagementComponent,
   },
   {
 
@@ -85,7 +89,7 @@ const routes: Routes = [
   
   {
     path:'list-of-attendance',
-    component:LeavesAdminComponent
+    component:ListOfAttendanceComponent
   }  ,
   {
     path:'register-employee',
@@ -131,10 +135,6 @@ const routes: Routes = [
     component: PayslipDetailsComponent,
   },
 {
-  path: 'leaves-admin',
-  component:LeavesAdminComponent
-},
-{
   path: 'emp-payroll',
   component:EmpPayrollsComponent
 }
@@ -148,5 +148,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { 
- 
 }

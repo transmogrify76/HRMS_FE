@@ -1,9 +1,12 @@
 <div class="container">
+
   <h2>Select Employee</h2>
   <select [(ngModel)]="selectedEmployee" (change)="fetchEmployeeData()" class="custom-select" aria-label="select-employee">
       <option disabled selected>Select Employee</option>
       <option *ngFor="let employee of employees; let i = index" [value]="employee.empId">{{ employee.username }}</option>
   </select>
+
+  <p style="color: azure; font-size: large;"><strong>Joining Date:</strong> {{ employeeDetails?.employee?.joiningDate }}</p>
 
   <div *ngIf="selectedEmployee">
 
@@ -20,6 +23,7 @@
             <p><strong>Reason:</strong> {{ leaves.reason }}</p>
             <p><strong>Duration:</strong> {{ leaves.duration }}</p>
             <p><strong>Remaining Leave: </strong>{{this.leavecount}}</p>
+            
             <div class="form-group">
               <label for="remark{{i}}">Remark:</label>
               <textarea id="remark{{i}}" name="remark{{i}}" [(ngModel)]="remark[i]" required></textarea>
@@ -30,7 +34,7 @@
                 <option value="APPROVED">Approved(With Pay)</option>
                 <option value="REJECTED">Approved(Without Pay)</option>      
               </select>
-              <button type="button" class="btn btn-dark" (click)="updateLeaveStatus(leaves?.leaveId, selectedLeaveStatus[i])">
+              <button type="button" class="btn btn-dark" (click)="updateLeaveStatus(leaves?.leaveId, selectedLeaveStatus[i], leaves.duration)">
                 Submit
               </button>
             </div>       
