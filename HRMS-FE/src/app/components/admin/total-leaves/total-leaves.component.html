@@ -1,0 +1,43 @@
+<div class="container">
+    <h2>Select Employee</h2>
+    <select [(ngModel)]="selectedEmployee" (change)="fetchEmployeeData()" class="custom-select" aria-label="select-employee">
+        <option disabled selected>Select Employee</option>
+        <option *ngFor="let employee of employees; let i = index" [value]="employee.empId">{{ employee.username }}</option>
+    </select>
+
+    <div *ngIf="selectedEmployee" class="employee-details">
+        <div class="card">
+            <div class="card-header bg-gradient-primary">
+                Leave Details
+            </div>
+            <div class="card-body">
+                <h2>Leave Details</h2>
+                <p><strong>Employee Mail: </strong>{{employeeDetails?.employee?.email}}</p>
+                <p><strong>Joining Date: </strong>{{employeeDetails?.employee?.joiningDate}}</p>
+                <div *ngFor="let leaves of employeeDetails?.employee?.leaves; let i = index">
+                    <div class="leave-details" *ngIf="leaves.leaveStatus === 'APPROVED' || leaves.leaveStatus === 'REJECTED'">
+                        <p><strong>Start Date:</strong> {{ leaves.startDate | date: 'medium' }}</p>
+                        <p><strong>End Date:</strong> {{ leaves.endDate | date: 'medium' }}</p>
+                        <p><strong>Reason:</strong> {{ leaves.reason }}</p>
+                        <p><strong>Duration:</strong> {{ leaves.duration }}</p>
+                        <p><strong>Status:</strong> {{ leaves.leaveStatus | uppercase }}</p>
+                        <div class="overlay" *ngIf="showSpinner">
+                            <div class="spinner-container">
+                                <div class="dot-spinner">
+                                    <div class="dot-spinner__dot"></div>
+                                    <div class="dot-spinner__dot"></div>
+                                    <div class="dot-spinner__dot"></div>
+                                    <div class="dot-spinner__dot"></div>
+                                    <div class="dot-spinner__dot"></div>
+                                    <div class="dot-spinner__dot"></div>
+                                    <div class="dot-spinner__dot"></div>
+                                    <div class="dot-spinner__dot"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

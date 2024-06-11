@@ -24,6 +24,7 @@ import { FetchSalaryComponent } from './components/fetch-salary/fetch-salary.com
 import { PayslipDetailsComponent } from './components/payslip-details/payslip-details.component';
 import { EmpPayrollsComponent } from './components/emp-payrolls/emp-payrolls.component';
 import { UserManagementComponent } from './components/admin/user-management/user-management.component';
+import { TotalLeavesComponent } from './components/admin/total-leaves/total-leaves.component';
 
 
 const routes: Routes = [
@@ -61,6 +62,11 @@ const routes: Routes = [
 
     path: 'leave',
     component: LeaveComponent,
+  },
+  {
+
+    path: 'total-leaves',
+    component: TotalLeavesComponent,
   },
   {
 
