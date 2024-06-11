@@ -15,12 +15,12 @@
                 <p><strong>Employee Mail: </strong>{{employeeDetails?.employee?.email}}</p>
                 <p><strong>Joining Date: </strong>{{employeeDetails?.employee?.joiningDate}}</p>
                 <div *ngFor="let leaves of employeeDetails?.employee?.leaves; let i = index">
-                    <div class="leave-details" *ngIf="leaves.leaveStatus === 'APPROVED' || leaves.leaveStatus === 'REJECTED'">
+                    <div class="leave-details" >
                         <p><strong>Start Date:</strong> {{ leaves.startDate | date: 'medium' }}</p>
                         <p><strong>End Date:</strong> {{ leaves.endDate | date: 'medium' }}</p>
                         <p><strong>Reason:</strong> {{ leaves.reason }}</p>
                         <p><strong>Duration:</strong> {{ leaves.duration }}</p>
-                        <p><strong>Status:</strong> {{ leaves.leaveStatus | uppercase }}</p>
+                        <p><strong>Status:</strong>{{ leaves.leaveStatus === 'APPROVED' ? 'PAID LEAVE' : (leaves.leaveStatus === 'REJECTED' ? 'LEAVE WITHOUT PAY' : 'PENDING') }}</p>
                         <div class="overlay" *ngIf="showSpinner">
                             <div class="spinner-container">
                                 <div class="dot-spinner">
