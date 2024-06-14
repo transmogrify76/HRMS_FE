@@ -6,21 +6,32 @@
     </select>
   </div>
 
-  <div class="payslip-container" *ngIf="filterdata">
-    <div class="company-details">
+  <div id="payslip-container" #content class="payslip-container" *ngIf="filterdata">
+    <div class="company-details" >
       <div class="company-logo">
-        <img src="../../../assets/transmogrify logo.jpg" alt="Company Logo">
+        <img src="../../../assets/transmogrify logo.jpg" alt="Company Logo" />
       </div>
       <div class="company-address">
-        <p>Company Name: Transmogrify Global Private Limited</p>
-        <p>Email: tgwbin@gmail.com</p>
+        <p>Transmogrify Global Private Limited</p>
+        <p>
+          10ES6, 10th floor, EAST TOWER, MANI CASADONA IT BUILDING, <br />
+          Newtown, Kolkata, <br />
+          West Bengal 700156 <br />
+        </p>
+        <p>
+          CIN : U71100WB2023PTC262992 <br />
+          Pay Slip for {{ this.filterdata?.month }} , 2024 <br />
+        </p>
       </div>
     </div>
 
     <div class="employee">
       <div class="employee-details">
         <h3>Employee Details</h3>
-        <p>Employee Name: {{ this.employee?.firstName }} {{this.employee?.lastName}}</p>
+        <p>
+          Employee Name: {{ this.employee?.firstName }}
+          {{ this.employee?.lastName }}
+        </p>
         <p>Employee ID: {{ this.employee?.empIDNO }}</p>
         <p>Date of Joining: {{ this.employee?.joiningDate }}</p>
         <p>PAN: {{ this.employee?.panNo }}</p>
@@ -28,12 +39,14 @@
       </div>
 
       <div class="employee-address-details">
-        <h3>Address & Bank Details</h3>
-        <p>Present Address: {{ this.employee?.Present_Address ? this.employee?.Present_Address : 'Error retrieving address'}}</p>
-        <p>Permanent Address: {{ this.employee?.Permanent_Address ? this.employee?.Permanent_Address : 'Error retrieving address'}}</p>
-        <p>Date of Joining: {{ this.employee?.joiningDate }}</p>
+        <h3>Other Details</h3>
         <p>Mobile Number: {{ this.employee?.mobileNo }}</p>
-        <p>IFSC Code: {{this.employee?.role?.roleId}}</p>
+        <p>Email: {{ this.employee?.p_email }}</p>
+        <p>
+          Bank Name: {{ this.employee?.employeedetails[0]?.bankAccountName }}
+        </p>
+        <p>Account: {{ this.employee?.employeedetails[0]?.bankAccountNo }}</p>
+        <p>Working Days (this month): {{ this.filterdata?.workingDays }}</p>
       </div>
     </div>
 
@@ -64,13 +77,22 @@
 
     <div class="net-payable">
       <h3>Amount Payable</h3>
-      <p>Net Payable: {{ this.filterdata?.transferred_amount }}</p>
+      <p>
+        <strong>Net Salary: INR {{ this.filterdata?.transferred_amount
+          }}</strong>
+      </p>
     </div>
 
     <div class="footer">
-      <p>Registered Office: Unit No 10ES6, 10th floor, EAST TOWER, MANI CASADONA IT BUILDING, International Financial Hub(CBD), Newtown, Kolkata, Chakpachuria, West Bengal 700156</p>
-      <p>Visit our Official Website: <a href="https://transmogriffy.com/">Transmogrify Global Private Limited</a></p>
-      <p>Disclaimer: This is a computer-generated document and does not require a signature.</p>
+      <p>
+        Visit our Official Website:
+        <a href="https://transmogriffy.com/">Transmogrify Global Private
+          Limited</a>
+      </p>
+      <p>
+        Disclaimer: This is a computer-generated document and does not require a
+        signature.
+      </p>
     </div>
   </div>
 

@@ -1,28 +1,54 @@
 .container {
-    font-family: Arial, sans-serif;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
     max-width: 800px;
-    margin: auto;
+    margin-top: 5vh;
     padding: 20px;
+    border: 1px solid #000;
+    /* Outline for the entire page */
+    background-color: aliceblue;
 }
 
 .header {
     margin-bottom: 20px;
+    text-align: center;
+}
+
+.header h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.header select {
+    padding: 5px;
+    font-size: 16px;
 }
 
 .payslip-container {
     border: 1px solid #ccc;
     padding: 20px;
     margin-bottom: 20px;
-    background-color: white; /* Set background color to white */
-    }
+    background-color: #fff;
+}
 
 .company-details {
     display: flex;
-    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #000;
+    /* Outline for company details */
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #fff;
 }
 
 .company-logo img {
-    max-width: 100px;
+    mix-blend-mode: multiply;
+    margin-top: 30px;
+    width: 120px;
+}
+
+.company-address p {
+    margin: 5px 0;
+    font-size: 14px;
 }
 
 .employee {
@@ -34,6 +60,22 @@
 .employee-details,
 .employee-address-details {
     width: 48%;
+    border: 1px solid #000;
+    /* Outline for employee details */
+    padding: 10px;
+    background-color: white;
+}
+
+.employee-details h3,
+.employee-address-details h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.employee-details p,
+.employee-address-details p {
+    margin: 5px 0;
+    font-size: 14px;
 }
 
 .content {
@@ -44,10 +86,77 @@
 
 .section {
     width: 48%;
+    border: 1px solid #000;
+    /* Outline for earnings and deductions */
+    padding: 10px;
+    background-color: white;
+}
+
+.section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.section ul li {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.net-payable {
+    border: 1px solid #000;
+    /* Outline for net payable section */
+    padding: 10px;
+    background-color: #fff;
+    margin-bottom: 20px;
+}
+
+.net-payable h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.net-payable p {
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .footer {
-    border-top: 1px solid #ccc;
-    padding-top: 20px;
-    margin-top: 20px;
+    border-top: 1px solid #fff;
+    padding-top: 10px; /* Reduced padding-top to minimize white space */
+    margin-top: 10px;  /* Reduced margin-top to minimize white space */
+    text-align: center;
+}
+
+.footer p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.footer a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+button {
+    padding: 10px;
+    margin-left: 41%;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
 }
