@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HrmsApiService } from 'src/app/services/hrms-api.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-attendance',
@@ -16,6 +17,7 @@ export class AttendanceComponent implements OnInit {
   empId: number = 0;
   selectedLeaveStatus = '';
   showSpinner = false;
+  selectedMonth: string = '';
 
   months = [
     { name: 'January', value: '01' },
@@ -63,70 +65,70 @@ export class AttendanceComponent implements OnInit {
     );
   }
 
-  combineData(selectedMonth?: string): void {
-    if (this.employeeDetails && this.employeeDetails.attendances && this.employeeDetails.leaves) {
-      if (selectedMonth) {
-        // Filter attendances for the selected month
-        const filteredAttendances = this.employeeDetails.attendances.filter((attendance: any) => {
-          const checkInDate = new Date(attendance.checkIn);
-          return (checkInDate.getMonth() + 1).toString().padStart(2, '0') === selectedMonth;
-        });
-  
-        // Filter leaves for the selected month
-        const filteredLeaves = this.employeeDetails.leaves.filter((leave: any) => {
-          const startDate = new Date(leave.startDate);
-          return (startDate.getMonth() + 1).toString().padStart(2, '0') === selectedMonth;
-        });
-  
-        console.log('Filtered Attendances:', filteredAttendances); // Log filtered attendances
-        console.log('Filtered Leaves:', filteredLeaves); // Log filtered leaves
-  
-        // Combine filtered attendances with matching leaves
-        this.combinedData = filteredAttendances.map((attendance: any) => {
-          const matchingLeave = filteredLeaves.find((leave: any) => leave.startDate === attendance.checkIn.split('T')[0]);
-  
-          return {
-            checkIn: attendance.checkIn,
-            checkOut: attendance.checkOut,
-            date: attendance.checkIn.split('T')[0], // Adjust date format as needed
-            leaveReason: matchingLeave ? matchingLeave.reason : '',
-            // Add more properties as needed
-          };
-        });
-      } else {
-        // If no month is selected, combine all attendances with corresponding leaves
-        this.combinedData = this.employeeDetails.attendances.map((attendance: any) => {
-          const matchingLeave = this.employeeDetails.leaves.find((leave: any) => leave.startDate === attendance.checkIn.split('T')[0]);
-  
-          return {
-            checkIn: attendance.checkIn,
-            checkOut: attendance.checkOut,
-            date: attendance.checkIn.split('T')[0], // Adjust date format as needed
-            leaveReason: matchingLeave ? matchingLeave.reason : '',
-            // Add more properties as needed
-          };
-        });
-      }
-  
-      console.log('Combined Data:', this.combinedData); // Log combined data after mapping
+  combineData(): void {
+    const attendances = this.employeeDetails.attendances.map((att: { checkIn: moment.MomentInput; checkOut: any; }) => ({
+      date: moment(att.checkIn).format('YYYY-MM-DD'),
+      checkIn: att.checkIn,
+      checkOut: att.checkOut,
+      status: 'Present'
+    }));
+
+    const leaves = this.employeeDetails.leaves.map((leave: { startDate: moment.MomentInput; }) => ({
+      date: moment(leave.startDate).format('YYYY-MM-DD'),
+      status: 'Leave'
+    }));
+
+    const startDate = moment.min(
+      attendances.map((a: { date: moment.MomentInput; }) => moment(a.date))
+    ).startOf('day');
+    const endDate = moment.max(
+      attendances.map((a: { date: moment.MomentInput; }) => moment(a.date))
+    ).endOf('day');
+
+    // Generate date range
+    const dateRange = [];
+    for (let m = startDate.clone(); m.isSameOrBefore(endDate); m.add(1, 'days')) {
+      dateRange.push(m.format('YYYY-MM-DD'));
+    }
+
+    // Hardcoded holidays and weekends
+    const holidays = ['2024-01-01','2024-01-26','2024-03-25','2024-05-01','2024-05-25','2024-05-27','2024-06-01','2024-08-15','2024-10-02','2024-10-10','2024-10-11','2024-10-12','2024-10-16','2024-10-31','2024-12-25']
+    const weekends = dateRange.filter(date => {
+      const day = moment(date).day();
+      return day === 0 || day === 6;
+    });
+
+    // Merge data
+    this.combinedData = dateRange.map(date => {
+      const attendance = attendances.find((a: { date: string; }) => a.date === date);
+      const leave = leaves.find((l: { date: string; }) => l.date === date);
+      const isHoliday = holidays.includes(date);
+      const isWeekend = weekends.includes(date);
+
+      return {
+        date,
+        checkIn: attendance ? attendance.checkIn : null,
+        checkOut: attendance ? attendance.checkOut : null,
+        status: attendance
+          ? attendance.status
+          : leave
+          ? leave.status
+          : isHoliday
+          ? 'Holiday'
+          : isWeekend
+          ? 'Weekend'
+          : 'Absent'
+      };
+    });
+
+    // Filter based on selected month
+    if (this.selectedMonth) {
+      this.combinedData = this.combinedData.filter(data => moment(data.date).format('MM') === this.selectedMonth);
     }
   }
-  
-  
-  
-  
-  onMonthChange(event: Event): void {
-    const selectedMonth = (event.target as HTMLSelectElement).value;
-    if (this.employeeDetails && this.employeeDetails.attendances && this.employeeDetails.leaves) {
-      if (selectedMonth === '') {
-        // Reset to all attendances with corresponding leaves
-        this.combineData();
-      } else {
-        this.combineData(selectedMonth);
-      }
-    }
+
+  onMonthChange(event: any): void {
+    this.selectedMonth = event.target.value;
+    this.combineData();
   }
-  
-  
-  
 }
