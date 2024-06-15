@@ -4,68 +4,91 @@
   </div>
   <div class="employee-details-container">
     
-    <!-- Profile picture -->
-    <div class="profile-picture-section">
-      <div class="profile-picture-container">
-        <input #fileInput type="file" accept="image/*" (change)="onFileSelected($event)" class="file-input">
-        <div class="upload-area" *ngIf="!isUploading && !profilePicture" (click)="fileInput.click()">
-          <span class="upload-text">Upload Photo</span>
-        </div>
-        <div class="upload-area" *ngIf="isUploading">
-          <div class="spinner"></div>
-        </div>
-        <div class="profile-picture" *ngIf="profilePicture" (click)="fileInput.click()">
-          <img [src]="profilePicture" alt="Profile Picture">
+    <!-- Profile picture and basic details -->
+    <div class="basic-details-section">
+      <div class="profile-picture-section">
+        <div class="profile-picture-container">
+          <input #fileInput type="file" accept="image/*" (change)="onFileSelected($event)" class="file-input">
+          <div class="upload-area" *ngIf="!isUploading && !profilePicture" (click)="fileInput.click()">
+            <span class="upload-text">Upload Photo</span>
+          </div>
+          <div class="upload-area" *ngIf="isUploading">
+            <div class="spinner"></div>
+          </div>
+          <div class="profile-picture" *ngIf="profilePicture" (click)="fileInput.click()">
+            <img [src]="profilePicture" alt="Profile Picture">
+          </div>
         </div>
       </div>
-      <!-- <button class="btn-get-profile" (click)="retrieveAndDisplayProfilePic()">Get Profile Picture</button> -->
+      <div class="employee-details">
+        <!-- Basic employee details -->
+        <div class="detail-item">
+          <span class="label">Full Name:</span>
+          <span class="value">{{ employeeDetails?.employee?.firstName }} {{ employeeDetails?.employee?.lastName }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="label">Employee ID:</span>
+          <span class="value">{{ employeeDetails?.employee?.empIDNO }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="label">Work's mail:</span>
+          <span class="value">{{ employeeDetails?.employee?.email }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="label">Username:</span>
+          <span class="value">{{ employeeDetails?.employee?.username }}</span>
+        </div>
+      </div>
     </div>
-    
-    <!-- Employee details -->
-    <div *ngIf="employeeDetails" class="employee-details">
-      <div class="detail-item">
-        <span class="label">Full Name:</span>
-        <span class="value">{{ employeeDetails.employee.firstName }} {{ employeeDetails.employee.lastName }}</span>
-      </div>
-      <div class="detail-item">
-        <span class="label">Email:</span>
-        <span class="value">{{ employeeDetails.employee.email }}</span>
-      </div>
-      <div class="detail-item">
-        <span class="label">Username:</span>
-        <span class="value">{{ employeeDetails.employee.username }}</span>
-      </div>
+
+    <!-- Bank details section -->
+    <div class="bank-details-section">
       <div class="detail-item">
         <span class="label">Bank Account No:</span>
-        <span class="value">{{employeeDetails?.employee?.bankAccountNo}}</span>
-      </div>
-      <div class="detail-item">
-        <span class="label">Aadhar Card No:</span>
-        <span class="value">{{employeeDetails?.employee?.aadhaarNo}}</span>
+        <span class="value">{{ employeeDetails?.employee?.bankAccountNo }}</span>
       </div>
       <div class="detail-item">
         <span class="label">IFSC No:</span>
-        <span class="value">{{employeeDetails?.employee?.IFSCno}}</span>
+        <span class="value">{{ employeeDetails?.employee?.IFSCno }}</span>
+      </div>
+    </div>
+
+    <!-- Aadhar & PAN details section -->
+    <div class="aadhar-pan-section">
+      <div class="detail-item">
+        <span class="label">Aadhar Card No:</span>
+        <span class="value">{{ employeeDetails?.employee?.aadhaarNo }}</span>
       </div>
       <div class="detail-item">
         <span class="label">PAN No:</span>
-        <span class="value">{{employeeDetails?.employee?.panNo}}</span>
-      </div>
-      <div class="detail-item">
-        <span class="label">Joining Date:</span>
-        <span class="value">{{ employeeDetails.employee.joiningDate }}</span>
-      </div>
-      <div class="detail-item">
-        <span class="label">Current Working Days:</span>
-        <span class="value">{{ currentWorkingDays }}</span>
-      </div>
-      <!-- Available Leaves section -->
-      <div class="detail-item">
-        <span class="label">Available Leaves:</span>
-        <span class="value">{{ employeeDetails?.employee?.leaveCount }}</span>
+        <span class="value">{{ employeeDetails?.employee?.panNo }}</span>
       </div>
     </div>
+
+    <!-- Contact details section -->
+    <div class="contact-details-section">
+      <div class="detail-item">
+        <span class="label">Contact Number:</span>
+        <span class="value">{{ employeeDetails?.employee?.mobileNo }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="label">Personal Email:</span>
+        <span class="value">{{ employeeDetails?.employee?.p_email }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="label">Department:</span>
+        <span class="value">{{ employeeDetails?.employee?.dept }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="label">Designation:</span>
+        <span class="value">{{ employeeDetails?.employee?.post }}</span>
+      </div>
+    </div>
+
     <!-- Loading indicator -->
-    <div *ngIf="!employeeDetails" class="loading-indicator">Loading employee details...</div>
+    <div *ngIf="!employeeDetails" class="loading-indicator">
+      <div class="spinner"></div>
+      <p>Loading employee details...</p>
+    </div>
   </div>
 </div>

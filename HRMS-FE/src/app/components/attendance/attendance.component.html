@@ -9,29 +9,37 @@
         </div>
         <div class="card">
             <div class="card-header bg-gradient-primary">
-                Employee Details
+                Employee Attendance Details
             </div>
             <div class="card-body">
-                <!-- Dropdown for Month Selection -->
-                
-
-                <table *ngIf="filteredAttendances && filteredAttendances.length > 0">
+                <table *ngIf="combinedData && combinedData.length > 0">
                     <thead>
                         <tr>
+                            <th>S.No</th>
                             <th>Check In</th>
                             <th>Check Out</th>
-                            <th>Check In Date</th>
+                            <th>Date</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr *ngFor="let attendance of filteredAttendances">
-                            <td>{{ (attendance.checkIn  | subtractHours) | date:'h:mm a' }}</td> 
-                            <td>{{ (attendance.checkOut | subtractHours ) | date:'h:mm a'}}</td>
-                            <td>{{ attendance.checkIn | date:'yyyy-MM-dd' }}</td>
+                    <!-- <tbody>
+                        <tr *ngFor="let entry of combinedData ; let i = index">
+                            <td>{{ i + 1}}</td>
+                            <td>{{ entry.checkIn | date: 'dd-MMM-yyyy'  }}</td>
+                            <td *ngIf="!entry.status">{{(( entry.checkIn | date: 'h:mm a' )) || 'Absent' }}</td>
+                            <td *ngIf="!entry.status">{{ ((entry.checkOut  ) | date: 'h:mm a'  ) || 'Absent' }}</td>
                         </tr>
-                    </tbody>
-                </table>
-                <div *ngIf="!filteredAttendances || filteredAttendances.length === 0">
+                    </tbody> -->
+                    <tbody>
+                        <tr *ngFor="let entry of combinedData ; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ entry.checkIn | date: ' h:mm a' }}</td>
+                            <td>{{ entry.checkOut | date: 'h:mm a' }}</td>
+                            <td>{{ entry.date | date: 'dd-MM-yyyy' }}</td>
+                        </tr>
+                        </tbody>
+                        </table>
+                    <!-- <p>{{combinedData | json}}</p> -->
+                <div *ngIf="!combinedData || combinedData.length === 0">
                     No attendance records found for the selected month.
                 </div>
             </div>
