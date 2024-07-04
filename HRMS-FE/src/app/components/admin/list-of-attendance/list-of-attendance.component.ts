@@ -11,6 +11,7 @@ interface Attendance {
 
 interface EmployeeData {
   empId: number;
+  empIDNO:number;
   firstName: string;
   lastName: string;
   attendances: Attendance[];
@@ -92,6 +93,7 @@ export class ListOfAttendanceComponent {
         this.employees = this.attendanceDetails.map((item: any) => {
           return {
             empId: item.employee.empId,
+            empIDNO:item.employee.empIDNO,
             firstName: item.employee.firstName,
             lastName: item.employee.lastName,
             attendances: item.attendances
@@ -116,15 +118,16 @@ export class ListOfAttendanceComponent {
 
     let y = 30; 
 
-    const columnWidths = [50, 40, 30, 25, 25, 25,25]; // Updated for all columns 
+    const columnWidths = [10, 20, 30, 25, 23, 22, 22, 21]; // Updated for all columns 
 
     const headers = [
-        { label: 'Emp Name', width: columnWidths[0] },
-        { label: 'P', width: columnWidths[1] },
-        { label: 'H', width: columnWidths[2] },
+        { label: 'Emp Id', width: columnWidths[0] },
+        { label: 'Emp Name', width: columnWidths[1] },
+        { label: 'P', width: columnWidths[2] },
+        { label: 'H', width: columnWidths[3] },
         { label: 'Wo', width: columnWidths[3] },
         { label: 'Ab', width: columnWidths[4] },
-        { label: 'AL', width: columnWidths[5] },
+        { label: 'AL', width: columnWidths[4] },
         { label: 'Tw', width: columnWidths[5] }
     ];
 
@@ -136,38 +139,41 @@ export class ListOfAttendanceComponent {
 
     y += 10; 
 
-    this.employees.forEach((employee, ) => {
+    this.employees.sort((a, b) => a.empIDNO - b.empIDNO);
+
+    this.employees.forEach((employee) => {
         const presentDays = this.countAttendanceDays(employee); 
         const holidaysCount = this.hardcodedHolidays[this.selectedMonth];
         const weekendsAttendance = this.hardcodedWeekends[this.selectedMonth];
         const totalDays = this.hardcodedWorkingDays[this.selectedMonth];
 
         const weekOffs = weekendsAttendance;
-       
 
         const leaveDetails = this.leavedetails.find((details: any) => details.employee.empId === employee.empId);
 
         let totalPendingLeaveDuration = 0;
-    if (leaveDetails) {
-        leaveDetails.leave.forEach((leave: any) => {
-            if (leave.leaveStatus === 'APPROVED') {
-                totalPendingLeaveDuration += leave.duration;
-            }
-        });
-    }
-        const pendingLeaves = totalPendingLeaveDuration ;
+        if (leaveDetails) {
+            leaveDetails.leave.forEach((leave: any) => {
+                if (leave.leaveStatus === 'APPROVED') {
+                    totalPendingLeaveDuration += leave.duration;
+                }
+            });
+        }
+
+        const pendingLeaves = totalPendingLeaveDuration;
         const absentDays = totalDays - (presentDays + holidaysCount + weekOffs + pendingLeaves);
-        const total = (presentDays + holidaysCount + weekOffs + totalPendingLeaveDuration)
+        const total = presentDays + holidaysCount + weekOffs + totalPendingLeaveDuration;
+
         const rowData = [
-            { value: `${employee.firstName} ${employee.lastName}`, width: columnWidths[0] },
-            { value: presentDays.toString(), width: columnWidths[1] },
-            { value: holidaysCount.toString(), width: columnWidths[2] },
+            { value: `${employee.empIDNO}`, width: columnWidths[0] },
+            { value: `${employee.firstName} ${employee.lastName}`, width: columnWidths[1] },
+            { value: presentDays.toString(), width: columnWidths[2] },
+            { value: holidaysCount.toString(), width: columnWidths[3] },
             { value: weekOffs.toString(), width: columnWidths[3] },
             { value: absentDays.toString(), width: columnWidths[4] },
-            { value: pendingLeaves.toString(), width: columnWidths[5] },
+            { value: pendingLeaves.toString(), width: columnWidths[4] },
             { value: total.toString(), width: columnWidths[5] }
         ];
-
 
         doc.setFontSize(10);
 
@@ -180,6 +186,7 @@ export class ListOfAttendanceComponent {
 
     doc.save('employees_attendance_report.pdf');
 }
+
 
 
 
