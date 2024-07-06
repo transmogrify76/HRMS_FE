@@ -10,6 +10,7 @@
             <th>Joining Date</th>
             <th>Confirmation Date</th>
             <th>Status</th>
+            <th>Resignation Date</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -24,6 +25,7 @@
             <td>{{ employee?.joiningDate }}</td>
             <td>{{ employee?.confirmationData }}</td>
             <td>{{employee.isActive ? 'Active' : 'Deactive'}}</td>
+            <td>{{ employee?.resignation_Date }}</td>
             <td class="status-container">
                 <label class="switch">
                     <input type="checkbox" [checked]="employee.isActive" (change)="toggleStatus(employee)">
