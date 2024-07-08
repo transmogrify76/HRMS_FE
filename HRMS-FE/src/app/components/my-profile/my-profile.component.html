@@ -83,6 +83,14 @@
         <span class="label">Designation:</span>
         <span class="value">{{ employeeDetails?.employee?.post }}</span>
       </div>
+      <div class="detail-item">
+        <span class="label">Total Working Days:</span>
+        <span class="value">{{ currentWorkingDays }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="label">Remaining Leave:</span>
+        <span class="value">{{ employeeDetails?.employee?.leaveCount }}</span>
+      </div>
     </div>
 
     <!-- Loading indicator -->
