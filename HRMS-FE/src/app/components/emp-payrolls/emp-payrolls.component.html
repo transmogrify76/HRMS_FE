@@ -5,7 +5,6 @@
       <option *ngFor="let month of months" [value]="month">{{ month }}</option>
     </select>
   </div>
-
   <div id="payslip-container" #content class="payslip-container" *ngIf="filterdata">
     <div class="company-details" >
       <div class="company-logo">
@@ -24,7 +23,6 @@
         </p>
       </div>
     </div>
-
     <div class="employee">
       <div class="employee-details">
         <h3>Employee Details</h3>
@@ -35,9 +33,9 @@
         <p>Employee ID: {{ this.employee?.empIDNO }}</p>
         <p>Date of Joining: {{ this.employee?.joiningDate }}</p>
         <p>PAN: {{ this.employee?.panNo }}</p>
+        <p>UAN: {{ '102050745364' }}</p>
         <p>Standard Days: 30</p>
       </div>
-
       <div class="employee-address-details">
         <h3>Other Details</h3>
         <p>Mobile Number: {{ this.employee?.mobileNo }}</p>
@@ -49,7 +47,6 @@
         <p>Working Days (this month): {{ this.filterdata?.workingDays }}</p>
       </div>
     </div>
-
     <div class="content">
       <div class="section earnings">
         <h3>Earnings</h3>
@@ -62,7 +59,6 @@
           <li>Total Earnings: {{ this.filterdata?.Total_Earnings }}</li>
         </ul>
       </div>
-
       <div class="section deductions">
         <h3>Deductions</h3>
         <ul>
@@ -74,7 +70,6 @@
         </ul>
       </div>
     </div>
-
     <div class="net-payable">
       <h3>Amount Payable</h3>
       <p>
@@ -82,7 +77,6 @@
           }}</strong>
       </p>
     </div>
-
     <div class="footer">
       <p>
         Visit our Official Website:
@@ -95,6 +89,5 @@
       </p>
     </div>
   </div>
-
   <button (click)="downloadPdf()">Download Payslip</button>
 </div>

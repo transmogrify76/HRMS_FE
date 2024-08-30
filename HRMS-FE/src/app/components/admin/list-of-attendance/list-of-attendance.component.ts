@@ -53,7 +53,7 @@ export class ListOfAttendanceComponent {
     5: 3,  // May
     6: 1,  // June
     7: 0,  // July
-    8: 1,  // August
+    8: 2,  // August
     9: 0,  // September
     10: 6,  // October
     11: 0, // November
