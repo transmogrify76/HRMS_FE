@@ -22,7 +22,7 @@ export class HomeComponent {
     { occasion: 'Durgapuga-Astomi', date: '11-10-2024', day: 'Friday' },
     { occasion: 'Durgapuga-Navami', date: '12-10-2024', day: 'Saturday' },
     { occasion: 'Laksmi Puja', date: '16-10-2024', day: 'Wednesday' },
-    { occasion: 'Kali Puja', date: '31-10-2024', day: 'Thursday' },
+    { occasion: 'Kali Puja', date: '02-10-2024', day: 'Saturday' },
     { occasion: 'Christmas Day', date: '25-12-2024', day: 'Wednesday' },
   ];
   currentDate: Date = new Date();
@@ -30,7 +30,7 @@ export class HomeComponent {
   roleType: any;
   empId: any;
   pendingLeaves: any[] = [];
-  weekdays: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']; // Define weekday names here
+  weekdays: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']; 
   ngOnInit(): void {
     this.generateCalendar();
     this.leaverequest();
