@@ -12,18 +12,18 @@ export class HomeComponent {
   private hasRunOnce: boolean = true;
   notificationCount: number = 3; // Example notification count
   holidays: any[] = [  // Example holiday data
-    { occasion: 'New Year', date: '01-01-2024', day: 'Wednesday' },
-    { occasion: 'Republic Day', date: '26-01-2024', day: 'Friday' },
-    { occasion: 'Doljatra', date: '25-03-2024', day: 'Monday' },
-    { occasion: 'May Day', date: '01-05-2024', day: 'Wednesday' },
-    { occasion: 'Independence Day', date: '15-08-2024', day: 'Thursday' },
-    { occasion: 'Gandhiji Birth Day', date: '02-10-2024', day: 'Wednesday' },
-    { occasion: 'Durgapuga-Saptami', date: '10-10-2024', day: 'Thursday' },
-    { occasion: 'Durgapuga-Astomi', date: '11-10-2024', day: 'Friday' },
-    { occasion: 'Durgapuga-Navami', date: '12-10-2024', day: 'Saturday' },
-    { occasion: 'Laksmi Puja', date: '16-10-2024', day: 'Wednesday' },
-    { occasion: 'Kali Puja', date: '02-10-2024', day: 'Saturday' },
-    { occasion: 'Christmas Day', date: '25-12-2024', day: 'Wednesday' },
+    { occasion: 'New Year', date: '01-01-2025', day: 'Wednesday' },
+    { occasion: 'Netaji Birthday', date: '23-01-2025', day: 'Thursday' },
+    { occasion: 'Doljatra', date: '14-03-2025', day: 'Friday' },
+    { occasion: 'May Day', date: '01-05-2025', day: 'Thursday' },
+    { occasion: 'Independence Day', date: '15-08-2025', day: 'Friday' },
+    { occasion: 'Durgapuga-Saptami', date: '29-09-2025', day: 'Monday' },
+    { occasion: 'Durgapuga-Astomi', date: '30-09-2025', day: 'Tuesday' },
+    { occasion: 'Durgapuga-Navami', date: '01-10-2025', day: 'Wednesday' },
+    { occasion: 'Gandhiji Birth Day', date: '02-10-2024', day: 'Thursday' },
+    { occasion: 'Laksmi Puja', date: '06-10-2025', day: 'Monday' },
+    { occasion: 'Kali Puja', date: '20-10-2025', day: 'Monday' },
+    { occasion: 'Christmas Day', date: '25-12-2025', day: 'Thursday' },
   ];
   currentDate: Date = new Date();
   calendar: Date[][] = [];
