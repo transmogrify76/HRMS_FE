@@ -11,7 +11,7 @@ interface Attendance {
 
 interface EmployeeData {
   empId: number;
-  empIDNO:number;
+  empIDNO: number;
   firstName: string;
   lastName: string;
   attendances: Attendance[];
@@ -22,13 +22,13 @@ interface EmployeeData {
   templateUrl: './list-of-attendance.component.html',
   styleUrls: ['./list-of-attendance.component.scss']
 })
-
 export class ListOfAttendanceComponent {
   employees: EmployeeData[] = [];
   selectedMonth!: number;
+  selectedYear: number = new Date().getFullYear(); // Default to current year
   attendanceDetails: any;
   employeeDetails: any;
-  leavedetails:any;
+  leavedetails: any;
 
   hardcodedWorkingDays: { [key: number]: number } = {
     1: 31,  // January
@@ -42,7 +42,7 @@ export class ListOfAttendanceComponent {
     9: 30,  // September
     10: 31,  // October
     11: 30, // November
-    12: 31,  // December
+    12: 31, // December
   };
 
   hardcodedHolidays: { [key: number]: number } = {
@@ -77,125 +77,121 @@ export class ListOfAttendanceComponent {
 
   constructor(private hrmsApiService: HrmsApiService) {}
 
-  fetchEmployeeData(){
+  fetchEmployeeData() {
     this.hrmsApiService.allLeavebyMonth(this.selectedMonth).subscribe(
-      (response:any) =>{
+      (response: any) => {
         this.leavedetails = response;
-        console.log(this.leavedetails)
-
+        console.log(this.leavedetails);
       }
-    )
-    this.hrmsApiService.allAttendancebyMonth(this.selectedMonth).subscribe(
+    );
+
+    // Updated API call to include year
+    this.hrmsApiService.allAttendancebyMonthAndYear(this.selectedYear, this.selectedMonth).subscribe(
       (response: any) => {
         this.attendanceDetails = response;
-        console.log('Employee attendance details:',  this.attendanceDetails );
-        
+        console.log('Employee attendance details:', this.attendanceDetails);
+
         this.employees = this.attendanceDetails.map((item: any) => {
           return {
             empId: item.employee.empId,
-            empIDNO:item.employee.empIDNO,
+            empIDNO: item.employee.empIDNO,
             firstName: item.employee.firstName,
             lastName: item.employee.lastName,
             attendances: item.attendances
           };
         });
-
       },
       (error: any) => {
         console.error('Error fetching employee details:', error);
       }
     );
-  
   }
 
   countAttendanceDays(employee: EmployeeData): number {
     return employee.attendances.length;
   }
+
   downloadPDF(): void {
     const doc = new jsPDF();
     doc.text('Employee Attendance Report', 105, 10, { align: 'center' });
     doc.text(`Selected Month: ${this.getMonthName(this.selectedMonth)}`, 105, 20, { align: 'center' });
 
-    let y = 30; 
+    let y = 30;
 
-    const columnWidths = [10, 20, 30, 25, 23, 22, 22, 21]; // Updated for all columns 
+    const columnWidths = [10, 20, 30, 25, 23, 22, 22, 21]; // Updated for all columns
 
     const headers = [
-        { label: 'Emp Id', width: columnWidths[0] },
-        { label: 'Emp Name', width: columnWidths[1] },
-        { label: 'P', width: columnWidths[2] },
-        { label: 'H', width: columnWidths[3] },
-        { label: 'Wo', width: columnWidths[3] },
-        { label: 'Ab', width: columnWidths[4] },
-        { label: 'AL', width: columnWidths[4] },
-        { label: 'Tw', width: columnWidths[5] }
+      { label: 'Emp Id', width: columnWidths[0] },
+      { label: 'Emp Name', width: columnWidths[1] },
+      { label: 'P', width: columnWidths[2] },
+      { label: 'H', width: columnWidths[3] },
+      { label: 'Wo', width: columnWidths[3] },
+      { label: 'Ab', width: columnWidths[4] },
+      { label: 'AL', width: columnWidths[4] },
+      { label: 'Tw', width: columnWidths[5] }
     ];
 
     doc.setFontSize(12);
 
     headers.forEach((header, index) => {
-        doc.text(header.label, 10 + index * (columnWidths[index] + 5), y + 8); 
+      doc.text(header.label, 10 + index * (columnWidths[index] + 5), y + 8);
     });
 
-    y += 10; 
+    y += 10;
 
     this.employees.sort((a, b) => a.empIDNO - b.empIDNO);
 
     this.employees.forEach((employee) => {
-        const presentDays = this.countAttendanceDays(employee); 
-        const holidaysCount = this.hardcodedHolidays[this.selectedMonth];
-        const weekendsAttendance = this.hardcodedWeekends[this.selectedMonth];
-        const totalDays = this.hardcodedWorkingDays[this.selectedMonth];
+      const presentDays = this.countAttendanceDays(employee);
+      const holidaysCount = this.hardcodedHolidays[this.selectedMonth];
+      const weekendsAttendance = this.hardcodedWeekends[this.selectedMonth];
+      const totalDays = this.hardcodedWorkingDays[this.selectedMonth];
 
-        const weekOffs = weekendsAttendance;
+      const weekOffs = weekendsAttendance;
 
-        const leaveDetails = this.leavedetails.find((details: any) => details.employee.empId === employee.empId);
+      const leaveDetails = this.leavedetails.find((details: any) => details.employee.empId === employee.empId);
 
-        let totalPendingLeaveDuration = 0;
-        if (leaveDetails) {
-            leaveDetails.leave.forEach((leave: any) => {
-                if (leave.leaveStatus === 'APPROVED') {
-                    totalPendingLeaveDuration += leave.duration;
-                }
-            });
-        }
-
-        const pendingLeaves = totalPendingLeaveDuration;
-        const absentDays = totalDays - (presentDays + holidaysCount + weekOffs + pendingLeaves);
-        const total = presentDays + holidaysCount + weekOffs + totalPendingLeaveDuration;
-
-        const rowData = [
-            { value: `${employee.empIDNO}`, width: columnWidths[0] },
-            { value: `${employee.firstName} ${employee.lastName}`, width: columnWidths[1] },
-            { value: presentDays.toString(), width: columnWidths[2] },
-            { value: holidaysCount.toString(), width: columnWidths[3] },
-            { value: weekOffs.toString(), width: columnWidths[3] },
-            { value: absentDays.toString(), width: columnWidths[4] },
-            { value: pendingLeaves.toString(), width: columnWidths[4] },
-            { value: total.toString(), width: columnWidths[5] }
-        ];
-
-        doc.setFontSize(10);
-
-        rowData.forEach((data, index) => {
-            doc.text(data.value, 10 + index * (columnWidths[index] + 5), y + 8);
+      let totalPendingLeaveDuration = 0;
+      if (leaveDetails) {
+        leaveDetails.leave.forEach((leave: any) => {
+          if (leave.leaveStatus === 'APPROVED') {
+            totalPendingLeaveDuration += leave.duration;
+          }
         });
+      }
 
-        y += 10; 
+      const pendingLeaves = totalPendingLeaveDuration;
+      const absentDays = totalDays - (presentDays + holidaysCount + weekOffs + pendingLeaves);
+      const total = presentDays + holidaysCount + weekOffs + totalPendingLeaveDuration;
+
+      const rowData = [
+        { value: `${employee.empIDNO}`, width: columnWidths[0] },
+        { value: `${employee.firstName} ${employee.lastName}`, width: columnWidths[1] },
+        { value: presentDays.toString(), width: columnWidths[2] },
+        { value: holidaysCount.toString(), width: columnWidths[3] },
+        { value: weekOffs.toString(), width: columnWidths[3] },
+        { value: absentDays.toString(), width: columnWidths[4] },
+        { value: pendingLeaves.toString(), width: columnWidths[4] },
+        { value: total.toString(), width: columnWidths[5] }
+      ];
+
+      doc.setFontSize(10);
+
+      rowData.forEach((data, index) => {
+        doc.text(data.value, 10 + index * (columnWidths[index] + 5), y + 8);
+      });
+
+      y += 10;
     });
 
     doc.save('employees_attendance_report.pdf');
-}
-
-
-
-
+  }
 
   getMonthName(month: number): string {
     const monthNames = [
       "January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December"
     ];
-    return monthNames[month -1 ];
+    return monthNames[month - 1];
   }
 }
