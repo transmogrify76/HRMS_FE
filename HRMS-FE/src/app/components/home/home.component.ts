@@ -20,7 +20,7 @@ export class HomeComponent {
     { occasion: 'Durgapuga-Saptami', date: '29-09-2025', day: 'Monday' },
     { occasion: 'Durgapuga-Astomi', date: '30-09-2025', day: 'Tuesday' },
     { occasion: 'Durgapuga-Navami', date: '01-10-2025', day: 'Wednesday' },
-    { occasion: 'Gandhiji Birth Day', date: '02-10-2024', day: 'Thursday' },
+    { occasion: 'Gandhiji Birth Day', date: '02-10-2025', day: 'Thursday' },
     { occasion: 'Laksmi Puja', date: '06-10-2025', day: 'Monday' },
     { occasion: 'Kali Puja', date: '20-10-2025', day: 'Monday' },
     { occasion: 'Christmas Day', date: '25-12-2025', day: 'Thursday' },
