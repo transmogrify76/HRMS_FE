@@ -32,7 +32,7 @@ export class ListOfAttendanceComponent {
 
   hardcodedWorkingDays: { [key: number]: number } = {
     1: 31,  // January
-    2: 29,  // February
+    2: 28,  // February
     3: 31,  // March
     4: 30,  // April
     5: 31,  // May
@@ -50,13 +50,13 @@ export class ListOfAttendanceComponent {
     2: 0,  // February
     3: 1,  // March
     4: 0,  // April
-    5: 3,  // May
-    6: 1,  // June
+    5: 1,  // May
+    6: 0,  // June
     7: 0,  // July
-    8: 2,  // August
-    9: 0,  // September
-    10: 6,  // October
-    11: 1, // November
+    8: 1,  // August
+    9: 2,  // September
+    10: 4,  // October
+    11: 0, // November
     12: 1, // December
   };
 
@@ -68,11 +68,11 @@ export class ListOfAttendanceComponent {
     5: 4,  // May
     6: 5,  // June
     7: 4,  // July
-    8: 4,  // August
-    9: 5,  // September
+    8: 5,  // August
+    9: 4,  // September
     10: 4,  // October
-    11: 4, // November
-    12: 5, // December
+    11: 5, // November
+    12: 4, // December
   };
 
   constructor(private hrmsApiService: HrmsApiService) {}
