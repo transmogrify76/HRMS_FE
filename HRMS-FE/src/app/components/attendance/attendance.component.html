@@ -1,45 +1,45 @@
 <div class="container" *ngIf="employeeDetails">
     <div>
-        <div class="monthSelectContainer">
-            <label for="monthSelect">Select Month:</label>
-            <select id="monthSelect" (change)="onMonthChange($event)">
-                <option value="" selected>All Months</option>
-                <option *ngFor="let month of months" [value]="month.value">{{ month.name }}</option>
-            </select>
+      <div class="monthSelectContainer">
+        <label for="monthSelect">Select Month:</label>
+        <select id="monthSelect" (change)="onMonthChange($event)">
+          <option value="" selected>All Months</option>
+          <option *ngFor="let month of months" [value]="month.value">{{ month.name }}</option>
+        </select>
+      </div>
+      <div class="card">
+        <div class="card-header bg-gradient-primary">
+          Employee Attendance Details
         </div>
-        <div class="card">
-            <div class="card-header bg-gradient-primary">
-                Employee Attendance Details
-            </div>
-            <div class="card-body">
-                <table *ngIf="combinedData && combinedData.length > 0">
-                    <thead>
-                        <tr>
-                            <th>S.No</th>
-                            <th>Check In</th>
-                            <th>Check Out</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let entry of combinedData ; let i = index">
-                            <td>{{ i + 1 }}</td>
-                            <td>{{ entry.checkIn ? (entry.checkIn |subtractHours | date: 'h:mm a') : 'N/A' }}</td>
-                            <td>{{ entry.checkOut ? (entry.checkOut|subtractHours | date: 'h:mm a') : 'N/A' }}</td>
-                            <td>{{ entry.date | date: 'dd-MM-yyyy' }}</td>
-                            <td>{{ entry.status }}</td>
-                        </tr>
-                        </tbody>
-                        </table>
-                    <!-- <p>{{combinedData | json}}</p> -->
-                <div *ngIf="!combinedData || combinedData.length === 0">
-                    No attendance records found for the selected month.
-                </div>
-            </div>
+        <div class="card-body">
+          <table *ngIf="combinedData && combinedData.length > 0">
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Check In</th>
+                <th>Check Out</th>
+                <th>Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let entry of combinedData; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ entry.checkIn ? (entry.checkIn | subtractHours | date: 'h:mm a') : 'N/A' }}</td>
+                <td>{{ entry.checkOut ? (entry.checkOut | subtractHours | date: 'h:mm a') : 'N/A' }}</td>
+                <td>{{ entry.date | date: 'dd-MM-yyyy' }}</td>
+                <td>{{ entry.status }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div *ngIf="!combinedData || combinedData.length === 0">
+            No attendance records found for the selected month.
+          </div>
         </div>
+      </div>
     </div>
-</div>
-<div *ngIf="!employeeDetails">
+  </div>
+  <div *ngIf="!employeeDetails">
     Loading employee details...
-</div>
+  </div>
+  

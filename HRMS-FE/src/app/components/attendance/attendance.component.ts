@@ -53,7 +53,7 @@ export class AttendanceComponent implements OnInit {
           leaves: employee.employee.leaves || []
         };
 
-        console.log('Attendances:', this.employeeDetails.attendances); // Log attendances
+        console.log('Attendances:', this.employeeDetails.attendances);
         console.log('Leaves:', this.employeeDetails.leaves);
 
         this.combineData(); // Call method to combine attendance and leave data
@@ -92,7 +92,11 @@ export class AttendanceComponent implements OnInit {
     }
 
     // Hardcoded holidays and weekends
-    const holidays = ['2025-01-01','2025-01-23','2025-03-14','2025-05-01','2025-08-15','2025-09-29','2025-09-30','2025-10-01','2025-10-02','2025-10-06','2025-10-20','2025-12-25']
+    const holidays = [
+      '2025-01-01','2025-01-23','2025-03-14','2025-05-01',
+      '2025-08-15','2025-09-29','2025-09-30','2025-10-01',
+      '2025-10-02','2025-10-06','2025-10-20','2025-12-25'
+    ];
     const weekends = dateRange.filter(date => {
       const day = moment(date).day();
       return day === 0 || day === 6;
@@ -121,7 +125,10 @@ export class AttendanceComponent implements OnInit {
       };
     });
 
-    // Filter based on selected month
+    // Filter out any records that are not from 2025
+    this.combinedData = this.combinedData.filter(data => moment(data.date).year() === 2025);
+
+    // Filter based on selected month (if any)
     if (this.selectedMonth) {
       this.combinedData = this.combinedData.filter(data => moment(data.date).format('MM') === this.selectedMonth);
     }
